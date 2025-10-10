@@ -50,6 +50,13 @@
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
   services.xserver.desktopManager.gnome.enable = true;
+  
+  environment.gnome.excludePackages = with pkgs; [
+    gnome-text-editor
+    gnome-calendar
+    gnome-maps
+    gnome-music
+  ];
 
   # Configure keymap in X11
   services.xserver.xkb = {
@@ -88,6 +95,8 @@
     #  thunderbird
     ];
   };
+  
+  programs.git.config.init.defaultBranch = "main";
 
   # Install firefox.
   programs.firefox.enable = true;
@@ -100,9 +109,10 @@
   environment.systemPackages = with pkgs; [
     git
     emacs
+    fish
   ];
 
-  # Some programs need SUID wrappers, can be configured further or are
+    # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {
