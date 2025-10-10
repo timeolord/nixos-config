@@ -1,5 +1,9 @@
 (require 'package)
 
+;; Hide Window Frame and Full Screen and Maximize
+(add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 ;; Nice macro for updating lists in place.
 (defmacro append-to-list (target suffix)
   "Append SUFFIX to TARGET in place."
@@ -33,8 +37,6 @@
 (use-package doom-themes
   :init
   (load-theme 'doom-one))
-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 (use-package ivy
   :init
@@ -101,5 +103,4 @@
 ;; Disable Menu Bar
 (menu-bar-mode -1)
 
-;; Hide Window Frame
-(setq default-frame-alist '((undecorated . t)))
+
