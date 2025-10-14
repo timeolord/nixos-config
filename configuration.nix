@@ -56,7 +56,20 @@
     gnome-calendar
     gnome-maps
     gnome-music
+    epiphany
+    totem
+    geary
+    gnome-contacts
+    gnome-connections
+    simple-scan
+    evince
+    gnome-software
+    loupe
+    gnome-tour
   ];
+
+  # Configures the udev rules for bazecor
+  services.udev.extraRules = builtins.readFile ./bazecor-rules;
 
   # Configure keymap in X11
   services.xserver.xkb = {

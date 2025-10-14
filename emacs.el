@@ -103,4 +103,13 @@
 ;; Disable Menu Bar
 (menu-bar-mode -1)
 
+(defalias 'yes-or-no-p 'y-or-n-p)
+
+(setq blink-cursor-mode nil)
+
+(setq-default indent-tabs-mode nil
+  tab-width 2
+  c-basic-offset 2)
+
+
 
