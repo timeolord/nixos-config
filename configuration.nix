@@ -25,7 +25,7 @@
   networking.networkmanager.enable = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
-
+ 
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -44,29 +44,44 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver.enable = false;
+  services.displayManager.ly.enable = true;
+  # services.xserver.displayManager.startx.enable = true;
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
+  # Autologin
+  # services.getty.autologinUser = "melk";
   
-  environment.gnome.excludePackages = with pkgs; [
-    gnome-text-editor
-    gnome-calendar
-    gnome-maps
-    gnome-music
-    epiphany
-    totem
-    geary
-    gnome-contacts
-    gnome-connections
-    simple-scan
-    evince
-    gnome-software
-    loupe
-    gnome-tour
-  ];
+  # Enable the GNOME Desktop Environment.
+  # services.xserver.displayManager.gdm.enable = true;
+  # services.xserver.desktopManager.gnome.enable = true;
+  
+  # environment.gnome.excludePackages = with pkgs; [
+  #   gnome-text-editor
+  #   gnome-calendar
+  #   gnome-maps
+  #   gnome-music
+  #   epiphany
+  #   totem
+  #   geary
+  #   gnome-contacts
+  #   gnome-connections
+  #   simple-scan
+  #   evince
+  #   gnome-software
+  #   loupe
+  #   gnome-tour
+  # ];
+
+  # Enables Steam
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
+  # Remove xterm
+  # services.xserver.excludePackages = [ pkgs.xterm ];
 
   # Configures the udev rules for bazecor
   services.udev.extraRules = builtins.readFile ./bazecor-rules;
@@ -97,7 +112,7 @@
   };
 
   # Enable touchpad support (enabled default in most desktopManager).
-  # services.xserver.libinput.enable = true;
+  # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.melk = {
@@ -105,13 +120,11 @@
     description = "Melody";
     extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
-    #  thunderbird
     ];
   };
   
   programs.git.config.init.defaultBranch = "main";
 
-  # Install firefox.
   programs.firefox.enable = true;
 
   # Allow unfree packages
@@ -121,9 +134,77 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     git
+    cmake
+    kitty
     emacs
+    # Fish
     fish
+    nix-index
+    babelfish
+    # Hyprland 
+    xorg.xrandr
+    swww
+    xdg-desktop-portal-gtk
+    xdg-desktop-portal-hyprland
+    xwayland
+    waybar
+    meson
+    wayland-protocols
+    wayland-utils
+    wl-clipboard
+    wlroots
+    pavucontrol
+    pipewire
+    rofi-wayland    
   ];
+
+  # Fish Settings
+  programs.fish = {
+    enable = true;
+    useBabelfish = true;
+  };
+  programs.nix-index = {
+    enable = true;
+    enableFishIntegration = true;
+    enableBashIntegration = false;
+    enableZshIntegration = false;
+  };
+
+  fonts.packages = with pkgs; [
+    meslo-lgs-nf
+  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
+
+  services.emacs.package = pkgs.emacs-unstable;
+
+  nixpkgs.overlays = [
+    (import (builtins.fetchTarball {
+      url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+      sha256 = "0yblkl7ywaagsck5f4j9yqgirb3dad8a4q91hg29l8jfq4n5ww1g";
+    }))
+    (import (builtins.fetchTarball {
+      url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
+      sha256 = "1313yync0hn4nsbd5apifdqlk6gmnx0bqfyhlvwakl8c0j9ijliy";
+    })) 
+  ];
+
+  programs.hyprland = {
+    enable = true;
+    # withUWSM = true;
+    xwayland.enable = true;
+  };
+
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
+
+  #services.xserver.displayManager.lightdm = {
+  #  enable = true;
+  #};
+  
+  # services.xserver.windowManager.session = [{
+  #  #exwm.enable = true;
+  #  name = "exwm";
+  #  start = "exec emacs";
+  # }];
 
     # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

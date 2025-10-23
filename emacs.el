@@ -28,6 +28,26 @@
  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
  use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
 
+;; EXWM Setup
+;;(use-package exwm
+;;  :config
+;;  (setq exwm-workspace-number 5)
+;;  (require 'exwm)
+  ;;(require 'exwm-config)
+  ;; Update buffer name by window
+  ;; (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
+
+  ;; (require 'exwm-randr)
+  ;; (exwm-randr-enable)
+  ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal")
+
+;;  (require 'exwm-systemtray)
+;;  (exwm-systemtray-enable)
+;;(exwm-enable))
+
+(use-package vterm
+  :ensure t)
+
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
 (use-package exec-path-from-shell
@@ -94,6 +114,28 @@
   :config
   (setq lsp-prefer-flymake nil)) ;; Flymake is outdated
 
+;; Rust Config
+(use-package rust-mode)
+(use-package flycheck-rust)
+(with-eval-after-load 'rust-mode
+  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))'
+
+;; Python Config
+;(use-package elpy
+;  :ensure t
+;  :init
+;  (elpy-enable))
+(use-package reformatter)
+(use-package ruff-format)
+(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+(add-hook 'python-mode-hook
+      (lambda ()
+        (setq indent-tabs-mode nil)
+        (setq tab-width 4)
+        (setq python-indent-offset 4)))
+
+
+
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)
 
@@ -107,9 +149,14 @@
 
 (setq blink-cursor-mode nil)
 
+;; Autosave every 10 inputs
+(setq auto-save-interval 20)
+
 (setq-default indent-tabs-mode nil
   tab-width 2
   c-basic-offset 2)
+
+(add-hook 'prog-mode-hook 'display-line-numbers-mode)
 
 
 

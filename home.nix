@@ -3,11 +3,33 @@
 {
   home.username = "melk";
   home.homeDirectory = "/home/melk";
-  
-  xsession.enable = true;
-  xsession.windowManager.command = "…";
 
-  # Packages that should be installed to the user profile.
+
+  
+  # xsession.enable = true;
+  # xsession.windowManager.command = "emacs";
+
+  programs.kitty.enable = true; # required for the default Hyprland config
+  #wayland.windowManager.hyprland.enable = true;
+  #wayland.windowManager.hyprland.package = null;
+  # home.file.".config/hypr/hyprland.conf" = {
+  #   text = builtins.readFile ./hyprland.conf;
+  #   onChange = ''
+  #   cp /etc/nixos/hyprland.conf ~/.config/hypr/hyprland.conf
+  #   '';
+  #   force = true;
+  # };
+  # wayland.windowManager.hyprland.settings = {
+  #  monitor = "dp1, 1920x1080@60.5, 0x0, 1";
+  # };
+  wayland.windowManager.hyprland.portalPackage = null;
+  # wayland.windowManager.hyprland.systemd.variables = ["--all"];
+  #  enable = true;
+  #  xwayland.enable = true;
+  #};
+
+  # xdg.configFile."uwsm/env".soruce = "${config.home.sessionVariablesPackage}/etc/profile.d/hm-session-vars.sh";
+
   home.packages = with pkgs; [
     bitwarden-desktop
     youtube-music
@@ -17,7 +39,14 @@
     zoom-us
     obsidian
     todoist-electron
+  # bottles
+    qbittorrent
+    viennarna
+    ghostscript
+    pandoc
   ];
+  
+  # home.file."xinitrc".source = ./xinitrc;
 
   programs.git = {
     enable = true;
@@ -29,8 +58,28 @@
     enable = true;
     extraPackages = epkgs: [
       epkgs.nix-mode
+      # epkgs.exwm
     ];
     extraConfig = builtins.readFile ./emacs.el;
+  };
+
+  programs.bash = {
+    enable = true;
+    initExtra = ''
+    if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
+    then
+      shopt -q login_shell && LOGIN_OPTION='--login' || LOGIN_OPTION=""
+      exec ${pkgs.fish}/bin/fish $LOGIN_OPTION
+    fi
+  '';
+  };
+
+  programs.fish = {
+    enable = true;
+  };
+
+  home.shell = {
+    enableFishIntegration = true;
   };
 
   # This value determines the home Manager release that your
