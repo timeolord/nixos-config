@@ -21,17 +21,19 @@
   programs.waybar = {
     enable = true;
     settings = {
-      position = "top";
-      layer = "top";
-      height = 16;
-      margin-top = 0;
-      margin-bottom = 0;
-      margin-left = 0;
-      margin-right = 0;
+      mainBar = {
+        position = "top";
+        layer = "top";
+        height = 16;
+        margin-top = 0;
+        margin-bottom = 0;
+        margin-left = 0;
+        margin-right = 0;
 
-      modules-left = ["hyprland/workspaces"];
-      modules-center = ["cpu" "memory" "disk"];
-      modules-right = ["tray" "network" "pulseaudio" "clock"];
+        modules-left = ["hyprland/workspaces"];
+        modules-center = ["cpu" "memory" "disk"];
+        modules-right = ["tray" "network" "pulseaudio" "clock"];
+      };
     };
     style = {
 
