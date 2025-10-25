@@ -28,9 +28,7 @@
     zoom-us
     obsidian
     todoist-electron
-    # bottles
     qbittorrent
-    # viennarna
     ghostscript
     pandoc
     zotero
@@ -58,6 +56,7 @@
     enable = true;
     shellInit = ''
     set PATH /etc/nixos $PATH
+    abbr --add rb rebuild.sh
     '';
   };
 
