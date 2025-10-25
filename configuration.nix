@@ -46,31 +46,6 @@
 
   services.xserver.enable = false;
   services.displayManager.ly.enable = true;
-  # services.xserver.displayManager.startx.enable = true;
-
-  # Autologin
-  # services.getty.autologinUser = "melk";
-  
-  # Enable the GNOME Desktop Environment.
-  # services.xserver.displayManager.gdm.enable = true;
-  # services.xserver.desktopManager.gnome.enable = true;
-  
-  # environment.gnome.excludePackages = with pkgs; [
-  #   gnome-text-editor
-  #   gnome-calendar
-  #   gnome-maps
-  #   gnome-music
-  #   epiphany
-  #   totem
-  #   geary
-  #   gnome-contacts
-  #   gnome-connections
-  #   simple-scan
-  #   evince
-  #   gnome-software
-  #   loupe
-  #   gnome-tour
-  # ];
 
   # Enables Steam
   programs.steam = {
@@ -141,7 +116,8 @@
     fish
     nix-index
     babelfish
-    # Hyprland 
+    # Hyprland
+    dunst
     xorg.xrandr
     swww
     xdg-desktop-portal-gtk
