@@ -18,6 +18,15 @@
     systemd.variables = ["--all"];
     extraConfig = builtins.readFile ./hyprland.conf;
   };
+  programs.waybar = {
+    enable = true;
+    settings = {
+      
+    };
+    style = {
+
+    };
+  };
  
   home.packages = with pkgs; [
     bitwarden-desktop
