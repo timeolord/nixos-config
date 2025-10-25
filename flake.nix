@@ -3,14 +3,14 @@
 
   inputs = {
     # NixOS official package source, using the nixos-25.05 branch here
-    #hyprland.url = "github:hyprwm/Hyprland";
-    #hyprland-plugins = {
-    #  url = "github:hyprwm/hyprland-plugins";
-    #  inputs.hyprland.follows = "hyprland";
-    #};
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
+    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland-plugins = {
+      url = "github:hyprwm/hyprland-plugins";
+     inputs.hyprland.follows = "hyprland";
+    };
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.05";
+      url = "github:nix-community/home-manager";
       
       # The `follows` keyword in inputs is used for inheritance.
       # Here, `inputs.nixpkgs` of home-manager is kept consistent with
@@ -22,15 +22,17 @@
 
   outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+      melk = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
         modules = [
           ./configuration.nix
           
           home-manager.nixosModules.home-manager 
           {
+            home-manager.verbose = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.melk = import ./home.nix;
+            home-manager.users.melk = ./home.nix;
           }
         ];
       };

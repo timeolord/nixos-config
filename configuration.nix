@@ -155,7 +155,7 @@
     wlroots
     pavucontrol
     pipewire
-    rofi-wayland    
+    rofi    
   ];
 
   # Fish Settings
