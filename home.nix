@@ -112,6 +112,22 @@
     };
     style = builtins.readFile ./waybar.css;
   };
+  services.dunst = {
+    enable = true;
+    settings = {
+    };
+  };
+  services.hyprpaper = {
+    enable = true;
+    settings = {
+      preload = [
+        "/etc/nixos/wallpapers/ivan_the_terrible.jpg"
+      ];
+      wallpaper = [
+        ", /etc/nixos/wallpapers/ivan_the_terrible.jpg"
+      ];
+    };
+  };
  
   home.packages = with pkgs; [
     bitwarden-desktop
