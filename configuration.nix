@@ -156,7 +156,7 @@
   nixpkgs.overlays = [
     (import (builtins.fetchTarball {
       url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "0yblkl7ywaagsck5f4j9yqgirb3dad8a4q91hg29l8jfq4n5ww1g";
+      sha256 = "0yblkl7ywaagsck5f4j9yqgirb3dad8a4q91hg29l8jfq4n5ww1";
     }))
     (import (builtins.fetchTarball {
       url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
@@ -166,7 +166,6 @@
 
   programs.hyprland = {
     enable = true;
-    # withUWSM = true;
     xwayland.enable = true;
   };
 
