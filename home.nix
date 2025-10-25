@@ -101,9 +101,9 @@
 		      format-icons = {
 			      default = ["󰕿" "󰖀" "󰕾"];
 		      };
-		      on-click = "bash /etc/nixos/scripts/volume-mute";
-          on-scroll-up = "bash /etc/nixos/scripts/volume-up";
-          on-scroll-down = "bash /etc/nixos/scripts/.scripts/volume-down";
+		      # on-click = "bash /etc/nixos/scripts/volume-mute";
+          # on-scroll-up = "bash /etc/nixos/scripts/volume-up";
+          # on-scroll-down = "bash /etc/nixos/scripts/.scripts/volume-down";
           scroll-step = 5;
 		      on-click-right = "pavucontrol";
         };
@@ -125,6 +125,7 @@
     ghostscript
     pandoc
     zotero
+    fastfetch
   ];
 
   programs.git = {
