@@ -116,8 +116,7 @@
         };
       };
     };
-    style = ''
-    '';
+    style = builtins.readFile ./waybar.css;
   };
  
   home.packages = with pkgs; [
