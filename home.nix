@@ -33,6 +33,22 @@
         modules-left = ["hyprland/workspaces"];
         modules-center = ["cpu" "memory" "disk"];
         modules-right = ["tray" "network" "pulseaudio" "clock"];
+
+        "hyprland/workspaces" = {
+          active-only = false;
+          all-outputs = true;
+          on-scroll-up = "hyprctl dispatch workspace -1";
+          on-scroll-down = "hyprctl dispatch workspace +1";
+          format = "{icon}";
+          on-click = "activate";
+          format-icons = {
+            "1" = "一";
+			      "2" = "二";
+			      "3" = "三";
+			      "4" = "四";
+			      "5" = "五";
+          };
+        };
       };
     };
     style = ''
