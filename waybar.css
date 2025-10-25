@@ -3,7 +3,7 @@
     border-radius: 0px;
     /*font-family: VictorMono, Iosevka Nerd Font, Noto Sans CJK;*/
     font-family: Iosevka, FontAwesome, Noto Sans CJK;
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     min-height: 0;
 }
@@ -101,16 +101,6 @@ window#waybar {
     border-radius: 5px 5px 5px 5px;
 }
 
-#backlight {
-    /*background-color: #24283b;*/
-    color: #db4b4b;
-    border-radius: 0px 0px 0px 0px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 0px;
-}
-
 #network {
     color: #f4d9e1;
     border-radius: 8px;
@@ -201,7 +191,7 @@ window#waybar {
     background-color: #1E1E2E;
 }
 
-#cpu {
+#cpu, #memory, #disk {
     background-color: #282828;
     /*color: #FABD2D;*/
     border-radius: 16px;
@@ -212,27 +202,27 @@ window#waybar {
     font-weight: bold;
 }
 
-#memory {
-    background-color: #282828;
-    /*color: #83A598;*/
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
-}
+/* #memory { */
+/*     background-color: #282828; */
+/*     /\*color: #83A598;*\/ */
+/*     border-radius: 16px; */
+/*     margin: 5px; */
+/*     margin-left: 5px; */
+/*     margin-right: 5px; */
+/*     padding: 0px 10px 0px 10px; */
+/*     font-weight: bold; */
+/* } */
 
-#disk {
-    background-color: #282828;
-    /*color: #8EC07C;*/
-    border-radius: 16px;
-    margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
-    font-weight: bold;
-}
+/* #disk { */
+/*     background-color: #282828; */
+/*     /\*color: #8EC07C;*\/ */
+/*     border-radius: 16px; */
+/*     margin: 5px; */
+/*     margin-left: 5px; */
+/*     margin-right: 5px; */
+/*     padding: 0px 10px 0px 10px; */
+/*     font-weight: bold; */
+/* } */
 
 #custom-hyprpicker {
     background-color: #282828;
