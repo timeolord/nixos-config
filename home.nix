@@ -86,7 +86,13 @@
           interval = 5;
         };
         network = {
-          
+          "format-wifi" = "󰤨";
+        	"format-ethernet" = " {ifname}: Aesthetic";
+        	"format-linked" = " {ifname} (No IP)";
+        	"format-disconnected" = "󰤭";
+        	"format-alt" = " {ifname}: {ipaddr}/{cidr}";
+          "tooltip-format" = "{essid}";
+          "on-click-right" = "nm-connection-editor";
         };
         tray = {
           icon-size = 16;
