@@ -9,7 +9,7 @@
     shellIntegration.enableFishIntegration = true;
     settings = {
       shell = "${pkgs.fish}/bin/fish";
-      background_opacity = 0.2;
+      background_opacity = 0.5;
     };
   };
   wayland.windowManager.hyprland = {
@@ -82,6 +82,7 @@
           format = "󰋊 {}%";
           format-alt = "󰋊 {used}/{total} GiB";
           interval = 5;
+          path = "/";
         };
         network = {
           "format-wifi" = "󰤨";

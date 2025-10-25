@@ -121,7 +121,6 @@
     hyprpolkitagent
     xorg.xrandr
     hyprpaper
-    swww
     xdg-desktop-portal-gtk
     xdg-desktop-portal-hyprland
     xwayland
