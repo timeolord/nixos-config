@@ -53,6 +53,9 @@
             "8" = "捌";
             "9" = "玖";
             "10" = "拾";
+            urgent = "";
+			      active = "";
+			      default = "󰧞";
           };
         };
         battery = {
@@ -66,6 +69,28 @@
           format-plugged = "{capacity}% ";
           format-alt = "{icon} {time}";
           format-icons = ["" "" "" "" ""];
+        };
+        memory = {
+          format = "󰍛 {}%";
+          format-alt = "󰍛 {used}/{total} GiB";
+          interval = 5;
+        };
+        cpu = {
+          format = "󰻠 {usage}%";
+          format-alt = "󰻠 {avg_frequency} GHz";
+          interval = 5;
+        };
+        disk = {
+          format = "󰋊 {}%";
+          format-alt = "󰋊 {used}/{total} GiB";
+          interval = 5;
+        };
+        network = {
+          
+        };
+        tray = {
+          icon-size = 16;
+          spacing = 5;
         };
       };
     };
