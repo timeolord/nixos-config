@@ -151,6 +151,7 @@
     shellInit = ''
     set PATH /etc/nixos $PATH
     abbr --add rb rebuild.sh
+    fastfetch
     '';
   };
 
