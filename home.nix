@@ -24,7 +24,7 @@
       mainBar = {
         position = "top";
         layer = "top";
-        height = 16;
+        height = 24;
         margin-top = 0;
         margin-bottom = 0;
         margin-left = 0;
@@ -41,6 +41,7 @@
           on-scroll-down = "hyprctl dispatch workspace +1";
           format = "{icon}";
           on-click = "activate";
+          sort-by-number = true;
           format-icons = {
             "1" = "壹";
 			      "2" = "贰";
