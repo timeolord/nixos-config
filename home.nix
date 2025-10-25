@@ -24,7 +24,6 @@
       mainBar = {
         position = "top";
         layer = "top";
-        # height = 24;
         margin-top = 0;
         margin-bottom = 0;
         margin-left = 0;
@@ -54,8 +53,6 @@
             "9" = "玖";
             "10" = "拾";
             urgent = "";
-			      active = "";
-			      default = "󰧞";
           };
         };
         battery = {
@@ -78,7 +75,7 @@
         cpu = {
           format = "󰻠 {usage}%";
           format-alt = "󰻠 {avg_frequency} GHz";
-          interval = 5;
+          interval = 1;
         };
         disk = {
           format = "󰋊 {}%";

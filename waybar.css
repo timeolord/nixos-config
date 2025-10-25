@@ -1,7 +1,6 @@
 * {
     border: none;
     border-radius: 0px;
-    /*font-family: VictorMono, Iosevka Nerd Font, Noto Sans CJK;*/
     font-family: Iosevka, FontAwesome, Noto Sans CJK;
     font-size: 15px;
     font-style: normal;
@@ -143,6 +142,7 @@ window#waybar {
 
 #cpu, #memory, #disk {
     background-color: #282828;
+    color: #f4d9e1;
     border-radius: 16px;
     margin: 5px;
     margin-left: 5px;
