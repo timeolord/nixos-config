@@ -144,7 +144,6 @@
     pandoc
     zotero
     fastfetch
-    gimp
   ];
 
   programs.git = {
