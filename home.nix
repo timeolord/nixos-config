@@ -15,8 +15,8 @@
     enable = true;
     package = null;
     portalPackage = null;
-    # systemd.variables = ["--all"];
-    # extraConfig = builtins.readFile ./hyprland.conf;
+    systemd.variables = ["--all"];
+    extraConfig = builtins.readFile ./hyprland.conf;
   };
  
   home.packages = with pkgs; [
