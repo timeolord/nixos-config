@@ -9,7 +9,7 @@
     shellIntegration.enableFishIntegration = true;
     settings = {
       shell = "${pkgs.fish}/bin/fish";
-      background_opacity = 0.5;
+      background_opacity = 0.2;
     };
   };
   wayland.windowManager.hyprland = {

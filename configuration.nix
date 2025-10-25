@@ -118,6 +118,7 @@
     babelfish
     # Hyprland
     dunst
+    hyprpolkitagent
     xorg.xrandr
     swww
     xdg-desktop-portal-gtk
