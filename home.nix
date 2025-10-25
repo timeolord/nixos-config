@@ -35,9 +35,8 @@
         modules-right = ["tray" "network" "pulseaudio" "clock"];
       };
     };
-    style = {
-
-    };
+    style = ''
+    '';
   };
  
   home.packages = with pkgs; [
