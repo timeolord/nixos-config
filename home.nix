@@ -32,7 +32,7 @@
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["cpu" "memory" "disk"];
-        modules-right = ["tray" "network" "pulseaudio" "backlight" "battery" "clock"];
+        modules-right = ["tray" "network" "pulseaudio" "battery" "clock"];
 
         "hyprland/workspaces" = {
           active-only = false;
@@ -98,19 +98,15 @@
           icon-size = 16;
           spacing = 5;
         };
-        backlight = {
-	        format = "{icon} {percent}%";
-          format-icons = ["" "" "" "" "" "" "" "" ""];
-	      };
         pulseaudio = {
           format = "{icon} {volume}%";
         	format-muted = "󰝟";
 		      format-icons = {
 			      default = ["󰕿" "󰖀" "󰕾"];
 		      };
-		      on-click = "bash ~/.scripts/volume mute";
-          on-scroll-up = "bash ~/.scripts/volume up";
-          on-scroll-down = "bash ~/.scripts/volume down";
+		      on-click = "bash /etc/nixos/scripts/volume-mute";
+          on-scroll-up = "bash /etc/nixos/scripts/volume-up";
+          on-scroll-down = "bash /etc/nixos/scripts/.scripts/volume-down";
           scroll-step = 5;
 		      on-click-right = "pavucontrol";
         };
