@@ -41,7 +41,7 @@ window#waybar {
 	border-radius: 16px;
 }
 
-#custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher {
+#custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher{
 	background: transparent;
 	padding: 5px 5px 5px 5px;
 	margin: 5px 5px 5px 5px;
@@ -102,12 +102,12 @@ window#waybar {
 }
 
 #backlight {
-    background-color: #24283b;
+    /*background-color: #24283b;*/
     color: #db4b4b;
     border-radius: 0px 0px 0px 0px;
     margin: 5px;
-    margin-left: 0px;
-    margin-right: 0px;
+    margin-left: 5px;
+    margin-right: 5px;
     padding: 0px 0px;
 }
 
