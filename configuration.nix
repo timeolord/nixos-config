@@ -125,6 +125,7 @@
     pavucontrol
     pipewire
     fuzzel
+    hyprpaper
   ];
 
   # Fish Settings
