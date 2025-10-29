@@ -142,7 +142,7 @@
         font = "Monospace 10";
         line_height = 0;
         markup = "full";
-        format = "%s %p\n%b";
+        format = "%s %p %b";
         alignment = "left";
         vertical_alignment = "center";
         show_age_threshold = 60;
