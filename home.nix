@@ -137,7 +137,7 @@
         horizontal_padding = 10;
         text_icon_padding = 0;
         frame_width = 0;
-        frame_color = "#450693";
+        frame_color = "#ffc40080";
         separator_color = "frame";
         sort = "yes";
         idle_threshold = 120;
@@ -189,7 +189,6 @@
       urgency_critical = {
         background = "#ff3f7f80";
         foreground = "#f4d9el";
-        frame_color = "#ffc400";
         # timeout = 10;
       };
     };
