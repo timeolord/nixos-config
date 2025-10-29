@@ -132,7 +132,7 @@
         progress_bar_max_width = 300;
 
         
-        separator_height = 1;
+        separator_height = 5;
         padding = 8;
         horizontal_padding = 10;
         text_icon_padding = 0;
@@ -190,7 +190,7 @@
         background = "#ff3f7f80";
         foreground = "#f4d9el";
         frame_color = "#ffc400";
-        timeout = 10;
+        # timeout = 10;
       };
     };
   };
