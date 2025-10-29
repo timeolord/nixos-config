@@ -132,7 +132,7 @@
         progress_bar_max_width = 300;
 
         
-        separator_height = 5;
+        separator_height = 0;
         padding = 8;
         horizontal_padding = 10;
         text_icon_padding = 0;
@@ -189,7 +189,7 @@
       urgency_critical = {
         background = "#ff3f7f80";
         foreground = "#f4d9el";
-        # timeout = 10;
+        timeout = 60;
       };
     };
   };
