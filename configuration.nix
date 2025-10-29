@@ -120,6 +120,7 @@
     # nix-index
     babelfish
     # Hyprland
+    blueman
     hyprpolkitagent
     xorg.xrandr
     xdg-desktop-portal-gtk
