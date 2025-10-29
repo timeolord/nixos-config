@@ -119,6 +119,7 @@
       global = {
         follow = "mouse";
         indicate_hidden = true;
+        transparency = 15;
         width = 300;
         height = "(0, 300)";
         origin = "top-right";
@@ -137,10 +138,21 @@
         horizontal_padding = 10;
         text_icon_padding = 0;
         frame_width = 0;
-        frame_color = "#45069380";
+        frame_color = "#450693";
         separator_color = "frame";
         sort = "yes";
         idle_threshold = 120;
+        font = "Monospace 10";
+        line_height = 0;
+        markup = "full";
+        format = "%s %p\n%b";
+        alignment = "left";
+        vertical_alignment = "center";
+        show_age_threshold = 60;
+        ellipsize = "middle";
+        ignore_newline = "no";
+        stack_duplicates = false;
+        show_indicators = "yes";
         
         fullscreen = "show";
       };
