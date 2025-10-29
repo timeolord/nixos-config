@@ -255,8 +255,21 @@
         dpi_aware = "yes";
         terminal = "${pkgs.kitty}/bin/kitty";
         layer = "overlay";
+        auto-select = "yes";
       };
-      colors.background = "ffffffff";
+      colors = {
+        background = "282828dd";
+        text = "f4d9e1ff";
+        prompt = "f4d9e1ff";
+        placeholder="838ba7ff";
+input="c6d0f5ff";
+match="ea999cff";
+selection="626880ff";
+selection-text="c6d0f5ff";
+selection-match="ea999cff";
+counter="838ba7ff";
+border="ea999cff";
+      };
     };
   };
 
