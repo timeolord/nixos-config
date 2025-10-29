@@ -128,7 +128,6 @@
     # wlroots
     pavucontrol
     pipewire
-    rofi
   ];
 
   # Fish Settings
