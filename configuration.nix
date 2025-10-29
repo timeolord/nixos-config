@@ -145,13 +145,13 @@
     meslo-lgs-nf
   ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
-  services.emacs.package = pkgs.emacs-unstable;
+  # services.emacs.package = pkgs.emacs-unstable;
 
   nixpkgs.overlays = [
-    (import (builtins.fetchTarball {
-      url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-      sha256 = "0rxaccfndq5zv3n0k2z8ma626yivvh2xa3f4j35d0ylyamw5sww1";
-    }))
+    # (import (builtins.fetchTarball {
+    #   url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    #   sha256 = "0rxaccfndq5zv3n0k2z8ma626yivvh2xa3f4j35d0ylyamw5sww1";
+    # }))
     (import (builtins.fetchTarball {
       url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
       sha256 = "0211jcyijzai8267mykmc4xib88vcqd9qvrrzazn3r52v5w7p7xy";
@@ -160,7 +160,7 @@
 
   programs.hyprland = {
     enable = true;
-    xwayland.enable = true;
+    xwayland.enable = false;
   };
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
