@@ -119,13 +119,28 @@
       global = {
         follow = "mouse";
         indicate_hidden = true;
-        offset = "10x10";
+        width = 300;
         height = "(0, 300)";
-        separator_height = 10;
-        padding = 8;
-        frame_width = 2;
+        origin = "top-right";
+        offset = "10x50";
+        scale = 0;
+        notification_limit = 0;
+        progress_bar = true;
+        progress_bar_height = 10;
+        progress_bar_frame_width = 1;
+        progress_bar_min_width = 150;
+        progress_bar_max_width = 300;
 
-        frame_color = "45069380";
+        
+        separator_height = 1;
+        padding = 8;
+        horizontal_padding = 10;
+        text_icon_padding = 0;
+        frame_width = 0;
+        frame_color = "#45069380";
+        separator_color = "frame";
+        sort = "yes";
+        idle_threshold = 120;
         
         fullscreen = "show";
       };
