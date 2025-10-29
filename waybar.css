@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background: rgba(30, 30, 46, 0.5);
+    background: #45069380;
     border-bottom: 1px solid #282828;
     color: #f4d9e1
 }
@@ -34,11 +34,11 @@ window#waybar {
     border-radius: 16px;
 }
 
-#workspaces button:hover {
-	  background-color: #E6B9C6;
-	  color: black;
-	  border-radius: 16px;
-}
+/* #workspaces button:hover { */
+/* 	  background-color: #E6B9C6; */
+/* 	  color: black; */
+/* 	  border-radius: 16px; */
+/* } */
 
 /* #custom-date, #clock, #battery, #pulseaudio, #network, #custom-randwall, #custom-launcher{ */
 /* 	background: transparent; */
@@ -146,7 +146,7 @@ window#waybar {
 }
 
 #cpu, #memory, #disk {
-    background-color: #450693;
+    /* background-color: #450693; */
     color: #ff3f7f;
     border-radius: 16px;
     margin: 5px;
