@@ -8,7 +8,7 @@
 }
 
 window#waybar {
-    background: #45069380;
+    background: rgba(1, 1, 1, 0.5);
     border-bottom: 1px solid #282828;
     color: #f4d9e1
 }
@@ -94,7 +94,8 @@ window#waybar {
 }
 
 #clock.date {
-    color: #ff3f7f
+    color: #ff3f7f;
+    padding-left: 0;
 }
 
 
