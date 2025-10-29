@@ -159,7 +159,7 @@
         sticky_history = "yes";
         history_length = 20;
 
-        browser = "${pkgs.firefox} -new-tab";
+        browser = "${pkgs.firefox}/bin/firefox -new-tab";
         always_run_script = "true";
 
         title = "Dunst";
@@ -246,6 +246,18 @@
     interactiveShellInit=''
     fastfetch
     '';
+  };
+
+  programs.fuzzel = {
+    enable = true;
+    settings = {
+      main = {
+        dpi_aware = "yes";
+        terminal = "${pkgs.kitty}/bin/kitty";
+        layer = "overlay";
+      };
+      colors.background = "ffffffff";
+    };
   };
 
     # This value determines the home Manager release that your

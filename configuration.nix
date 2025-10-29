@@ -112,6 +112,7 @@
     cmake
     kitty
     emacs
+    vlc
     # Fish
     fish
     nix-index
