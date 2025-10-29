@@ -111,7 +111,7 @@
     git
     cmake
     kitty
-    emacs-nox
+    emacs-pgtk
     vlc
     udiskie
     unzip
