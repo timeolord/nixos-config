@@ -106,9 +106,8 @@
           spacing = 5;
         };
         clock = {
-          interval = 30;
-          format = "{:%H:%M}";
-          
+          interval = 1;
+          format = "{:%OI:%M}";
         };
         pulseaudio = {
           format = "{icon} {volume}%";
