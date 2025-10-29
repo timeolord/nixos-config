@@ -15,7 +15,6 @@ window#waybar {
 
 #workspaces {
 	  background: #282828;
-    color: #ff3f7f;
 	  margin: 5px 5px 5px 5px;
     padding: 0px 5px 0px 5px;
 	  border-radius: 16px;
@@ -24,7 +23,7 @@ window#waybar {
     font-style: normal;
 }
 #workspaces button {
-    padding: 0px 16px;
+    padding: 0px 8px;
     border-radius: 16px;
     color: #ff3f7f;
 }
