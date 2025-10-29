@@ -107,7 +107,7 @@
         };
         clock = {
           interval = 1;
-          format = "{:%A} :%I:%M}";
+          format = "{:%A} {:%I:%M}";
           #tooltip-format = "{:%Y-%m-%d}";
         };
         pulseaudio = {
