@@ -119,7 +119,6 @@
       global = {
         follow = "mouse";
         indicate_hidden = true;
-        transparency = 15;
         width = 300;
         height = "(0, 300)";
         origin = "top-right";
@@ -153,8 +152,45 @@
         ignore_newline = "no";
         stack_duplicates = false;
         show_indicators = "yes";
+
+        icon_position = "left";
+        min_icon_size = 0;
+        max_icon_size = 64;
+        icon_path = "";
+
+        sticky_history = "yes";
+        history_length = 20;
+
+        browser = "${pkgs.firefox} -new-tab";
+        always_run_script = true;
+
+        title = "Dunst";
+        class = "Dunst";
+
+        corner_radius = 5;
+        ignore_dbusclose = false;
+
+        mouse_left_click = "close_current";
+        mouse_middle_click = "do_action, close_current";
+        mouse_right_click = "close_all";
         
         fullscreen = "show";
+      };
+      urgency_low = {
+        background = "#45069380";
+        foreground = "#f4d9el";
+        timeout = 10;
+      };
+      urgency_normal = {
+        background = "#8c00ff80";
+        foreground = "#f4d9el";
+        timeout = 10;
+      };
+      urgency_critical = {
+        background = "#ff3f7f80";
+        foreground = "#f4d9el";
+        frame_color = "#ffc400";
+        timeout = 10;
       };
     };
   };
