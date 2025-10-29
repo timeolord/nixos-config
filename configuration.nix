@@ -113,6 +113,8 @@
     kitty
     emacs-nox
     vlc
+    udiskie
+    dolphin
     # Fish
     fish
     nix-index
@@ -125,6 +127,7 @@
     waybar
     pavucontrol
     pipewire
+    wireplumber2
     fuzzel
     hyprpaper
   ];
