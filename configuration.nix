@@ -114,7 +114,7 @@
     emacs-nox
     vlc
     udiskie
-    dolphin
+    kdePackages.dolphin
     # Fish
     fish
     nix-index
