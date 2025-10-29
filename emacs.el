@@ -54,12 +54,12 @@
   :config
   (exec-path-from-shell-initialize))
 
-;;(use-package doom-themes
-;;  :init
-;;  (load-theme 'doom-one))
+(use-package doom-themes
+  :init
+  (load-theme 'doom-one))
 
-(set-frame-parameter nil 'alpha-background 70) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
+;; (set-frame-parameter nil 'alpha-background 70) ; For current frame
+;; (add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
 
 (use-package ivy
   :init
