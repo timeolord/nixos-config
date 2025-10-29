@@ -14,7 +14,7 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "melkyway"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -23,7 +23,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
-  networking.wireless.userControlled.enable = true;
+  # networking.wireless.userControlled.enable = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
@@ -193,16 +193,11 @@
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
-
-  #services.xserver.displayManager.lightdm = {
-  #  enable = true;
-  #};
-  
-  # services.xserver.windowManager.session = [{
-  #  #exwm.enable = true;
-  #  name = "exwm";
-  #  start = "exec emacs";
-  # }];
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
+  };
 
     # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
