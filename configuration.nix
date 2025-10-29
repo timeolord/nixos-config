@@ -138,12 +138,12 @@
     enable = true;
     useBabelfish = true;
   };
-  programs.nix-index = {
-    enable = true;
-    enableFishIntegration = true;
-    enableBashIntegration = false;
-    enableZshIntegration = false;
-  };
+  #programs.nix-index = {
+  #  enable = true;
+  #  enableFishIntegration = true;
+  #  enableBashIntegration = false;
+  #  enableZshIntegration = false;
+  #};
 
   fonts.packages = with pkgs; [
     meslo-lgs-nf
