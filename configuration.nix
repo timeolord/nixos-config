@@ -160,7 +160,7 @@
     }))
     (import (builtins.fetchTarball {
       url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
-      sha256 = "1313yync0hn4nsbd5apifdqlk6gmnx0bqfyhlvwakl8c0j9ijliy";
+      sha256 = "0211jcyijzai8267mykmc4xib88vcqd9qvrrzazn3r52v5w7p7xy";
     })) 
   ];
 
