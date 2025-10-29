@@ -18,17 +18,17 @@
       # to avoid problems caused by different versions of nixpkgs.
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-index-database.url = "github:nix-community/nix-index-database";
-    nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
+    # nix-index-database.url = "github:nix-community/nix-index-database";
+    # nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-index-database, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, ... }: {
     nixosConfigurations = {
       melk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
           ./configuration.nix
-          nix-index-database.nixosModules.nix-index
+          # nix-index-database.nixosModules.nix-index
           home-manager.nixosModules.home-manager 
           {
             home-manager.verbose = true;
