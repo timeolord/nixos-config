@@ -115,8 +115,7 @@
   };
   services.dunst = {
     enable = true;
-    settings = {
-    };
+    configFile = ./dunstrc;
   };
   services.hyprpaper = {
     enable = true;

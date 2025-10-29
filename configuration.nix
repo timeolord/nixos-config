@@ -117,22 +117,18 @@
     nix-index
     babelfish
     # Hyprland
-    dunst
     hyprpolkitagent
     xorg.xrandr
-    hyprpaper
     xdg-desktop-portal-gtk
-    xdg-desktop-portal-hyprland
     xwayland
     waybar
-    meson
-    wayland-protocols
-    wayland-utils
-    wl-clipboard
-    wlroots
+    # wayland-protocols
+    # wayland-utils
+    # wl-clipboard
+    # wlroots
     pavucontrol
     pipewire
-    rofi    
+    rofi-wayland
   ];
 
   # Fish Settings
