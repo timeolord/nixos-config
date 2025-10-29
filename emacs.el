@@ -54,16 +54,21 @@
   :config
   (exec-path-from-shell-initialize))
 
+(solaire-global-mode +1)
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
 (use-package doom-themes
   :init
-  (load-theme 'doom-one))
+  (load-theme 'doom-laserwave))
 
 ;; (set-background-color "#102372")
 ;; (add-to-list 'default-frame-alist '(background-color . "#102372"))
-(set-frame-parameter nil 'alpha-background 70) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
+;; (set-frame-parameter nil 'alpha-background 70) ; For current frame
+;; (add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
 
-(use-package ivy
+(Use-package ivy
   :init
   (ivy-mode 1)
   (setq ivy-height 15
