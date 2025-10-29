@@ -99,7 +99,7 @@
         	"format-disconnected" = "󰤭";
         	"format-alt" = " {ifname}: {ipaddr}/{cidr}";
           "tooltip-format" = "{essid}";
-          "on-click-right" = "nm-connection-editor";
+          "on-click" = "wpanm-connection-editor";
         };
         tray = {
           icon-size = 16;

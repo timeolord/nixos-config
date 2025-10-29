@@ -1,5 +1,9 @@
 (require 'package)
 
+;; Keybinds
+(global-set-key (kbd "M-;") 'comment-line)
+(global-set-key (kbd "C-x C-B") 'switch-to-buffer)
+
 ;; Hide Window Frame and Full Screen and Maximize
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
@@ -99,18 +103,21 @@
 (use-package company
   :bind (("C-." . company-complete))
   :custom
+  (company-minimum-prefix-length 1)
   (company-idle-delay 0) ;; I always want completion, give it to me asap
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t "Numbers are helpful.")
   (company-tooltip-limit 10 "The more the merrier.")
   :config
-  (global-company-mode) ;; We want completion everywhere
+  (global-company-mode t) ;; We want completion everywhere
 
   ;; use numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
+(use-package company-nixos-options)
+(add-to-list 'company-backends 'company-nixos-options)
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
@@ -160,7 +167,7 @@
 (setq blink-cursor-mode nil)
 
 ;; Autosave every 10 inputs
-(setq auto-save-interval 20)
+;;(setq auto-save-interval 20)
 
 (setq-default indent-tabs-mode nil
   tab-width 2
