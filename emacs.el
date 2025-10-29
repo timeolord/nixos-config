@@ -58,6 +58,8 @@
   :init
   (load-theme 'doom-one))
 
+;; (set-background-color "#102372")
+;; (add-to-list 'default-frame-alist '(background-color . "#102372"))
 (set-frame-parameter nil 'alpha-background 70) ; For current frame
 (add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
 
