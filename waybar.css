@@ -23,11 +23,11 @@ window#waybar {
     font-weight: normal;
     font-style: normal;
 }
-/* #workspaces button { */
-/*     padding: 0px 5px; */
-/*     border-radius: 16px; */
-/*     color: #928374; */
-/* } */
+#workspaces button {
+    padding: 0px 0px;
+    border-radius: 16px;
+    color: #ff3f7f;
+}
 
 #workspaces button.active {
     color: #ffc400;
