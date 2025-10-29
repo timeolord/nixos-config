@@ -114,7 +114,7 @@
     emacs-nox
     vlc
     udiskie
-    kdePackages.dolphin
+    unzip
     # Fish
     fish
     nix-index
@@ -130,6 +130,7 @@
     wireplumber
     fuzzel
     hyprpaper
+    kdePackages.dolphin
   ];
 
   # Fish Settings
