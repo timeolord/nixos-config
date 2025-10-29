@@ -61,7 +61,7 @@
 
 (use-package doom-themes
   :init
-  (load-theme 'doom-laserwave))
+  (load-theme 'doom-one))
 
 ;; (set-background-color "#102372")
 ;; (add-to-list 'default-frame-alist '(background-color . "#102372"))

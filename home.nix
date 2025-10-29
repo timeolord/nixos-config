@@ -32,7 +32,7 @@
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["cpu" "memory" "disk"];
-        modules-right = ["tray" "network" "pulseaudio" "battery" "clock"];
+        modules-right = ["tray" "bluetooth" "network" "pulseaudio" "battery" "clock"];
 
         "hyprland/workspaces" = {
           active-only = false;
@@ -55,6 +55,14 @@
             "10" = "拾";
             urgent = "";
           };
+        };
+        bluetooth = {
+          format = " {status}";
+          format-disabled = "";
+          format-connected = " {num_connections} connected";
+          tooltip-format = "{controller_alias}\t{controller_address}";
+	        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+	        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
         };
         battery = {
           states = {
