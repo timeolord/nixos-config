@@ -68,7 +68,7 @@
 ;; (set-frame-parameter nil 'alpha-background 70) ; For current frame
 ;; (add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
 
-(Use-package ivy
+(use-package ivy
   :init
   (ivy-mode 1)
   (setq ivy-height 15
