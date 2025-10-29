@@ -122,7 +122,7 @@
         width = 300;
         height = "(0, 300)";
         origin = "top-right";
-        offset = "10x50";
+        offset = "(10, 50)";
         scale = 0;
         notification_limit = 0;
         progress_bar = true;
@@ -137,8 +137,6 @@
         horizontal_padding = 10;
         text_icon_padding = 0;
         frame_width = 0;
-        frame_color = "#ffc40080";
-        separator_color = "frame";
         sort = "yes";
         idle_threshold = 120;
         font = "Monospace 10";
@@ -178,17 +176,17 @@
       };
       urgency_low = {
         background = "#45069380";
-        foreground = "#f4d9el";
+        foreground = "#f4d9elff";
         timeout = 10;
       };
       urgency_normal = {
         background = "#8c00ff80";
-        foreground = "#f4d9el";
+        foreground = "#f4d9elff";
         timeout = 10;
       };
       urgency_critical = {
         background = "#ff3f7f80";
-        foreground = "#f4d9el";
+        foreground = "#f4d9elff";
         timeout = 60;
       };
     };
