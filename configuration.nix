@@ -117,7 +117,7 @@
     unzip
     # Fish
     fish
-    nix-index
+    # nix-index
     babelfish
     # Hyprland
     hyprpolkitagent

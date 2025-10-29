@@ -22,7 +22,7 @@
     nix-index-database.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, ... }: {
+  outputs = inputs@{ nixpkgs, home-manager, nix-index-database, ... }: {
     nixosConfigurations = {
       melk = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
