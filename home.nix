@@ -266,8 +266,8 @@
         match="ea999cff";
         selection="626880ff";
         selection-text="ff3f7fff";
-        selection-match="ea999cff";
-        counter="838ba7ff";
+        selection-match="ffce00ff";
+        counter="8c00ffff";
         border="450693ff";
       };
     };
