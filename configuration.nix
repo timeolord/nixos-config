@@ -23,6 +23,7 @@
 
   # Enable networking
   networking.networkmanager.enable = true;
+  networking.wireless.userControlled.enable = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
  
