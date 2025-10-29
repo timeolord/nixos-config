@@ -105,6 +105,11 @@
           icon-size = 16;
           spacing = 5;
         };
+        clock = {
+          interval = 30;
+          format = "{:%H:%M}";
+          
+        };
         pulseaudio = {
           format = "{icon} {volume}%";
         	format-muted = "󰝟";
