@@ -32,7 +32,7 @@
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["cpu" "memory" "disk"];
-        modules-right = ["tray" "network" "pulseaudio" "battery" "clock"];
+        modules-right = ["tray" "network" "pulseaudio" "battery" "clock#date" "clock"];
 
         "hyprland/workspaces" = {
           active-only = false;
@@ -70,7 +70,7 @@
             warning = 30;
             critical = 15;
           };
-          format = "{icon}  {capacity}%";
+          format = "{icon} {capacity}%";
           format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{icon} {time}";
@@ -107,8 +107,11 @@
         };
         clock = {
           interval = 1;
-          format = "{:%b %a %d %I:%M %p}";
-          #tooltip-format = "{:%Y-%m-%d}";
+          format = "{:%I:%M %p}";
+        };
+        "clock#date" = {
+          interval = 60;
+          format = "{:%b %a %d}";
         };
         pulseaudio = {
           format = "{icon} {volume}%";
