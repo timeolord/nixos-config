@@ -127,7 +127,7 @@
     waybar
     pavucontrol
     pipewire
-    wireplumber2
+    wireplumber
     fuzzel
     hyprpaper
   ];
