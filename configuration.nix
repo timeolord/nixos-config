@@ -121,6 +121,7 @@
     babelfish
     # Hyprland
     blueman
+    bluez
     hyprpolkitagent
     xorg.xrandr
     xdg-desktop-portal-gtk
