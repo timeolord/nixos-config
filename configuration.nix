@@ -111,7 +111,7 @@
     git
     cmake
     kitty
-    emacs
+    emacs-pgtk
     vlc
     # Fish
     fish
