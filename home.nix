@@ -108,6 +108,7 @@
         clock = {
           interval = 1;
           format = "{:%I:%M}";
+          tooltip-format = "{:%Y-%m-%d}";
         };
         pulseaudio = {
           format = "{icon} {volume}%";
