@@ -95,7 +95,7 @@ window#waybar {
 
 #clock.date {
     color: #ff3f7f;
-    padding-left: 0px;
+    padding-right: 0px;
     margin-left: 0px;
 }
 
