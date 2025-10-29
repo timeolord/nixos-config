@@ -115,7 +115,21 @@
   };
   services.dunst = {
     enable = true;
-    configFile = ./dunstrc;
+    settings = {
+      global = {
+        follow = "mouse";
+        indicate_hidden = true;
+        offset = "10x10";
+        height = "(0, 300)";
+        separator_height = 10;
+        padding = 8;
+        frame_width = 2;
+
+        frame_color = "45069380";
+        
+        fullscreen = "show";
+      };
+    };
   };
   services.hyprpaper = {
     enable = true;
