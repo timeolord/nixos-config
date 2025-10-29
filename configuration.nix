@@ -122,12 +122,9 @@
     xdg-desktop-portal-gtk
     xwayland
     waybar
-    # wayland-protocols
-    # wayland-utils
-    # wl-clipboard
-    # wlroots
     pavucontrol
     pipewire
+    fuzzel
   ];
 
   # Fish Settings
