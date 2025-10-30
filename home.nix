@@ -258,7 +258,7 @@
   programs.fish = {
     enable = true;
     shellInit = ''
-    set PATH /etc/nixos $PATH
+    set PATH /etc/nixos /home/melk/.local/bin $PATH
     abbr --add rb rebuild.sh
     set -g fish_greeting
     '';
