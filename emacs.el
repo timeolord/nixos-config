@@ -1,6 +1,7 @@
 (require 'package)
 
 ;; Keybinds
+(global-set-key (kbd "M-;") nil)
 (global-set-key (kbd "M-;") 'comment-line)
 (global-set-key (kbd "C-x C-B") 'switch-to-buffer)
 
@@ -150,8 +151,13 @@
         (setq indent-tabs-mode nil)
         (setq tab-width 4)
         (setq python-indent-offset 4)))
+;; Haskell Config
+(use-package haskell-mode)
+(eval-after-load "haskell-mode"
+    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
 
-
+(eval-after-load "haskell-cabal"
+    '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
 
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)
