@@ -33,6 +33,15 @@
  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
  use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
 
+(use-package smartparens
+  :ensure smartparens  ;; install the package
+  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :config
+  ;; load default config
+  (require 'smartparens-config))
+
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
 ;; EXWM Setup
 ;;(use-package exwm
 ;;  :config
@@ -159,11 +168,11 @@
 (eval-after-load "haskell-cabal"
     '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
 
-(add-hook 'haskell-mode-hook
-          (lambda ()
-            (set (make-local-variable 'company-backends)
-                 (append '((company-capf company-dabbrev-code))
-                         company-backends))))
+;; (add-hook 'haskell-mode-hook
+;;           (lambda ()
+;;             (set (make-local-variable 'company-backends)
+;;                  (append '((company-capf company-dabbrev-code))
+;;                          company-backends))))
 (add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 ;; hslint on the command line only likes this indentation mode;
