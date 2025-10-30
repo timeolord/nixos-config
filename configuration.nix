@@ -1,14 +1,22 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
+flake-overlays:
 { config, pkgs, inputs, ... }:
-
 {
   imports =
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
     ];
+
+  nixpkgs.overlays = [
+    # (import (builtins.fetchTarball {
+    #   url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
+    #   sha256 = "0rxaccfndq5zv3n0k2z8ma626yivvh2xa3f4j35d0ylyamw5sww1";
+    # }))
+    (import (builtins.fetchTarball {
+      url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
+      sha256 = "0211jcyijzai8267mykmc4xib88vcqd9qvrrzazn3r52v5w7p7xy";
+    })) 
+  ] ++ flake-overlays;
+
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -136,8 +144,7 @@
     kitty
     emacs-pgtk
     vlc
-    udiskie
-    unzip
+    matlab
     # Fish
     fish
     # nix-index
@@ -153,7 +160,8 @@
     wireplumber
     fuzzel
     hyprpaper
-    kdePackages.dolphin
+    udiskie
+    unzip
   ];
 
   # Fish Settings
@@ -173,17 +181,6 @@
   ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   # services.emacs.package = pkgs.emacs-unstable;
-
-  nixpkgs.overlays = [
-    # (import (builtins.fetchTarball {
-    #   url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    #   sha256 = "0rxaccfndq5zv3n0k2z8ma626yivvh2xa3f4j35d0ylyamw5sww1";
-    # }))
-    (import (builtins.fetchTarball {
-      url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
-      sha256 = "0211jcyijzai8267mykmc4xib88vcqd9qvrrzazn3r52v5w7p7xy";
-    })) 
-  ];
 
   programs.hyprland = {
     enable = true;
