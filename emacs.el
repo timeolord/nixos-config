@@ -88,17 +88,17 @@
 
 ;; We need something to manage the various projects we work on
 ;; and for common functionality like project-wide searching, fuzzy file finding etc.
-(use-package projectile
-  :init
-  (projectile-mode t) ;; Enable this immediately
-  :config
-  (setq projectile-enable-caching t ;; Much better performance on large projects
-        projectile-completion-system 'ivy)) ;; Ideally the minibuffer should aways look similar
+;; (use-package projectile
+;;   :init
+;;   (projectile-mode t) ;; Enable this immediately
+;;   :config
+;;   (setq projectile-enable-caching t ;; Much better performance on large projects
+;;         projectile-completion-system 'ivy)) ;; Ideally the minibuffer should aways look similar
 
 ;; Counsel and projectile should work together.
-(use-package counsel-projectile
-  :init
-  (counsel-projectile-mode))
+;; (use-package counsel-projectile
+;;   :init
+;;   (counsel-projectile-mode))
 
 ;; Company is the best Emacs completion system.
 (use-package company
@@ -117,8 +117,8 @@
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
-(use-package company-nixos-options)
-(add-to-list 'company-backends 'company-nixos-options)
+;; (use-package company-nixos-options)
+;; (add-to-list 'company-backends 'company-nixos-options)
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
@@ -158,6 +158,23 @@
 
 (eval-after-load "haskell-cabal"
     '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
+
+(add-hook 'haskell-mode-hook
+          (lambda ()
+            (set (make-local-variable 'company-backends)
+                 (append '((company-capf company-dabbrev-code))
+                         company-backends))))
+(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+
+;; hslint on the command line only likes this indentation mode;
+;; alternatives commented out below.
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
+
+;; Ignore compiled Haskell files in filename completions
+(add-to-list 'completion-ignored-extensions ".hi")
+
 
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)
