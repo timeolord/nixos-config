@@ -261,7 +261,7 @@
     shellInit = ''
     set PATH /etc/nixos /home/melk/.local/bin $PATH
     abbr --add rb rebuild.sh
-    abbr -add mtlb nix run gitlab:doronbehar/nix-matlab
+    abbr --add mtlb nix run gitlab:doronbehar/nix-matlab
     set -g fish_greeting
     '';
     interactiveShellInit=''
