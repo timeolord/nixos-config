@@ -233,6 +233,7 @@
     pandoc
     zotero
     fastfetch
+    any-nix-shell
   ];
 
   programs.git = {
@@ -262,6 +263,7 @@
     '';
     interactiveShellInit=''
     fastfetch
+    ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
   };
 
