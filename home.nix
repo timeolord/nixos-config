@@ -120,9 +120,6 @@
 		      format-icons = {
 			      default = ["󰕿" "󰖀" "󰕾"];
 		      };
-		      # on-click = "bash /etc/nixos/scripts/volume-mute";
-          # on-scroll-up = "bash /etc/nixos/scripts/volume-up";
-          # on-scroll-down = "bash /etc/nixos/scripts/.scripts/volume-down";
           scroll-step = 5;
 		      on-click-right = "pavucontrol";
         };
@@ -237,6 +234,10 @@
     any-nix-shell
   ];
 
+  home.file.".config/matlab/nix.sh".text = ''
+  INSTALL_DIR=$HOME/matlab
+  '';
+
   programs.git = {
     enable = true;
     settings.user.name = "melk";
@@ -293,8 +294,7 @@
       };
     };
   };
-  # programs.nix-index.enable = true;
-    # This value determines the home Manager release that your
+  # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
   # incompatible changes.
@@ -302,7 +302,7 @@
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "25.11";
+  home.stateVersion = "25.05";
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
