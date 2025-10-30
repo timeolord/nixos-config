@@ -6,3 +6,5 @@ Run this to set file permissions:
 
 Install Matlab at `~/matlab`:
 https://github.com/nyadiia/nix-matlab
+
+TODO: Cursor Setup
