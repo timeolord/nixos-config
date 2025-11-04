@@ -151,7 +151,6 @@ flake-overlays:
     gzip
     git
     cmake
-    kitty
     emacs-pgtk
     vlc
     nixfmt
@@ -160,17 +159,6 @@ flake-overlays:
     fish
     # nix-index
     babelfish
-    # Hyprland
-    hyprpolkitagent
-    xorg.xrandr
-    xdg-desktop-portal-gtk
-    xwayland
-    waybar
-    pavucontrol
-    pipewire
-    wireplumber
-    fuzzel
-    hyprpaper
     udiskie
     unzip
   ];

@@ -15,4 +15,14 @@
     systemd.variables = ["--all"];
     extraConfig = builtins.readFile ./hyprland.conf;
   };
+
+  home.packages = with pkgs; [
+    hyprpolkitagent
+    xorg.xrandr
+    xdg-desktop-portal-gtk
+    xwayland
+    pavucontrol
+    pipewire
+    wireplumber
+  ];
 }
