@@ -31,7 +31,6 @@
           (import ./configuration.nix flake-overlays)
           home-manager.nixosModules.home-manager 
           {
-            home-manager.verbose = true;
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.users.melk = ./home.nix;
