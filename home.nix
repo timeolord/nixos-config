@@ -238,11 +238,11 @@
   INSTALL_DIR=$HOME/matlab
   '';
 
-  programs.git = {
-    enable = true;
-    userName = "timeolord";
-    userEmail = "timeolord6677@gmail.com";
-  };
+  # programs.git = {
+  #   enable = true;
+  #   userName = "timeolord";
+  #   userEmail = "timeolord6677@gmail.com";
+  # };
 
   programs.emacs = {
     enable = true;
