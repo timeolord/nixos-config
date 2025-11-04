@@ -240,7 +240,7 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "melk";
+    settings.user.name = "timeolord";
     settings.user.email = "timeolord6677@gmail.com";
   };
 
