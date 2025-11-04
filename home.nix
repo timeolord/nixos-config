@@ -234,10 +234,6 @@
     any-nix-shell
   ];
 
-  home.file.".config/matlab/nix.sh".text = ''
-  INSTALL_DIR=$HOME/matlab
-  '';
-
   programs.emacs = {
     enable = true;
     extraPackages = epkgs: [
