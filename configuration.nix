@@ -1,22 +1,19 @@
 flake-overlays:
-{ config, pkgs, inputs, ... }:
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-    ];
+  config,
+  pkgs,
+  inputs,
+  ...
+}:
+{
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
+  ];
 
   nixpkgs.overlays = [
-    # (import (builtins.fetchTarball {
-    #   url = "https://github.com/nix-community/emacs-overlay/archive/master.tar.gz";
-    #   sha256 = "0rxaccfndq5zv3n0k2z8ma626yivvh2xa3f4j35d0ylyamw5sww1";
-    # }))
-    # (import (builtins.fetchTarball {
-    #   url = "https://github.com/oxalica/rust-overlay/archive/master.tar.gz";
-    #   sha256 = "0211jcyijzai8267mykmc4xib88vcqd9qvrrzazn3r52v5w7p7xy";
-    # })) 
-  ] ++ flake-overlays;
-
+  ]
+  ++ flake-overlays;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -32,10 +29,13 @@ flake-overlays:
   # Enable networking
   networking.networkmanager.enable = true;
   # networking.wireless.userControlled.enable = true;
-  
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  nix.settings.experimental-features = [
+    "nix-command"
+    "flakes"
+  ];
   programs.direnv.enable = true;
-  
+
   # Set your time zone.
   time.timeZone = "America/New_York";
 
@@ -125,11 +125,14 @@ flake-overlays:
   users.users.melk = {
     isNormalUser = true;
     description = "Melody";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+    ];
     packages = with pkgs; [
     ];
   };
-  
+
   programs.git = {
     enable = true;
     config = {
@@ -154,7 +157,6 @@ flake-overlays:
     emacs-pgtk
     vlc
     nixfmt
-    # matlab
     # Fish
     fish
     # nix-index
@@ -168,25 +170,18 @@ flake-overlays:
     enable = true;
     useBabelfish = true;
   };
-  #programs.nix-index = {
-  #  enable = true;
-  #  enableFishIntegration = true;
-  #  enableBashIntegration = false;
-  #  enableZshIntegration = false;
-  #};
 
-  fonts.packages = with pkgs; [
-    meslo-lgs-nf
-  ] ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-
-  # services.emacs.package = pkgs.emacs-unstable;
+  fonts.packages =
+    with pkgs;
+    [
+      meslo-lgs-nf
+    ]
+    ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
   };
-
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   nix.gc = {
     automatic = true;
@@ -198,7 +193,7 @@ flake-overlays:
     enable = true;
   };
 
-    # Some programs need SUID wrappers, can be configured further or are
+  # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
   # programs.gnupg.agent = {

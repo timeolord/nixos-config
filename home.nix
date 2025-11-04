@@ -6,7 +6,7 @@
 
   home.username = "melk";
   home.homeDirectory = "/home/melk";
- 
+
   home.packages = with pkgs; [
     bitwarden-desktop
     youtube-music
@@ -33,20 +33,20 @@
   };
 
   programs.bash = {
-    enable = true;  
+    enable = true;
   };
 
   programs.fish = {
     enable = true;
     shellInit = ''
-    set PATH /etc/nixos /home/melk/.local/bin $PATH
-    abbr --add rb rebuild.sh
-    set -g fish_greeting
+      set PATH /etc/nixos /home/melk/.local/bin $PATH
+      abbr --add rb rebuild.sh
+      set -g fish_greeting
     '';
-    interactiveShellInit=''
-    fastfetch
-    ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-    godsays
+    interactiveShellInit = ''
+      fastfetch
+      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      godsays
     '';
   };
   # This value determines the home Manager release that your
