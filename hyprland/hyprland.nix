@@ -20,7 +20,6 @@
     hyprpolkitagent
     xorg.xrandr
     xdg-desktop-portal-gtk
-    xwayland
     pavucontrol
     pipewire
     wireplumber
