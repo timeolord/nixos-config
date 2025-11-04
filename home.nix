@@ -4,16 +4,10 @@
   home.username = "melk";
   home.homeDirectory = "/home/melk";
 
-  
-  programs.kitty = {
-    enable = true;
-    shellIntegration.enableFishIntegration = true;
-    settings = {
-      shell = "${pkgs.fish}/bin/fish";
-      background_opacity = 0.5;
-      enable_audio_bell = "no";
-    };
-  };
+  imports = [
+    import ./kitty.nix
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = null;
