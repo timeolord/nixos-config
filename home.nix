@@ -5,7 +5,7 @@
   home.homeDirectory = "/home/melk";
 
   imports = [
-    ./kitty.nix
+    ./hyprland/hyprland.nix
   ];
 
   wayland.windowManager.hyprland = {
