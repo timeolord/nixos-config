@@ -22,7 +22,6 @@
     let
       flake-overlays = [
         rust-overlay.overlays.default
-        # nix-matlab.overlay
       ];
     in{
     nixosConfigurations = {

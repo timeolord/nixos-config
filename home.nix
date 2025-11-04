@@ -1,12 +1,12 @@
 { config, pkgs, ... }:
 
 {
-  home.username = "melk";
-  home.homeDirectory = "/home/melk";
-
   imports = [
     ./hyprland/hyprland.nix
   ];
+
+  home.username = "melk";
+  home.homeDirectory = "/home/melk";
 
   wayland.windowManager.hyprland = {
     enable = true;
