@@ -130,7 +130,15 @@ flake-overlays:
     ];
   };
   
-  programs.git.config.init.defaultBranch = "main";
+  programs.git = {
+    enable = true;
+    config = {
+      init.defaultBranch = "main";
+      core.editor = "emacs";
+      user.name = "timeolord";
+      user.email = "timeolord6677@gmail.com";
+    };
+  };
 
   programs.firefox.enable = true;
 
