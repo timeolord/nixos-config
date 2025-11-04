@@ -12,16 +12,21 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    nix-matlab = {
-      url = "gitlab:doronbehar/nix-matlab";
+    # nix-matlab = {
+    #   url = "gitlab:doronbehar/nix-matlab";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = inputs@{ nixpkgs, home-manager, nix-matlab, ... }:
+  outputs = inputs@{ nixpkgs, home-manager, rust-overlay, ... }:
     let
       flake-overlays = [
-        nix-matlab.overlay
+        rust-overlay.overlays.default
+        # nix-matlab.overlay
       ];
     in{
     nixosConfigurations = {
