@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # nix-matlab = {
-    #   url = "gitlab:doronbehar/nix-matlab";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
