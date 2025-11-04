@@ -1,5 +1,5 @@
 {
-  description = "Melk Flake";
+  description = "Flake(s) for all my computers";
 
   inputs = {
     hyprland.url = "github:hyprwm/Hyprland";
