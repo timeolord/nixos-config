@@ -5,6 +5,16 @@
 (global-set-key (kbd "M-;") 'comment-line)
 (global-set-key (kbd "C-x C-B") 'switch-to-buffer)
 
+(set-terminal-coding-system 'utf-8)
+(set-keyboard-coding-system 'utf-8)
+(prefer-coding-system 'utf-8)
+
+(defvar backup-dir (expand-file-name "~/emacs/backups/"))
+(defvar autosave-dir (expand-file-name "~/emacs/autosaves/"))
+(setq backup-directory-alist (list (cons ".*" backup-dir)))
+(setq auto-save-list-file-prefix autosave-dir)
+(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
 ;; Hide Window Frame and Full Screen and Maximize
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
