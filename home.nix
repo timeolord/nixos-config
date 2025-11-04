@@ -4,6 +4,7 @@
   home.username = "melk";
   home.homeDirectory = "/home/melk";
 
+  
   programs.kitty = {
     enable = true;
     shellIntegration.enableFishIntegration = true;
