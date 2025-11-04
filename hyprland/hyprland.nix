@@ -3,6 +3,9 @@
   imports = [
     ./kitty.nix
     ./waybar.nix
+    ./dunst.nix
+    ./hyprpaper.nix
+    ./fuzzel.nix
   ];
   
   wayland.windowManager.hyprland = {
