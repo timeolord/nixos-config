@@ -34,7 +34,8 @@ flake-overlays:
   # networking.wireless.userControlled.enable = true;
   
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
- 
+  programs.direnv.enable = true;
+  
   # Set your time zone.
   time.timeZone = "America/New_York";
 
