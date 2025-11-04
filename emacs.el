@@ -59,8 +59,8 @@
 ;;  (exwm-systemtray-enable)
 ;;(exwm-enable))
 
-(use-package vterm
-  :ensure t)
+;; (use-package vterm
+;;   :ensure t)
 
 ;; Slurp environment variables from the shell.
 ;; a.k.a. The Most Asked Question On r/emacs
