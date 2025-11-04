@@ -240,8 +240,8 @@
 
   programs.git = {
     enable = true;
-    settings.user.name = "timeolord";
-    settings.user.email = "timeolord6677@gmail.com";
+    settings.userName = "timeolord";
+    settings.userEmail = "timeolord6677@gmail.com";
   };
 
   programs.emacs = {
