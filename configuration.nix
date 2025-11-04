@@ -154,6 +154,7 @@ flake-overlays:
     kitty
     emacs-pgtk
     vlc
+    nixfmts
     # matlab
     # Fish
     fish
