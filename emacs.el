@@ -18,6 +18,9 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
 
+(require 'use-package-ensure)
+(setq use-package-always-ensure t)
+
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
   :ensure t
