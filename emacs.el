@@ -41,7 +41,8 @@
 ;; (require 'use-package)
 (require 'use-package-ensure)
 (setq
- use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded)
+ use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
+ )
  
 (use-package smartparens
   :hook (prog-mode text-mode markdown-mode)
