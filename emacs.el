@@ -34,63 +34,39 @@
 
 ;; Ensure use-package is present. From here on out, all packages are loaded
 ;; with use-package, a macro for importing and installing packages. Also, refresh the package archive on load so we can pull the latest packages.
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
+;; (unless (package-installed-p 'use-package)
+;;   (package-refresh-contents)
+;;   (package-install 'use-package))
 
-(require 'use-package)
+;; (require 'use-package)
+(require 'use-package-ensure)
 (setq
  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
  use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
 
 (use-package smartparens
-  :ensure smartparens  ;; install the package
-  :hook (prog-mode text-mode markdown-mode) ;; add `smartparens-mode` to these hooks
+  :hook (prog-mode text-mode markdown-mode)
   :config
-  ;; load default config
   (require 'smartparens-config))
 
-(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
-
-;; EXWM Setup
-;;(use-package exwm
-;;  :config
-;;  (setq exwm-workspace-number 5)
-;;  (require 'exwm)
-  ;;(require 'exwm-config)
-  ;; Update buffer name by window
-  ;; (add-hook 'exwm-update-class-hook #'efs/exwm-update-class)
-
-  ;; (require 'exwm-randr)
-  ;; (exwm-randr-enable)
-  ;; (start-process-shell-command "xrandr" nil "xrandr --output Virtual-1 --primary --mode 1920x1080 --pos 0x0 --rotate normal")
-
-;;  (require 'exwm-systemtray)
-;;  (exwm-systemtray-enable)
-;;(exwm-enable))
-
-;; (use-package vterm
-;;   :ensure t)
+(use-package rainbow-delimiters
+  :hook (prog-mode text-mode markdown-mode))
 
 ;; Slurp environment variables from the shell.
-;; a.k.a. The Most Asked Question On r/emacs
-(use-package exec-path-from-shell
-  :config
-  (exec-path-from-shell-initialize))
+;(use-package exec-path-from-shell
+;  :config
+;  (exec-path-from-shell-initialize))
 
-(solaire-global-mode +1)
+(use-package solaire-mode
+  :config
+  (solaire-global-mode +1))
+
 (use-package doom-modeline
-  :ensure t
   :init (doom-modeline-mode 1))
 
 (use-package doom-themes
   :init
   (load-theme 'doom-one))
-
-;; (set-background-color "#102372")
-;; (add-to-list 'default-frame-alist '(background-color . "#102372"))
-;; (set-frame-parameter nil 'alpha-background 70) ; For current frame
-;; (add-to-list 'default-frame-alist '(alpha-background . 70)) ; For all new frames henceforth
 
 (use-package ivy
   :init
@@ -130,20 +106,19 @@
   (company-tooltip-limit 10 "The more the merrier.")
   :config
   (global-company-mode t) ;; We want completion everywhere
-
   ;; use numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
-;; (use-package company-nixos-options)
-;; (add-to-list 'company-backends 'company-nixos-options)
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
-  :config
-  (add-hook 'prog-mode-hook 'flycheck-mode) ;; always lint my code
-  (add-hook 'after-init-hook #'global-flycheck-mode))
+  :hook ((prog-mode)
+	 (after-init . global-flycheck-mode))
+  ;(add-hook 'prog-mode-hook 'flycheck-mode) ;; always lint my code
+  ;(add-hook 'after-init-hook #'global-flycheck-mode)
+  )
 
 ;; Package for interacting with language servers
 (use-package lsp-mode
@@ -153,47 +128,51 @@
 
 ;; Rust Config
 (use-package rust-mode)
-(use-package flycheck-rust)
-(with-eval-after-load 'rust-mode
-  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))'
+(use-package flycheck-rust
+  :hook (flycheck-mode . flycheck-rust-setup)
+  ;(with-eval-after-load 'rust-mode
+  ;  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))'
+  )
 
 ;; Python Config
-;(use-package elpy
-;  :ensure t
-;  :init
-;  (elpy-enable))
 (use-package reformatter)
-(use-package ruff-format)
-(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
-(add-hook 'python-mode-hook
-      (lambda ()
+(use-package ruff-format
+  :defer t
+  :hook (python-mode . ruff-format-on-save-mode)
+  :config
+  (python-mode . (lambda ()
         (setq indent-tabs-mode nil)
         (setq tab-width 4)
-        (setq python-indent-offset 4)))
+        (setq python-indent-offset 4))))
+;(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
+;(add-hook 'python-mode-hook
+;      )
 ;; Haskell Config
-(use-package haskell-mode)
-(eval-after-load "haskell-mode"
-    '(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile))
-
-(eval-after-load "haskell-cabal"
-    '(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile))
+(use-package haskell-mode
+  :defer t
+  :bind ((:map haskell-mode-map ("C-c C-c" . haskell-compile))
+	 (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
+  :hook ((haskell-mode . turn-on-haskell-doc-mode)
+	 (haskell-mode . turn-on-haskell-indentation))
+  :config
+  ;(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile)
+  ;(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile)
+  (add-to-list 'completion-ignored-extensions ".hi"))
 
 ;; (add-hook 'haskell-mode-hook
 ;;           (lambda ()
 ;;             (set (make-local-variable 'company-backends)
 ;;                  (append '((company-capf company-dabbrev-code))
 ;;                          company-backends))))
-(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
 
 ;; hslint on the command line only likes this indentation mode;
 ;; alternatives commented out below.
-(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
 ;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
 
 ;; Ignore compiled Haskell files in filename completions
-(add-to-list 'completion-ignored-extensions ".hi")
-
 
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)

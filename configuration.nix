@@ -146,6 +146,9 @@
       core.editor = "emacs";
       user.name = "timeolord";
       user.email = "timeolord6677@gmail.com";
+      safe.directory = [
+        "/etc/nixos"
+      ];
     };
   };
 
