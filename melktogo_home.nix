@@ -28,6 +28,21 @@ userName:{ config, pkgs, ... }:
     enable = true;
     extraPackages = epkgs: [
       epkgs.nix-mode
+      epkgs.solaire-mode
+      epkgs.flycheck
+      epkgs.smartparens
+      epkgs.rainbow-delimiters
+      epkgs.doom-modeline
+      epkgs.doom-themes
+      epkgs.ivy
+      epkgs.counsel
+      epkgs.company
+      epkgs.lsp-mode
+      epkgs.rust-mode
+      epkgs.flycheck-rust
+      epkgs.reformatter
+      epkgs.ruff-format
+      epkgs.haskell-mode
     ];
     extraConfig = builtins.readFile ./emacs.el;
   };

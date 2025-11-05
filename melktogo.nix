@@ -172,6 +172,11 @@
     babelfish
     udiskie
     unzip
+  #   ((emacsPackagesFor emacs-pgtk).emacsWithPackages (
+  #     epkgs: [ epkgs.flycheck
+  #              epkgs.solaire-mode
+  #            ]
+  # ))
   ];
 
   # Fish Settings

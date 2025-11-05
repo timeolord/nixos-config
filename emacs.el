@@ -9,6 +9,7 @@
 (set-keyboard-coding-system 'utf-8)
 (prefer-coding-system 'utf-8)
 
+;; Autosaves and backups
 (defvar backup-dir (expand-file-name "~/emacs/backups/"))
 (defvar autosave-dir (expand-file-name "~/emacs/autosaves/"))
 (setq backup-directory-alist (list (cons ".*" backup-dir)))
@@ -20,17 +21,17 @@
 (add-to-list 'default-frame-alist '(undecorated . t))
 
 ;; Nice macro for updating lists in place.
-(defmacro append-to-list (target suffix)
-  "Append SUFFIX to TARGET in place."
-  `(setq ,target (append ,target ,suffix)))
+;; (defmacro append-to-list (target suffix)
+;;   "Append SUFFIX to TARGET in place."
+;;   `(setq ,target (append ,target ,suffix)))
 
 ;; Set up emacs package archives with 'package
-(append-to-list package-archives
-                '(("gnu" . "https://elpa.gnu.org/packages/")
-		              ("melpa" . "http://melpa.org/packages/") ;; Main package archive
-                  ("org-elpa" . "https://orgmode.org/elpa/"))) ;; Org packages, I don't use org but seems like a harmless default
+;; (append-to-list package-archives
+;;                 '(("gnu" . "https://elpa.gnu.org/packages/")
+;; 		              ("melpa" . "http://melpa.org/packages/") ;; Main package archive
+;;                   ("org-elpa" . "https://orgmode.org/elpa/"))) ;; Org packages, I don't use org but seems like a harmless default
 
-(package-initialize)
+;; (package-initialize)
 
 ;; Ensure use-package is present. From here on out, all packages are loaded
 ;; with use-package, a macro for importing and installing packages. Also, refresh the package archive on load so we can pull the latest packages.
@@ -46,20 +47,20 @@
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
-  :ensure t
+  :ensure nil
   :defer t
   :hook ((prog-mode)
 	 (after-init . global-flycheck-mode)))
  
 (use-package smartparens
-  :ensure t
+  :ensure nil
   :defer t
   :hook (prog-mode text-mode markdown-mode)
   :config
   (require 'smartparens-config))
 
 (use-package rainbow-delimiters
-  :ensure t
+  :ensure nil
   :defer t
   :hook ((prog-mode . rainbow-delimiters-mode)
          (text-mode . rainbow-delimiters-mode)
@@ -71,22 +72,22 @@
 ;;  (exec-path-from-shell-initialize))
 
 (use-package solaire-mode
-  :ensure t
+  :ensure nil
   :config
   (solaire-global-mode +1))
 
 (use-package doom-modeline
-  :ensure t
+  :ensure nil
   :config
   (doom-modeline-mode 1))
 
 (use-package doom-themes
-  :ensure t
+  :ensure nil
   :config
   (load-theme 'doom-one))
 
 (use-package ivy
-  :ensure t
+  :ensure nil
   :config
   (ivy-mode 1)
   (setq ivy-height 15
@@ -94,9 +95,9 @@
         ivy-use-selectable-prompt t))
 
 (use-package counsel
-  :ensure t
+  :ensure nil
   :after ivy
-  :init
+  :config
   (counsel-mode 1)
   :bind (:map ivy-minibuffer-map))
 
@@ -116,7 +117,7 @@
 
 ;; Company is the best Emacs completion system.
 (use-package company
-  :ensure t
+  :ensure nil
   :defer t
   :bind (("C-." . company-complete))
   :custom
@@ -135,7 +136,7 @@
 
 ;; Package for interacting with language servers
 (use-package lsp-mode
-  :ensure t
+  :ensure nil
   :defer t
   :commands lsp
   :config
@@ -143,10 +144,10 @@
 
 ;; Rust Config
 (use-package rust-mode
-  :ensure t
+  :ensure nil
   :defer t)
 (use-package flycheck-rust
-  :ensure t
+  :ensure nil
   :defer t
   :hook (flycheck-mode . flycheck-rust-setup)
   ;(with-eval-after-load 'rust-mode
@@ -155,10 +156,10 @@
 
 ;; Python Config
 (use-package reformatter
-  :ensure t
+  :ensure nil
   :defer t)
 (use-package ruff-format
-  :ensure t
+  :ensure nil
   :defer t
   :hook (python-mode . ruff-format-on-save-mode)
   :config
@@ -169,7 +170,7 @@
 
 ;; Haskell Config
 (use-package haskell-mode
-  :ensure t
+  :ensure nil
   :defer t
   :bind ((:map haskell-mode-map ("C-c C-c" . haskell-compile))
 	 (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
