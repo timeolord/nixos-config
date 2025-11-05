@@ -39,17 +39,21 @@
 ;;   (package-install 'use-package))
 
 ;; (require 'use-package)
-(require 'use-package-ensure)
-(setq
- use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
- )
+;; (require 'use-package-ensure)
+;; (setq
+;;  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
+;;  )
  
 (use-package smartparens
+  :ensure t
+  :defer t
   :hook (prog-mode text-mode markdown-mode)
   :config
   (require 'smartparens-config))
 
 (use-package rainbow-delimiters
+  :ensure t
+  :defer t
   :hook (prog-mode text-mode markdown-mode))
 
 ;; Slurp environment variables from the shell.
@@ -58,18 +62,22 @@
 ;  (exec-path-from-shell-initialize))
 
 (use-package solaire-mode
+  :ensure t
   :config
   (solaire-global-mode +1))
 
 (use-package doom-modeline
+  :ensure t
   :config
   (doom-modeline-mode 1))
 
 (use-package doom-themes
+  :ensure t
   :config
   (load-theme 'doom-one))
 
 (use-package ivy
+  :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-height 15
@@ -77,6 +85,7 @@
         ivy-use-selectable-prompt t))
 
 (use-package counsel
+  :ensure t
   :after ivy
   :init
   (counsel-mode 1)
@@ -98,6 +107,8 @@
 
 ;; Company is the best Emacs completion system.
 (use-package company
+  :ensure t
+  :defer t
   :bind (("C-." . company-complete))
   :custom
   (company-minimum-prefix-length 1)
@@ -115,6 +126,8 @@
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
+  :ensure t
+  :defer t
   :hook ((prog-mode)
 	 (after-init . global-flycheck-mode))
   ;(add-hook 'prog-mode-hook 'flycheck-mode) ;; always lint my code
@@ -123,21 +136,30 @@
 
 ;; Package for interacting with language servers
 (use-package lsp-mode
+  :ensure t
+  :defer t
   :commands lsp
   :config
   (setq lsp-prefer-flymake nil)) ;; Flymake is outdated
 
 ;; Rust Config
-(use-package rust-mode)
+(use-package rust-mode
+  :ensure t
+  :defer t)
 (use-package flycheck-rust
+  :ensure t
+  :defer t
   :hook (flycheck-mode . flycheck-rust-setup)
   ;(with-eval-after-load 'rust-mode
   ;  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))'
   )
 
 ;; Python Config
-(use-package reformatter)
+(use-package reformatter
+  :ensure t
+  :defer t)
 (use-package ruff-format
+  :ensure t
   :defer t
   :hook (python-mode . ruff-format-on-save-mode)
   :config
@@ -150,6 +172,7 @@
 ;      )
 ;; Haskell Config
 (use-package haskell-mode
+  :ensure t
   :defer t
   :bind ((:map haskell-mode-map ("C-c C-c" . haskell-compile))
 	 (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
