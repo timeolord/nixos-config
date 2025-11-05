@@ -22,7 +22,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = userName; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
@@ -66,9 +65,7 @@
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
-  # Remove xterm
-  # services.xserver.excludePackages = [ pkgs.xterm ];
-
+  
   # Configures the udev rules for bazecor
   services.udev.extraRules = builtins.readFile ./bazecor-rules;
 
@@ -159,7 +156,11 @@
     gzip
     git
     cmake
-    emacs-pgtk
+    (pkgs.emacsWithPackagesFromUsePackage {
+      package = pkgs.emacs-git-pgtk;
+      config = ./emacs.el;
+      alwaysEnsure = true;
+    })
     vlc
     nixfmt
     # Fish
@@ -168,11 +169,6 @@
     babelfish
     udiskie
     unzip
-  #   ((emacsPackagesFor emacs-pgtk).emacsWithPackages (
-  #     epkgs: [ epkgs.flycheck
-  #              epkgs.solaire-mode
-  #            ]
-  # ))
   ];
 
   # Fish Settings

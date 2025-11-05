@@ -24,30 +24,30 @@ userName:{ config, pkgs, ... }:
     any-nix-shell
   ];
 
-  programs.emacs = {
-    enable = true;
-    extraPackages = epkgs: with epkgs; [
-      nix-mode
-      solaire-mode
-      flycheck
-      smartparens
-      rainbow-delimiters
-      doom-modeline
-      doom-themes
-      ivy
-      counsel
-      company
-      lsp-mode
-      rust-mode
-      flycheck-rust
-      reformatter
-      ruff-format
-      haskell-mode
-      multiple-cursors
-      magit
-    ];
-    extraConfig = builtins.readFile ./emacs.el;
-  };
+  # programs.emacs = {
+  #   enable = true;
+  #   extraPackages = epkgs: with epkgs; [
+  #     nix-mode
+  #     solaire-mode
+  #     flycheck
+  #     smartparens
+  #     rainbow-delimiters
+  #     doom-modeline
+  #     doom-themes
+  #     ivy
+  #     counsel
+  #     company
+  #     lsp-mode
+  #     rust-mode
+  #     flycheck-rust
+  #     reformatter
+  #     ruff-format
+  #     haskell-mode
+  #     multiple-cursors
+  #     magit
+  #   ];
+  #   extraConfig = builtins.readFile ./emacs.el;
+  # };
 
   programs.bash = {
     enable = true;

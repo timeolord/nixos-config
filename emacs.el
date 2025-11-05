@@ -35,6 +35,9 @@
   :ensure nil
   :defer t)
 
+(use-package nix-mode
+  :mode "\\.nix\\'")
+
 (use-package smartparens
   :ensure nil
   :defer t

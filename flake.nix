@@ -40,16 +40,18 @@
         "melkPC"
         "melkLab"
       ];
-      configurations = builtins.listToAttrs (map (username: {
-        name = username;
-        value = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = { inherit inputs username; };
-          modules = [
-            import ./config.nix
-          ];
-        };
-      }) userNames);
+      configurations = builtins.listToAttrs (
+        map (userName: {
+          name = userName;
+          value = nixpkgs.lib.nixosSystem {
+            system = "x86_64-linux";
+            specialArgs = { inherit inputs userName; };
+            modules = [
+              (import ./config.nix)
+            ];
+          };
+        }) userNames
+      );
     in
     {
       nixpkgs.overlays = flake-overlays;
