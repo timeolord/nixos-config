@@ -39,7 +39,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs; };
           modules = [
-            (import "./${arguments.userName}.nix" arguments)
+            (import (./. + builtins.toPath "/${arguments.userName}.nix") arguments)
           ];
         };
       };

@@ -13,7 +13,7 @@
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users."${userName}" = import ./home.nix userName;
+      home-manager.users."${userName}" = import (./. + builtins.toPath "/${userName}_home.nix") userName;
     }
   ];
 
