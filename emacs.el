@@ -26,7 +26,8 @@
 
 ;; Set up emacs package archives with 'package
 (append-to-list package-archives
-                '(("melpa" . "http://melpa.org/packages/") ;; Main package archive
+                '(("gnu" . "https://elpa.gnu.org/packages/")
+		  ("melpa" . "http://melpa.org/packages/") ;; Main package archive
                   ("melpa-stable" . "http://stable.melpa.org/packages/") ;; Some packages might only do stable releases?
                   ("org-elpa" . "https://orgmode.org/elpa/"))) ;; Org packages, I don't use org but seems like a harmless default
 
