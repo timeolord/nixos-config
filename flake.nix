@@ -39,7 +39,7 @@
             (import ./configuration.nix flake-overlays userName)
             home-manager.nixosModules.home-manager
             {
-              home-manager.users.melk = import ./home.nix ;
+              home-manager.users.melk = (import ./home.nix userName);
             }
           ];
         };
