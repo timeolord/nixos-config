@@ -45,7 +45,7 @@
           name = userName;
           value = nixpkgs.lib.nixosSystem {
             system = "x86_64-linux";
-            specialArgs = { inherit inputs userName; };
+            specialArgs = { inherit inputs userName flake-overlays; };
             modules = [
               (import ./config.nix)
             ];
@@ -54,7 +54,7 @@
       );
     in
     {
-      nixpkgs.overlays = flake-overlays;
+
       nixosConfigurations = configurations;
     };
 }

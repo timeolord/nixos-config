@@ -20,55 +20,55 @@
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
-  :ensure nil
+  :ensure t
   :defer t
   :hook ((prog-mode)
 	       (after-init . global-flycheck-mode)))
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
-  :ensure nil
+  :ensure t
   :defer t)
 
 ;; TODO: Learn how to use magit
 (use-package magit
-  :ensure nil
+  :ensure t
   :defer t)
 
 (use-package nix-mode
   :mode "\\.nix\\'")
 
 (use-package smartparens
-  :ensure nil
+  :ensure t
   :defer t
   :hook (prog-mode text-mode markdown-mode)
   :config
   (require 'smartparens-config))
 
 (use-package rainbow-delimiters
-  :ensure nil
+  :ensure t
   :defer t
   :hook ((prog-mode . rainbow-delimiters-mode)
          (text-mode . rainbow-delimiters-mode)
          (markdown-mode . rainbow-delimiters-mode)))
 
 (use-package solaire-mode
-  :ensure nil
+  :ensure t
   :config
   (solaire-global-mode +1))
 
 (use-package doom-modeline
-  :ensure nil
+  :ensure t
   :config
   (doom-modeline-mode 1))
 
 (use-package doom-themes
-  :ensure nil
+  :ensure t
   :config
   (load-theme 'doom-one))
 
 (use-package ivy
-  :ensure nil
+  :ensure t
   :config
   (ivy-mode 1)
   (setq ivy-height 15
@@ -76,7 +76,7 @@
         ivy-use-selectable-prompt t))
 
 (use-package counsel
-  :ensure nil
+  :ensure t
   :after ivy
   :config
   (counsel-mode 1)
@@ -98,7 +98,7 @@
 
 ;; Company is the best Emacs completion system.
 (use-package company
-  :ensure nil
+  :ensure t
   :defer t
   :bind (("C-." . company-complete))
   :custom
@@ -117,7 +117,7 @@
 
 ;; Package for interacting with language servers
 (use-package lsp-mode
-  :ensure nil
+  :ensure t
   :defer t
   :commands lsp
   :config
@@ -125,19 +125,19 @@
 
 ;; Rust Config
 (use-package rust-mode
-  :ensure nil
+  :ensure t
   :defer t)
 (use-package flycheck-rust
-  :ensure nil
+  :ensure t
   :defer t
   :hook (flycheck-mode . flycheck-rust-setup))
 
 ;; Python Config
 (use-package reformatter
-  :ensure nil
+  :ensure t
   :defer t)
 (use-package ruff-format
-  :ensure nil
+  :ensure t
   :defer t
   :hook (python-mode . ruff-format-on-save-mode)
   :config
@@ -148,7 +148,7 @@
 
 ;; Haskell Config
 (use-package haskell-mode
-  :ensure nil
+  :ensure t
   :defer t
   :bind ((:map haskell-mode-map ("C-c C-c" . haskell-compile))
 	       (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
