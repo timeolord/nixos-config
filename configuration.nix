@@ -1,4 +1,4 @@
-{flake-overlays, userName }:
+{ flake-overlays, userName }:
 {
   config,
   pkgs,
@@ -9,9 +9,13 @@
   imports = [
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager.useGlobalPkgs = true;
+      home-manager.useUserPackages = true;
+      home-manager.users."${userName}" = import ./home.nix userName;
+    }
   ];
-  home-manager.useGlobalPkgs = true;
-  home-manager.useUserPackages = true;
 
   nixpkgs.overlays = [
   ]

@@ -26,21 +26,20 @@
       ...
     }:
     let
-      flake-overlays = [
+      arguments = {
+        flake-overlays = [
         rust-overlay.overlays.default
       ];
-      userName = "melktogo";  
+        userName = "melktogo";
+      };  
     in
     {
       nixosConfigurations = {
-        "${userName}" = nixpkgs.lib.nixosSystem {
+        "${arguments.userName}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
+          specialArgs = { inherit inputs; };
           modules = [
-            (import ./configuration.nix flake-overlays)
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.users.melk = (import ./home.nix userName);
-            }
+            (import "./${arguments.userName}.nix" arguments)
           ];
         };
       };

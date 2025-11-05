@@ -39,7 +39,7 @@ userName:{ config, pkgs, ... }:
   programs.fish = {
     enable = true;
     shellInit = ''
-      set PATH /etc/nixos /home/${username}/.local/bin $PATH
+      set PATH /etc/nixos /home/${userName}/.local/bin $PATH
       abbr --add rb rebuild.sh
       set -g fish_greeting
     '';
