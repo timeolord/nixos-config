@@ -29,7 +29,7 @@
       flake-overlays = [
         rust-overlay.overlays.default
       ];
-      userName = "melkLaptop";  
+      userName = "melktogo";  
     in
     {
       nixosConfigurations = {
