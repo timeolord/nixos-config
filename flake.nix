@@ -44,7 +44,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs userName; };
           modules = [
-            (import ./. + builtins.toPath "/${userName}.nix")
+            (import (./. + builtins.toPath "/${userName}.nix"))
           ];
         };
       };
