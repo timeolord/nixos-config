@@ -44,7 +44,7 @@
           system = "x86_64-linux";
           specialArgs = { inherit inputs userName; };
           modules = [
-            (import ./config.nix)
+            import ./config.nix
           ];
         };
       };
