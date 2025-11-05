@@ -52,10 +52,12 @@
   :config
   (require 'smartparens-config))
 
-(use-package rainbow-delimiters
+(use-package rainbow-delimiters-mode
   :ensure t
   :defer t
-  :hook (prog-mode text-mode markdown-mode))
+  :hook ((prog-mode . rainbow-delimiters-mode)
+         (text-mode . rainbow-delimiters-mode)
+         (markdown-mode . rainbow-delimiters-mode)))
 
 ;; Slurp environment variables from the shell.
 ;(use-package exec-path-from-shell
@@ -130,10 +132,7 @@
   :ensure t
   :defer t
   :hook ((prog-mode)
-	 (after-init . global-flycheck-mode))
-  ;(add-hook 'prog-mode-hook 'flycheck-mode) ;; always lint my code
-  ;(add-hook 'after-init-hook #'global-flycheck-mode)
-  )
+	 (after-init . global-flycheck-mode)))
 
 ;; Package for interacting with language servers
 (use-package lsp-mode
