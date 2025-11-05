@@ -24,10 +24,10 @@ userName:{ config, pkgs, ... }:
     any-nix-shell
   ];
 
-  programs.emacs = {
-    enable = true;
-    extraConfig = builtins.readFile ./emacs.el;
-  };
+  # programs.emacs = {
+  #   enable = true;
+  #   extraConfig = builtins.readFile ./emacs.el;
+  # };
 
   programs.bash = {
     enable = true;

@@ -161,6 +161,7 @@
     (pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-git-pgtk;
       config = ./emacs.el;
+      defaultInitFile = true;
       alwaysEnsure = true;
     })
     vlc
