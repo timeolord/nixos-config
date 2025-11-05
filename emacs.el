@@ -1,4 +1,4 @@
-(require 'package)
+;;(require 'package)
 
 ;; Keybinds
 (global-set-key (kbd "M-;") nil)
@@ -27,8 +27,7 @@
 ;; Set up emacs package archives with 'package
 (append-to-list package-archives
                 '(("gnu" . "https://elpa.gnu.org/packages/")
-		  ("melpa" . "http://melpa.org/packages/") ;; Main package archive
-                  ("melpa-stable" . "http://stable.melpa.org/packages/") ;; Some packages might only do stable releases?
+		              ("melpa" . "http://melpa.org/packages/") ;; Main package archive
                   ("org-elpa" . "https://orgmode.org/elpa/"))) ;; Org packages, I don't use org but seems like a harmless default
 
 (package-initialize)
@@ -44,6 +43,13 @@
 ;; (setq
 ;;  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
 ;;  )
+
+;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
+(use-package flycheck
+  :ensure t
+  :defer t
+  :hook ((prog-mode)
+	 (after-init . global-flycheck-mode)))
  
 (use-package smartparens
   :ensure t
@@ -52,7 +58,7 @@
   :config
   (require 'smartparens-config))
 
-(use-package rainbow-delimiters-mode
+(use-package rainbow-delimiters
   :ensure t
   :defer t
   :hook ((prog-mode . rainbow-delimiters-mode)
@@ -60,9 +66,9 @@
          (markdown-mode . rainbow-delimiters-mode)))
 
 ;; Slurp environment variables from the shell.
-;(use-package exec-path-from-shell
-;  :config
-;  (exec-path-from-shell-initialize))
+;;(use-package exec-path-from-shell
+;;  :config
+;;  (exec-path-from-shell-initialize))
 
 (use-package solaire-mode
   :ensure t
@@ -127,13 +133,6 @@
                         `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
 
-;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
-(use-package flycheck
-  :ensure t
-  :defer t
-  :hook ((prog-mode)
-	 (after-init . global-flycheck-mode)))
-
 ;; Package for interacting with language servers
 (use-package lsp-mode
   :ensure t
@@ -167,9 +166,7 @@
         (setq indent-tabs-mode nil)
         (setq tab-width 4)
         (setq python-indent-offset 4))))
-;(add-hook 'python-mode-hook 'ruff-format-on-save-mode)
-;(add-hook 'python-mode-hook
-;      )
+
 ;; Haskell Config
 (use-package haskell-mode
   :ensure t
