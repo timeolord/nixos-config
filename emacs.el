@@ -41,9 +41,8 @@
 ;; (require 'use-package)
 (require 'use-package-ensure)
 (setq
- use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
- use-package-verbose t) ;; Package install logging. Packages break, it's nice to know why.
-
+ use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded)
+ 
 (use-package smartparens
   :hook (prog-mode text-mode markdown-mode)
   :config
@@ -62,14 +61,15 @@
   (solaire-global-mode +1))
 
 (use-package doom-modeline
-  :init (doom-modeline-mode 1))
+  :config
+  (doom-modeline-mode 1))
 
 (use-package doom-themes
-  :init
+  :config
   (load-theme 'doom-one))
 
 (use-package ivy
-  :init
+  :config
   (ivy-mode 1)
   (setq ivy-height 15
         ivy-use-virtual-buffers t
