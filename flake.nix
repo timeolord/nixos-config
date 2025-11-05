@@ -36,7 +36,7 @@
         "${userName}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           modules = [
-            (import ./configuration.nix flake-overlays userName)
+            (import ./configuration.nix flake-overlays)
             home-manager.nixosModules.home-manager
             {
               home-manager.users.melk = (import ./home.nix userName);
