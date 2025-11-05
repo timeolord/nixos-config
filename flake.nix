@@ -26,25 +26,25 @@
     inputs@{
       nixpkgs,
       home-manager,
-        rust-overlay,
-        emacs-overlay,
+      rust-overlay,
+      emacs-overlay,
       ...
     }:
     let
-      arguments = {
-        flake-overlays = [
+      flake-overlays = [
         rust-overlay.overlays.default
+        emacs-overlay.overlays.default
       ];
-        userName = "melktogo";
-      };  
+      userName = "melktogo";
     in
     {
+      nixpkgs.overlays = flake-overlays;
       nixosConfigurations = {
-        "${arguments.userName}" = nixpkgs.lib.nixosSystem {
+        "${userName}" = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs; };
+          specialArgs = { inherit inputs userName; };
           modules = [
-            (import (./. + builtins.toPath "/${arguments.userName}.nix") arguments)
+            (import ./. + builtins.toPath "/${userName}.nix")
           ];
         };
       };

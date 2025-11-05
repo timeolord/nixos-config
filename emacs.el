@@ -1,5 +1,3 @@
-;;(require 'package)
-
 ;; Keybinds
 (global-set-key (kbd "M-;") nil)
 (global-set-key (kbd "M-;") 'comment-line)
@@ -20,38 +18,23 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
 
-;; Nice macro for updating lists in place.
-;; (defmacro append-to-list (target suffix)
-;;   "Append SUFFIX to TARGET in place."
-;;   `(setq ,target (append ,target ,suffix)))
-
-;; Set up emacs package archives with 'package
-;; (append-to-list package-archives
-;;                 '(("gnu" . "https://elpa.gnu.org/packages/")
-;; 		              ("melpa" . "http://melpa.org/packages/") ;; Main package archive
-;;                   ("org-elpa" . "https://orgmode.org/elpa/"))) ;; Org packages, I don't use org but seems like a harmless default
-
-;; (package-initialize)
-
-;; Ensure use-package is present. From here on out, all packages are loaded
-;; with use-package, a macro for importing and installing packages. Also, refresh the package archive on load so we can pull the latest packages.
-;; (unless (package-installed-p 'use-package)
-;;   (package-refresh-contents)
-;;   (package-install 'use-package))
-
-;; (require 'use-package)
-;; (require 'use-package-ensure)
-;; (setq
-;;  use-package-always-ensure t ;; Makes sure to download new packages if they aren't already downloaded
-;;  )
-
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
   :ensure nil
   :defer t
   :hook ((prog-mode)
-	 (after-init . global-flycheck-mode)))
- 
+	       (after-init . global-flycheck-mode)))
+
+;; TODO: Learn how to use multiple cursors.
+(use-package multiple-cursors
+  :ensure nil
+  :defer t)
+
+;; TODO: Learn how to use magit
+(use-package magit
+  :ensure nil
+  :defer t)
+
 (use-package smartparens
   :ensure nil
   :defer t
@@ -65,11 +48,6 @@
   :hook ((prog-mode . rainbow-delimiters-mode)
          (text-mode . rainbow-delimiters-mode)
          (markdown-mode . rainbow-delimiters-mode)))
-
-;; Slurp environment variables from the shell.
-;;(use-package exec-path-from-shell
-;;  :config
-;;  (exec-path-from-shell-initialize))
 
 (use-package solaire-mode
   :ensure nil
@@ -122,16 +100,16 @@
   :bind (("C-." . company-complete))
   :custom
   (company-minimum-prefix-length 1)
-  (company-idle-delay 0) ;; I always want completion, give it to me asap
+  (company-idle-delay 0)
   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
   (company-show-numbers t "Numbers are helpful.")
   (company-tooltip-limit 10 "The more the merrier.")
   :config
-  (global-company-mode t) ;; We want completion everywhere
+  (global-company-mode t)
   ;; use numbers 0-9 to select company completion candidates
   (let ((map company-active-map))
     (mapc (lambda (x) (define-key map (format "%d" x)
-                        `(lambda () (interactive) (company-complete-number ,x))))
+                                  `(lambda () (interactive) (company-complete-number ,x))))
           (number-sequence 0 9))))
 
 ;; Package for interacting with language servers
@@ -140,7 +118,7 @@
   :defer t
   :commands lsp
   :config
-  (setq lsp-prefer-flymake nil)) ;; Flymake is outdated
+  (setq lsp-prefer-flymake nil))
 
 ;; Rust Config
 (use-package rust-mode
@@ -149,10 +127,7 @@
 (use-package flycheck-rust
   :ensure nil
   :defer t
-  :hook (flycheck-mode . flycheck-rust-setup)
-  ;(with-eval-after-load 'rust-mode
-  ;  (add-hook 'flycheck-mode-hook #'flycheck-rust-setup))'
-  )
+  :hook (flycheck-mode . flycheck-rust-setup))
 
 ;; Python Config
 (use-package reformatter
@@ -164,37 +139,21 @@
   :hook (python-mode . ruff-format-on-save-mode)
   :config
   (python-mode . (lambda ()
-        (setq indent-tabs-mode nil)
-        (setq tab-width 4)
-        (setq python-indent-offset 4))))
+                   (setq indent-tabs-mode nil)
+                   (setq tab-width 4)
+                   (setq python-indent-offset 4))))
 
 ;; Haskell Config
 (use-package haskell-mode
   :ensure nil
   :defer t
   :bind ((:map haskell-mode-map ("C-c C-c" . haskell-compile))
-	 (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
+	       (:map haskell-cabal-mode-map ("C-c C-c" . haskell-compile)))
   :hook ((haskell-mode . turn-on-haskell-doc-mode)
-	 (haskell-mode . turn-on-haskell-indentation))
+	       (haskell-mode . turn-on-haskell-indentation))
   :config
-  ;(define-key haskell-mode-map (kbd "C-c C-c") 'haskell-compile)
-  ;(define-key haskell-cabal-mode-map (kbd "C-c C-c") 'haskell-compile)
   (add-to-list 'completion-ignored-extensions ".hi"))
 
-;; (add-hook 'haskell-mode-hook
-;;           (lambda ()
-;;             (set (make-local-variable 'company-backends)
-;;                  (append '((company-capf company-dabbrev-code))
-;;                          company-backends))))
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-doc-mode)
-
-;; hslint on the command line only likes this indentation mode;
-;; alternatives commented out below.
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-indent)
-;;(add-hook 'haskell-mode-hook 'turn-on-haskell-simple-indent)
-
-;; Ignore compiled Haskell files in filename completions
 
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)
@@ -209,14 +168,8 @@
 
 (setq blink-cursor-mode nil)
 
-;; Autosave every 10 inputs
-;;(setq auto-save-interval 20)
-
 (setq-default indent-tabs-mode nil
-  tab-width 2
-  c-basic-offset 2)
+              tab-width 2
+              c-basic-offset 2)
 
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-
-
-

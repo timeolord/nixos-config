@@ -26,23 +26,25 @@ userName:{ config, pkgs, ... }:
 
   programs.emacs = {
     enable = true;
-    extraPackages = epkgs: [
-      epkgs.nix-mode
-      epkgs.solaire-mode
-      epkgs.flycheck
-      epkgs.smartparens
-      epkgs.rainbow-delimiters
-      epkgs.doom-modeline
-      epkgs.doom-themes
-      epkgs.ivy
-      epkgs.counsel
-      epkgs.company
-      epkgs.lsp-mode
-      epkgs.rust-mode
-      epkgs.flycheck-rust
-      epkgs.reformatter
-      epkgs.ruff-format
-      epkgs.haskell-mode
+    extraPackages = epkgs: with epkgs; [
+      nix-mode
+      solaire-mode
+      flycheck
+      smartparens
+      rainbow-delimiters
+      doom-modeline
+      doom-themes
+      ivy
+      counsel
+      company
+      lsp-mode
+      rust-mode
+      flycheck-rust
+      reformatter
+      ruff-format
+      haskell-mode
+      multiple-cursors
+      magit
     ];
     extraConfig = builtins.readFile ./emacs.el;
   };

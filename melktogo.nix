@@ -1,8 +1,8 @@
-{ flake-overlays, userName }:
 {
   config,
   pkgs,
   inputs,
+  userName,
   ...
 }:
 {
@@ -16,10 +16,6 @@
       home-manager.users."${userName}" = import (./. + builtins.toPath "/${userName}_home.nix") userName;
     }
   ];
-
-  nixpkgs.overlays = [
-  ]
-  ++ flake-overlays;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
