@@ -1,4 +1,4 @@
-flake-overlays:
+{flake-overlays, userName }:
 {
   config,
   pkgs,
@@ -11,6 +11,7 @@ flake-overlays:
     ./hardware-configuration.nix
   ];
   home-manager.useGlobalPkgs = true;
+  home-manager.useUserPackages = true;
 
   nixpkgs.overlays = [
   ]
@@ -20,7 +21,7 @@ flake-overlays:
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
-  networking.hostName = "melk"; # Define your hostname.
+  networking.hostName = userName; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -123,7 +124,7 @@ flake-overlays:
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
-  users.users.melk = {
+  users.users."${userName}" = {
     isNormalUser = true;
     description = "Melody";
     extraGroups = [

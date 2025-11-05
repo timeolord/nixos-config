@@ -1,11 +1,11 @@
-{ config, pkgs, ... }:
+userName:{ config, pkgs, ... }:
 {
   imports = [
     ./hyprland/hyprland.nix
   ];
 
-  home.username = "melk";
-  home.homeDirectory = "/home/melk";
+  home.username = userName;
+  home.homeDirectory = "/home/${userName}";
 
   home.packages = with pkgs; [
     bitwarden-desktop
@@ -39,7 +39,7 @@
   programs.fish = {
     enable = true;
     shellInit = ''
-      set PATH /etc/nixos /home/melk/.local/bin $PATH
+      set PATH /etc/nixos /home/${username}/.local/bin $PATH
       abbr --add rb rebuild.sh
       set -g fish_greeting
     '';
