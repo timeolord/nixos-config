@@ -21,6 +21,9 @@
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
+(set-frame-parameter nil 'alpha-background 95) ; For current frame
+(add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
+
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
 (use-package flycheck
   :ensure t
