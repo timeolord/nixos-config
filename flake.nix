@@ -35,18 +35,24 @@
         rust-overlay.overlays.default
         emacs-overlay.overlays.default
       ];
-      userName = "melktogo";
-    in
-    {
-      nixpkgs.overlays = flake-overlays;
-      nixosConfigurations = {
-        "${userName}" = nixpkgs.lib.nixosSystem {
+      userNames = [
+        "melktogo"
+        "melkPC"
+        "melkLab"
+      ];
+      configurations = builtins.listToAttrs (map (username: {
+        name = username;
+        value = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
-          specialArgs = { inherit inputs userName; };
+          specialArgs = { inherit inputs username; };
           modules = [
             import ./config.nix
           ];
         };
-      };
+      }) userNames);
+    in
+    {
+      nixpkgs.overlays = flake-overlays;
+      nixosConfigurations = configurations;
     };
 }
