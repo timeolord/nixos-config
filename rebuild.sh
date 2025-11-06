@@ -12,4 +12,5 @@ if [ $? -eq 0 ]; then
     git push
 else
     sudo nixos-rebuild switch --flake /etc/nixos#${USER} --show-trace
+    git status
 fi

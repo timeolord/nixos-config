@@ -1,0 +1,76 @@
+{
+    "window-size": {
+        "width": 672,
+        "height": 540
+    },
+    "window-maximized": true,
+    "window-position": {
+        "x": 0,
+        "y": 0
+    },
+    "url": "https://music.youtube.com/watch?v=67nYGQsI06s&list=RDAMPLOLAK5uy_lyHAnjFoQ3oA99xB_bjZRFiSu43NthCfY&index=0",
+    "options": {
+        "tray": true,
+        "appVisible": true,
+        "autoUpdates": true,
+        "alwaysOnTop": false,
+        "hideMenu": true,
+        "hideMenuWarned": true,
+        "startAtLogin": false,
+        "disableHardwareAcceleration": false,
+        "removeUpgradeButton": false,
+        "restartOnConfigChanges": false,
+        "trayClickPlayPause": true,
+        "autoResetAppCache": false,
+        "resumeOnStart": false,
+        "likeButtons": "",
+        "proxy": "",
+        "startingPage": "Albums",
+        "overrideUserAgent": false,
+        "usePodcastParticipantAsArtist": false,
+        "themes": []
+    },
+    "plugins": {
+        "notifications": {
+            "enabled": true
+        },
+        "video-toggle": {
+            "mode": "custom"
+        },
+        "precise-volume": {
+            "globalShortcuts": {}
+        },
+        "discord": {
+            "listenAlong": true,
+            "enabled": true
+        },
+        "scrobbler": {
+            "enabled": true,
+            "scrobbleOtherMedia": true,
+            "alternativeTitles": true,
+            "alternativeArtist": true,
+            "scrobblers": {
+                "lastfm": {
+                    "enabled": true,
+                    "token": "wvFMSkjLqRNjq4X9FqfNHNwtmpN-451J",
+                    "sessionKey": "ACACFg4jGMk0Owd6yl1IQRZIAtfAZH57",
+                    "apiRoot": "https://ws.audioscrobbler.com/2.0/",
+                    "apiKey": "04d76faaac8726e60988e14c105d421a",
+                    "secret": "a5d2a36fdf64819290f6982481eaffa2"
+                },
+                "listenbrainz": {
+                    "enabled": false,
+                    "apiRoot": "https://api.listenbrainz.org/1/"
+                }
+            }
+        },
+        "bypass-age-restrictions": {
+            "enabled": true
+        }
+    },
+    "__internal__": {
+        "migrations": {
+            "version": "3.11.0"
+        }
+    }
+}

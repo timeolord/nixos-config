@@ -13,12 +13,14 @@
     obsidian
     todoist-electron
     qbittorrent
-    ghostscript
-    pandoc
     zotero
     fastfetch
     any-nix-shell
   ];
+
+  home.file = {
+    ".config/Youtube Music/config.json".source = ./programs/youtube-music.json;
+  };
 
   programs.bash = {
     enable = true;
