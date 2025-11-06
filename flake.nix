@@ -44,7 +44,9 @@
         map (
           userName:
           let
+            arguments = { inherit inputs userName flake-overlays; };
             home-manager-module = home-manager.nixosModules.home-manager {
+              home-manager.extraSpecialArgs = arguments; 
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
               home-manager.users."${userName}" = (import ./home.nix);
@@ -56,7 +58,7 @@
             name = userName;
             value = nixpkgs.lib.nixosSystem {
               system = "x86_64-linux";
-              specialArgs = { inherit inputs userName flake-overlays; };
+              specialArgs = arguments;
               modules = [
                 ./config.nix
                 ./hyprland/hyprland.nix
