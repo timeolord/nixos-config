@@ -16,6 +16,7 @@
       home-manager.useUserPackages = true;
       home-manager.users."${userName}" = import ./home.nix userName;
     }
+    (./. + builtins.toPath "/${userName}.nix")
   ];
   nixpkgs.overlays = flake-overlays;
 
