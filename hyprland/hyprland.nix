@@ -38,7 +38,7 @@ in
       setup_cmd = "${dmcfg.sessionData.wrapper}";
       
       allow_empty_password = true;
-      animation = "gameoflife";
+      animation = "doom";
       animation_timeout_sec = 0;
       asterisk = "*";
       auth_fails = 10;
