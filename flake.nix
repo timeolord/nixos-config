@@ -41,24 +41,32 @@
         "melk-lab"
       ];
       configurations = builtins.listToAttrs (
-        map (userName: {
-          name = userName;
-          value = nixpkgs.lib.nixosSystem {
-            system = "x86_64-linux";
-            specialArgs = { inherit inputs userName flake-overlays; };
-            modules = [
-              (import ./config.nix)
-              ./hyprland/hyprland.nix
-              inputs.home-manager.nixosModules.home-manager {
-                home-manager.useGlobalPkgs = true;
-                home-manager.useUserPackages = true;
-                home-manager.users."${userName}" = (import ./home.nix);
-              }
-              (./. + builtins.toPath "/${userName}.nix")
-              (./. + builtins.toPath "/hardware-configuration-${userName}.nix")
-            ];
-          };
-        }) userNames
+        map (
+          userName:
+          let
+            home-manager-module = inputs.home-manager.nixosModules.home-manager {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users."${userName}" = (import ./home.nix);
+            };
+            user-module = (./. + builtins.toPath "/${userName}.nix");
+            hardware-module = (./. + builtins.toPath "/hardware-configuration-${userName}.nix");
+          in
+          {
+            name = userName;
+            value = nixpkgs.lib.nixosSystem {
+              system = "x86_64-linux";
+              specialArgs = { inherit inputs userName flake-overlays; };
+              modules = [
+                ./config.nix
+                ./hyprland/hyprland.nix
+                home-manager-module
+                user-module
+                hardware-module
+              ];
+            };
+          }
+        ) userNames
       );
     in
     {
