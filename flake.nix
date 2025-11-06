@@ -45,12 +45,6 @@
           userName:
           let
             arguments = { inherit inputs userName flake-overlays; };
-            home-manager-module = home-manager.nixosModules.home-manager {
-              home-manager.extraSpecialArgs = arguments; 
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-              home-manager.users."${userName}" = (import ./home.nix);
-            };
             user-module = (./. + builtins.toPath "/${userName}.nix");
             hardware-module = (./. + builtins.toPath "/hardware-configuration-${userName}.nix");
           in
@@ -62,9 +56,15 @@
               modules = [
                 ./config.nix
                 ./hyprland/hyprland.nix
-                home-manager-module
                 user-module
                 hardware-module
+                home-manager.nixosModules.home-manager
+                {
+                  home-manager.extraSpecialArgs = arguments;
+                  home-manager.useGlobalPkgs = true;
+                  home-manager.useUserPackages = true;
+                  home-manager.users."${userName}" = (import ./home.nix);
+                }
               ];
             };
           }

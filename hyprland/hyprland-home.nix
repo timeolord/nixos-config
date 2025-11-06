@@ -1,7 +1,7 @@
 { config, pkgs, userName, ... }:
 let
   hyprland_base_config = builtins.readFile ./hyprland.conf;
-  additional_config = builtins.readFile (./. + builtins.toPath "${userName.conf}");
+  additional_config = builtins.readFile (./. + builtins.toPath "${userName}.conf");
   hyprland_config = hyprland_base_config + additional_config;
 in
 {
