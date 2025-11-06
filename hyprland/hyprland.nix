@@ -16,6 +16,11 @@ in
     }
   ];
 
+  environment.systemPackages = with pkgs; [
+    xauth
+    brightnessctl
+  ];
+  
   services.xserver.enable = false;
   services.displayManager.ly = {
     enable = true;
