@@ -37,8 +37,8 @@
       ];
       userNames = [
         "melktogo"
-        "melkPC"
-        "melkLab"
+        "melk-pc"
+        "melk-lab"
       ];
       configurations = builtins.listToAttrs (
         map (userName: {

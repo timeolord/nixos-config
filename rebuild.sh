@@ -3,7 +3,7 @@
 #! nix-shell -p bash
 
 sudo git config --global --add safe.directory /etc/nixos
-sudo -- bash -c "nixos-rebuild switch --flake '/etc/nixos#melktogo'"
+sudo -- bash -c "nixos-rebuild switch --flake '/etc/nixos#${USER}'"
 # Update Git Repo
 cd /etc/nixos
 git add -u
