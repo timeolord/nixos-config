@@ -19,7 +19,7 @@
   ];
 
   home.file = {
-    ".config/Youtube Music/config.json".source = ./programs/youtube-music.json;
+    ".config/YouTube Music/config.json".source = ./programs/youtube-music.json;
   };
 
   programs.bash = {
