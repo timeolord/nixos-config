@@ -1,9 +1,5 @@
-userName:{ config, pkgs, ... }:
+{ config, pkgs, userName, ... }:
 {
-  imports = [
-    ./hyprland/hyprland.nix
-  ];
-
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
 
@@ -23,11 +19,6 @@ userName:{ config, pkgs, ... }:
     fastfetch
     any-nix-shell
   ];
-
-  # programs.emacs = {
-  #   enable = true;
-  #   extraConfig = builtins.readFile ./emacs.el;
-  # };
 
   programs.bash = {
     enable = true;

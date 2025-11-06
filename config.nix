@@ -8,14 +8,14 @@
 }:
 {
   imports = [
-    # Include the results of the hardware scan.
     (./. + builtins.toPath "/hardware-configuration-${userName}.nix")
     inputs.home-manager.nixosModules.home-manager
     {
       home-manager.useGlobalPkgs = true;
       home-manager.useUserPackages = true;
-      home-manager.users."${userName}" = import ./home.nix userName;
+      home-manager.users."${userName}" = (import ./home.nix);
     }
+    ./hyprland/hyprland.nix
     (./. + builtins.toPath "/${userName}.nix")
   ];
   nixpkgs.overlays = flake-overlays;
@@ -57,9 +57,6 @@
     LC_TELEPHONE = "en_US.UTF-8";
     LC_TIME = "en_US.UTF-8";
   };
-
-  services.xserver.enable = false;
-  services.displayManager.ly.enable = true;
 
   # Enables Steam
   programs.steam = {
@@ -131,8 +128,6 @@
       "networkmanager"
       "wheel"
     ];
-    packages = with pkgs; [
-    ];
   };
 
   programs.git = {
@@ -187,11 +182,6 @@
       meslo-lgs-nf
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
-  };
 
   nix.gc = {
     automatic = true;

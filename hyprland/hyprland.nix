@@ -1,29 +1,24 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  userName,
+  ...
+}:
 {
   imports = [
-    ./kitty.nix
-    ./waybar.nix
-    ./dunst.nix
-    ./hyprpaper.nix
-    ./fuzzel.nix
+    inputs.home-manager.nixosModules.home-manager
+    {
+      home-manager.users."${userName}" = (import ./hyprland-home.nix);
+    }
   ];
   
-  wayland.windowManager.hyprland = {
+  services.xserver.enable = false;
+  services.displayManager.ly.enable = true;
+  
+  programs.hyprland = {
     enable = true;
-    package = null;
-    portalPackage = null;
-    systemd.variables = ["--all"];
-    extraConfig = builtins.readFile ./hyprland.conf;
+    xwayland.enable = true;
   };
-
-  # environment.sessionVariables.NIXOS_OZONE_WL = "1";
-
-  home.packages = with pkgs; [
-    hyprpolkitagent
-    xorg.xrandr
-    xdg-desktop-portal-gtk
-    pavucontrol
-    pipewire
-    wireplumber
-  ];
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
 }
