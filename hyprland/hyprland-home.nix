@@ -23,7 +23,6 @@ in
 
   home.packages = with pkgs; [
     hyprpolkitagent
-    xorg.xrandr
     xdg-desktop-portal-gtk
     pavucontrol
     pipewire
