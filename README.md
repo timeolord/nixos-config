@@ -2,7 +2,7 @@
 
 ## Setup
 Run this to set file permissions:
-`setfacl -R -m u:melk:rwx /etc/nixos`
+`sudo setfacl -R -m u:${USER}:rwx /etc/nixos`
 
 Install Matlab at `~/matlab`:
 https://github.com/nyadiia/nix-matlab
