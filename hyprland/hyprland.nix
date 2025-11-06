@@ -5,6 +5,9 @@
   userName,
   ...
 }:
+let
+  dmcfg = config.services.displayManager;
+in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -17,6 +20,17 @@
   services.displayManager.ly = {
     enable = true;
     settings = {
+      shutdown_cmd = "/run/current-system/systemd/bin/systemctl poweroff";
+      restart_cmd = "/run/current-system/systemd/bin/systemctl reboot";
+      service_name = "ly";
+      path = "/run/current-system/sw/bin";
+      term_reset_cmd = "${pkgs.ncurses}/bin/tput reset";
+      term_restore_cursor_cmd = "${pkgs.ncurses}/bin/tput cnorm";
+      waylandsessions = "${dmcfg.sessionData.desktops}/share/wayland-sessions";
+      xsessions = "${dmcfg.sessionData.desktops}/share/xsessions";
+      xauth_cmd = "";
+      x_cmd = "";
+      setup_cmd = "${dmcfg.sessionData.wrapper}";
       # bigclock = "en";
       # bigclock_12hr = "true";
 
