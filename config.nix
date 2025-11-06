@@ -7,20 +7,7 @@
   ...
 }:
 {
-  imports = [
-    (./. + builtins.toPath "/hardware-configuration-${userName}.nix")
-    inputs.home-manager.nixosModules.home-manager
-    {
-      home-manager.useGlobalPkgs = true;
-      home-manager.useUserPackages = true;
-      home-manager.users."${userName}" = (import ./home.nix);
-    }
-    ./hyprland/hyprland.nix
-    (./. + builtins.toPath "/${userName}.nix")
-  ];
   nixpkgs.overlays = flake-overlays;
-
-  specialArgs = { inherit userName; };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

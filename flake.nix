@@ -48,6 +48,14 @@
             specialArgs = { inherit inputs userName flake-overlays; };
             modules = [
               (import ./config.nix)
+              ./hyprland/hyprland.nix
+              inputs.home-manager.nixosModules.home-manager {
+                home-manager.useGlobalPkgs = true;
+                home-manager.useUserPackages = true;
+                home-manager.users."${userName}" = (import ./home.nix);
+              }
+              (./. + builtins.toPath "/${userName}.nix")
+              (./. + builtins.toPath "/hardware-configuration-${userName}.nix")
             ];
           };
         }) userNames
