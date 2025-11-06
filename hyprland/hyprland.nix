@@ -17,7 +17,7 @@ in
   ];
 
   environment.systemPackages = with pkgs; [
-    brightnessctl
+    brightnessctl # for ly
   ];
   
   services.xserver.enable = false;
