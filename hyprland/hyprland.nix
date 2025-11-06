@@ -17,8 +17,8 @@
   services.displayManager.ly = {
     enable = true;
     settings = {
-      bigclock = "en";
-      bigclock_12hr = "true";
+      # bigclock = "en";
+      # bigclock_12hr = "true";
 
       animation = "gameoflife";
       gameoflife_entropy_interval = 10;
