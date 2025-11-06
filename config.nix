@@ -20,6 +20,8 @@
   ];
   nixpkgs.overlays = flake-overlays;
 
+  specialArgs = { inherit userName; };
+
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
