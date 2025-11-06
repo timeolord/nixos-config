@@ -28,11 +28,12 @@ in
       term_restore_cursor_cmd = "${pkgs.ncurses}/bin/tput cnorm";
       waylandsessions = "${dmcfg.sessionData.desktops}/share/wayland-sessions";
       xsessions = "${dmcfg.sessionData.desktops}/share/xsessions";
-      xauth_cmd = "";
-      x_cmd = "";
+      xauth_cmd = "$PREFIX_DIRECTORY/bin/xauth";
+      x_cmd = "$PREFIX_DIRECTORY/bin/X";
       setup_cmd = "${dmcfg.sessionData.wrapper}";
+      
       allow_empty_password = true;
-      animation = "gameoflife";
+      animation = "none";
       animation_timeout_sec = 0;
       asterisk = "*";
       auth_fails = 10;
@@ -86,6 +87,7 @@ in
       default_input = "login";
 
       doom_fire_height = 6;
+      
       doom_fire_spread = 2;
 
       doom_top_color = "0x009F2707";
