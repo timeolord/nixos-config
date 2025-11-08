@@ -27,6 +27,7 @@
     "nix-command"
     "flakes"
   ];
+  # TODO
   programs.direnv.enable = true;
 
   # Set your time zone.
@@ -177,7 +178,11 @@
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
-
+  nix.optimise = {
+    automatic = true;
+    dates = "weekly";
+  };
+  nix.settings.auto-optimise-store = true;
   system.autoUpgrade = {
     enable = true;
   };
