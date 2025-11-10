@@ -1,4 +1,9 @@
-{ config, pkgs, userName, ... }:
+{
+  config,
+  pkgs,
+  userName,
+  ...
+}:
 {
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
@@ -9,7 +14,6 @@
     discord
     signal-desktop
     bazecor
-    zoom-us
     obsidian
     todoist-electron
     qbittorrent
@@ -21,6 +25,13 @@
 
   home.file = {
     ".config/YouTube Music/config.json".source = ./programs/youtube-music.json;
+  };
+
+  programs.direnv = {
+    enable = true;
+    enableBashIntegration = true;
+    # enableFishIntegration = true;
+    nix-direnv.enable = true;
   };
 
   programs.bash = {
