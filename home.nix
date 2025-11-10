@@ -6,9 +6,6 @@
   ...
 }:
 {
-  imports = [
-    inputs.direnv-instant.homeModules.direnv-instant
-  ];
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
 
@@ -33,10 +30,9 @@
 
   programs.direnv = {
     enable = true;
-    enableBashIntegration = false;
+    enableBashIntegration = true;
     nix-direnv.enable = true;
   };
-  programs.direnv-instant.enable = true;
 
   programs.bash = {
     enable = true;
