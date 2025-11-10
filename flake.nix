@@ -20,8 +20,8 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    direnv-instant.url = "github:Mic92/direnv-instant";
   };
-
   outputs =
     inputs@{
       nixpkgs,
