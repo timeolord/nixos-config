@@ -139,9 +139,7 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    gzip
     git
-    cmake
     (pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-git-pgtk;
       config = ./emacs.el;
@@ -150,18 +148,12 @@
     })
     vlc
     nixfmt
-    # Fish
     fish
-    # nix-index
-    babelfish
-    udiskie
-    unzip
   ];
 
   # Fish Settings
   programs.fish = {
     enable = true;
-    useBabelfish = true;
   };
 
   fonts.packages =

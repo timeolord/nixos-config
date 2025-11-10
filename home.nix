@@ -21,7 +21,6 @@
     zotero
     fastfetch
     any-nix-shell
-    texliveFull
   ];
 
   home.file = {
