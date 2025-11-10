@@ -27,5 +27,6 @@ in
     pavucontrol
     pipewire
     wireplumber
+    hyprshot
   ];
 }
