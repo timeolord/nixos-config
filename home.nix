@@ -33,7 +33,7 @@
 
   programs.direnv = {
     enable = true;
-    # enableBashIntegration = true;
+    enableBashIntegration = false;
     nix-direnv.enable = true;
   };
   programs.direnv-instant.enable = true;
