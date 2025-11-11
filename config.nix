@@ -3,11 +3,10 @@
   pkgs,
   inputs,
   userName,
-  flake-overlays,
   ...
 }:
 {
-  nixpkgs.overlays = flake-overlays;
+  # nixpkgs.overlays = flake-overlays;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

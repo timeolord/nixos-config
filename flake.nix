@@ -20,7 +20,7 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    godsays = {
+    godsays-flake = {
       url = "github:timeolord/godsays-haskell";
     };
   };
@@ -29,11 +29,13 @@
       nixpkgs,
       home-manager,
       rust-overlay,
-        emacs-overlay,
+      emacs-overlay,
+      godsays-flake,
       ...
     }:
     let
-      flake-overlays = [
+      system = "x86_64-linux";
+      overlays = [
         rust-overlay.overlays.default
         emacs-overlay.overlays.default
       ];
@@ -46,16 +48,19 @@
         map (
           userName:
           let
-            arguments = { inherit inputs userName flake-overlays; };
+            # godsays = godsays-flake.${system}.packages.default;  
+            arguments = { inherit inputs userName; };
             user-module = (./. + builtins.toPath "/${userName}.nix");
             hardware-module = (./. + builtins.toPath "/hardware-configuration-${userName}.nix");
           in
           {
             name = userName;
             value = nixpkgs.lib.nixosSystem {
-              system = "x86_64-linux";
+              inherit system;
               specialArgs = arguments;
+              # nixpkgs = { inherit overlays; };
               modules = [
+                {nixpkgs = { inherit overlays; };}
                 ./config.nix
                 ./hyprland/hyprland.nix
                 user-module
@@ -74,7 +79,7 @@
         ) userNames
       );
     in
-    {
+      {
       nixosConfigurations = configurations;
     };
 }

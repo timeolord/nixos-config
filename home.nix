@@ -2,7 +2,7 @@
   config,
   pkgs,
   userName,
-  inputs,
+  godsays,
   ...
 }:
 {
@@ -24,6 +24,7 @@
     qbittorrent
     zotero
     sgt-puzzles # for Theo
+    # godsays
   ];
 
   home.file = {

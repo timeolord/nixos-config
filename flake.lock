@@ -110,7 +110,7 @@
         "type": "github"
       }
     },
-    "godsays": {
+    "godsays-flake": {
       "inputs": {
         "flake-utils": "flake-utils",
         "nixpkgs": "nixpkgs"
@@ -528,7 +528,7 @@
     "root": {
       "inputs": {
         "emacs-overlay": "emacs-overlay",
-        "godsays": "godsays",
+        "godsays-flake": "godsays-flake",
         "home-manager": "home-manager",
         "hyprland": "hyprland",
         "hyprland-plugins": "hyprland-plugins",
