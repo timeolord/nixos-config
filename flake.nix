@@ -48,9 +48,9 @@
         map (
           userName:
           let
-            # godsays = godsays-flake.${system}.packages.default;  
+            # godsays = godsays-flake.${system}.packages.default;
             arguments = { inherit inputs userName; };
-            user-module = (./. + builtins.toPath "/${userName}.nix");
+            user-module = ./${userName}.nix;
             hardware-module = (./. + builtins.toPath "/hardware-configuration-${userName}.nix");
           in
           {
@@ -58,9 +58,8 @@
             value = nixpkgs.lib.nixosSystem {
               inherit system;
               specialArgs = arguments;
-              # nixpkgs = { inherit overlays; };
               modules = [
-                {nixpkgs = { inherit overlays; };}
+                { nixpkgs = { inherit overlays; }; }
                 ./config.nix
                 ./hyprland/hyprland.nix
                 user-module
@@ -79,7 +78,7 @@
         ) userNames
       );
     in
-      {
+    {
       nixosConfigurations = configurations;
     };
 }
