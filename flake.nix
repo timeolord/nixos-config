@@ -38,6 +38,7 @@
       overlays = [
         rust-overlay.overlays.default
         emacs-overlay.overlays.default
+        (final: perv: {godsays = godsays-flake.packages.${system}.default;})
       ];
       userNames = [
         "melktogo"
