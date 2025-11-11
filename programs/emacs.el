@@ -163,6 +163,10 @@
   :config
   (add-to-list 'completion-ignored-extensions ".hi"))
 
+(use-package fish-mode
+  :ensure t
+  :defer t)
+
 
 ;; Disable Scroll Bar
 (scroll-bar-mode -1)

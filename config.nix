@@ -161,7 +161,7 @@
     git
     (pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-git-pgtk;
-      config = ./emacs.el;
+      config = ./programs/emacs.el;
       defaultInitFile = true;
       alwaysEnsure = true;
     })
