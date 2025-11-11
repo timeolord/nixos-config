@@ -35,6 +35,7 @@
       abbr --add rb rebuild.sh
       function fish_greeting
          fastfetch
+         echo "God Says..."
          godsays
       end
     '' + builtins.readFile ./prompt.fish;
