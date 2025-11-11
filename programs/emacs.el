@@ -18,6 +18,8 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
 
+(setq inhibit-startup-screen t)
+
 (require 'use-package-ensure)
 (setq use-package-always-ensure t)
 
