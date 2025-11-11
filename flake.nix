@@ -51,7 +51,7 @@
             # godsays = godsays-flake.${system}.packages.default;
             arguments = { inherit inputs userName; };
             user-module = ./${userName}.nix;
-            hardware-module = (./. + builtins.toPath "/hardware-configuration-${userName}.nix");
+            hardware-module = ./hardware-configuration-${userName}.nix;
           in
           {
             name = userName;
