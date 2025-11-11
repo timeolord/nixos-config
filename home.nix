@@ -41,8 +41,12 @@
     enable = true;
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
+      set -gx EDITOR emacs
       abbr --add rb rebuild.sh
-      set -g fish_greeting
+      function fish_prompt
+          echo $PWD '>'
+      end
+      # set -g fish_greeting
     '';
     interactiveShellInit = ''
       fastfetch

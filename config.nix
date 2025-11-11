@@ -131,7 +131,26 @@
     };
   };
 
-  programs.firefox.enable = true;
+  programs.firefox = {
+    enable = true;
+    policies = {
+      DefaultDownloadDirectory = "\${home}\\downloads";
+      DownloadDirectory = "\${home}\\downloads";
+      AutofillAdressEnabled = false;
+      AutofillCreditCardEnabled = false;
+      PasswordManagerEnabled = false;
+      GenerativeAI = {
+        Enabled = false;
+        Locked = true;
+      };
+      Homepage = {
+        StartPage = "previous-session";
+      };
+      OfferToSaveLogins = false;
+      OfferToSaveLoginsDefault = false;
+      PictureInPicture = false;
+    };
+  };
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
