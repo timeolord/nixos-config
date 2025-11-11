@@ -167,14 +167,8 @@
     })
     vlc
     nixfmt
-    fish
   ];
-
-  # Fish Settings
-  #programs.fish = {
-  #  enable = true;
-  #};
-
+  
   fonts.packages =
     with pkgs;
     [
