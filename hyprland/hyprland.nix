@@ -25,6 +25,7 @@ in
     enable = true;
     settings = {
       animation = "colormix";
+      session_log = "null";
     };
   };
 

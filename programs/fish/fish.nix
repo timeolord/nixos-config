@@ -6,8 +6,10 @@
   ...
 }:
 {
+  home.packages = [ pkgs.any-nix-shell pkgs.fastfetch ];
   programs.fish = {
     enable = true;
+    
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
       set -gx EDITOR emacs

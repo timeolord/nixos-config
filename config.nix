@@ -185,7 +185,10 @@
     automatic = true;
     dates = "weekly";
   };
-  nix.settings.auto-optimise-store = true;
+  nix.settings = {
+    auto-optimise-store = true;
+    substituters = []; #builds all packages from source
+  };
   system.autoUpgrade = {
     enable = true;
   };

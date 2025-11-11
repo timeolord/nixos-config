@@ -23,8 +23,6 @@
     todoist-electron
     qbittorrent
     zotero
-    fastfetch
-    any-nix-shell
   ];
 
   home.file = {
