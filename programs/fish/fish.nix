@@ -7,6 +7,9 @@
 }:
 {
   home.packages = [ pkgs.any-nix-shell pkgs.fastfetch ];
+  programs.fastfetch = {
+    
+  };
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -14,7 +17,10 @@
       nclean = "nix-clean.sh";
       fperm = "fix-permissions.sh";
       gs = "git status";
-      gp = "git pull";
+      gau = "git add - u";
+      gcm = "git commit -m";
+      gph = "git push";
+      gpl = "git pull";
       "..." = "cd ../..";
       utar = "tar -xf";
       lsa = "ls -lha";
