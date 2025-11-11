@@ -9,7 +9,15 @@
   home.packages = [ pkgs.any-nix-shell pkgs.fastfetch ];
   programs.fish = {
     enable = true;
-    
+    shellAbbrs = {
+      rb = "rebuild.sh";
+      nclean = "nix-clean.sh";
+      fperm = "fix-permissions.sh";
+      gs = "git status";
+      gp = "git pull";
+      "..." = "cd ../..";
+      utar = "tar -xf";
+    };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
       set -gx EDITOR emacs
