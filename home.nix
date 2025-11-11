@@ -46,12 +46,14 @@
       function fish_prompt
           echo $PWD '>'
       end
+      function fish_greeting
+         fastfetch
+         godsays
+      end
       # set -g fish_greeting
     '';
     interactiveShellInit = ''
-      fastfetch
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-      godsays
     '';
   };
   # This value determines the home Manager release that your
