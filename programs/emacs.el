@@ -2,6 +2,8 @@
 (global-set-key (kbd "M-;") nil)
 (global-set-key (kbd "M-;") 'comment-line)
 (global-set-key (kbd "C-x C-B") 'switch-to-buffer)
+(global-set-key (kbd "C-x f") nil)
+(global-set-key (kbd "C-x f") 'find-file)
 
 (set-terminal-coding-system 'utf-8)
 (set-keyboard-coding-system 'utf-8)
