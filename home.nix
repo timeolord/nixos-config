@@ -24,7 +24,6 @@
     qbittorrent
     zotero
     sgt-puzzles # for Theo
-    fable
   ];
 
   home.file = {

@@ -187,8 +187,7 @@
   };
   nix.settings = {
     auto-optimise-store = true;
-    substitute = false;
-    # substituters = []; #builds all packages from source
+    substitute = false; # builds all packages from source
   };
   system.autoUpgrade = {
     enable = true;
