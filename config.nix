@@ -134,8 +134,8 @@
   programs.firefox = {
     enable = true;
     policies = {
-      DefaultDownloadDirectory = "\${home}\\downloads";
-      DownloadDirectory = "\${home}\\downloads";
+      DefaultDownloadDirectory = "\${home}/downloads";
+      DownloadDirectory = "\${home}/downloads";
       AutofillAdressEnabled = false;
       AutofillCreditCardEnabled = false;
       PasswordManagerEnabled = false;
