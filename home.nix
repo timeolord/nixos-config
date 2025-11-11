@@ -43,15 +43,11 @@
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
       set -gx EDITOR emacs
       abbr --add rb rebuild.sh
-      function fish_prompt
-          echo $PWD '>'
-      end
       function fish_greeting
          fastfetch
          godsays
       end
-      # set -g fish_greeting
-    '';
+    '' + builtins.readFile ./programs/fish/prompt.fish;
     interactiveShellInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
