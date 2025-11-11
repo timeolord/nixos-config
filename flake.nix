@@ -41,7 +41,7 @@
       overlays = [
         rust-overlay.overlays.default
         emacs-overlay.overlays.default
-        godsays-flake.outputs.overlays.${system}.default
+        godsays-flake.overlays.${system}.default
       ];
       userNames = [
         "melktogo"
@@ -52,7 +52,6 @@
         map (
           userName:
           let
-            # godsays = godsays-flake.${system}.packages.default;
             arguments = { inherit inputs userName; };
             user-module = ./${userName}.nix;
             hardware-module = ./hardware-configuration-${userName}.nix;
