@@ -21,11 +21,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     godsays-flake = {
-      url = "github:timeolord/godsays-haskell";
+      # url = "github:timeolord/godsays-haskell";
+      url = "path:/home/melk-pc/haskell/godsays";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =
     inputs@{
+      self,
       nixpkgs,
       home-manager,
       rust-overlay,
@@ -38,7 +41,7 @@
       overlays = [
         rust-overlay.overlays.default
         emacs-overlay.overlays.default
-        (final: perv: {godsays = godsays-flake.packages.${system}.default;})
+        godsays-flake.outputs.overlays.${system}.default
       ];
       userNames = [
         "melktogo"
