@@ -23,6 +23,7 @@
     todoist-electron
     qbittorrent
     zotero
+    sgt-puzzles # for Theo
   ];
 
   home.file = {
