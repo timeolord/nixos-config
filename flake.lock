@@ -118,14 +118,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1762897371,
-        "narHash": "sha256-1KRmjKS+LjC7SqAwJk0In8P5NSgtT3d3AJvaOJd3ckc=",
-        "path": "/home/melk-pc/haskell/godsays",
-        "type": "path"
+        "lastModified": 1762898281,
+        "narHash": "sha256-GSnR8XtqM2+VYFfjvwj13SwCF1UQxGV1BUUcTQhFMZA=",
+        "owner": "timeolord",
+        "repo": "godsays-haskell",
+        "rev": "e02d81855dd0b7fb19ea22bbed2fbb181d12bdf1",
+        "type": "github"
       },
       "original": {
-        "path": "/home/melk-pc/haskell/godsays",
-        "type": "path"
+        "owner": "timeolord",
+        "repo": "godsays-haskell",
+        "type": "github"
       }
     },
     "home-manager": {

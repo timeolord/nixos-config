@@ -21,8 +21,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     godsays-flake = {
-      # url = "github:timeolord/godsays-haskell";
-      url = "path:/home/melk-pc/haskell/godsays";
+      url = "github:timeolord/godsays-haskell";
+      # url = "path:/home/melk-pc/haskell/godsays";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
