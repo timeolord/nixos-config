@@ -18,6 +18,11 @@
       fsType = "ext4";
     };
 
+  fileSystems."/home/melk-pc/shared" =
+    { device = "/dev/disk/by-uuid/3E784C690C570EC7";
+      fsType = "ntfs";
+    };
+
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8ACB-14EF";
       fsType = "vfat";
