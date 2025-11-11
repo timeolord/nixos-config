@@ -6,6 +6,10 @@
   ...
 }:
 {
+  imports = [
+    ./programs/fish/fish.nix
+  ];
+  
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
 
@@ -37,21 +41,6 @@
     enable = true;
   };
 
-  programs.fish = {
-    enable = true;
-    shellInit = ''
-      set PATH /etc/nixos /home/${userName}/.local/bin $PATH
-      set -gx EDITOR emacs
-      abbr --add rb rebuild.sh
-      function fish_greeting
-         fastfetch
-         godsays
-      end
-    '' + builtins.readFile ./programs/fish/prompt.fish;
-    interactiveShellInit = ''
-      ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
-    '';
-  };
   # This value determines the home Manager release that your
   # configuration is compatible with. This helps avoid breakage
   # when a new home Manager release introduces backwards
