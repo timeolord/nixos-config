@@ -12,7 +12,7 @@ in
   imports = [
     inputs.home-manager.nixosModules.home-manager
     {
-      home-manager.users."${userName}" = (import ./hyprland-home.nix);
+      home-manager.users.${userName} = (import ./hyprland-home.nix);
     }
   ];
 
