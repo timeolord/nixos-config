@@ -17,6 +17,7 @@
       gp = "git pull";
       "..." = "cd ../..";
       utar = "tar -xf";
+      lsa = "ls -lha";
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH

@@ -20,13 +20,16 @@
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    godsays = {
+      url = "github:timeolord/godsays-haskell";
+    };
   };
   outputs =
     inputs@{
       nixpkgs,
       home-manager,
       rust-overlay,
-      emacs-overlay,
+        emacs-overlay,
       ...
     }:
     let
