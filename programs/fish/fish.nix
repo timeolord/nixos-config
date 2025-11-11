@@ -6,10 +6,14 @@
   ...
 }:
 {
-  home.packages = [ pkgs.any-nix-shell pkgs.fastfetch ];
-  programs.fastfetch = {
-    
-  };
+  home.packages = [ pkgs.any-nix-shell pkgs.neofetch ];
+  # programs.fastfetch = {
+  #   settings = {
+  #     modules = [
+        
+  #     ];
+  #   };
+  # };
   programs.fish = {
     enable = true;
     shellAbbrs = {
@@ -31,7 +35,7 @@
       abbr --add rb rebuild.sh
       function fish_greeting
          fastfetch
-         godsays
+         neofetch
       end
     '' + builtins.readFile ./prompt.fish;
     interactiveShellInit = ''
