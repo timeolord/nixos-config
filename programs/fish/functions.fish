@@ -23,6 +23,6 @@ function flakeinit -a project_name lang_name
     direnv allow .
     git init
 end
-function nix-eval -a nix_file
-    nix-instantiate --eval -E nix_file
+function nix-eval -a nix_expression
+    nix-instantiate --eval -E $nix_expression
 end
