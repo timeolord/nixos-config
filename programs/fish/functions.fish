@@ -15,3 +15,14 @@ function cd -a dir
     end
     ls
 end
+function flakeinit -a project_name lang_name
+    mkdir project_name
+    cd project_name
+    
+    echo "use flake" > .envrc
+    direnv allow .
+    git init
+end
+function nix-eval -a nix_file
+    nix-instantiate --eval -E nix_file
+end
