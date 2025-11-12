@@ -1,5 +1,5 @@
 {
-  description = "$project_name$";
+  description = "__project_name";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -24,7 +24,7 @@
       in
       with pkgs;
       {
-        overlays.default = (final: perv: { "$project_name$" = compiled_package; });
+        overlays.default = (final: perv: { "__project_name" = compiled_package; });
         packages.default = compiled_package;
         devShells.default = mkShell {
           packages = [
