@@ -37,7 +37,7 @@
          echo "God Says..."
          godsays
       end
-    '' + builtins.readFile ./prompt.fish;
+    '' + (builtins.readFile ./prompt.fish) + (builtins.readFile ./functions.fish);
     interactiveShellInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
     '';
