@@ -3,6 +3,6 @@ function ghcl -a username repo_name
     command git clone $repo_link
 end
 function gaup -a commit_message
-    command git add -a
-    command commit -m $commit_message
+    command git add -A
+    command git commit -m $commit_message
 end
