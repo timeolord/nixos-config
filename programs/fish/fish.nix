@@ -10,7 +10,6 @@
   programs.fastfetch = {
     settings = {
       modules = [
-        
       ];
     };
   };
@@ -28,11 +27,11 @@
       "..." = "cd ../..";
       utar = "tar -xf";
       lsa = "ls -lha";
+      emacs = "emacs 2> /dev/null &";
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
       set -gx EDITOR emacs
-      abbr --add rb rebuild.sh
       function fish_greeting
          fastfetch
          echo "God Says..."
