@@ -31,7 +31,7 @@
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
-      set -gx EDITOR "emacs 2> /dev/null"
+      set -gx EDITOR emacs
       function fish_greeting
          fastfetch
          echo "God Says..."
