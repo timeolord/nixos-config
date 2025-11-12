@@ -30,5 +30,5 @@ function load-flake-template -a flake_name
     echo $(cat /etc/nixos/flake-templates/$flake_name | string collect)
 end
 function replace-var -a var value input
-    string replace \"__{$var}\" $value $input
+    string replace \"__$var\" $value $input
 end
