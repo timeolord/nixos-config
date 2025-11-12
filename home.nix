@@ -26,9 +26,9 @@
     godsays
   ];
 
-  home.file = {
-    ".config/YouTube Music/config.json".source = ./programs/youtube-music.json;
-  };
+  #home.file = {
+  #  ".config/YouTube Music/config.json".source = ./programs/youtube-music.json;
+  #};
 
   programs.direnv = {
     enable = true;
