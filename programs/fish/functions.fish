@@ -18,13 +18,13 @@ end
 function flakeinit -a project_name lang_name
     mkdir project_name
     cd project_name
-    set -l flake-template $(load-flake-template)
+    set -l flake-template $(load-flake-template haskell.nix)
     set flake-template $(replace-var project_name $project_name $flake-template)
     echo "use flake" > .envrc
     direnv allow .
     git init
 end
-function load-flake-template -a flake_name project_name
+function load-flake-template -a flake_name
     echo $(cat /etc/nixos/flake-templates/$flake_name | string collect)
 end
 function replace-var -a var value input
