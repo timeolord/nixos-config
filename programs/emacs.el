@@ -151,11 +151,7 @@
   :ensure t
   :defer t
   :hook (python-mode . ruff-format-on-save-mode)
-  :config
-  (python-mode . (lambda ()
-                   (setq indent-tabs-mode nil)
-                   (setq tab-width 4)
-                   (setq python-indent-offset 4))))
+)
 
 ;; Haskell Config
 (use-package haskell-mode
