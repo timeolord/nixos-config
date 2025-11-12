@@ -27,7 +27,7 @@ function flakeinit -a project_name lang_name
     direnv allow .
 end
 function load-flake-template -a flake_name
-    echo $(cat /etc/nixos/flake-templates/$flake_name | string collect -N)
+    echo $(cat /etc/nixos/flake-templates/$flake_name)
 end
 function replace-var -a var value input
     string replace \"__$var\" $value $input
