@@ -20,6 +20,9 @@
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(undecorated . t))
 
+;; Electric Pairs
+(setq electric-pair-mode t)
+
 (setq inhibit-startup-screen t)
 (setq inhibit-splash-screen t)
 
@@ -48,13 +51,6 @@
 
 (use-package nix-mode
   :mode "\\.nix\\'")
-
-(use-package smartparens
-  :ensure t
-  :defer t
-  :hook (prog-mode text-mode markdown-mode)
-  :config
-  (require 'smartparens-config))
 
 (use-package rainbow-delimiters
   :ensure t

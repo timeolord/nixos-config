@@ -31,6 +31,7 @@
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
+      set PYTHONSTARTUP /etc/nixos/python/startup.py
       set -gx EDITOR emacs
       function fish_greeting
          fastfetch
