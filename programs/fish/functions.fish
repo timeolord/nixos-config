@@ -24,5 +24,5 @@ function flakeinit -a project_name lang_name
     git init
 end
 function nix-eval -a nix_expression
-    nix-instantiate --eval -E $nix_expression
+    nix eval --expr -E $nix_expression
 end
