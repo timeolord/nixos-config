@@ -28,6 +28,7 @@
       utar = "tar -xf";
       lsa = "ls -lha";
       emacs = "emacs 2> /dev/null &";
+      du = "du -h";
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
