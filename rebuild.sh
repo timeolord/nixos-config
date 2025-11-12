@@ -7,7 +7,7 @@ git pull
 sudo nixos-rebuild switch --flake /etc/nixos#${USER}
 if [ $? -eq 0 ]; then
     # Update Git Repo
-    git add -u
+    git add -A
     git commit -m "updated configs"
     git push
 else
