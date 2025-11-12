@@ -22,12 +22,13 @@ function flakeinit -a project_name lang_name
     set flake_template $(replace-var project_name $project_name $flake-template)
     echo $flake_template > flake.nix
     echo "use flake" > .envrc
-    direnv allow .
     git init
+    git add -A
+    direnv allow .
 end
 function load-flake-template -a flake_name
     echo $(cat /etc/nixos/flake-templates/$flake_name | string collect)
 end
 function replace-var -a var value input
-    string replace \"\$$var\$\" $value $input
+    string replace \"\${$var}\$\" $value $input
 end
