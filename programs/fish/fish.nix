@@ -37,6 +37,7 @@
          fastfetch
          echo "God Says..."
          godsays
+         ls
       end
     '' + (builtins.readFile ./prompt.fish) + (builtins.readFile ./functions.fish);
     interactiveShellInit = ''
