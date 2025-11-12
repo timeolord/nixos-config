@@ -7,11 +7,11 @@ function gacp -a commit_message
     command git commit -m $commit_message
     command git push
 end
-function cd --argument dir
+function cd -a dir
     if [ "dir" = "" ]
         builtin cd $HOME
     else
         builtin cd $dir
     end
-    command ls
+    ls
 end
