@@ -144,15 +144,13 @@
 (use-package corfu
   :ensure t
   :defer t
-  :general
-  (:keymaps 'corfu-map
-            :states 'insert
-            "C-n" #'corfu-next
-            "C-p" #'corfu-previous
-            "<escape>" #'corfu-quit
-            "<return>" #'corfu-insert
-            "M-d" #'corfu-show-documentation
-            "M-l" #'corfu-show-location)
+  :bind ((:map corfu-map ("C-n" . corfu-next))
+	 (:map corfu-map ("C-p" . corfu-previous))
+	 (:map corfu-map ("<escape>" corfu-quit))
+	 (:map corfu-map ("<return>" corfu-insert))
+	 (:map corfu-map ("M-d" corfu-show-documentation))
+	 (:map corfu-map ("M-l" corfu-show-location))
+	 )
   :config
   (corfu-global-mode)
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
