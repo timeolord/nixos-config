@@ -36,6 +36,12 @@
 ;;   :hook ((prog-mode)
 ;; 	       (after-init . global-flycheck-mode)))
 
+(use-package emacs
+  :custom
+  (completion-cycle-threshold nil)
+  (text-mode-ispell-word-completion nil)
+  (read-extended-command-predicate #'command-completion-default-include-p))
+
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
   :ensure t
@@ -146,13 +152,14 @@
   :defer t
   :bind ((:map corfu-map ("C-n" . corfu-next))
 	 (:map corfu-map ("C-p" . corfu-previous))
-	 (:map corfu-map ("<escape>" corfu-quit))
-	 (:map corfu-map ("<return>" corfu-insert))
-	 (:map corfu-map ("M-d" corfu-show-documentation))
-	 (:map corfu-map ("M-l" corfu-show-location))
+	 (:map corfu-map ("<escape>" . corfu-quit))
+	 (:map corfu-map ("<return>" . corfu-insert))
+	 (:map corfu-map ("M-d" . corfu-show-documentation))
+	 (:map corfu-map ("M-l" . corfu-show-location))
 	 )
   :config
   (corfu-global-mode)
+  :custom
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.1)
@@ -162,9 +169,6 @@
   (corfu-count 14)
   (corfu-scroll-margin 4)
   (corfu-cycle nil))
-(completion-cycle-threshold nil)
-(text-mode-ispell-word-completion nil)
-(read-extended-command-predicate #'command-completion-default-include-p)
 
 ;; Rust Config
 (use-package rust-mode
