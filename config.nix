@@ -167,6 +167,7 @@
     })
     vlc
     nixfmt
+    trashy
   ];
 
   fonts.packages =
