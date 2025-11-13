@@ -46,7 +46,7 @@
   :ensure t
   :defer t)
 
-(use-package electric-operators
+(use-package electric-operator
   :ensure t
   :defer t
   :hook (prog-mode))
