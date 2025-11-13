@@ -170,7 +170,12 @@
 	       (haskell-mode . turn-on-haskell-indentation))
   :config
   (add-to-list 'completion-ignored-extensions ".hi"))
+(use-package flycheck-haskell-ghc-cache-directory
+  :ensure t
+  :defer t
+  :hook ((haskell-mode . flycheck-haskell-setup)))
 
+;; Fish Config
 (use-package fish-mode
   :ensure t
   :defer t)
