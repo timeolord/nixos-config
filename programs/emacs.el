@@ -168,6 +168,17 @@
   (corfu-count 14)
   (corfu-scroll-margin 4)
   (corfu-cycle nil))
+(use-package eglot
+  :ensure t
+  :hook (haskell-mode . eglot-ensure)
+  :config
+  (setq-default eglot-workspace-configuration
+                '(:haskell (:plugin (:stan (:globalOn t))
+                                    :formattingProvider "ormolu")))
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-confirm-server-initiated-edits nil))
+
 
 ;; Rust Config
 (use-package rust-mode
