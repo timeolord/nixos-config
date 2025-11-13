@@ -165,6 +165,7 @@
       defaultInitFile = true;
       alwaysEnsure = true;
     })
+    emacs-lsp-booster
     vlc
     nixfmt
     trashy
