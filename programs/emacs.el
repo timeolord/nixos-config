@@ -46,6 +46,11 @@
   :ensure t
   :defer t)
 
+(use-package electric-operators
+  :ensure t
+  :defer t
+  :hook (prog-mode))
+
 (use-package nix-mode
   :ensure t
   :defer t
