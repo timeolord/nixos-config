@@ -179,6 +179,7 @@
   (eglot-autoshutdown t)
   (eglot-confirm-server-initiated-edits nil))
 (use-package eglot-booster
+  :ensure t
 	:after eglot
 	:config	(eglot-booster-mode))
 
