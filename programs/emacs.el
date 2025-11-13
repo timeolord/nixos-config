@@ -149,7 +149,6 @@
 
 (use-package corfu
   :ensure t
-  :defer t
   :bind ((:map corfu-map ("C-n" . corfu-next))
 	 (:map corfu-map ("C-p" . corfu-previous))
 	 (:map corfu-map ("<escape>" . corfu-quit))
@@ -157,8 +156,8 @@
 	 (:map corfu-map ("M-d" . corfu-show-documentation))
 	 (:map corfu-map ("M-l" . corfu-show-location))
 	 )
-  :config
-  (corfu-global-mode)
+  :init
+  (global-corfu-mode)
   :custom
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
   (corfu-auto-prefix 2)
