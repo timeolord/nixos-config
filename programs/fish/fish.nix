@@ -29,6 +29,7 @@
       lsa = "ls -lha";
       emacs = "emacs 2> /dev/null &";
       du = "du -h";
+      fish = "exec fish";
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH

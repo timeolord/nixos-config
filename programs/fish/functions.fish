@@ -24,6 +24,8 @@ function flakeinit -a project_name lang_name
             set flake_template $(string replace -a \"__project_name\" \"$project_name\" $flake_template)
         case '*'
             echo "Invalid Language"
+            cd ..
+            rm -rf $project_name
             return 1
     end
     echo $flake_template > flake.nix
