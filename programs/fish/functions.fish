@@ -20,7 +20,7 @@ function flakeinit -a project_name lang_name
     cd $project_name
     switch $lang_name
         case haskell
-            set -l flake_template $(load-flake-template haskell.nix)
+            set -f flake_template $(load-flake-template haskell.nix)
             set flake_template $(string replace -a \"__project_name\" \"$project_name\" $flake_template)
         case '*'
             echo "Invalid Language"
