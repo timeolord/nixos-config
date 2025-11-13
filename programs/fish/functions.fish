@@ -39,6 +39,6 @@ function load-flake-template -a flake_name
     echo $(cat /etc/nixos/flake-templates/$flake_name)
 end
 function cd -a arg
-    cd $arg
+    command cd $arg
     ls
 end
