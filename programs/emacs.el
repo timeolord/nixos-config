@@ -178,6 +178,9 @@
   :custom
   (eglot-autoshutdown t)
   (eglot-confirm-server-initiated-edits nil))
+(use-package eglot-booster
+	:after eglot
+	:config	(eglot-booster-mode))
 
 
 ;; Rust Config
