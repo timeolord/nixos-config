@@ -49,7 +49,7 @@
 (use-package electric-operator
   :ensure t
   :defer t
-  :hook (prog-mode))
+  :hook (python-mode))
 
 (use-package nix-mode
   :ensure t
@@ -59,7 +59,7 @@
 (use-package smartparens
   :ensure t
   :defer t
-  :hook (prog-mode text-mode markdown-mode python-shell-mode)
+  :hook (prog-mode text-mode markdown-mode python-shell-mode inferior-mode)
   :config
   (require 'smartparens-config))
 
@@ -115,23 +115,23 @@
 ;;   (counsel-projectile-mode))
 
 ;; Company is the best Emacs completion system.
-(use-package company
-  :ensure t
-  :defer t
-  :bind (("C-." . company-complete))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0)
-  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-  (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 10 "The more the merrier.")
-  :config
-  (global-company-mode t)
-  ;; use numbers 0-9 to select company completion candidates
-  (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                                  `(lambda () (interactive) (company-complete-number ,x))))
-          (number-sequence 0 9))))
+;; (use-package company
+;;   :ensure t
+;;   :defer t
+;;   :bind (("C-." . company-complete))
+;;   :custom
+;;   (company-minimum-prefix-length 1)
+;;   (company-idle-delay 0)
+;;   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
+;;   (company-show-numbers t "Numbers are helpful.")
+;;   (company-tooltip-limit 10 "The more the merrier.")
+;;   :config
+;;   (global-company-mode t)
+;;   ;; use numbers 0-9 to select company completion candidates
+;;   (let ((map company-active-map))
+;;     (mapc (lambda (x) (define-key map (format "%d" x)
+;;                                   `(lambda () (interactive) (company-complete-number ,x))))
+;;           (number-sequence 0 9))))
 
 ;; Package for interacting with language servers
 ;; (use-package lsp-mode
@@ -140,6 +140,33 @@
 ;;   :commands lsp
 ;;   :config
 ;;   (setq lsp-prefer-flymake nil))
+
+(use-package corfu
+  :ensure t
+  :defer t
+  :general
+  (:keymaps 'corfu-map
+            :states 'insert
+            "C-n" #'corfu-next
+            "C-p" #'corfu-previous
+            "<escape>" #'corfu-quit
+            "<return>" #'corfu-insert
+            "M-d" #'corfu-show-documentation
+            "M-l" #'corfu-show-location)
+  :config
+  (corfu-global-mode)
+  (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.1)
+
+  (corfu-min-width 80)
+  (corfu-max-width corfu-min-width)       ; Always have the same width
+  (corfu-count 14)
+  (corfu-scroll-margin 4)
+  (corfu-cycle nil))
+(completion-cycle-threshold nil)
+(text-mode-ispell-word-completion nil)
+(read-extended-command-predicate #'command-completion-default-include-p)
 
 ;; Rust Config
 (use-package rust-mode
