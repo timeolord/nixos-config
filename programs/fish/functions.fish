@@ -21,13 +21,15 @@ function flakeinit -a project_name lang_name
     switch $lang_name
         case haskell
             set -f flake_template $(load-flake-template haskell.nix)
-            set flake_template $(string replace -a \"__project_name\" \"$project_name\" $flake_template)
+        case python
+            set -f flake_template $(load-flake-template python.nix)
         case '*'
             echo "Invalid Language"
             cd ..
             rm -rf $project_name
             return 1
     end
+    set flake_template $(string replace -a \"__project_name\" \"$project_name\" $flake_template)
     echo $flake_template > flake.nix
     echo "use flake" > .envrc
     git init
