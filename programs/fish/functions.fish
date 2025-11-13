@@ -38,7 +38,6 @@ end
 function load-flake-template -a flake_name
     echo $(cat /etc/nixos/flake-templates/$flake_name)
 end
-function cd -a arg
-    command cd $arg
+function ls_after_cd --on-variable PWD
     ls
 end
