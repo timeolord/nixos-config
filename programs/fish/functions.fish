@@ -25,6 +25,7 @@ function flakeinit -a project_name lang_name
         case '*'
             echo "Invalid Language"
             return 1
+    end
     echo $flake_template > flake.nix
     echo "use flake" > .envrc
     git init
