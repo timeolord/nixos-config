@@ -30,11 +30,11 @@
 (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
-(use-package flycheck
-  :ensure t
-  :defer t
-  :hook ((prog-mode)
-	       (after-init . global-flycheck-mode)))
+;; (use-package flycheck
+;;   :ensure t
+;;   :defer t
+;;   :hook ((prog-mode)
+;; 	       (after-init . global-flycheck-mode)))
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
@@ -134,21 +134,21 @@
           (number-sequence 0 9))))
 
 ;; Package for interacting with language servers
-(use-package lsp-mode
-  :ensure t
-  :defer t
-  :commands lsp
-  :config
-  (setq lsp-prefer-flymake nil))
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :defer t
+;;   :commands lsp
+;;   :config
+;;   (setq lsp-prefer-flymake nil))
 
 ;; Rust Config
 (use-package rust-mode
   :ensure t
   :defer t)
-(use-package flycheck-rust
-  :ensure t
-  :defer t
-  :hook (flycheck-mode . flycheck-rust-setup))
+;; (use-package flycheck-rust
+;;   :ensure t
+;;   :defer t
+;;   :hook (flycheck-mode . flycheck-rust-setup))
 
 ;; Python Config
 (use-package reformatter
@@ -170,10 +170,10 @@
 	       (haskell-mode . turn-on-haskell-indentation))
   :config
   (add-to-list 'completion-ignored-extensions ".hi"))
-(use-package flycheck-haskell-ghc-cache-directory
-  :ensure t
-  :defer t
-  :hook ((haskell-mode . flycheck-haskell-setup)))
+;; (use-package flycheck-haskell-ghc-cache-directory
+;;   :ensure t
+;;   :defer t
+;;   :hook ((haskell-mode . flycheck-haskell-setup)))
 
 ;; Fish Config
 (use-package fish-mode
