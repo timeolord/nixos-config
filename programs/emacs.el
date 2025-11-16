@@ -30,11 +30,17 @@
 (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
 
 ;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
-(use-package flycheck
-  :ensure t
-  :defer t
-  :hook ((prog-mode)
-	       (after-init . global-flycheck-mode)))
+;; (use-package flycheck
+;;   :ensure t
+;;   :defer t
+;;   :hook ((prog-mode)
+;; 	       (after-init . global-flycheck-mode)))
+
+(use-package emacs
+  :custom
+  (completion-cycle-threshold nil)
+  (text-mode-ispell-word-completion nil)
+  (read-extended-command-predicate #'command-completion-default-include-p))
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
@@ -49,7 +55,7 @@
 (use-package electric-operator
   :ensure t
   :defer t
-  :hook (prog-mode))
+  :hook (python-mode))
 
 (use-package nix-mode
   :ensure t
@@ -59,7 +65,7 @@
 (use-package smartparens
   :ensure t
   :defer t
-  :hook (prog-mode text-mode markdown-mode python-shell-mode)
+  :hook (prog-mode text-mode markdown-mode python-shell-mode inferior-mode)
   :config
   (require 'smartparens-config))
 
@@ -115,40 +121,78 @@
 ;;   (counsel-projectile-mode))
 
 ;; Company is the best Emacs completion system.
-(use-package company
-  :ensure t
-  :defer t
-  :bind (("C-." . company-complete))
-  :custom
-  (company-minimum-prefix-length 1)
-  (company-idle-delay 0)
-  (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-  (company-show-numbers t "Numbers are helpful.")
-  (company-tooltip-limit 10 "The more the merrier.")
-  :config
-  (global-company-mode t)
-  ;; use numbers 0-9 to select company completion candidates
-  (let ((map company-active-map))
-    (mapc (lambda (x) (define-key map (format "%d" x)
-                                  `(lambda () (interactive) (company-complete-number ,x))))
-          (number-sequence 0 9))))
+;; (use-package company
+;;   :ensure t
+;;   :defer t
+;;   :bind (("C-." . company-complete))
+;;   :custom
+;;   (company-minimum-prefix-length 1)
+;;   (company-idle-delay 0)
+;;   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
+;;   (company-show-numbers t "Numbers are helpful.")
+;;   (company-tooltip-limit 10 "The more the merrier.")
+;;   :config
+;;   (global-company-mode t)
+;;   ;; use numbers 0-9 to select company completion candidates
+;;   (let ((map company-active-map))
+;;     (mapc (lambda (x) (define-key map (format "%d" x)
+;;                                   `(lambda () (interactive) (company-complete-number ,x))))
+;;           (number-sequence 0 9))))
 
 ;; Package for interacting with language servers
-(use-package lsp-mode
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :defer t
+;;   :commands lsp
+;;   :config
+;;   (setq lsp-prefer-flymake nil))
+
+(use-package corfu
   :ensure t
-  :defer t
-  :commands lsp
+  :bind ((:map corfu-map ("C-n" . corfu-next))
+	 (:map corfu-map ("C-p" . corfu-previous))
+	 (:map corfu-map ("<escape>" . corfu-quit))
+	 (:map corfu-map ("<return>" . corfu-insert))
+	 (:map corfu-map ("M-d" . corfu-show-documentation))
+	 (:map corfu-map ("M-l" . corfu-show-location))
+	 )
+  :init
+  (global-corfu-mode)
+  :custom
+  (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.1)
+
+  (corfu-min-width 80)
+  (corfu-max-width corfu-min-width)       ; Always have the same width
+  (corfu-count 14)
+  (corfu-scroll-margin 4)
+  (corfu-cycle nil))
+(use-package eglot
+  :ensure t
+  :hook (haskell-mode . eglot-ensure)
   :config
-  (setq lsp-prefer-flymake nil))
+  (setq-default eglot-workspace-configuration
+                '(:haskell (:plugin (:stan (:globalOn t))
+                                    :formattingProvider "ormolu")))
+  :custom
+  (eglot-autoshutdown t)
+  (eglot-confirm-server-initiated-edits nil))
+
+(use-package eglot-booster
+  :ensure t
+	:after eglot
+	:config	(eglot-booster-mode))
+
 
 ;; Rust Config
 (use-package rust-mode
   :ensure t
   :defer t)
-(use-package flycheck-rust
-  :ensure t
-  :defer t
-  :hook (flycheck-mode . flycheck-rust-setup))
+;; (use-package flycheck-rust
+;;   :ensure t
+;;   :defer t
+;;   :hook (flycheck-mode . flycheck-rust-setup))
 
 ;; Python Config
 (use-package reformatter
@@ -170,7 +214,12 @@
 	       (haskell-mode . turn-on-haskell-indentation))
   :config
   (add-to-list 'completion-ignored-extensions ".hi"))
+;; (use-package flycheck-haskell-ghc-cache-directory
+;;   :ensure t
+;;   :defer t
+;;   :hook ((haskell-mode . flycheck-haskell-setup)))
 
+;; Fish Config
 (use-package fish-mode
   :ensure t
   :defer t)
