@@ -57,10 +57,19 @@
   :defer t
   :hook (python-mode))
 
+(use-package lsp-nix
+  :ensure lsp-mode
+  :after (lsp-mode)
+  :demand t
+  :custom
+  (lsp-nix-nil-formatter ["nixfmt"]))
+
 (use-package nix-mode
   :ensure t
-  :defer t
-  :mode "\\.nix\\'")
+  :hook (nix-mode . lsp-deffered)
+  ;; :defer t
+  ;; :mode "\\.nix\\'"
+  )
 
 (use-package smartparens
   :ensure t
