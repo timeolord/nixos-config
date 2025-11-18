@@ -24,6 +24,7 @@
     zotero
     sgt-puzzles # for Theo
     godsays
+    gimp-with-plugins
   ];
 
   #home.file = {
