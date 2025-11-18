@@ -25,6 +25,7 @@
     sgt-puzzles # for Theo
     godsays
     gimp-with-plugins
+    unzip
   ];
 
   #home.file = {
