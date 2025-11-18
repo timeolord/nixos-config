@@ -169,7 +169,7 @@
     emacs-lsp-booster
     vlc
     nixfmt
-    # nil
+    nil
     trashy
     ntfs3g
   ];
