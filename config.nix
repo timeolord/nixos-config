@@ -169,6 +169,7 @@
     vlc
     nixfmt
     trashy
+    ntfs3g
   ];
 
   fonts.packages =

@@ -18,11 +18,11 @@
       fsType = "ext4";
     };
 
-  fileSystems."/home/melk-pc/shared" =
-    { device = "/dev/disk/by-uuid/3E784C690C570EC7";
-      fsType = "ntfs3";
-      options = [ "rw" "uid=1000" "fmask=117" "dmask=007" ];
-    };
+  # fileSystems."/home/melk-pc/shared" =
+  #   { device = "/dev/disk/by-uuid/3E784C690C570EC7";
+  #     fsType = "ntfs-3g";
+  #     options = [ "nofail" "rw" "uid=1000" "fmask=117" "dmask=007" ];
+  #   };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8ACB-14EF";
