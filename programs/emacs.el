@@ -66,7 +66,7 @@
 
 (use-package nix-mode
   :ensure t
-  :hook (nix-mode . lsp-deffered)
+  :hook (nix-mode . lsp-deferred)
   ;; :defer t
   ;; :mode "\\.nix\\'"
   )
