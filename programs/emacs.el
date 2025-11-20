@@ -1,4 +1,4 @@
-b(defun split-and-follow-horizontally ()
+(defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
   (balance-windows)
