@@ -1,42 +1,57 @@
 ;; Keybinds
-(global-set-key (kbd "M-;") nil)
-(global-set-key (kbd "M-;") 'comment-line)
-(global-set-key (kbd "C-x C-B") 'switch-to-buffer)
-(global-set-key (kbd "C-x f") nil)
-(global-set-key (kbd "C-x f") 'find-file)
-
-(set-terminal-coding-system 'utf-8)
-(set-keyboard-coding-system 'utf-8)
-(prefer-coding-system 'utf-8)
-
-;; Autosaves and backups
-(defvar backup-dir (expand-file-name "~/emacs/backups/"))
-(defvar autosave-dir (expand-file-name "~/emacs/autosaves/"))
-(setq backup-directory-alist (list (cons ".*" backup-dir)))
-(setq auto-save-list-file-prefix autosave-dir)
-(setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
-
-;; Hide Window Frame and Full Screen and Maximize
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(undecorated . t))
-
-(setq inhibit-startup-screen t)
-(setq inhibit-splash-screen t)
-
-(require 'use-package-ensure)
-(setq use-package-always-ensure t)
-
-(set-frame-parameter nil 'alpha-background 95) ; For current frame
-(add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
-
-;; Flycheck is the newer version of flymake and is needed to make lsp-mode not freak out.
-;; (use-package flycheck
-;;   :ensure t
-;;   :defer t
-;;   :hook ((prog-mode)
-;; 	       (after-init . global-flycheck-mode)))
-
+;; (global-set-key (kbd "M-;") nil)
+;; (global-set-key (kbd "M-;") 'comment-line)
+;; (global-set-key (kbd "C-x C-B") 'switch-to-buffer)
+;; (global-set-key (kbd "C-x f") nil)
+;; (global-set-key (kbd "C-x f") 'find-file)
 (use-package emacs
+  :bind (("M-;" . 'comment-line)
+         ("C-x C-B" 'switch-to-buffer)
+         ("C-x f" 'find-file))
+  :config
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+
+  ;; Autosaves and backups
+  (defvar backup-dir (expand-file-name "~/emacs/backups/"))
+  (defvar autosave-dir (expand-file-name "~/emacs/autosaves/"))
+  (setq backup-directory-alist (list (cons ".*" backup-dir)))
+  (setq auto-save-list-file-prefix autosave-dir)
+  (setq auto-save-file-name-transforms `((".*" ,autosave-dir t)))
+
+  ;; Hide Window Frame and Full Screen and Maximize
+  (add-to-list 'default-frame-alist '(fullscreen . maximized))
+  (add-to-list 'default-frame-alist '(undecorated . t))
+
+  (setq inhibit-startup-screen t)
+  (setq inhibit-splash-screen t)
+
+  (set-frame-parameter nil 'alpha-background 95) ; For current frame
+  (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
+  (require 'use-package-ensure)
+  (setq use-package-always-ensure t)
+
+  ;; Disable Scroll Bar
+  (scroll-bar-mode -1)
+
+  ;; Disable Tool Bar
+  (tool-bar-mode -1)
+
+  ;; Disable Menu Bar
+  (menu-bar-mode -1)
+
+  (defalias 'yes-or-no-p 'y-or-n-p)
+
+  (setq blink-cursor-mode nil)
+
+  (setq-default indent-tabs-mode nil
+                tab-width 2
+                c-basic-offset 2)
+
+  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
+  (treemacs-start-on-boot)
+  
   :custom
   (completion-cycle-threshold nil)
   (text-mode-ispell-word-completion nil)
@@ -52,14 +67,18 @@
   :ensure t
   :defer t)
 
-;; (use-package dirvish
-  ;; :ensure t)
-
 (use-package treemacs
   :ensure t
+  :bind (("M-0" . treemacs-select-window)
+         ("C-x t t" . treemacs))
   :defer t
   :config
-  (treemacs-filewatch-mode t))
+  (treemacs-filewatch-mode t)
+  (setq treemacs-is-never-other-window t))
+
+(use-package treemacs-icons-dired
+  :hook (dired-mode . treemacs-icons-dired-enable-once)
+  :ensure t)
 
 (use-package treemacs-magit
   :after (treemacs magit)
@@ -70,19 +89,9 @@
   :defer t
   :hook (python-mode))
 
-;; (use-package lsp-nix
-;;   :ensure lsp-mode
-;;   :after (lsp-mode)
-;;   :demand t
-;;   :custom
-;;   (lsp-nix-nil-formatter ["nixfmt"]))
-
 (use-package nix-mode
   :ensure t
-  ;; :hook (nix-mode . lsp-deferred)
-  :defer t
-  ;; :mode "\\.nix\\'"
-  )
+  :defer t)
 
 (use-package smartparens
   :ensure t
@@ -247,23 +256,3 @@
 (use-package fish-mode
   :ensure t
   :defer t)
-
-
-;; Disable Scroll Bar
-(scroll-bar-mode -1)
-
-;; Disable Tool Bar
-(tool-bar-mode -1)
-
-;; Disable Menu Bar
-(menu-bar-mode -1)
-
-(defalias 'yes-or-no-p 'y-or-n-p)
-
-(setq blink-cursor-mode nil)
-
-(setq-default indent-tabs-mode nil
-              tab-width 2
-              c-basic-offset 2)
-
-(add-hook 'prog-mode-hook 'display-line-numbers-mode)
