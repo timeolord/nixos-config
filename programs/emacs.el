@@ -79,7 +79,6 @@ t  (split-window-below)
   :defer t
   :config
   (treemacs-filewatch-mode t)
-  (treemacs-load-theme "all-the-icons")
   (setq treemacs-is-never-other-window t))
 
 (use-package treemacs-icons-dired
@@ -91,13 +90,13 @@ t  (split-window-below)
   :ensure t)
 
 (use-package all-the-icons
-  :ensure t
-  :defer t)
+  :ensure t)
 
 (use-package treemacs-all-the-icons
   :ensure t
-  :after (all-the-icons)
-  :before (treemacs))
+  :after (treemacs all-the-icons)
+  :config
+  (treemacs-load-theme "all-the-icons"))
 
 (use-package electric-operator
   :ensure t
