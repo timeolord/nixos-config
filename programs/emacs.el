@@ -17,8 +17,8 @@
 	       ("C-x f" . 'find-file)
          ("C-x 2" . nil)
          ("C-x 2" . 'split-and-follow-horizontally)
-         ("C-x 1" . nil)
-         ("C-x 1" . 'split-and-follow-vertically))
+         ("C-x 3" . nil)
+         ("C-x 3" . 'split-and-follow-vertically))
   :config
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
