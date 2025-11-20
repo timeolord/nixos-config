@@ -52,7 +52,17 @@
   :ensure t
   :defer t)
 
-(use-package dirvish
+;; (use-package dirvish
+  ;; :ensure t)
+
+(use-package treemacs
+  :ensure t
+  :defer t
+  :config
+  (treemacs-filewatch-mode t))
+
+(use-package treemacs-magit
+  :after (treemacs magit)
   :ensure t)
 
 (use-package electric-operator
