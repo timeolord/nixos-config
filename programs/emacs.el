@@ -1,13 +1,11 @@
-;; Keybinds
-;; (global-set-key (kbd "M-;") nil)
-;; (global-set-key (kbd "M-;") 'comment-line)
-;; (global-set-key (kbd "C-x C-B") 'switch-to-buffer)
-;; (global-set-key (kbd "C-x f") nil)
-;; (global-set-key (kbd "C-x f") 'find-file)
 (use-package emacs
-  :bind (("M-;" . 'comment-line)
-         ("C-x C-B" 'switch-to-buffer)
-         ("C-x f" 'find-file))
+  :bind (("C-x C-B" . nil)
+	       ("C-x C-B" . 'switch-to-buffer)
+         ("C-x f" . nil)
+	       ("C-x f" . 'find-file))
+  :init
+  (setq inhibit-startup-screen t)
+  (setq inhibit-splash-screen t)
   :config
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
@@ -24,21 +22,14 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (add-to-list 'default-frame-alist '(undecorated . t))
 
-  (setq inhibit-startup-screen t)
-  (setq inhibit-splash-screen t)
-
   (set-frame-parameter nil 'alpha-background 95) ; For current frame
-  (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames henceforth
+  (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames
+  
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 
-  ;; Disable Scroll Bar
   (scroll-bar-mode -1)
-
-  ;; Disable Tool Bar
   (tool-bar-mode -1)
-
-  ;; Disable Menu Bar
   (menu-bar-mode -1)
 
   (defalias 'yes-or-no-p 'y-or-n-p)
@@ -50,8 +41,6 @@
                 c-basic-offset 2)
 
   (add-hook 'prog-mode-hook 'display-line-numbers-mode)
-  (treemacs-start-on-boot)
-  
   :custom
   (completion-cycle-threshold nil)
   (text-mode-ispell-word-completion nil)
