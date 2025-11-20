@@ -1,6 +1,6 @@
-  (interactive)
 (defun split-and-follow-horizontally ()
-t  (split-window-below)
+  (interactive)
+  (split-window-below)
   (balance-windows)
   (other-window 1))
 
@@ -217,7 +217,8 @@ t  (split-window-below)
 (use-package eglot
   :ensure t
   :hook ((haskell-mode . eglot-ensure)
-         (nix-mode . eglot-ensure))
+         (nix-mode . eglot-ensure)
+         (python-mode. eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
