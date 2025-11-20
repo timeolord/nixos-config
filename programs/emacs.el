@@ -53,8 +53,7 @@
   :defer t)
 
 (use-package dirvish
-  :ensure t
-  :defer t)
+  :ensure t)
 
 (use-package electric-operator
   :ensure t
