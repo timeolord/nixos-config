@@ -177,9 +177,9 @@
   (corfu-cycle nil))
 (use-package eglot
   :ensure t
-  :bind (("C-e s" . eglot)
-         ("C-e a" . eglot-code-action)
-         ("C-e f" . eglot-format))
+  :bind (("C-x e s" . eglot)
+         ("C-x e a" . eglot-code-action)
+         ("C-x e f" . eglot-format))
   :hook ((haskell-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
          (python-mode. eglot-ensure))
