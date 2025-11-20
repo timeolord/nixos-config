@@ -96,7 +96,8 @@ t  (split-window-below)
 
 (use-package treemacs-all-the-icons
   :ensure t
-  :after (treemacs all-the-icons))
+  :after (all-the-icons)
+  :before (treemacs))
 
 (use-package electric-operator
   :ensure t
