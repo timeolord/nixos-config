@@ -1,6 +1,6 @@
-(defun split-and-follow-horizontally ()
   (interactive)
-  (split-window-below)
+(defun split-and-follow-horizontally ()
+t  (split-window-below)
   (balance-windows)
   (other-window 1))
 
@@ -79,6 +79,7 @@
   :defer t
   :config
   (treemacs-filewatch-mode t)
+  (treemacs-load-theme "all-the-icons")
   (setq treemacs-is-never-other-window t))
 
 (use-package treemacs-icons-dired
@@ -91,7 +92,7 @@
 
 (use-package all-the-icons
   :ensure t
-  :if (display-graphic-p))
+  :defer t)
 
 (use-package treemacs-all-the-icons
   :ensure t
