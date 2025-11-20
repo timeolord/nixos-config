@@ -89,6 +89,14 @@
   :after (treemacs magit)
   :ensure t)
 
+(use-package all-the-icons
+  :ensure t
+  :if (display-graphic-p))
+
+(use-package treemacs-all-the-icons
+  :ensure t
+  :after (treemacs all-the-icons))
+
 (use-package electric-operator
   :ensure t
   :defer t
