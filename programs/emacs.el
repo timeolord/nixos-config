@@ -1,4 +1,4 @@
-(defun split-and-follow-horizontally ()
+b(defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)
   (balance-windows)
@@ -177,9 +177,9 @@
   (corfu-cycle nil))
 (use-package eglot
   :ensure t
-  :bind (("C-x e s" . eglot)
-         ("C-x e a" . eglot-code-action)
-         ("C-x e f" . eglot-format))
+  :bind (("C-x a" . eglot)
+         ("C-x w" . eglot-code-action)
+         ("C-x x" . eglot-format))
   :hook ((haskell-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
          (python-mode. eglot-ensure))
