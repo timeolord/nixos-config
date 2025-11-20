@@ -1,3 +1,4 @@
+
 {
   config,
   pkgs,
@@ -168,6 +169,7 @@
     emacs-lsp-booster
     vlc
     nixfmt
+    nil
     trashy
     ntfs3g
   ];

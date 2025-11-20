@@ -61,10 +61,19 @@
   :defer t
   :hook (python-mode))
 
+;; (use-package lsp-nix
+;;   :ensure lsp-mode
+;;   :after (lsp-mode)
+;;   :demand t
+;;   :custom
+;;   (lsp-nix-nil-formatter ["nixfmt"]))
+
 (use-package nix-mode
   :ensure t
+  ;; :hook (nix-mode . lsp-deferred)
   :defer t
-  :mode "\\.nix\\'")
+  ;; :mode "\\.nix\\'"
+  )
 
 (use-package smartparens
   :ensure t
@@ -174,8 +183,10 @@
   (corfu-cycle nil))
 (use-package eglot
   :ensure t
-  :hook (haskell-mode . eglot-ensure)
+  :hook ((haskell-mode . eglot-ensure)
+         (nix-mode . eglot-ensure))
   :config
+  (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
                 '(:haskell (:plugin (:stan (:globalOn t))
                                     :formattingProvider "ormolu")))
