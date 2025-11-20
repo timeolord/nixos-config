@@ -23,7 +23,7 @@
       {
         devShells.default = mkShell {
           packages = [
-            pylint
+            basedpyright
             ruff
             (python3.withPackages (
               python-pkgs: with python-pkgs; [

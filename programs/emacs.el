@@ -62,6 +62,9 @@
   (text-mode-ispell-word-completion nil)
   (read-extended-command-predicate #'command-completion-default-include-p))
 
+(use-package markdown-mode
+  :ensure t)
+
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
   :ensure t
@@ -96,13 +99,12 @@
   :ensure t
   :after (treemacs all-the-icons)
   :config
-  (treemacs-load-theme "all-the-icons")
-  )
+  (treemacs-load-theme "all-the-icons"))
 
 (use-package electric-operator
   :ensure t
   :defer t
-  :hook (python-mode))
+  :hook (python-mode python-inferior-mode))
 
 (use-package nix-mode
   :ensure t
@@ -111,7 +113,7 @@
 (use-package smartparens
   :ensure t
   :defer t
-  :hook (prog-mode text-mode markdown-mode python-shell-mode inferior-mode)
+  :hook (prog-mode text-mode markdown-mode python-shell-mode python-inferior-mode)
   :config
   (require 'smartparens-config))
 
@@ -152,47 +154,6 @@
   (counsel-mode 1)
   :bind (:map ivy-minibuffer-map))
 
-;; We need something to manage the various projects we work on
-;; and for common functionality like project-wide searching, fuzzy file finding etc.
-;; (use-package projectile
-;;   :init
-;;   (projectile-mode t) ;; Enable this immediately
-;;   :config
-;;   (setq projectile-enable-caching t ;; Much better performance on large projects
-;;         projectile-completion-system 'ivy)) ;; Ideally the minibuffer should aways look similar
-
-;; Counsel and projectile should work together.
-;; (use-package counsel-projectile
-;;   :init
-;;   (counsel-projectile-mode))
-
-;; Company is the best Emacs completion system.
-;; (use-package company
-;;   :ensure t
-;;   :defer t
-;;   :bind (("C-." . company-complete))
-;;   :custom
-;;   (company-minimum-prefix-length 1)
-;;   (company-idle-delay 0)
-;;   (company-dabbrev-downcase nil "Don't downcase returned candidates.")
-;;   (company-show-numbers t "Numbers are helpful.")
-;;   (company-tooltip-limit 10 "The more the merrier.")
-;;   :config
-;;   (global-company-mode t)
-;;   ;; use numbers 0-9 to select company completion candidates
-;;   (let ((map company-active-map))
-;;     (mapc (lambda (x) (define-key map (format "%d" x)
-;;                                   `(lambda () (interactive) (company-complete-number ,x))))
-;;           (number-sequence 0 9))))
-
-;; Package for interacting with language servers
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :defer t
-;;   :commands lsp
-;;   :config
-;;   (setq lsp-prefer-flymake nil))
-
 (use-package corfu
   :ensure t
   :bind ((:map corfu-map ("C-n" . corfu-next))
@@ -216,6 +177,9 @@
   (corfu-cycle nil))
 (use-package eglot
   :ensure t
+  :bind (("C-e s" . eglot)
+         ("C-e a" . eglot-code-action)
+         ("C-e f" . eglot-format))
   :hook ((haskell-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
          (python-mode. eglot-ensure))
