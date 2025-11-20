@@ -90,13 +90,17 @@ t  (split-window-below)
   :ensure t)
 
 (use-package all-the-icons
-  :ensure t)
+  :ensure t
+  :defer t
+  :config
+  (all-the-icons-install-fonts))
 
 (use-package treemacs-all-the-icons
   :ensure t
   :after (treemacs all-the-icons)
   :config
-  (treemacs-load-theme "all-the-icons"))
+  (treemacs-load-theme "all-the-icons")
+  )
 
 (use-package electric-operator
   :ensure t
