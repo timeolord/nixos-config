@@ -1,15 +1,31 @@
+(defun split-and-follow-horizontally ()
+  (interactive)
+  (split-window-below)
+  (balance-windows)
+  (other-window 1))
+
+(defun split-and-follow-vertically ()
+  (interactive)
+  (split-window-right)
+  (balance-windows)
+  (other-window 1))
+
 (use-package emacs
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
          ("C-x f" . nil)
-	       ("C-x f" . 'find-file))
-  :init
-  (setq inhibit-startup-screen t)
-  (setq inhibit-splash-screen t)
+	       ("C-x f" . 'find-file)
+         ("C-x 2" . nil)
+         ("C-x 2" . 'split-and-follow-horizontally)
+         ("C-x 1" . nil)
+         ("C-x 1" . 'split-and-follow-vertically))
   :config
   (set-terminal-coding-system 'utf-8)
   (set-keyboard-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
+
+  (setq inhibit-startup-screen t)
+  (setq inhibit-splash-screen t)
 
   ;; Autosaves and backups
   (defvar backup-dir (expand-file-name "~/emacs/backups/"))
