@@ -90,9 +90,7 @@ t  (split-window-below)
   :ensure t)
 
 (use-package all-the-icons
-  :ensure t
-  :config
-  (all-the-icons-install-fonts))
+  :ensure t)
 
 (use-package treemacs-all-the-icons
   :ensure t
