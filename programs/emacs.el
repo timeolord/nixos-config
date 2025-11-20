@@ -91,7 +91,6 @@ t  (split-window-below)
 
 (use-package all-the-icons
   :ensure t
-  :defer t
   :config
   (all-the-icons-install-fonts))
 
