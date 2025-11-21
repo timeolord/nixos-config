@@ -26,6 +26,7 @@
     godsays
     gimp-with-plugins
     unzip
+    tree
   ];
 
   #home.file = {

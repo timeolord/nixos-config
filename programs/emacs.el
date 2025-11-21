@@ -12,9 +12,9 @@
 
 (use-package emacs
   :bind (("C-x C-B" . nil)
-	 ("C-x C-B" . 'switch-to-buffer)
+	       ("C-x C-B" . 'switch-to-buffer)
          ("C-x f" . nil)
-	 ("C-x f" . 'find-file)
+	       ("C-x f" . 'find-file)
          ("C-x 2" . nil)
          ("C-x 2" . 'split-and-follow-horizontally)
          ("C-x 3" . nil)
@@ -115,7 +115,8 @@
   :defer t
   :hook (prog-mode text-mode markdown-mode python-shell-mode python-inferior-mode)
   :config
-  (require 'smartparens-config))
+  (require 'smartparens-config)
+  (setq smartparens-global-mode t))
 
 (use-package rainbow-delimiters
   :ensure t
