@@ -11,6 +11,9 @@
   (other-window 1))
 
 (use-package emacs
+  :hook ((prog-mode . display-line-numbers-mode)
+         (prog-mode . flyspell-prog-mode)
+         (text-mode . flyspell-mode))
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
          ("C-x f" . nil)
@@ -27,7 +30,7 @@
   (setq inhibit-startup-screen t)
   (setq inhibit-splash-screen t)
 
-  ;; Autosaves and backups
+  ;; Auto-saves and backups
   (defvar backup-dir (expand-file-name "~/emacs/backups/"))
   (defvar autosave-dir (expand-file-name "~/emacs/autosaves/"))
   (setq backup-directory-alist (list (cons ".*" backup-dir)))
@@ -48,7 +51,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-auto-revert-mode t)
-
+  
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   (setq blink-cursor-mode nil)
@@ -56,19 +59,16 @@
   (setq-default indent-tabs-mode nil
                 tab-width 2
                 c-basic-offset 2)
-
-  (add-hook 'prog-mode-hook 'display-line-numbers-mode)
   :custom
   (completion-cycle-threshold nil)
-  (text-mode-ispell-word-completion nil)
+  ;; (text-mode-ispell-word-completion nil)
   (read-extended-command-predicate #'command-completion-default-include-p))
 
 (use-package markdown-mode
   :ensure t)
 
 (use-package pdf-tools
-  :ensure t
-  :defer t)
+  :ensure t)
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors

@@ -27,6 +27,7 @@
             ruff
             (python3.withPackages (
               python-pkgs: with python-pkgs; [
+                jedi-language-server
               ]
             ))
           ];
