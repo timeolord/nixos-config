@@ -28,6 +28,7 @@
     unzip
     tree
     texliveFull
+    audacity
   ];
 
   #home.file = {
