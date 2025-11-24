@@ -188,7 +188,8 @@
          ("C-c x" . eglot-format))
   :hook ((haskell-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
-         (python-mode. eglot-ensure))
+         (python-mode. eglot-ensure)
+         (prog-mode . eglot))
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
@@ -202,7 +203,6 @@
   :ensure t
 	:after eglot
 	:config	(eglot-booster-mode))
-
 
 ;; Rust Config
 (use-package rust-mode
