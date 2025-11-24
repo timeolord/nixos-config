@@ -51,6 +51,8 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-auto-revert-mode t)
+
+  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
   
   (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -188,8 +190,7 @@
          ("C-c x" . eglot-format))
   :hook ((haskell-mode . eglot-ensure)
          (nix-mode . eglot-ensure)
-         (python-mode. eglot-ensure)
-         (prog-mode . eglot))
+         (python-mode. eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
