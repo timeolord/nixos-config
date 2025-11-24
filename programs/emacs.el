@@ -71,12 +71,10 @@
   :ensure t)
 
 (use-package flyspell
-  :ensure t
   :hook ((prog-mode . flyspell-prog-mode)
          (text-mode . flyspell-mode)))
 
-(use-package ispell
-  :ensure t)
+(use-package ispell)
 
 (use-package pdf-tools
   :ensure t
