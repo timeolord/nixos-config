@@ -201,8 +201,7 @@
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
-                '(:haskell (:plugin (:stan (:globalOn t))
-                                    :formattingProvider "ormolu")))
+                '(:haskell (:plugin (:stan (:globalOn t)) :formattingProvider "ormolu")))
   :custom
   (eglot-autoshutdown t)
   (eglot-confirm-server-initiated-edits nil))
