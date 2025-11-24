@@ -10,6 +10,11 @@
   (balance-windows)
   (other-window 1))
 
+(defun open-tex-pdf-and-watch ()
+  (interactive)
+  (split-and-follow-horizontally)
+  (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf")))
+
 (use-package emacs
   :hook ((prog-mode . display-line-numbers-mode)
          (prog-mode . flyspell-prog-mode)
@@ -51,8 +56,6 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-auto-revert-mode t)
-
-  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
   
   (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -70,7 +73,9 @@
   :ensure t)
 
 (use-package pdf-tools
-  :ensure t)
+  :ensure t
+  :config
+  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
