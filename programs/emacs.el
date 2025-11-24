@@ -65,6 +65,10 @@
 (use-package markdown-mode
   :ensure t)
 
+(use-package pdf-tools
+  :ensure t
+  :defer t)
+
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
   :ensure t
