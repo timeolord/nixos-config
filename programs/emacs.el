@@ -197,9 +197,9 @@
   :bind (("C-c a" . eglot)
          ("C-c w" . eglot-code-action)
          ("C-c x" . eglot-format))
-  :hook ((haskell-mode . eglot-ensure)
-         (nix-mode . eglot-ensure)
-         (python-mode. eglot-ensure))
+  ;; :hook ((haskell-mode . eglot-ensure)
+  ;;        (nix-mode . eglot-ensure)
+  ;;        (python-mode. eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
