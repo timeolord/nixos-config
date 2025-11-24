@@ -31,7 +31,7 @@ function flakeinit -a project_name lang_name
     end
     set flake_template $(string replace -a \"__project_name\" \"$project_name\" $flake_template)
     echo $flake_template > flake.nix
-    echo "use flake" > .envrc
+    echo "use flake\n git pull" > .envrc
     echo ".direnv" > .gitignore
     git init
     git add -A
