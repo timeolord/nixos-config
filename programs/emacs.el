@@ -16,9 +16,7 @@
   (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf")))
 
 (use-package emacs
-  :hook ((prog-mode . display-line-numbers-mode)
-         (prog-mode . flyspell-prog-mode)
-         (text-mode . flyspell-mode))
+  :hook ((prog-mode . display-line-numbers-mode))
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
          ("C-x f" . nil)
@@ -70,6 +68,14 @@
   (read-extended-command-predicate #'command-completion-default-include-p))
 
 (use-package markdown-mode
+  :ensure t)
+
+(use-package flyspell
+  :ensure t
+  :hook ((prog-mode . flyspell-prog-mode)
+         (text-mode . flyspell-mode)))
+
+(use-package ispell
   :ensure t)
 
 (use-package pdf-tools
