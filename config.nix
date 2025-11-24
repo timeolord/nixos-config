@@ -33,6 +33,8 @@
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
+  i18n.extraLocales = ["fr_CA.UTF-8/UTF-8"];
+
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_CA.UTF-8";
     LC_IDENTIFICATION = "en_CA.UTF-8";
