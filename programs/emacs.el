@@ -186,7 +186,6 @@
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
   (corfu-auto-prefix 2)
   (corfu-auto-delay 0.1)
-
   (corfu-min-width 80)
   (corfu-max-width corfu-min-width)       ; Always have the same width
   (corfu-count 14)
@@ -197,9 +196,8 @@
   :bind (("C-c a" . eglot)
          ("C-c w" . eglot-code-action)
          ("C-c x" . eglot-format))
-  ;; :hook ((haskell-mode . eglot-ensure)
-  ;;        (nix-mode . eglot-ensure)
-  ;;        (python-mode. eglot-ensure))
+  :hook ((haskell-mode . eglot-ensure)
+         (python-mode. eglot-ensure))
   :config
   (add-to-list 'eglot-server-programs '(nix-mode . ("nil")))
   (setq-default eglot-workspace-configuration
@@ -218,10 +216,6 @@
 (use-package rust-mode
   :ensure t
   :defer t)
-;; (use-package flycheck-rust
-;;   :ensure t
-;;   :defer t
-;;   :hook (flycheck-mode . flycheck-rust-setup))
 
 ;; Python Config
 (use-package reformatter
@@ -243,10 +237,6 @@
 	       (haskell-mode . turn-on-haskell-indentation))
   :config
   (add-to-list 'completion-ignored-extensions ".hi"))
-;; (use-package flycheck-haskell-ghc-cache-directory
-;;   :ensure t
-;;   :defer t
-;;   :hook ((haskell-mode . flycheck-haskell-setup)))
 
 ;; Fish Config
 (use-package fish-mode
