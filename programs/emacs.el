@@ -12,7 +12,7 @@
 
 (defun open-tex-pdf-and-watch ()
   (interactive)
-  (split-and-follow-horizontally)
+  (split-and-follow-vertically)
   (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf")))
 
 (use-package emacs
