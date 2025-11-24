@@ -160,6 +160,7 @@
   environment.systemPackages = with pkgs; [
     gzip
     git
+    
     (pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-git-pgtk;
       config = ./programs/emacs.el;
@@ -167,9 +168,16 @@
       alwaysEnsure = true;
     })
     emacs-lsp-booster
-    vlc
     nixfmt
     nil
+    aspell
+    aspellDicts.fr
+    aspellDicts.en
+    aspellDicts.en-science
+    aspellDicts.en-computers
+    aspellDicts.tr
+    
+    vlc
     trashy
     ntfs3g
   ];

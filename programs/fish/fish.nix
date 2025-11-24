@@ -36,7 +36,8 @@
       set PYTHONSTARTUP /etc/nixos/python/startup.py
       set -gx EDITOR emacs
       function fish_greeting
-         rm -r /home/${userName}/Downloads 
+         rm -r /home/${userName}/Downloads 2> /dev/null
+         rm -r /home/${userName}/null 2> /dev/null
          fastfetch
          echo "God Says..."
          godsays

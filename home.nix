@@ -27,6 +27,7 @@
     gimp-with-plugins
     unzip
     tree
+    texliveFull
   ];
 
   #home.file = {
