@@ -54,7 +54,7 @@
         "melk-lab"
       ];
       gen_system =
-        {userName, include-hardware}:
+        { userName, include-hardware }:
         let
           arguments = { inherit inputs userName; };
           user-module = ./${userName}.nix;
@@ -82,14 +82,20 @@
       configurations = builtins.listToAttrs (
         map (userName: {
           name = userName;
-          value = nixpkgs.lib.nixosSystem gen_system userName;
+          value = nixpkgs.lib.nixosSystem (gen_system {
+            inherit userName;
+            include-hardware = true;
+          });
         }) userNames
       );
       isos = builtins.listToAttrs (
         map (userName: {
           name = userName + "-iso";
           value = nixos-generators.nixosGenerate (
-            (gen_system {inherit userName; include-hardware = false;})
+            (gen_system {
+              inherit userName;
+              include-hardware = false;
+            })
             // {
               format = "install-iso";
             }
