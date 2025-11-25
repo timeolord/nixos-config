@@ -25,6 +25,10 @@
       # url = "path:/home/melk-pc/haskell/godsays";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    nixos-generators = {
+      url = "github:nix-community/nixos-generators";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
@@ -34,6 +38,7 @@
       rust-overlay,
       emacs-overlay,
       godsays-flake,
+      nixos-generators,
       ...
     }:
     let
@@ -48,40 +53,49 @@
         "melk-pc"
         "melk-lab"
       ];
+      gen_system =
+        userName:
+        let
+          arguments = { inherit inputs userName; };
+          user-module = ./${userName}.nix;
+          hardware-module = ./hardware-configuration-${userName}.nix;
+        in
+        {
+          inherit system;
+          specialArgs = arguments;
+          modules = [
+            { nixpkgs = { inherit overlays; }; }
+            ./config.nix
+            ./hyprland/hyprland.nix
+            user-module
+            hardware-module
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.extraSpecialArgs = arguments;
+              home-manager.backupFileExtension = "backup";
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.${userName} = (import ./home.nix);
+            }
+          ];
+        };
       configurations = builtins.listToAttrs (
-        map (
-          userName:
-          let
-            arguments = { inherit inputs userName; };
-            user-module = ./${userName}.nix;
-            hardware-module = ./hardware-configuration-${userName}.nix;
-          in
-          {
-            name = userName;
-            value = nixpkgs.lib.nixosSystem {
-              inherit system;
-              specialArgs = arguments;
-              modules = [
-                { nixpkgs = { inherit overlays; }; }
-                ./config.nix
-                ./hyprland/hyprland.nix
-                user-module
-                hardware-module
-                home-manager.nixosModules.home-manager
-                {
-                  home-manager.extraSpecialArgs = arguments;
-                  home-manager.backupFileExtension = "backup";
-                  home-manager.useGlobalPkgs = true;
-                  home-manager.useUserPackages = true;
-                  home-manager.users.${userName} = (import ./home.nix);
-                }
-              ];
-            };
-          }
-        ) userNames
+        map (userName: {
+          name = userName;
+          value = nixpkgs.lib.nixosSystem gen_system userName;
+        }) userNames
+      );
+      isos = builtins.listToAttrs (
+        map (userName: {
+          name = userName + "-iso";
+          value = nixos-generators.nixosGenerate ((gen_system userName) // {
+            format = "install-iso";
+          });
+        }) userNames
       );
     in
     {
+      packages.x86_64-linux = isos;
       nixosConfigurations = configurations;
     };
 }
