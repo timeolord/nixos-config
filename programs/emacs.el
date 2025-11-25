@@ -94,6 +94,8 @@
   :defer t
   :config
   (treemacs-filewatch-mode t)
+  (treemacs-project-follow-mode t)
+  (treemacs-indent-guide-mode t)
   (setq treemacs-is-never-other-window t))
 
 (use-package treemacs-icons-dired
