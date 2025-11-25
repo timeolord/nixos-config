@@ -30,6 +30,7 @@
     texliveFull
     audacity
     appimage-run
+    anki
   ];
 
   #home.file = {
