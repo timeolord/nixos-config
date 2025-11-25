@@ -54,7 +54,7 @@
         "melk-lab"
       ];
       gen_system =
-        userName:
+        {userName, include-hardware}:
         let
           arguments = { inherit inputs userName; };
           user-module = ./${userName}.nix;
@@ -68,7 +68,6 @@
             ./config.nix
             ./hyprland/hyprland.nix
             user-module
-            hardware-module
             home-manager.nixosModules.home-manager
             {
               home-manager.extraSpecialArgs = arguments;
@@ -77,7 +76,8 @@
               home-manager.useUserPackages = true;
               home-manager.users.${userName} = (import ./home.nix);
             }
-          ];
+          ]
+          ++ (if include-hardware then [ hardware-module ] else [ ]);
         };
       configurations = builtins.listToAttrs (
         map (userName: {
@@ -88,9 +88,12 @@
       isos = builtins.listToAttrs (
         map (userName: {
           name = userName + "-iso";
-          value = nixos-generators.nixosGenerate ((gen_system userName) // {
-            format = "install-iso";
-          });
+          value = nixos-generators.nixosGenerate (
+            (gen_system {inherit userName; include-hardware = false;})
+            // {
+              format = "install-iso";
+            }
+          );
         }) userNames
       );
     in
