@@ -29,6 +29,7 @@
     tree
     texliveFull
     audacity
+    appimage-run
   ];
 
   #home.file = {
