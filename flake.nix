@@ -29,6 +29,10 @@
       url = "github:nix-community/nixos-generators";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs =
     inputs@{
@@ -39,6 +43,7 @@
       emacs-overlay,
       godsays-flake,
       nixos-generators,
+      sops-nix,
       ...
     }:
     let
@@ -53,7 +58,7 @@
         "melk-pc"
         "melk-lab"
       ];
-      gen_system =
+      generateSystem =
         { userName, include-hardware }:
         let
           arguments = { inherit inputs userName; };
@@ -76,13 +81,14 @@
               home-manager.useUserPackages = true;
               home-manager.users.${userName} = (import ./home.nix);
             }
+            sops-nix.nixosModules.sops
           ]
           ++ (if include-hardware then [ hardware-module ] else [ ]);
         };
       configurations = builtins.listToAttrs (
         map (userName: {
           name = userName;
-          value = nixpkgs.lib.nixosSystem (gen_system {
+          value = nixpkgs.lib.nixosSystem (generateSystem {
             inherit userName;
             include-hardware = true;
           });
@@ -92,7 +98,7 @@
         map (userName: {
           name = userName + "-iso";
           value = nixos-generators.nixosGenerate (
-            (gen_system {
+            (generateSystem {
               inherit userName;
               include-hardware = false;
             })

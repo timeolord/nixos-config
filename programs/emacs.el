@@ -13,7 +13,8 @@
 (defun open-tex-pdf-and-watch ()
   (interactive)
   (split-and-follow-vertically)
-  (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf")))
+  (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf"))
+  (async-shell-command "latex-watch.sh"))
 
 (use-package emacs
   :hook ((prog-mode . display-line-numbers-mode)
