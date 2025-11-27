@@ -10,7 +10,7 @@
   (balance-windows)
   (other-window 1))
 
-(defun open-tex-pdf-and-watch ()
+(defun tex-open-pdf-and-watch ()
   (interactive)
   (split-and-follow-vertically)
   (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf"))
@@ -75,6 +75,7 @@
 
 (use-package pdf-tools
   :ensure t
+  :hook ((pdf-view-mode . tex-open-pdf-and-watch))
   :config
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
 
