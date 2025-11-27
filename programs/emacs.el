@@ -77,7 +77,8 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
-  (add-hook 'latex-mode-hook 'tex-open-pdf-and-watch))
+                                        ;(add-hook 'latex-mode-hook 'tex-open-pdf-and-watch)
+  )
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
