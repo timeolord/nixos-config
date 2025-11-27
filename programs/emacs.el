@@ -75,7 +75,7 @@
 
 (use-package pdf-tools
   :ensure t
-  :hook ((pdf-view-mode . tex-open-pdf-and-watch))
+  :hook ((latex-mode . tex-open-pdf-and-watch))
   :config
   (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
 
