@@ -225,6 +225,11 @@
   :hook (python-mode . ruff-format-on-save-mode)
 )
 
+;; Zig Config
+(use-package zig-mode
+  :ensure t
+  :defer t)
+
 ;; Haskell Config
 (use-package haskell-mode
   :ensure t
