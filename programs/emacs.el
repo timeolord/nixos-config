@@ -10,7 +10,7 @@
   (balance-windows)
   (other-window 1))
 
-(defun open-tex-pdf-and-watch ()
+(defun tex-open-pdf-and-watch ()
   (interactive)
   (split-and-follow-vertically)
   (find-file (concat (file-name-sans-extension buffer-file-name) ".pdf"))
@@ -76,7 +76,9 @@
 (use-package pdf-tools
   :ensure t
   :config
-  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode)))
+  (add-to-list 'auto-mode-alist '("\\.pdf\\'" . pdf-view-mode))
+                                        ;(add-hook 'latex-mode-hook 'tex-open-pdf-and-watch)
+  )
 
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
