@@ -25,7 +25,7 @@
       gph = "git push";
       gpl = "git pull";
       "..." = "cd ../..";
-      utar = "tar -xf";
+      untar = "tar -xf";
       lsa = "ls -lha";
       emacs = "emacs 2> /dev/null &";
       du = "du -h";
