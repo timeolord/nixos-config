@@ -45,3 +45,10 @@ function cd
     builtin cd $argv
     and ls
 end
+function untar -a file_name
+    set -f file $file_name
+    while path extension $file
+        set -f file (path change-extension '' $file)
+    end
+    tar -xf $file_name -C ./$file
+end
