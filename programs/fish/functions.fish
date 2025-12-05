@@ -47,7 +47,7 @@ function cd
 end
 function untar -a file_name
     set -f file $file_name
-    while path extension $file 1> /dev/null
+    while path extension $file &> /dev/null
         set -f file (path change-extension '' $file)
     end
     mkdir $file
