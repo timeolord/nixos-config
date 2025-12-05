@@ -50,5 +50,6 @@ function untar -a file_name
     while path extension $file
         set -f file (path change-extension '' $file)
     end
+    mkdir $file
     tar -xf $file_name -C ./$file
 end
