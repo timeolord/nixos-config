@@ -53,3 +53,9 @@ function untar -a file_name
     mkdir $file
     tar -xf $file_name -C ./$file
 end
+function guntar -a file_name
+    gunzip $file_name
+    set -f file $file_name
+    path extension $file &> /dev/null
+    untar $file
+end
