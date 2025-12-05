@@ -75,7 +75,7 @@ function rename-folder -a folder_name
 end
 function rnf
     set -f files (ls -p | grep -v /)
-    set -f folders (ls -d */) 2> /dev/null
+    set -f folders (ls -d */ 2> /dev/null) 
     for folder in $folders
         rename-folder $folder
     end
