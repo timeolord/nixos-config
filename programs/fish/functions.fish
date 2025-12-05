@@ -64,10 +64,10 @@ function rename-file -a file_name
     set -f new_name (string replace -a "_" "-" $file_name)
     mv $file_name $new_name
 end
-function rename_files
+function rnf
     set -f files ls
     for file in $files
-        rename-file file
+        rename-file $file
     end
 end
     
