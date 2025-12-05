@@ -53,6 +53,7 @@ function untar -a file_name
     mkdir $file
     tar -xf $file_name -C ./$file
     rm $file_name
+    cd $file
 end
 function guntar -a file_name
     gunzip $file_name
