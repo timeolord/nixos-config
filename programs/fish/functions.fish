@@ -62,6 +62,7 @@ function guntar -a file_name
 end
 function rename-file -a file_name
     set -f new_name (string replace -a "_" "-" $file_name)
+    set -f new_name (string replace -a " " "-" $new_name)
     set -f new_name (string lower $new_name)
     mv $file_name $new_name
 end
