@@ -55,7 +55,6 @@ function untar -a file_name
 end
 function guntar -a file_name
     gunzip $file_name
-    set -f file $file_name
-    path extension $file &> /dev/null
+    set -f file (path change-extension '' $file_name)
     untar $file
 end
