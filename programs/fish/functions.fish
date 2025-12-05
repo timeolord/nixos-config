@@ -65,7 +65,7 @@ function rename-file -a file_name
     mv $file_name $new_name
 end
 function rnf
-    set -f files ls
+    set -f files (ls)
     for file in $files
         rename-file $file
     end
