@@ -61,7 +61,7 @@ function guntar -a file_name
     untar $file
 end
 function rename-file -a file_name
-    mv $file_name (string join "." (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
+    mv $file_name (string join (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
 end
 function generate-new-name -a name
     set -f new_name (string replace -a "_" "-" $name)
