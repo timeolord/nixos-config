@@ -60,3 +60,7 @@ function guntar -a file_name
     set -f file (path change-extension '' $file_name)
     untar $file
 end
+function rename-file -a file_name
+    set -f new_name (string replace -a "_" "-" $file_name)
+    mv $file_name $new_name
+end
