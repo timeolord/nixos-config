@@ -61,18 +61,17 @@ function guntar -a file_name
     untar $file
 end
 function rename-file -a file_name
-    mv $file_name (generate-new-name $file_name)
+    mv $file_name (generate-new-name (path change-extension '' $file_name))
 end
 function generate-new-name -a name
     set -f new_name (string replace -a "_" "-" $name)
     set -f new_name (string replace -a " " "-" $new_name)
+    set -f new_name (string replace -a "." "-" $new_name)
     set -f new_name (string lower $new_name)
     echo $new_name
 end
 function rename-folder -a folder_name
-    set -f new_name (generate-new-name $folder_name)
-    set -f new_name (string replace -a "." "-" $new_name)
-    mv $folder_name $new_name
+    mv $file_name (generate-new-name $folder_name)
 end
 function rnf
     set -f files (ls -p | grep -v /)
