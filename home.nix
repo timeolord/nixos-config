@@ -32,6 +32,8 @@
     audacity
     appimage-run
     anki
+    vlc
+    syspower
   ];
 
   programs.direnv = {

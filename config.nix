@@ -177,8 +177,7 @@
     aspellDicts.en-science
     aspellDicts.en-computers
     aspellDicts.tr
-    
-    vlc
+
     trashy
     ntfs3g
   ];
