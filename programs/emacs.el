@@ -65,7 +65,7 @@
   (setq-default indent-tabs-mode nil
                 tab-width 2
                 c-basic-offset 2)
-  (set-frame-font "JetBrainsMono 12" nil t)
+  (set-frame-font "-TWR-UDEV Gothic NF-regular-normal-normal-*-16-*-*-*-d-0-iso10646-1" nil t)
   :custom
   (completion-cycle-threshold nil)
   ;; (text-mode-ispell-word-completion nil)
