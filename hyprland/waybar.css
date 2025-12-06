@@ -49,7 +49,7 @@ window#waybar {
 /*   border: solid 0px #f4d9e1; */
 /* } */
 
-#clock, #clock.date, #battery, #pulseaudio, #network {
+#clock, #clock.date, #battery, #pulseaudio, #network #custom-power {
 	  background: transparent;
 	  padding: 5px 5px 5px 5px;
 	  margin: 5px 5px 5px 5px;
