@@ -14,7 +14,7 @@
 
         modules-left = ["hyprland/workspaces"];
         modules-center = ["cpu" "memory" "disk"];
-        modules-right = ["tray" "network" "pulseaudio" "custom/power" "battery" "clock#date" "clock"];
+        modules-right = ["tray" "network" "pulseaudio" "battery" "clock#date" "clock" "custom/power" ];
 
         "hyprland/workspaces" = {
           active-only = false;
