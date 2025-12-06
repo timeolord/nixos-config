@@ -7,6 +7,7 @@
 {
   imports = [
     ./programs/fish/fish.nix
+    ./cursor.nix
   ];
   
   home.username = userName;
@@ -32,10 +33,6 @@
     appimage-run
     anki
   ];
-
-  #home.file = {
-  #  ".config/YouTube Music/config.json".source = ./programs/youtube-music.json;
-  #};
 
   programs.direnv = {
     enable = true;
