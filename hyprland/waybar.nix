@@ -39,7 +39,7 @@
           };
         };
         "custom/power" = {
-          format = "⏻";
+          format = "⏻ ";
           on-click = "syspower";
         };
         bluetooth = {
