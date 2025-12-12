@@ -14,17 +14,21 @@
 }
 
 #syspower .box_buttons {
-    background: rgba(0, 0, 0, 0.75);
+ 
 }
 
 #syspower .progressbar_status {
 }
 
 #syspower .button_shutdown {
+    background: rgba(0, 0, 0, 0.75);
 }
 #syspower .button_reboot {
+    background: rgba(0, 0, 0, 0.75);
 }
 #syspower .button_logout {
+    background: rgba(0, 0, 0, 0.75);
 }
 #syspower .button_cancel {
+    background: rgba(0, 0, 0, 0.75);
 }
