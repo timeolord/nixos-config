@@ -187,7 +187,7 @@
     aspellDicts.en-computers
     aspellDicts.tr
 
-    trashy
+    # trashy
     ntfs3g
   ];
 

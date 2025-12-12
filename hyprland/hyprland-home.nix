@@ -21,6 +21,8 @@ in
     extraConfig = hyprland_config;
   };
 
+  home.file.".config/sys64/power/style.css".source = ./syspower.css;
+
   home.packages = with pkgs; [
     hyprpolkitagent
     xdg-desktop-portal-gtk
