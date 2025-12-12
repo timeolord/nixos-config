@@ -22,18 +22,26 @@
   networking.networkmanager.enable = true;
   # networking.wireless.userControlled.enable = true;
 
-  nix.settings.experimental-features = [
-    "nix-command"
-    "flakes"
-  ];
-
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+    substituters = [
+      "https://nix-community.cachix.org"
+    ];
+    trusted-public-keys = [
+      "nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs="
+    ];
+    auto-optimise-store = true;
+  };
   # Set your time zone.
   time.timeZone = "America/New_York";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_CA.UTF-8";
 
-  i18n.extraLocales = ["fr_CA.UTF-8/UTF-8"];
+  i18n.extraLocales = [ "fr_CA.UTF-8/UTF-8" ];
 
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "en_CA.UTF-8";
@@ -162,7 +170,7 @@
   environment.systemPackages = with pkgs; [
     gzip
     git
-    
+
     (pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-unstable-pgtk;
       config = ./programs/emacs.el;
@@ -203,11 +211,6 @@
     automatic = true;
     dates = "weekly";
   };
-  nix.settings = {
-    auto-optimise-store = true;
-    # substitute = false; # builds all packages from source (Too slow)
-  };
-
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
