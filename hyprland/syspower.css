@@ -20,33 +20,34 @@
 #syspower .progressbar_status {
 }
 
-/* #syspower .button_shutdown { */
-/*     background: rgba(0, 0, 0, 0.75); */
-/*     border-color: rgba(0, 0, 0, 0.75); */
-/*     color: rgba(255,255,255,255); */
-/* } */
-/* #syspower .button_reboot { */
-/*     background: rgba(0, 0, 0, 0.75); */
-/*     border-color: rgba(0, 0, 0, 0.75); */
-/*     color: rgba(255,255,255,255); */
-/* } */
-/* #syspower .button_logout { */
-/*     background: rgba(0, 0, 0, 0.75); */
-/*     border-color: rgba(0, 0, 0, 0.75); */
-/*     color: rgba(255,255,255,255); */
-/* } */
-/* #syspower .button_suspend { */
-/*     background: rgba(0, 0, 0, 0.75); */
-/*     border-color: rgba(0, 0, 0, 0.75); */
-/*     color: rgba(255,255,255,255); */
-/* } */
-/* #syspower .button_cancel { */
-/*     background: rgba(0, 0, 0, 0.75); */
-/*     border-color: rgba(0, 0, 0, 0.75); */
-/*     color: rgba(255,255,255,255); */
-/* } */
+#syspower .button_shutdown {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255,255,255,255);
+}
+#syspower .button_reboot {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255,255,255,255);
+}
+#syspower .button_logout {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255,255,255,255);
+}
+#syspower .button_suspend {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255,255,255,255);
+}
+#syspower .button_cancel {
+    background: rgba(0, 0, 0, 0.75);
+    border-color: rgba(0, 0, 0, 0.75);
+    color: rgba(255,255,255,255);
+}
 #syspower button {
 	border: 1px solid @borders;
 	background: alpha(currentColor, 0.05);
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-}
+}rb
+
