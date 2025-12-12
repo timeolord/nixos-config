@@ -164,7 +164,7 @@
     git
     
     (pkgs.emacsWithPackagesFromUsePackage {
-      package = pkgs.emacs-git-pgtk;
+      package = pkgs.emacs-unstable-pgtk;
       config = ./programs/emacs.el;
       defaultInitFile = true;
       alwaysEnsure = true;
