@@ -81,6 +81,11 @@
                                         ;(add-hook 'latex-mode-hook 'tex-open-pdf-and-watch)
   )
 
+(use-package direnv
+  :ensure t
+  :config
+  (direnv-mode))
+
 ;; TODO: Learn how to use multiple cursors.
 (use-package multiple-cursors
   :ensure t
