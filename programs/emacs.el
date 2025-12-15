@@ -181,7 +181,6 @@
   (vertico-mode))
 
 (use-package savehist
-  :ensure t
   :init
   (savehist-mode))
 
@@ -209,7 +208,8 @@
 (use-package vterm
   :ensure t
   :config
-  (setq vterm-shell "/etc/fish"))
+  ;; (setq vterm-shell "/etc/fish")
+  )
 
 ;; Example configuration for Consult
 (use-package consult
