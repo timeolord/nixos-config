@@ -68,7 +68,18 @@
   (set-frame-font "-TWR-UDEV Gothic NF-regular-normal-normal-*-16-*-*-*-d-0-iso10646-1" nil t)
   :custom
   (completion-cycle-threshold nil)
+  ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
+  ;; to switch display modes.
+  (context-menu-mode t)
+  ;; Support opening new minibuffers from inside existing minibuffers.
+  (enable-recursive-minibuffers t)
+  ;; Do not allow the cursor in the minibuffer prompt
+  (minibuffer-prompt-properties
+   '(read-only t cursor-intangible t face minibuffer-prompt))
   ;; (text-mode-ispell-word-completion nil)
+  ;; Hide commands in M-x which do not work in the current mode.  Vertico
+  ;; commands are hidden in normal buffers. This setting is useful beyond
+  ;; Vertico.
   (read-extended-command-predicate #'command-completion-default-include-p))
 
 (use-package markdown-mode
@@ -127,7 +138,7 @@
 (use-package electric-operator
   :ensure t
   :defer t
-  :hook (python-mode python-inferior-mode))
+  :hook (python-mode python-shell-mode))
 
 (use-package nix-mode
   :ensure t
@@ -146,7 +157,8 @@
   :defer t
   :hook ((prog-mode . rainbow-delimiters-mode)
          (text-mode . rainbow-delimiters-mode)
-         (markdown-mode . rainbow-delimiters-mode)))
+         (markdown-mode . rainbow-delimiters-mode)
+         (shell-mode . rainbow-delimiters-mode)))
 
 (use-package solaire-mode
   :ensure t
@@ -163,20 +175,51 @@
   :config
   (load-theme 'doom-one))
 
-(use-package ivy
+(use-package vertico
   :ensure t
-  :config
-  (ivy-mode 1)
-  (setq ivy-height 15
-        ivy-use-virtual-buffers t
-        ivy-use-selectable-prompt t))
+  :init
+  (vertico-mode))
 
-(use-package counsel
+(use-package savehist
   :ensure t
-  :after ivy
-  :config
-  (counsel-mode 1)
-  :bind (:map ivy-minibuffer-map))
+  :init
+  (savehist-mode))
+
+(use-package orderless
+  :ensure t
+  :custom
+  (completion-styles '(orderless basic))
+  (completion-category-overrides '((file (styles partial-completion))))
+  (completion-category-defaults nil) ;; Disable defaults, use our settings
+  (completion-pcm-leading-wildcard t))
+
+;; Enable rich annotations using the Marginalia package
+(use-package marginalia
+  ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
+  ;; available in the *Completions* buffer, add it to the
+  ;; `completion-list-mode-map'.
+  :bind (:map minibuffer-local-map
+         ("M-A" . marginalia-cycle))
+  :init
+  ;; Marginalia must be activated in the :init section of use-package such that
+  ;; the mode gets enabled right away. Note that this forces loading the
+  ;; package.
+  (marginalia-mode))
+
+;; (use-package ivy
+;;   :ensure t
+;;   :config
+;;   (ivy-mode 1)
+;;   (setq ivy-height 15
+;;         ivy-use-virtual-buffers t
+;;         ivy-use-selectable-prompt t))
+
+;; (use-package counsel
+;;   :ensure t
+;;   :after ivy
+;;   :config
+;;   (counsel-mode 1)
+;;   :bind (:map ivy-minibuffer-map))
 
 (use-package corfu
   :ensure t
@@ -191,13 +234,14 @@
   (global-corfu-mode)
   :custom
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
-  (corfu-auto-prefix 2)
+  (corfu-auto-prefix 0)
   (corfu-auto-delay 0.1)
-  (corfu-min-width 80)
-  (corfu-max-width corfu-min-width)       ; Always have the same width
+  ;; (corfu-min-width 80)
+  ;; (corfu-max-width corfu-min-width)       ; Always have the same width
   (corfu-count 14)
   (corfu-scroll-margin 4)
   (corfu-cycle nil))
+
 (use-package eglot
   :ensure t
   :bind (("C-c a" . eglot)
@@ -227,6 +271,7 @@
 (use-package reformatter
   :ensure t
   :defer t)
+
 (use-package ruff-format
   :ensure t
   :defer t
