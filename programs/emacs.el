@@ -179,11 +179,8 @@
   :ensure t
   :defer t
   :init
+  (savehist-mode)
   (vertico-mode))
-
-(use-package savehist
-  :init
-  (savehist-mode))
 
 (use-package orderless
   :ensure t
