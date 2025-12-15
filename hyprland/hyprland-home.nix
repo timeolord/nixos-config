@@ -35,8 +35,10 @@ in
       getFrom = url: hash: name: {
           gtk.enable = true;
           x11.enable = true;
+          hyprcursor.enable = true;
           name = name;
           size = 24;
+          enable = true;
           package = 
             pkgs.runCommand "moveUp" {} ''
               mkdir -p $out/share/icons
