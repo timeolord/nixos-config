@@ -177,6 +177,7 @@
 
 (use-package vertico
   :ensure t
+  :defer t
   :init
   (vertico-mode))
 
@@ -186,6 +187,7 @@
 
 (use-package orderless
   :ensure t
+  :defer t
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles partial-completion))))
@@ -194,6 +196,7 @@
 
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
+  :defer t
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
   ;; `completion-list-mode-map'.
@@ -213,6 +216,7 @@
 
 ;; Example configuration for Consult
 (use-package consult
+  :defer t
   ;; Replace bindings. Lazily loaded by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
          ("C-c M-x" . consult-mode-command)
