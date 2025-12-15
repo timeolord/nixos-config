@@ -206,6 +206,9 @@
   ;; package.
   (marginalia-mode))
 
+(use-package vterm
+    :ensure t)
+
 ;; (use-package ivy
 ;;   :ensure t
 ;;   :config
