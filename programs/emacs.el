@@ -343,7 +343,7 @@
   (global-corfu-mode)
   :custom
   (corfu-auto t)        ; Only use `corfu' when calling `completion-at-point' or `indent-for-tab-command'
-  (corfu-auto-prefix 0)
+  (corfu-auto-prefix 1)
   (corfu-auto-delay 0.1)
   ;; (corfu-min-width 80)
   ;; (corfu-max-width corfu-min-width)       ; Always have the same width
