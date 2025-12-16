@@ -120,6 +120,7 @@
           format-alt = "{bandwidthUpBytes} {bandwidthDownBytes}";
           tooltip-format = "{frequency} {signalStrength}";
           on-click-right = "nm-connection-editor";
+          interval = 1;
         };
         tray = {
           icon-size = 16;
@@ -128,10 +129,12 @@
         clock = {
           interval = 1;
           format = "{:%I:%M %p}";
+          tooltip = false;
         };
         "clock#date" = {
           interval = 60;
           format = "{:%b %a %d}";
+          tooltip = false;
         };
         pulseaudio = {
           format = "{icon} {volume}%";
