@@ -113,13 +113,13 @@
           path = "/";
         };
         network = {
-          "format-wifi" = "󰤨";
-          "format-ethernet" = " {ifname}: Aesthetic";
-          "format-linked" = " {ifname} (No IP)";
-          "format-disconnected" = "󰤭";
-          "format-alt" = " {ifname}: {ipaddr}/{cidr}";
-          "tooltip-format" = "{essid}";
-          "on-click" = "wpanm-connection-editor";
+          format-wifi = "󰤨 {essid}";
+          format-ethernet = "";
+          format-linked = "";
+          format-disconnected = "󰤭";
+          format-alt = "{bandwidthUpBytes} {bandwidthDownBytes}";
+          tooltip-format = "{frequency} {signalStrength}";
+          on-click-right = "nm-connection-editor";
         };
         tray = {
           icon-size = 16;
