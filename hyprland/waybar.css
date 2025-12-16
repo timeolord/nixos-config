@@ -155,7 +155,7 @@ window#waybar {
     font-style: normal;
 }
 
-#cpu, #memory, #disk {
+#cpu, #memory, #disk, #custom-nvidia {
     /* background-color: #450693; */
     color: #ff3f7f;
     border-radius: 16px;

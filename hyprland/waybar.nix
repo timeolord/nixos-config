@@ -87,13 +87,13 @@
           ];
         };
         memory = {
-          format = " {}%";
-          format-alt = " {used}/{total} GiB";
+          format = "  {}%";
+          format-alt = "  {used}/{total} GiB";
           interval = 5;
         };
         cpu = {
-          format = " {usage}%";
-          format-alt = " {avg_frequency} GHz";
+          format = "  {usage}%";
+          format-alt = "  {avg_frequency} GHz";
           interval = 1;
         };
         disk = {
