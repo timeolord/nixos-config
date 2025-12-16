@@ -102,6 +102,10 @@ window#waybar {
     /*border-left: solid 1px #282738;*/
 }
 
+#hyprland-language {
+    color: #ff3f7f;
+}
+
 #clock.date {
     color: #ff3f7f;
     padding-right: 0px;
