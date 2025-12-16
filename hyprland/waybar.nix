@@ -53,8 +53,8 @@
         };
         "custom/nvidia" = {
           exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,nounits,noheader";
-          format = "GPU: {}%";
-          interval = 2;
+          format = "󱑵 {}%";
+          interval = 1;
         };
         "custom/power" = {
           format = "⏻ ";
@@ -87,13 +87,13 @@
           ];
         };
         memory = {
-          format = "󰍛 {}%";
-          format-alt = "󰍛 {used}/{total} GiB";
+          format = " {}%";
+          format-alt = " {used}/{total} GiB";
           interval = 5;
         };
         cpu = {
-          format = "󰻠 {usage}%";
-          format-alt = "󰻠 {avg_frequency} GHz";
+          format = " {usage}%";
+          format-alt = " {avg_frequency} GHz";
           interval = 1;
         };
         disk = {
