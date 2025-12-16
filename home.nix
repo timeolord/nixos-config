@@ -7,7 +7,6 @@
 {
   imports = [
     ./programs/fish/fish.nix
-    ./cursor.nix
   ];
   
   home.username = userName;
@@ -54,7 +53,7 @@
   # You can update home Manager without changing this value. See
   # the home Manager release notes for a list of state version
   # changes in each release.
-  home.stateVersion = "25.05";
+  home.stateVersion = "25.11";
   # Let Home Manager install and manage itself.
   programs.home-manager.enable = true;
 }
