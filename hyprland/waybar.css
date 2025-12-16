@@ -160,7 +160,7 @@ window#waybar {
     color: #ff3f7f;
     border-radius: 16px;
     margin: 5px;
-    margin-left: 5px;
-    margin-right: 5px;
-    padding: 0px 10px 0px 10px;
+    /* margin-left: 5px; */
+    /* margin-right: 5px; */
+    padding: 0px 5px 0px 5px;
 }
