@@ -32,6 +32,7 @@
 
         "hyprland/language" = {
           format = "{}";
+          format-en = "英文";
         };
         
         "hyprland/workspaces" = {
