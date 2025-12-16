@@ -113,11 +113,11 @@
           path = "/";
         };
         network = {
-          format-wifi = "󰤨 {essid}";
-          format-ethernet = "";
-          format-linked = "";
+          format-wifi = "󰤨 {essid} {bandwidthUpBytes} {bandwidthDownBytes}";
+          format-ethernet = " {bandwidthUpBytes} {bandwidthDownBytes}";
+          format-linked = " {bandwidthUpBytes} {bandwidthDownBytes}";
           format-disconnected = "󰤭";
-          format-alt = "{bandwidthUpBytes} {bandwidthDownBytes}";
+          # format-alt = "";
           tooltip-format = "{frequency} {signalStrength}";
           on-click-right = "nm-connection-editor";
           interval = 1;

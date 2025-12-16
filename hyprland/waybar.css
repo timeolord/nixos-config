@@ -8,11 +8,11 @@
     min-height: 0;
 }
 
-*:hover {
-    background-color: #E6B9C6;
-	  color: black;
-	  border-radius: 16px;
-}
+/* *:hover { */
+/*     background-color: #E6B9C6; */
+/* 	  color: black; */
+/* 	  border-radius: 16px; */
+/* } */
 
 window#waybar {
     background: rgba(1, 1, 1, 0.5);
