@@ -1,3 +1,4 @@
+
 {
   config,
   pkgs,
@@ -214,6 +215,9 @@
 
     # trashy
     ntfs3g
+
+    openconnect
+    networkmanagerapplet
   ];
 
   fonts.packages =

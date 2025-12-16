@@ -5,9 +5,6 @@
   userName,
   ...
 }:
-let
-  dmcfg = config.services.displayManager;
-in
 {
   imports = [
     inputs.home-manager.nixosModules.home-manager
@@ -19,8 +16,8 @@ in
   environment.systemPackages = with pkgs; [
     brightnessctl # for ly
   ];
-  
   services.xserver.enable = false;
+  services.blueman.enable = true;
   services.displayManager.ly = {
     enable = true;
     settings = {
@@ -28,7 +25,6 @@ in
       session_log = "null";
     };
   };
-
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;

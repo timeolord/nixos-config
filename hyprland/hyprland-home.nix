@@ -63,5 +63,6 @@ in
     pipewire
     wireplumber
     hyprshot
+    networkmanagerapplet
   ];
 }
