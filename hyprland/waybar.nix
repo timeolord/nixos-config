@@ -21,6 +21,7 @@
         ];
         modules-right = [
           "tray"
+          "hyprland/language"
           "network"
           "pulseaudio"
           "battery"
@@ -29,6 +30,10 @@
           "custom/power"
         ];
 
+        "hyprland/language" = {
+          format = "{}";
+        };
+        
         "hyprland/workspaces" = {
           active-only = false;
           all-outputs = true;
