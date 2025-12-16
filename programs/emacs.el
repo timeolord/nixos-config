@@ -208,7 +208,7 @@
 (use-package vterm
   :ensure t
   :config
-  (setq vterm-shell "/etc/profiles/per-user/melktogo/bin/fish")
+  (setq vterm-shell (format "/etc/profiles/per-user/%s/bin/fish" (getenv "USER")))
   )
 
 ;; Example configuration for Consult

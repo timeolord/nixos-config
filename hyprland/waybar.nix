@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, ... }:
 {
   home.packages = [ pkgs.waybar ];
   programs.waybar = {
@@ -12,9 +12,22 @@
         margin-left = 0;
         margin-right = 0;
 
-        modules-left = ["hyprland/workspaces"];
-        modules-center = ["cpu" "memory" "disk"];
-        modules-right = ["tray" "network" "pulseaudio" "battery" "clock#date" "clock" "custom/power"];
+        modules-left = [ "hyprland/workspaces" ];
+        modules-center = [
+          "cpu"
+          "custom/nvidia"
+          "memory"
+          "disk"
+        ];
+        modules-right = [
+          "tray"
+          "network"
+          "pulseaudio"
+          "battery"
+          "clock#date"
+          "clock"
+          "custom/power"
+        ];
 
         "hyprland/workspaces" = {
           active-only = false;
@@ -26,10 +39,10 @@
           sort-by-number = true;
           format-icons = {
             "1" = "壹";
-			      "2" = "贰";
-			      "3" = "叁";
-			      "4" = "肆";
-			      "5" = "伍";
+            "2" = "贰";
+            "3" = "叁";
+            "4" = "肆";
+            "5" = "伍";
             "6" = "陆";
             "7" = "柒";
             "8" = "捌";
@@ -37,6 +50,11 @@
             "10" = "拾";
             urgent = "";
           };
+        };
+        "custom/nvidia" = {
+          exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,nounits,noheader";
+          format = "GPU: {}%";
+          interval = 2;
         };
         "custom/power" = {
           format = "⏻ ";
@@ -47,8 +65,8 @@
           format-disabled = "";
           format-connected = " {num_connections} connected";
           tooltip-format = "{controller_alias}\t{controller_address}";
-	        tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
-	        tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
+          tooltip-format-connected = "{controller_alias}\t{controller_address}\n\n{device_enumerate}";
+          tooltip-format-enumerate-connected = "{device_alias}\t{device_address}";
         };
         battery = {
           states = {
@@ -60,7 +78,13 @@
           format-charging = "{capacity}% ";
           format-plugged = "{capacity}% ";
           format-alt = "{icon} {time}";
-          format-icons = [" " " " " " " " " "];
+          format-icons = [
+            " "
+            " "
+            " "
+            " "
+            " "
+          ];
         };
         memory = {
           format = "󰍛 {}%";
@@ -80,10 +104,10 @@
         };
         network = {
           "format-wifi" = "󰤨";
-        	"format-ethernet" = " {ifname}: Aesthetic";
-        	"format-linked" = " {ifname} (No IP)";
-        	"format-disconnected" = "󰤭";
-        	"format-alt" = " {ifname}: {ipaddr}/{cidr}";
+          "format-ethernet" = " {ifname}: Aesthetic";
+          "format-linked" = " {ifname} (No IP)";
+          "format-disconnected" = "󰤭";
+          "format-alt" = " {ifname}: {ipaddr}/{cidr}";
           "tooltip-format" = "{essid}";
           "on-click" = "wpanm-connection-editor";
         };
@@ -101,12 +125,16 @@
         };
         pulseaudio = {
           format = "{icon} {volume}%";
-        	format-muted = "󰝟";
-		      format-icons = {
-			      default = ["󰕿" "󰖀" "󰕾"];
-		      };
+          format-muted = "󰝟";
+          format-icons = {
+            default = [
+              "󰕿"
+              "󰖀"
+              "󰕾"
+            ];
+          };
           scroll-step = 5;
-		      on-click-right = "pavucontrol";
+          on-click-right = "pavucontrol";
         };
       };
     };
