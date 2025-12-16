@@ -1,14 +1,15 @@
 { config, pkgs, ... }:
 {
   home.packages = [ pkgs.hyprpaper ];
+  home.file.".wallpapers".source = ../wallpapers;
   services.hyprpaper = {
     enable = true;
     settings = {
       preload = [
-        "/etc/nixos/wallpapers/ivan_the_terrible.jpg"
+        "~/.wallpapers/ivan_the_terrible.jpg"
       ];
       wallpaper = [
-        ", /etc/nixos/wallpapers/ivan_the_terrible.jpg"
+        ", ~/.wallpapers/ivan_the_terrible.jpg"
       ];
     };
   };
