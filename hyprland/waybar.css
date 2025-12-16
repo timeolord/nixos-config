@@ -1,7 +1,8 @@
 * {
     border: none;
     border-radius: 0px;
-    font-family: Iosevka, FontAwesome, Noto Sans CJK;
+    /* font-family: Iosevka, FontAwesome, Noto Sans CJK; */
+    font-family: UDEV Gothic NFLG, FontAwesome, Noto Sans CJK;
     font-size: 15px;
     font-style: normal;
     min-height: 0;
@@ -49,7 +50,7 @@ window#waybar {
 /*   border: solid 0px #f4d9e1; */
 /* } */
 
-#clock, #clock.date, #battery, #pulseaudio, #network {
+#clock, #clock.date, #battery, #pulseaudio, #network, #hyprland-language {
 	  background: transparent;
 	  padding: 5px 5px 5px 5px;
 	  margin: 5px 5px 5px 5px;
