@@ -1,6 +1,9 @@
 { config, pkgs, ... }:
 {
-  home.packages = [ pkgs.waybar ];
+  home.packages = [
+    pkgs.waybar
+    pkgs.playerctl
+  ];
   programs.waybar = {
     enable = true;
     settings = {
@@ -34,7 +37,7 @@
           format = "{}";
           format-en = "英文";
         };
-        
+
         "hyprland/workspaces" = {
           active-only = false;
           all-outputs = true;
@@ -57,11 +60,7 @@
             urgent = "";
           };
         };
-        "custom/nvidia" = {
-          exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,nounits,noheader";
-          format = "󱑵  {}%";
-          interval = 5;
-        };
+
         "custom/power" = {
           format = "⏻ ";
           on-click = "syspower";
@@ -92,6 +91,11 @@
             " "
           ];
         };
+        "custom/nvidia" = {
+          exec = "nvidia-smi --query-gpu=utilization.gpu --format=csv,nounits,noheader";
+          format = "󱑵  {}%";
+          interval = 1;
+        };
         memory = {
           format = "  {}%";
           format-alt = "  {used}/{total} GiB";
@@ -100,7 +104,7 @@
         cpu = {
           format = "  {usage}%";
           format-alt = "  {avg_frequency} GHz";
-          interval = 5;
+          interval = 1;
         };
         disk = {
           format = "󰋊 {percentage_used}%";
