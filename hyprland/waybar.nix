@@ -21,11 +21,11 @@
           "custom/nvidia"
           "memory"
           "disk"
+          "network"
         ];
         modules-right = [
           "tray"
           "hyprland/language"
-          "network"
           "pulseaudio"
           "battery"
           "clock#date"
