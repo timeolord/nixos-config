@@ -19,7 +19,32 @@
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
 
   # Enable networking
-  networking.networkmanager.enable = true;
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openconnect
+    ];
+    ensureProfiles = {
+      profiles.mcgill = {
+        connection = {
+          id = "McGill VPN";
+          type = "vpn";
+        };
+        vpn = rec {
+          # set these to your params
+          gateway = "securevpn.mcgill.ca";
+          remote = gateway;
+          username = "melody.wei@mail.mcgill.ca";
+          service-type = "org.freedesktop.NetworkManager.openconnect";
+          protocol = "anyconnect";
+          useragent = "AnyConnect";
+          authtype = "password";
+        };
+      };
+    };
+  };
+  
+  
   # networking.wireless.userControlled.enable = true;
 
   nix.settings = {
