@@ -33,7 +33,6 @@
     anki
     vlc
     syspower
-    openconnect
   ];
 
   programs.direnv = {
