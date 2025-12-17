@@ -19,7 +19,8 @@
 (use-package emacs
   :hook ((prog-mode . display-line-numbers-mode)
          ;; (prog-mode . flyspell-prog-mode)
-         (text-mode . flyspell-mode))
+         (text-mode . flyspell-mode)
+         (text-mode . auto-fill-mode))
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
          ("C-x f" . nil)
@@ -66,6 +67,17 @@
                 tab-width 2
                 c-basic-offset 2)
   (set-frame-font "-TWR-UDEV Gothic NF-regular-normal-normal-*-16-*-*-*-d-0-iso10646-1" nil t)
+
+  ;; Org-mode Settings
+  (setq org-support-shift-select t)
+  (setq fill-column 160)
+  (setq org-pretty-entities t)
+  (setq org-use-sub-superscripts '{})
+  (setq org-export-with-sub-superscripts '{})
+  (setq org-startup-with-inline-images t)
+  (setq org-startup-with-latex-preview t)
+  (setq org-startup-folded 'show2levels)
+  (setq org-startup-indented t)
   :custom
   (completion-cycle-threshold nil)
   ;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer
