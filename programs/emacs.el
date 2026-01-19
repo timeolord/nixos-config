@@ -20,6 +20,7 @@
   :hook ((prog-mode . display-line-numbers-mode)
          ;; (prog-mode . flyspell-prog-mode)
          (text-mode . flyspell-mode)
+         (flyspell-mode . flyspell-buffer)
          (text-mode . auto-fill-mode)
          (before-save . delete-trailing-whitespace))
   :bind (("C-x C-B" . nil)
@@ -51,7 +52,7 @@
 
   (set-frame-parameter nil 'alpha-background 95) ; For current frame
   (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames
-  
+
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 
@@ -59,7 +60,7 @@
   (tool-bar-mode -1)
   (menu-bar-mode -1)
   (global-auto-revert-mode t)
-  
+
   (defalias 'yes-or-no-p 'y-or-n-p)
 
   (setq blink-cursor-mode nil)

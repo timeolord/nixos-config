@@ -12,10 +12,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    rust-overlay = {
-      url = "github:oxalica/rust-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     emacs-overlay = {
       url = "github:nix-community/emacs-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -39,7 +35,6 @@
       self,
       nixpkgs,
       home-manager,
-      rust-overlay,
       emacs-overlay,
       godsays-flake,
       nixos-generators,
@@ -49,7 +44,6 @@
     let
       system = "x86_64-linux";
       overlays = [
-        rust-overlay.overlays.default
         emacs-overlay.overlays.default
         godsays-flake.overlays.${system}.default
       ];
