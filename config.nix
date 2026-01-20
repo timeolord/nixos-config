@@ -44,8 +44,8 @@
       };
     };
   };
-  
-  
+
+
   # networking.wireless.userControlled.enable = true;
 
   nix.settings = {
@@ -195,6 +195,7 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; [
     gzip
+    unrar
     git
 
     (pkgs.emacsWithPackagesFromUsePackage {

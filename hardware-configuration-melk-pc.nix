@@ -15,12 +15,6 @@
       fsType = "ext4";
     };
 
-  # fileSystems."/home/melk-pc/shared" =
-  #   { device = "/dev/disk/by-uuid/3E784C690C570EC7";
-  #     fsType = "ntfs-3g";
-  #     options = [ "nofail" "rw" "uid=1000" "fmask=117" "dmask=007" ];
-  #   };
-
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8ACB-14EF";
       fsType = "vfat";
@@ -30,7 +24,7 @@
   fileSystems."/home/melk-pc/games" =
     { device = "/dev/disk/by-uuid/7df12312-4b2c-4aa8-b3be-4af5e854a456";
       fsType = "ext4";
-      options = [ "nofail" ];
+      options = [ "nofail" "user" ];
     };
 
   swapDevices = [ ];
