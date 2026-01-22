@@ -24,7 +24,7 @@
   fileSystems."/home/melk-pc/games" =
     { device = "/dev/disk/by-uuid/7df12312-4b2c-4aa8-b3be-4af5e854a456";
       fsType = "ext4";
-      options = [ "nofail" "user" ];
+      options = [ "nofail" ];
     };
 
   swapDevices = [ ];
