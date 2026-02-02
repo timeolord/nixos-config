@@ -16,13 +16,14 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     # youtube-music is deprecated and is ai slop now...
+    strawberry
     discord
     signal-desktop
     bazecor
     obsidian
     todoist-electron
     qbittorrent
-    zotero
+    # zotero
     sgt-puzzles # for Theo
     godsays
     gimp-with-plugins
