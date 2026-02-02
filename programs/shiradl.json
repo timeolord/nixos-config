@@ -1,6 +1,6 @@
 {
     "final_path": "./music",
-    "temp_path": "./.temp",
+    "temp_path": "./temp",
     "cookies_location": "/etc/nixos/programs/cookies/youtube-music.txt",
     "ffmpeg_location": "ffmpeg",
     "itag": "141",
