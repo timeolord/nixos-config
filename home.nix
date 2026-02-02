@@ -7,6 +7,7 @@
 {
   imports = [
     ./programs/fish/fish.nix
+    ./programs/shiradl.nix
   ];
 
   home.username = userName;

@@ -1,0 +1,22 @@
+{
+    "final_path": "./music",
+    "temp_path": "./.temp",
+    "cookies_location": "/etc/nixos/programs/cookies/youtube-music.txt",
+    "ffmpeg_location": "ffmpeg",
+    "itag": "141",
+    "cover_size": 1200,
+    "cover_format": "jpg",
+    "cover_quality": 94,
+    "cover_img": null,
+    "cover_crop": "auto",
+    "template_folder": "{albumartist}/{album}",
+    "template_file": "{track:02d}-{title}",
+    "exclude_tags": null,
+    "truncate": 60,
+    "log_level": "INFO",
+    "save_cover": false,
+    "overwrite": false,
+    "print_exceptions": false,
+    "single_folder": false,
+    "use_playlist_name": false
+}
