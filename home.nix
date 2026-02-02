@@ -16,7 +16,6 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     # youtube-music is deprecated and is ai slop now...
-    shira #guess ill download my own music
     discord
     signal-desktop
     bazecor
