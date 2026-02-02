@@ -8,13 +8,13 @@
   imports = [
     ./programs/fish/fish.nix
   ];
-  
+
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
 
   home.packages = with pkgs; [
     bitwarden-desktop
-    youtube-music
+    # youtube-music //deprecated and is ai slop now...
     discord
     signal-desktop
     bazecor
