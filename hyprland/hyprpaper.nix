@@ -5,9 +5,8 @@
   services.hyprpaper = {
     enable = true;
     settings = {
-      # preload = [
-      #   "~/.wallpapers/ivan_the_terrible.jpg"
-      # ];
+      ipc = "on";
+      splash = false;
       wallpaper = {
         monitor = " ";
         path = "~/.wallpapers/ivan_the_terrible.jpg";
