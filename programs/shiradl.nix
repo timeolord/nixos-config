@@ -7,4 +7,5 @@
 }:
 {
   home.file.".shiradl/config.json".source = ./shiradl.json;
+
 }
