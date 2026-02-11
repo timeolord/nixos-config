@@ -63,7 +63,6 @@ function u7z -a file_name
     7z x $file_name
     rm $file_name
 end
-
 function rename-file -a file_name
     mv $file_name (string join "" (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
 end
