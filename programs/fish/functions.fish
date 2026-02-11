@@ -61,6 +61,7 @@ function guntar -a file_name
 end
 function u7z -a file_name
     7z x $file_name
+    rm $file_name
 end
 
 function rename-file -a file_name
