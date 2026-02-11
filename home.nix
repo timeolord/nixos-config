@@ -19,6 +19,7 @@
     style.name = "adwaita";
   };
 
+
   home.packages = with pkgs; [
     bitwarden-desktop
     # youtube-music is deprecated and is ai slop now...
@@ -33,6 +34,7 @@
     godsays
     gimp-with-plugins
     unzip
+    p7zip
     tree
     texliveFull
     audacity
@@ -40,6 +42,8 @@
     anki
     vlc
     syspower
+
+    jre
   ];
 
   programs.direnv = {

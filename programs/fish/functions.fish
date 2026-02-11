@@ -53,7 +53,6 @@ function untar -a file_name
     mkdir $file
     tar -xf $file_name -C ./$file
     rm $file_name
-    cd $file
 end
 function guntar -a file_name
     gunzip $file_name
@@ -75,7 +74,7 @@ function rename-folder -a folder_name
 end
 function rnf
     set -f files (ls -p | grep -v /)
-    set -f folders (ls -d */) 
+    set -f folders (ls -d */)
     for folder in $folders
         rename-folder $folder
     end
@@ -83,4 +82,3 @@ function rnf
         rename-file $file
     end
 end
-    
