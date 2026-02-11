@@ -59,6 +59,10 @@ function guntar -a file_name
     set -f file (path change-extension '' $file_name)
     untar $file
 end
+function u7z -a file_name
+    7z x $file_name
+end
+
 function rename-file -a file_name
     mv $file_name (string join "" (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
 end
