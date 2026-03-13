@@ -51,6 +51,7 @@
         "melktogo"
         "melk-pc"
         "melk-lab"
+	"melkmobile"
       ];
       generateSystem =
         { userName, include-hardware }:
