@@ -42,7 +42,7 @@
     anki
     vlc
     syspower
-
+    godot
     jre
   ];
 
