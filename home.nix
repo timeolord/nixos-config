@@ -46,6 +46,7 @@
     godot
     gh
     jre
+    claude-code
   ];
 
   programs.direnv = {
