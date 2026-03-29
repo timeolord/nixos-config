@@ -8,6 +8,7 @@
   imports = [
     ./programs/fish/fish.nix
     ./programs/shiradl.nix
+    ./programs/claude.nix
   ];
 
   home.username = userName;
@@ -46,7 +47,6 @@
     godot
     gh
     jre
-    claude-code
   ];
 
   programs.direnv = {
