@@ -421,3 +421,7 @@
 (use-package fish-mode
   :ensure t
   :defer t)
+
+(use-package gdscript-mode
+  :hook (gdscript-mode . eglot-ensure)
+  :defer t)
