@@ -422,6 +422,6 @@
   :ensure t
   :defer t)
 
-(use-package gdscript-mode
-  :hook (gdscript-mode . eglot-ensure)
+(use-package org-roam
+  :ensure t
   :defer t)

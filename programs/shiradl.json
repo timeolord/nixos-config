@@ -3,7 +3,7 @@
     "temp_path": "./temp",
     "cookies_location": "/etc/nixos/programs/cookies/youtube-music.txt",
     "ffmpeg_location": "ffmpeg",
-    "itag": "141",
+    "itag": "140",
     "cover_size": 1200,
     "cover_format": "jpg",
     "cover_quality": 94,
