@@ -43,8 +43,10 @@
     anki
     vlc
     syspower
+    godot
     gh
     jre
+    claude-code
   ];
 
   programs.direnv = {
