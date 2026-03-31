@@ -23,7 +23,7 @@
   home.file.".claude/settings.json".text = ''
 {
   "env": {
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": 0,
+    "CLAUDE_CODE_ATTRIBUTION_HEADER": 0
   }
 }
 '';
