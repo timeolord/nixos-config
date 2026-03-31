@@ -11,12 +11,9 @@
   home.file.".claude/settings.json".text = ''
 {
   "effortLevel": "medium",
-  "model": "sonnet",
   "env": {
-    "MAX_THINKING_TOKENS": "10000",
     "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
     "CLAUDE_CODE_SUBAGENT_MODEL": "haiku",
-    "CLAUDE_CODE_ATTRIBUTION_HEADER": 0,
   }
 }'';
 
