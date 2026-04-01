@@ -139,22 +139,6 @@ window#waybar {
     margin-right: 5px;
 }
 
-#cpu {
-    min-width: 88px;
-}
-
-#memory {
-    min-width: 88px;
-}
-
-#disk {
-    min-width: 96px;
-}
-
-#network {
-    min-width: 340px;
-}
-
 #pulseaudio {
     color: #ff3f7f;
     border-radius: 8px;
