@@ -30,8 +30,8 @@ in
   #   # hyprcursor.enable = true;
   # };
 
-    home.pointerCursor = 
-    let 
+    home.pointerCursor =
+    let
       getFrom = url: hash: name: {
           gtk.enable = true;
           x11.enable = true;
@@ -39,7 +39,7 @@ in
           name = name;
           size = 24;
           enable = true;
-          package = 
+          package =
             pkgs.runCommand "moveUp" {} ''
               mkdir -p $out/share/icons
               ln -s ${pkgs.fetchzip {
@@ -49,7 +49,7 @@ in
           '';
         };
     in
-      getFrom 
+      getFrom
         "https://github.com/K1NGSSTH/Sonic-cursor/releases/download/sonic-cursor/Sonic-cursor.tar"
         "sha256-i7iOZT4mh7MtKeFN5/2Msm4ekTocdt9BIdXJfABv3aU="
         "Sonic-cursor";
@@ -65,5 +65,6 @@ in
     wireplumber
     hyprshot
     networkmanagerapplet
+    brightnessctl
   ];
 }
