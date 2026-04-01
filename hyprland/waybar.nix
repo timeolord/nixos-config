@@ -113,9 +113,9 @@
           path = "/";
         };
         network = {
-          format-wifi = "󰤨 {essid}   {bandwidthDownBytes}   {bandwidthUpBytes}";
-          format-ethernet = "  {bandwidthDownBytes}   {bandwidthUpBytes}";
-          format-linked = "  {bandwidthDownBytes}   {bandwidthUpBytes}";
+          format-wifi = "󰤨 {essid}  {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
+          format-ethernet = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
+          format-linked = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
           format-disconnected = "󰤭";
           # format-alt = "";
           tooltip-format = "{frequency} {signalStrength}";
