@@ -97,17 +97,17 @@
           interval = 1;
         };
         memory = {
-          format = "  {}%";
+          format = "  {:>3}%";
           format-alt = "  {used}/{total} GiB";
           interval = 5;
         };
         cpu = {
-          format = "  {usage}%";
+          format = "  {usage:>3}%";
           format-alt = "  {avg_frequency} GHz";
           interval = 1;
         };
         disk = {
-          format = "󰋊 {percentage_used}%";
+          format = "󰋊 {percentage_used:>3}%";
           format-alt = "󰋊 {used}/{total} GiB";
           interval = 5;
           path = "/";
