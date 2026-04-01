@@ -54,7 +54,7 @@ in
         "sha256-i7iOZT4mh7MtKeFN5/2Msm4ekTocdt9BIdXJfABv3aU="
         "Sonic-cursor";
 
-  home.file.".config/sys64/power/config.conf".source = "${pkgs.syspower}/share/sys64/power/config.conf";
+  home.file.".config/sys64/power/config.conf".source = ./syspower.conf;
   home.file.".config/sys64/power/style.css".source = ./syspower.css;
 
   home.packages = with pkgs; [
