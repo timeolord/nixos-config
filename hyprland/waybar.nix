@@ -113,7 +113,7 @@
           path = "/";
         };
         network = {
-          format-wifi = "󰤨  {essid}  {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
+          format-wifi = "󰤨  {essid}   {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
           format-ethernet = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
           format-linked = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
           format-disconnected = "󰤭";
