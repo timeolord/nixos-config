@@ -2,6 +2,7 @@
 {
   config,
   pkgs,
+  lib,
   inputs,
   userName,
   ...
@@ -172,7 +173,7 @@
     policies = {
       DefaultDownloadDirectory = "\${home}/downloads";
       DownloadDirectory = "\${home}/downloads";
-      AutofillAdressEnabled = false;
+      AutofillAddressEnabled = false;
       AutofillCreditCardEnabled = false;
       PasswordManagerEnabled = false;
       GenerativeAI = {
