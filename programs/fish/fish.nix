@@ -52,6 +52,8 @@
           printf "\e]%s\e\\" "$argv"
         end
       end
+      # set -gx ANTHROPIC_BASE_URL http://localhost:8001
+      # set -gx ANTHROPIC_API_KEY sk-no-key-required
     '' + (builtins.readFile ./prompt.fish) + (builtins.readFile ./functions.fish);
     interactiveShellInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
