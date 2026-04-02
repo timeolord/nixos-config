@@ -97,25 +97,25 @@
           interval = 1;
         };
         memory = {
-          format = "  {}%";
+          format = "  {:>2}%";
           format-alt = "  {used}/{total} GiB";
           interval = 5;
         };
         cpu = {
-          format = "  {usage}%";
+          format = "  {usage:>2}%";
           format-alt = "  {avg_frequency} GHz";
           interval = 1;
         };
         disk = {
-          format = "󰋊 {percentage_used}%";
+          format = "󰋊 {percentage_used:>2}%";
           format-alt = "󰋊 {used}/{total} GiB";
           interval = 5;
           path = "/";
         };
         network = {
-          format-wifi = "󰤨 {essid}   {bandwidthDownBytes}   {bandwidthUpBytes}";
-          format-ethernet = "  {bandwidthDownBytes}   {bandwidthUpBytes}";
-          format-linked = "  {bandwidthDownBytes}   {bandwidthUpBytes}";
+          format-wifi = "󰤨  {essid}   {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
+          format-ethernet = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
+          format-linked = " {bandwidthDownBytes:>10}  {bandwidthUpBytes:>10}";
           format-disconnected = "󰤭";
           # format-alt = "";
           tooltip-format = "{frequency} {signalStrength}";

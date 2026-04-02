@@ -20,7 +20,7 @@
       nclean = "nix-clean.sh";
       fperm = "fix-permissions.sh";
       gs = "git status";
-      gau = "git add - u";
+      gau = "git add -u";
       gcm = "git commit -m";
       gph = "git push";
       gpl = "git pull";
@@ -32,7 +32,7 @@
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin $PATH
-      set PYTHONSTARTUP /etc/nixos/python/startup.py
+      set PYTHONSTARTUP /etc/nixos/programs/python/startup.py
       set -gx EDITOR emacs
       function fish_greeting
          rm -r /home/${userName}/Downloads 2> /dev/null
