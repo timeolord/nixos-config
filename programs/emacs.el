@@ -425,3 +425,7 @@
 (use-package org-roam
   :ensure t
   :defer t)
+
+(use-package wgsl-mode
+  :ensure t
+  :defer t)
