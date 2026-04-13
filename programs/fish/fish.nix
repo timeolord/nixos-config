@@ -31,7 +31,7 @@
       fish = "exec fish";
     };
     shellInit = ''
-      set PATH /etc/nixos /home/${userName}/.local/bin $PATH
+      set PATH /etc/nixos /home/${userName}/.local/bin /home/${userName}/.cargo/bin $PATH
       set PYTHONSTARTUP /etc/nixos/programs/python/startup.py
       set -gx EDITOR emacs
       function fish_greeting
