@@ -64,25 +64,37 @@ function u7z -a file_name
     rm $file_name
 end
 function rename-file -a file_name
-    mv $file_name (string join "" (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
-end
-function generate-new-name -a name
-    set -f new_name (string replace -a "_" "-" $name)
-    set -f new_name (string replace -a " " "-" $new_name)
-    set -f new_name (string replace -a "." "-" $new_name)
-    set -f new_name (string lower $new_name)
-    echo $new_name
-end
-function rename-folder -a folder_name
-    mv $file_name (generate-new-name $folder_name)
-end
-function rnf
-    set -f files (ls -p | grep -v /)
-    set -f folders (ls -d */)
-    for folder in $folders
-        rename-folder $folder
+    if test -z "$file_name"; or not test -e "$file_name"
+        return 1
     end
-    for file in $files
-        rename-file $file
+
+    set -f parent (path dirname "$file_name")
+    set -f old_name (path basename "$file_name")
+    set -f new_name (string lower (string replace -a " " "_" "$old_name"))
+    set -f new_path "$parent/$new_name"
+
+    if test "$file_name" = "$new_path"; or test "$old_name" = "$new_name"
+        return 0
+    end
+
+    if test -e "$new_path"
+        echo "rename-file: $new_path already exists"
+        return 1
+    end
+
+    mv "$file_name" "$new_path"
+end
+
+function rnf -a dir_name
+    if test -z "$dir_name"
+        set dir_name .
+    end
+
+    if not test -d "$dir_name"
+        return 1
+    end
+
+    for file_name in (find "$dir_name" -depth)
+        rename-file "$file_name"
     end
 end
