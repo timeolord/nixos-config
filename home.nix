@@ -47,6 +47,8 @@
     godot
     gh
     jre
+    # is this memes or mauybe this will be good actually.
+    powershell
   ];
 
   programs.direnv = {
