@@ -70,6 +70,11 @@ function rename-file -a file_name
 
     set -f parent (path dirname "$file_name")
     set -f old_name (path basename "$file_name")
+
+    if test "$old_name" = "."; or test "$old_name" = ".."
+        return 0
+    end
+
     set -f new_name (string replace -a " - " "-" "$old_name")
     set -f new_name (string replace -ar '([[:upper:]]+)([[:upper:]][[:lower:]])' '$1-$2' "$new_name")
     set -f new_name (string replace -ar '([[:lower:][:digit:]])([[:upper:]])' '$1-$2' "$new_name")
