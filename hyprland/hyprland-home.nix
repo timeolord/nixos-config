@@ -18,6 +18,7 @@ in
     package = null;
     portalPackage = null;
     systemd.variables = [ "--all" ];
+    configType = "hyprlang";
     extraConfig = hyprland_config;
   };
 

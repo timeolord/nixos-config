@@ -40,7 +40,6 @@
         icon_position = "left";
         min_icon_size = 0;
         max_icon_size = 64;
-        icon_path = "";
 
         sticky_history = "yes";
         history_length = 20;
