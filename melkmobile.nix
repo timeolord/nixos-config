@@ -7,7 +7,7 @@
   imports = [./nvidia.nix];
   services.logind.settings.Login = {
     HandleLidSwitch = "hibernate";
-    HandleLidSwitchExternalPower = "suspend";
+    HandleLidSwitchExternalPower = "hibernate";
     HandleLidSwitchDocked = "ignore";
   };
 }
