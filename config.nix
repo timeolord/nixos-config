@@ -90,6 +90,9 @@
     localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
   };
 
+  # test if this is needed for steam.
+  hardware.graphics.enable = true;
+
   # Configures the udev rules for bazecor
   services.udev.extraRules = builtins.readFile ./bazecor-rules;
 
