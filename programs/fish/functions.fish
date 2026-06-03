@@ -64,25 +64,74 @@ function u7z -a file_name
     rm $file_name
 end
 function rename-file -a file_name
-    mv $file_name (string join "" (generate-new-name (path change-extension '' $file_name)) (path extension $file_name))
-end
-function generate-new-name -a name
-    set -f new_name (string replace -a "_" "-" $name)
-    set -f new_name (string replace -a " " "-" $new_name)
-    set -f new_name (string replace -a "." "-" $new_name)
-    set -f new_name (string lower $new_name)
-    echo $new_name
-end
-function rename-folder -a folder_name
-    mv $file_name (generate-new-name $folder_name)
-end
-function rnf
-    set -f files (ls -p | grep -v /)
-    set -f folders (ls -d */)
-    for folder in $folders
-        rename-folder $folder
+    if test -z "$file_name"; or not test -e "$file_name"
+        return 1
     end
-    for file in $files
-        rename-file $file
+
+    set -f parent (path dirname "$file_name")
+    set -f old_name (path basename "$file_name")
+
+    if test "$old_name" = "."; or test "$old_name" = ".."
+        return 0
+    end
+
+    set -f new_name (string replace -a " - " "-" "$old_name")
+    set -f new_name (string replace -ar '([[:upper:]]+)([[:upper:]][[:lower:]])' '$1-$2' "$new_name")
+    set -f new_name (string replace -ar '([[:lower:][:digit:]])([[:upper:]])' '$1-$2' "$new_name")
+    set -f new_name (string lower (string replace -a " " "-" "$new_name"))
+    set -f new_name (string replace -a "_" "-" "$new_name")
+    if test -d "$file_name"
+        set -f new_name (string replace -a "." "-" "$new_name")
+    end
+    set -f new_name (string replace -ar -- "-+" "-" "$new_name")
+    set -f new_path "$parent/$new_name"
+
+    if test "$file_name" = "$new_path"; or test "$old_name" = "$new_name"
+        return 0
+    end
+
+    if test -e "$new_path"
+        echo "rename-file: $new_path already exists"
+        return 1
+    end
+
+    mv "$file_name" "$new_path"
+end
+
+function rnf
+    set -f dir_name .
+    set -f depth
+
+    while test (count $argv) -gt 0
+        switch $argv[1]
+            case -d
+                if test (count $argv) -lt 2
+                    return 1
+                end
+
+                set depth $argv[2]
+                set argv $argv[3..-1]
+            case '*'
+                set dir_name $argv[1]
+                set argv $argv[2..-1]
+        end
+    end
+
+    if not test -d "$dir_name"
+        return 1
+    end
+
+    if test -n "$depth"
+        if not string match -qr '^[0-9]+$' "$depth"
+            return 1
+        end
+
+        set -f files (find "$dir_name" -maxdepth $depth -depth)
+    else
+        set -f files (find "$dir_name" -depth)
+    end
+
+    for file_name in $files
+        rename-file "$file_name"
     end
 end
