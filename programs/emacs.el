@@ -432,7 +432,7 @@
          ("C-c n i" . org-roam-node-insert))
   :config
   (org-roam-setup)
-  (org-roam-db-sync)
+  (setq org-roam-db-autosync-mode t)
 )
 
 (use-package wgsl-mode
