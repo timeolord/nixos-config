@@ -30,7 +30,8 @@
     bazecor
     obsidian
     todoist-electron
-    qbittorrent
+    # for some reason qbittorent normal isn't working rn -06/03/2026
+    qbittorrent-enhanced
     # zotero
     sgt-puzzles # for Theo
     godsays
