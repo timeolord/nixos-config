@@ -430,7 +430,10 @@
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
          ("C-c n i" . org-roam-node-insert))
-  )
+  :config
+  (org-roam-setup)
+  (org-roam-db-sync)
+)
 
 (use-package wgsl-mode
   :ensure t
