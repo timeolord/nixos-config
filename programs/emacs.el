@@ -424,7 +424,16 @@
 
 (use-package org-roam
   :ensure t
-  :defer t)
+  :defer t
+  :custom
+  (org-roam-directory "~/notes")
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert))
+  :config
+  (org-roam-setup)
+  (setq org-roam-db-autosync-mode t)
+)
 
 (use-package wgsl-mode
   :ensure t
