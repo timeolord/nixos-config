@@ -24,15 +24,16 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     # youtube-music is deprecated and is ai slop now...
-    vscode
     discord
     signal-desktop
     bazecor
-    obsidian
+    # obsidian, switched to org-roam
     todoist-electron
     # for some reason qbittorent normal isn't working rn -06/03/2026
     qbittorrent-enhanced
     # zotero
+    # for gog games
+    heroic
     sgt-puzzles # for Theo
     godsays
     gimp-with-plugins
@@ -45,10 +46,9 @@
     anki
     vlc
     syspower
-    godot
     gh
     jre
-    # is this memes or mauybe this will be good actually.
+    # is this memes or maybe this will be good actually.
     powershell
   ];
 
