@@ -46,6 +46,14 @@
     };
   };
 
+  networking.firewall = {
+    enable = true;
+    # Minecraft server
+    allowedTCPPorts = [ 25565 ];
+    allowedUDPPortRanges = [
+      { from = 25565; to = 25565; }
+    ];
+  };
 
   # networking.wireless.userControlled.enable = true;
 

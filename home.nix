@@ -28,7 +28,7 @@
     signal-desktop
     bazecor
     # obsidian, switched to org-roam
-    todoist-electron
+    # todoist-electron - broken 06/08/2026
     # for some reason qbittorent normal isn't working rn -06/03/2026
     qbittorrent-enhanced
     # zotero
