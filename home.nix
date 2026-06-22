@@ -48,8 +48,9 @@
     syspower
     gh
     jre
+    dust
     # is this memes or maybe this will be good actually.
-    powershell
+    # powershell
   ];
 
   programs.direnv = {
