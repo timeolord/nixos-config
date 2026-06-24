@@ -52,6 +52,7 @@
     # for making gif demos of cli stuff
     vhs
     obs-studio
+    ffmpeg
     # is this memes or maybe this will be good actually.
     # powershell
   ];
