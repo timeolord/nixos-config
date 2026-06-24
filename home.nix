@@ -51,6 +51,7 @@
     dust
     # for making gif demos of cli stuff
     vhs
+    obs-studio
     # is this memes or maybe this will be good actually.
     # powershell
   ];
