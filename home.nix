@@ -49,6 +49,8 @@
     gh
     jre
     dust
+    # for making gif demos of cli stuff
+    vhs
     # is this memes or maybe this will be good actually.
     # powershell
   ];
