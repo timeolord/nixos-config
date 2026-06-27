@@ -44,6 +44,8 @@
     audacity
     appimage-run
     anki
+    # for ankimorph
+    python313Packages.spacy
     vlc
     syspower
     gh
