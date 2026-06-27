@@ -9,6 +9,7 @@
     ./programs/fish/fish.nix
     ./programs/shiradl.nix
     ./programs/claude.nix
+    ./programs/anki.nix
   ];
 
   home.username = userName;
@@ -43,9 +44,6 @@
     texliveFull
     audacity
     appimage-run
-    anki
-    # for ankimorph
-    python313Packages.spacy
     vlc
     syspower
     gh
