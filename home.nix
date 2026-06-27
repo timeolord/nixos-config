@@ -49,6 +49,7 @@
     gh
     jre
     dust
+    nautilus
     # for making gif demos of cli stuff
     vhs
     obs-studio
