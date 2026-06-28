@@ -19,9 +19,9 @@
 (use-package emacs
   :hook ((prog-mode . display-line-numbers-mode)
          ;; (prog-mode . flyspell-prog-mode)
-         (text-mode . flyspell-mode)
+         ;; (text-mode . flyspell-mode)
          (flyspell-mode . flyspell-buffer)
-         (text-mode . auto-fill-mode)
+         (text-mode . refill-mode)
          (before-save . delete-trailing-whitespace))
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
