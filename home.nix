@@ -9,6 +9,7 @@
     ./programs/fish/fish.nix
     ./programs/shiradl.nix
     ./programs/claude.nix
+    ./programs/anki.nix
   ];
 
   home.username = userName;
@@ -24,15 +25,16 @@
   home.packages = with pkgs; [
     bitwarden-desktop
     # youtube-music is deprecated and is ai slop now...
-    vscode
     discord
     signal-desktop
     bazecor
-    obsidian
-    todoist-electron
+    # obsidian, switched to org-roam
+    # todoist-electron - broken 06/08/2026
     # for some reason qbittorent normal isn't working rn -06/03/2026
     qbittorrent-enhanced
     # zotero
+    # for gog games
+    heroic
     sgt-puzzles # for Theo
     godsays
     gimp-with-plugins
@@ -42,14 +44,19 @@
     texliveFull
     audacity
     appimage-run
-    anki
     vlc
     syspower
-    godot
     gh
     jre
-    # is this memes or mauybe this will be good actually.
-    powershell
+    dust
+    nautilus
+    # for making gif demos of cli stuff
+    vhs
+    obs-studio
+    ffmpeg
+    cabal-install
+    # is this memes or maybe this will be good actually.
+    # powershell
   ];
 
   programs.direnv = {
