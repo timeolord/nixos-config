@@ -36,6 +36,7 @@
         "hyprland/language" = {
           format = "{}";
           format-en = "英文";
+          format-fr = "法文";
         };
 
         "hyprland/workspaces" = {
