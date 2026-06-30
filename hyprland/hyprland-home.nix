@@ -55,6 +55,43 @@ in
         "sha256-i7iOZT4mh7MtKeFN5/2Msm4ekTocdt9BIdXJfABv3aU="
         "Sonic-cursor";
 
+  home.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
+  };
+
+  xdg.configFile."fcitx5/profile".text = ''
+    [Groups/0]
+    Name=Default
+    Default Layout=us
+    DefaultIM=keyboard-us
+
+    [Groups/0/Items/0]
+    Name=keyboard-us
+    Layout=
+
+    [Groups/0/Items/1]
+    Name=keyboard-fr
+    Layout=
+
+    [Groups/0/Items/2]
+    Name=pinyin
+    Layout=
+
+    [GroupOrder]
+    0=Default
+  '';
+
+  xdg.configFile."fcitx5/config".text = ''
+    [Hotkey]
+    TriggerKeys=Super+space
+    EnumerateForwardKeys=
+    EnumerateBackwardKeys=
+  '';
+
   home.file.".config/sys64/power/config.conf".source = ./syspower.conf;
   home.file.".config/sys64/power/style.css".source = ./syspower.css;
 

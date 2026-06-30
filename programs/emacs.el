@@ -19,9 +19,9 @@
 (use-package emacs
   :hook ((prog-mode . display-line-numbers-mode)
          ;; (prog-mode . flyspell-prog-mode)
-         (text-mode . flyspell-mode)
+         ;; (text-mode . flyspell-mode)
          (flyspell-mode . flyspell-buffer)
-         (text-mode . auto-fill-mode)
+         (text-mode . refill-mode)
          (before-save . delete-trailing-whitespace))
   :bind (("C-x C-B" . nil)
 	       ("C-x C-B" . 'switch-to-buffer)
@@ -427,9 +427,12 @@
   :defer t
   :custom
   (org-roam-directory "~/notes")
+  (org-roam-complete-everywhere t)
   :bind (("C-c n l" . org-roam-buffer-toggle)
          ("C-c n f" . org-roam-node-find)
-         ("C-c n i" . org-roam-node-insert))
+         ("C-c n i" . org-roam-node-insert)
+         :map org-mode-map
+         ("C-M-i" . completion-at-point))
   :config
   (org-roam-setup)
   (setq org-roam-db-autosync-mode t)

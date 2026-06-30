@@ -135,3 +135,30 @@ function rnf
         rename-file "$file_name"
     end
 end
+function mp4togif
+    if test (count $argv) -lt 1
+        echo "Usage: mp4togif input.mp4 [output.gif]"
+        return 1
+    end
+
+    set input $argv[1]
+
+    if not test -f $input
+        echo "File not found: $input"
+        return 1
+    end
+
+    set stem (path change-extension "" -- (basename $input))
+    set palette "/tmp/$stem-palette.png"
+
+    if test (count $argv) -ge 2
+        set output $argv[2]
+    else
+        set output (path change-extension ".gif" -- $input)
+    end
+
+    ffmpeg -i $input -vf "fps=15,scale=800:-1:flags=lanczos,palettegen" $palette
+    or return 1
+
+    ffmpeg -i $input -i $palette -lavfi "fps=15,scale=800:-1:flags=lanczos[x];[x][1:v]paletteuse" $output
+end
