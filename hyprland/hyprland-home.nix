@@ -55,6 +55,14 @@ in
         "sha256-i7iOZT4mh7MtKeFN5/2Msm4ekTocdt9BIdXJfABv3aU="
         "Sonic-cursor";
 
+  home.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+    GLFW_IM_MODULE = "ibus";
+  };
+
   home.file.".config/sys64/power/config.conf".source = ./syspower.conf;
   home.file.".config/sys64/power/style.css".source = ./syspower.css;
 
