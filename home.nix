@@ -54,6 +54,7 @@
     vhs
     obs-studio
     ffmpeg
+    mpv
     # cabal-install
     # is this memes or maybe this will be good actually.
     # powershell

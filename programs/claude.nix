@@ -11,14 +11,14 @@ let
 in
 {
   home.file.".claude/CLAUDE.md".text = prompt;
-  home.file.".claude/settings.json".text = ''
-    {
-      "effortLevel": "medium",
-      "env": {
-        "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
-        "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
-      }
-    }'';
+  # home.file.".claude/settings.json".text = ''
+  #   {
+  #     "effortLevel": "medium",
+  #     "env": {
+  #       "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
+  #       "CLAUDE_CODE_SUBAGENT_MODEL": "haiku"
+  #     }
+  #   }'';
   home.file.".codex/AGENTS.md".text = prompt;
 
   #   home.file.".claude/settings.json".text = ''
