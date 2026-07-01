@@ -23,7 +23,7 @@
 
 
   home.packages = with pkgs; [
-    bitwarden-desktop
+    # bitwarden-desktop electron version is current eol
     # youtube-music is deprecated and is ai slop now...
     discord
     signal-desktop
@@ -54,7 +54,7 @@
     vhs
     obs-studio
     ffmpeg
-    cabal-install
+    # cabal-install
     # is this memes or maybe this will be good actually.
     # powershell
   ];

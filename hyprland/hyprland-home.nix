@@ -56,7 +56,7 @@ in
         "Sonic-cursor";
 
   home.sessionVariables = {
-    GTK_IM_MODULE = "fcitx";
+    # GTK_IM_MODULE = "fcitx";
     QT_IM_MODULE = "fcitx";
     XMODIFIERS = "@im=fcitx";
     SDL_IM_MODULE = "fcitx";
@@ -85,12 +85,12 @@ in
     0=Default
   '';
 
-  xdg.configFile."fcitx5/config".text = ''
-    [Hotkey]
-    TriggerKeys=Super+space
-    EnumerateForwardKeys=
-    EnumerateBackwardKeys=
-  '';
+  # xdg.configFile."fcitx5/config".text = ''
+  #   [Hotkey]
+  #   TriggerKeys=Super+space
+  #   EnumerateForwardKeys=
+  #   EnumerateBackwardKeys=
+  # '';
 
   home.file.".config/sys64/power/config.conf".source = ./syspower.conf;
   home.file.".config/sys64/power/style.css".source = ./syspower.css;
