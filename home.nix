@@ -10,6 +10,7 @@
     ./programs/shiradl.nix
     ./programs/claude.nix
     ./programs/anki.nix
+    ./programs/activitywatch.nix
   ];
 
   home.username = userName;
