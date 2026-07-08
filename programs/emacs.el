@@ -71,7 +71,7 @@
   ;; setting the default face is the only approach that survives the daemon,
   ;; both set-frame-font and default-frame-alist get overridden by the broken
   ;; system font that pgtk picks up on client frame creation
-  (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 160)
+  (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 130)
 
   ;; Org-mode Settings
   (setq org-support-shift-select t)

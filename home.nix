@@ -9,7 +9,6 @@
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     ./programs/fish/fish.nix
-    ./programs/shiradl.nix
     ./programs/claude.nix
     ./programs/anki.nix
     ./programs/activitywatch.nix
@@ -40,8 +39,19 @@
   qt = {
     enable = true;
     platformTheme.name = "qtct";
-    style.name = "adwaita";
+    # kvantum is the only qt style engine with a catppuccin port
+    style = {
+      name = "kvantum";
+      package = with pkgs; [
+        libsForQt5.qtstyleplugin-kvantum
+        qt6Packages.qtstyleplugin-kvantum
+      ];
+    };
   };
+  xdg.configFile."Kvantum/kvantum.kvconfig".text = ''
+    [General]
+    theme=catppuccin-mocha-blue
+  '';
 
   # nothing declared fonts for gtk before, so every gtk app picked its own
   # default out of the hundreds of installed nerd fonts
@@ -52,13 +62,18 @@
       size = 11;
     };
     theme = {
-      name = "Adwaita";
-      package = pkgs.gnome-themes-extra;
+      name = "catppuccin-mocha-blue-standard";
+      package = pkgs.catppuccin-gtk.override {
+        variant = "mocha";
+        accents = [ "blue" ];
+      };
     };
     iconTheme = {
       name = "Adwaita";
       package = pkgs.adwaita-icon-theme;
     };
+    # the catppuccin package ships gtk4 css too, link it for gtk4 apps
+    gtk4.theme = config.gtk.theme;
   };
 
   # pgtk apps like emacs read fonts from gsettings, not from settings.ini
@@ -66,6 +81,8 @@
     font-name = "UDEV Gothic NF 11";
     document-font-name = "UDEV Gothic NF 11";
     monospace-font-name = "UDEV Gothic NF 11";
+    # libadwaita apps ignore gtk themes but do respect this
+    color-scheme = "prefer-dark";
   };
 
 
@@ -100,6 +117,11 @@
     # for editing the encrypted secrets
     sops
     age
+    # the kvantum color scheme for qt apps
+    (catppuccin-kvantum.override {
+      variant = "mocha";
+      accent = "blue";
+    })
     # for making gif demos of cli stuff
     vhs
     obs-studio
