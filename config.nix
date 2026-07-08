@@ -251,6 +251,10 @@
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
+  # kvantum themes from user packages are only visible if this dir is linked
+  # into the profile, share/themes is linked by default but this one is not
+  environment.pathsToLink = [ "/share/Kvantum" ];
+
   # with hundreds of nerd fonts installed the generic aliases resolve to
   # whatever wins font sorting, so pin them explicitly
   fonts.fontconfig.defaultFonts = {
