@@ -28,6 +28,9 @@
   xdg.userDirs = {
     enable = true;
     createDirectories = false;
+    # also export XDG_DOWNLOAD_DIR and friends for apps that read the
+    # environment instead of the user dirs file
+    setSessionVariables = true;
     download = "${config.home.homeDirectory}/downloads";
     music = "${config.home.homeDirectory}/music";
     videos = "${config.home.homeDirectory}/videos";
