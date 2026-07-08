@@ -55,6 +55,7 @@
     obs-studio
     ffmpeg
     mpv
+    activitywatch
     # cabal-install
     # is this memes or maybe this will be good actually.
     # powershell
