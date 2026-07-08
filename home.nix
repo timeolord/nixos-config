@@ -17,6 +17,7 @@
     ./programs/ssh/ssh.nix
     ./programs/aspell/aspell.nix
     ./programs/emacs.nix
+    ./programs/strawberry/strawberry.nix
   ];
 
   home.username = userName;
@@ -114,8 +115,6 @@
     jre
     dust
     nautilus
-    # music
-    strawberry
     # for editing the encrypted secrets
     sops
     age
