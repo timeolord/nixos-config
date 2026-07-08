@@ -56,6 +56,7 @@
     ffmpeg
     mpv
     activitywatch
+    aw-watcher-window-wayland
     # cabal-install
     # is this memes or maybe this will be good actually.
     # powershell
