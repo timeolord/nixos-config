@@ -57,6 +57,17 @@
     '' + (builtins.readFile ./prompt.fish) + (builtins.readFile ./functions.fish);
     interactiveShellInit = ''
       ${pkgs.any-nix-shell}/bin/any-nix-shell fish --info-right | source
+      # direnv exports xdg data dirs into the running session after fish has already
+      # built its completion path, so pick up new vendor completions whenever it changes
+      function __refresh_vendor_completions --on-variable XDG_DATA_DIRS
+        for dir in (string split : -- $XDG_DATA_DIRS)
+          set -l comp $dir/fish/vendor_completions.d
+          if test -d $comp; and not contains -- $comp $fish_complete_path
+            set -gp fish_complete_path $comp
+          end
+        end
+      end
+      __refresh_vendor_completions
     '';
   };
 }
