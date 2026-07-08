@@ -11,6 +11,7 @@
     ./programs/claude.nix
     ./programs/anki.nix
     ./programs/activitywatch.nix
+    ./programs/mpv.nix
   ];
 
   home.username = userName;
@@ -55,7 +56,6 @@
     vhs
     obs-studio
     ffmpeg
-    mpv
     # cabal-install
     # is this memes or maybe this will be good actually.
     # powershell

@@ -441,3 +441,9 @@
 (use-package wgsl-mode
   :ensure t
   :defer t)
+
+;; ActivityWatch Config
+(use-package activity-watch-mode
+  :ensure t
+  :config
+  (global-activity-watch-mode))
