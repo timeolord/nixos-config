@@ -2,10 +2,12 @@
   config,
   pkgs,
   userName,
+  inputs,
   ...
 }:
 {
   imports = [
+    inputs.sops-nix.homeManagerModules.sops
     ./programs/fish/fish.nix
     ./programs/shiradl.nix
     ./programs/claude.nix
@@ -53,6 +55,9 @@
     jre
     dust
     nautilus
+    # for editing the encrypted secrets
+    sops
+    age
     # for making gif demos of cli stuff
     vhs
     obs-studio

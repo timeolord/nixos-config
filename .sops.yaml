@@ -1,0 +1,7 @@
+keys:
+  - &melk-pc age199ugvy7yhelyqgszu4adsj8r9kdymnsdermy523f7rhlatqf4d9szlgdm5
+creation_rules:
+  - path_regex: secrets/.*
+    key_groups:
+      - age:
+          - *melk-pc
