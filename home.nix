@@ -114,6 +114,8 @@
     jre
     dust
     nautilus
+    # music
+    strawberry
     # for editing the encrypted secrets
     sops
     age
