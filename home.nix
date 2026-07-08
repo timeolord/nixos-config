@@ -12,6 +12,7 @@
     ./programs/anki.nix
     ./programs/activitywatch.nix
     ./programs/mpv.nix
+    ./programs/git-sync.nix
   ];
 
   home.username = userName;

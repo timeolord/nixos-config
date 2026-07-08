@@ -27,6 +27,22 @@ let
     '';
     passthru.scriptName = "aw-watcher-mpv-logger";
   };
+  # pauses after each subtitle line proportionally to its length, toggle with n
+  primedListening = pkgs.stdenvNoCC.mkDerivation {
+    pname = "primed-listening";
+    version = "0-unstable-2025-06-11";
+    src = pkgs.fetchFromGitHub {
+      owner = "mattvsjapan";
+      repo = "dojo-prompts";
+      rev = "0db3b277782fb2a95df2f31b9015917a5f73d0e3";
+      hash = "sha256-2ALYhN/OCkN+OnI4XaRb5S9egmKk+iQ92J4AXy6UA5s=";
+    };
+    installPhase = ''
+      mkdir -p $out/share/mpv/scripts
+      cp primed-listening.lua $out/share/mpv/scripts/
+    '';
+    passthru.scriptName = "primed-listening.lua";
+  };
   awWatcherMpvSender = pkgs.python3Packages.buildPythonApplication {
     pname = "aw-watcher-mpv-sender";
     version = "0.2.2.1";
@@ -62,7 +78,10 @@ in
 {
   programs.mpv = {
     enable = true;
-    scripts = [ awWatcherMpvLogger ];
+    scripts = [
+      awWatcherMpvLogger
+      primedListening
+    ];
   };
   # the lua script cant create the log folder itself
   xdg.dataFile."mpv-history/.keep".text = "";
