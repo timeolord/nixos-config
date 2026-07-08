@@ -15,6 +15,7 @@
     ./programs/activitywatch.nix
     ./programs/mpv.nix
     ./programs/git-sync.nix
+    ./programs/ssh/ssh.nix
   ];
 
   home.username = userName;

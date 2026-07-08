@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   awWatcherSteam = pkgs.python3Packages.buildPythonApplication {
     pname = "aw-watcher-steam";
@@ -38,6 +38,39 @@ in
       sopsFile = ../secrets/aw-watcher-steam.toml;
       path = "${config.xdg.configHome}/activitywatch/aw-watcher-steam/aw-watcher-steam.toml";
     };
+  };
+
+  # aw-sync exports every bucket to a plain directory every 5 minutes, each
+  # machine only writes its own subfolder so git-sync can push it conflict free
+  systemd.user.services.aw-sync = {
+    Unit = {
+      Description = "sync activitywatch data to the git synced folder";
+      After = [ "activitywatch.service" ];
+      BindsTo = [ "activitywatch.target" ];
+    };
+    Service = {
+      # git-sync clones the repo when it is missing, so wait for that instead
+      # of creating a plain folder that would block the clone
+      ExecStartPre = "${pkgs.coreutils}/bin/test -d ${config.home.homeDirectory}/activity-data/.git";
+      ExecStart = "${pkgs.aw-server-rust}/bin/aw-sync --sync-dir ${config.home.homeDirectory}/activity-data daemon";
+      Restart = "on-failure";
+      RestartSec = 10;
+    };
+    Install.WantedBy = [ "activitywatch.target" ];
+  };
+
+  # the home manager module hooks the target to default.target, which fires at
+  # login before hyprland is up, so awatcher finds no wayland session and exits
+  # cleanly without ever being restarted. tie it to the graphical session instead
+  systemd.user.targets.activitywatch = {
+    Unit.After = [ "graphical-session.target" ];
+    Install.WantedBy = lib.mkForce [ "graphical-session.target" ];
+  };
+
+  # belt and suspenders in case awatcher still comes up before the compositor
+  systemd.user.services.activitywatch-watcher-awatcher.Service = {
+    Restart = "always";
+    RestartSec = 5;
   };
 
   # without the decrypted config the watcher exits immediately, so wait for

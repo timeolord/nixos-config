@@ -177,6 +177,10 @@
       safe.directory = [
         "/etc/nixos"
       ];
+      # git-sync refuses to auto commit unless these are set, and they are
+      # branch scoped, so setting them here covers every repo it manages
+      branch.main.sync = true;
+      branch.main.syncNewFiles = true;
     };
   };
 

@@ -24,3 +24,11 @@ run from the repo root so .sops.yaml is picked up:
 adding a new secret: create the file under secrets/ with sops, then declare
 it with sops.secrets in the relevant module (see programs/activitywatch.nix
 for an example).
+
+ssh keys
+========
+
+the ssh keypair is declarative: the public key sits in programs/ssh/ and the
+private key is encrypted at secrets/id_rsa, placed at ~/.ssh/id_rsa on
+rebuild. on a new machine clone this repo over https first (it is public),
+restore the age key as above, then rebuild to get the ssh key back.
