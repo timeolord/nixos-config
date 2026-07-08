@@ -68,7 +68,10 @@
   (setq-default indent-tabs-mode nil
                 tab-width 2
                 c-basic-offset 2)
-  (set-frame-font "-TWR-UDEV Gothic NF-regular-normal-normal-*-16-*-*-*-d-0-iso10646-1" nil t)
+  ;; setting the default face is the only approach that survives the daemon,
+  ;; both set-frame-font and default-frame-alist get overridden by the broken
+  ;; system font that pgtk picks up on client frame creation
+  (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 160)
 
   ;; Org-mode Settings
   (setq org-support-shift-select t)
@@ -127,6 +130,11 @@
          ("C-x t t" . treemacs))
   :defer t
   :config
+  ;; nixos has no /usr/bin so resolve the executables through PATH once at
+  ;; load time instead of letting treemacs guess
+  (setq treemacs-git-executable (executable-find "git"))
+  (setq treemacs-python-executable (executable-find "python3"))
+  (treemacs-git-mode 'deferred)
   (treemacs-filewatch-mode t)
   (treemacs-project-follow-mode t)
   (treemacs-indent-guide-mode t)

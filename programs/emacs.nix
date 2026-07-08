@@ -10,6 +10,10 @@
     };
   };
 
+  # treemacs needs python3 for its extended and deferred git modes, without
+  # it the git status annotations silently break
+  home.packages = [ pkgs.python3 ];
+
   # emacs runs as a daemon so all the init cost is paid once at login,
   # emacsclient frames then open instantly
   services.emacs = {
