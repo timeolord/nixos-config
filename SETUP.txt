@@ -25,6 +25,17 @@ adding a new secret: create the file under secrets/ with sops, then declare
 it with sops.secrets in the relevant module (see programs/activitywatch.nix
 for an example).
 
+user password
+=============
+
+the login password is declarative (users.mutableUsers = false), so passwd
+changes get reverted on rebuild. to change the password for real:
+
+    mkpasswd -m yescrypt | tr -d '\n' > secrets/user-password
+    sops encrypt --in-place secrets/user-password
+
+then rebuild. root has no password of its own, use sudo from the wheel group.
+
 ssh keys
 ========
 

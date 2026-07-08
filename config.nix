@@ -157,9 +157,21 @@
   # services.libinput.enable = true;
 
   # Define a user account. Don't forget to set a password with ‘passwd’.
+  # the password hash lives encrypted in the repo and is decrypted before
+  # user creation, so the login password is fully declarative
+  sops = {
+    age.keyFile = "/home/${userName}/.config/sops/age/keys.txt";
+    secrets.user-password = {
+      format = "binary";
+      sopsFile = ./secrets/user-password;
+      neededForUsers = true;
+    };
+  };
+  users.mutableUsers = false;
   users.users.${userName} = {
     isNormalUser = true;
     description = "Melody";
+    hashedPasswordFile = config.sops.secrets.user-password.path;
     extraGroups = [
       "networkmanager"
       "wheel"
@@ -171,7 +183,7 @@
     enable = true;
     config = {
       init.defaultBranch = "main";
-      core.editor = "emacs";
+      core.editor = "emacsclient -c";
       user.name = "timeolord";
       user.email = "timeolord6677@gmail.com";
       safe.directory = [
@@ -205,22 +217,13 @@
     };
   };
 
-  # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
-
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
   environment.systemPackages = with pkgs; [
     gzip
     unrar
     git
 
-    (pkgs.emacsWithPackagesFromUsePackage {
-      package = pkgs.emacs-unstable-pgtk;
-      config = ./programs/emacs.el;
-      defaultInitFile = true;
-      alwaysEnsure = true;
-    })
+    # emacs itself moved to programs/emacs.nix where it runs as a daemon
     emacs-lsp-booster
     nixfmt
     nil

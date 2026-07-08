@@ -46,13 +46,15 @@ function cd
     and ls
 end
 function untar -a file_name
+    # only strip known archive extensions so version numbers survive
+    set -f known_exts .tar .gz .tgz .bz2 .tbz .tbz2 .xz .txz .zst .tzst
     set -f file $file_name
-    while path extension $file &> /dev/null
+    while contains (string lower (path extension $file)) $known_exts
         set -f file (path change-extension '' $file)
     end
     mkdir $file
     tar -xf $file_name -C ./$file
-    rm $file_name
+    and rm $file_name
 end
 function guntar -a file_name
     gunzip $file_name
@@ -162,3 +164,47 @@ function mp4togif
 
     ffmpeg -i $input -i $palette -lavfi "fps=15,scale=800:-1:flags=lanczos[x];[x][1:v]paletteuse" $output
 end
+function uncompress -a file_name
+    if test -z "$file_name"; or not test -f "$file_name"
+        echo "usage: uncompress <archive>"
+        return 1
+    end
+    # only strip known archive extensions so version numbers survive,
+    # demo-1.2.tar.gz should become demo-1.2 and not demo-1
+    set -f known_exts .tar .gz .tgz .bz2 .tbz .tbz2 .xz .txz .zst .tzst .zip .jar .rar .7z
+    set -f dir (path basename $file_name)
+    while contains (string lower (path extension $dir)) $known_exts
+        set -f dir (path change-extension '' $dir)
+    end
+    set -f inner (path change-extension '' (path basename $file_name))
+    mkdir -p $dir
+    switch (string lower $file_name)
+        case '*.tar' '*.tar.gz' '*.tgz' '*.tar.bz2' '*.tbz' '*.tbz2' '*.tar.xz' '*.txz' '*.tar.zst' '*.tzst'
+            tar -xf $file_name -C $dir
+        case '*.zip' '*.jar'
+            unzip -q $file_name -d $dir
+        case '*.rar'
+            unrar x -idq $file_name $dir/
+        case '*.7z'
+            7z x -bso0 -o$dir $file_name
+        case '*.gz'
+            gunzip -c $file_name > $dir/$inner
+        case '*.bz2'
+            bunzip2 -c $file_name > $dir/$inner
+        case '*.xz'
+            unxz -c $file_name > $dir/$inner
+        case '*.zst'
+            zstd -dqc $file_name > $dir/$inner
+        case '*'
+            echo "uncompress: no idea how to extract $file_name"
+            rmdir $dir 2> /dev/null
+            return 1
+    end
+    # keep the archive next to its contents instead of littering the cwd
+    and mv $file_name $dir/
+    or begin
+        echo "uncompress: extraction failed"
+        return 1
+    end
+end
+complete -c uncompress -a '(__fish_complete_suffix .tar .tar.gz .tgz .tar.bz2 .tbz .tbz2 .tar.xz .txz .tar.zst .tzst .zip .jar .rar .7z .gz .bz2 .xz .zst)'

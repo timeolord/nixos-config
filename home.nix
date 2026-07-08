@@ -16,10 +16,23 @@
     ./programs/mpv.nix
     ./programs/git-sync.nix
     ./programs/ssh/ssh.nix
+    ./programs/aspell/aspell.nix
+    ./programs/emacs.nix
   ];
 
   home.username = userName;
   home.homeDirectory = "/home/${userName}";
+
+  # without this file apps fall back to hardcoded capitalized dirs like
+  # ~/Downloads, so point them at the lowercase ones instead
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = false;
+    download = "${config.home.homeDirectory}/downloads";
+    music = "${config.home.homeDirectory}/music";
+    videos = "${config.home.homeDirectory}/videos";
+    documents = "${config.home.homeDirectory}/documents";
+  };
 
   qt = {
     enable = true;

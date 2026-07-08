@@ -26,14 +26,14 @@
       gpl = "git pull";
       "..." = "cd ../..";
       lsa = "ls -lha";
-      emacs = "emacs 2> /dev/null &";
+      emacs = "emacsclient -c 2> /dev/null &";
       du = "du -h";
       fish = "exec fish";
     };
     shellInit = ''
       set PATH /etc/nixos /home/${userName}/.local/bin /home/${userName}/.cargo/bin $PATH
       set PYTHONSTARTUP /etc/nixos/programs/python/startup.py
-      set -gx EDITOR emacs
+      set -gx EDITOR "emacsclient -c"
       function fish_greeting
          rm -r /home/${userName}/Downloads 2> /dev/null
          rm -r /home/${userName}/null 2> /dev/null
