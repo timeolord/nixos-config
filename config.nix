@@ -251,6 +251,15 @@
     ]
     ++ builtins.filter lib.attrsets.isDerivation (builtins.attrValues pkgs.nerd-fonts);
 
+  # with hundreds of nerd fonts installed the generic aliases resolve to
+  # whatever wins font sorting, so pin them explicitly
+  fonts.fontconfig.defaultFonts = {
+    sansSerif = [ "Noto Sans" ];
+    serif = [ "Noto Serif" ];
+    monospace = [ "UDEV Gothic NF" ];
+    emoji = [ "Noto Color Emoji" ];
+  };
+
   nix.gc = {
     automatic = true;
     dates = "weekly";

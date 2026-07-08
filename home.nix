@@ -43,6 +43,31 @@
     style.name = "adwaita";
   };
 
+  # nothing declared fonts for gtk before, so every gtk app picked its own
+  # default out of the hundreds of installed nerd fonts
+  gtk = {
+    enable = true;
+    font = {
+      name = "UDEV Gothic NF";
+      size = 11;
+    };
+    theme = {
+      name = "Adwaita";
+      package = pkgs.gnome-themes-extra;
+    };
+    iconTheme = {
+      name = "Adwaita";
+      package = pkgs.adwaita-icon-theme;
+    };
+  };
+
+  # pgtk apps like emacs read fonts from gsettings, not from settings.ini
+  dconf.settings."org/gnome/desktop/interface" = {
+    font-name = "UDEV Gothic NF 11";
+    document-font-name = "UDEV Gothic NF 11";
+    monospace-font-name = "UDEV Gothic NF 11";
+  };
+
 
   home.packages = with pkgs; [
     # bitwarden-desktop electron version is current eol

@@ -15,6 +15,10 @@
         path = "${config.home.homeDirectory}/activity-data";
         uri = "git@github.com:timeolord/activity-data.git";
       };
+      website = {
+        path = "${config.home.homeDirectory}/website";
+        uri = "git@github.com:timeolord/timeolord.github.io.git";
+      };
     };
   };
 }
