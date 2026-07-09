@@ -13,6 +13,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  # cap generations on the tiny 100mb esp so it never fills up
+  boot.loader.systemd-boot.configurationLimit = 5;
 
   networking.hostName = userName; # Define your hostname.
 
