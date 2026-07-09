@@ -1,0 +1,130 @@
+Here's the full checklist. Nothing here should be run on the live system yet, since the destructive parts must happen from a live USB (you can't convert a mounted root). Config edits happen against /mnt during the process because the btrfs UUID only exists after conversion.
+
+Current facts baked into this:
+- root: /dev/sda1 ext4, 846G used
+- ESP: /dev/nvme0n1p1 vfat, stays as /boot
+- empty: /dev/sdb1, /dev/sdc1
+- games: /dev/sdd1 ext4, 739G
+- NVMe free space after p1: ~989 GB, will become /dev/nvme0n1p2
+- bootloader: systemd-boot, flake target #melk-pc
+
+Phase 0 — prep
+
+- Make a NixOS installer USB (the official ISO includes btrfs-progs). Your sde stick works but gets wiped.
+- Confirm you know your sops passphrase. That plus git is all you need; no key backup required.
+- Optional but cheap insurance: git -C /etc/nixos status should be clean and pushed (it is).
+
+Phase 1 — convert root (from live USB, you are root)
+
+# fs must be clean and unmounted
+e2fsck -f /dev/sda1
+
+# in place ext4 to btrfs
+btrfs-convert /dev/sda1
+
+# optional label
+btrfs filesystem label /dev/sda1 nixos
+
+# note the NEW btrfs uuid, you need it for the config
+blkid /dev/sda1
+
+Phase 2 — edit the config (still in live USB)
+
+mount /dev/sda1 /mnt
+mount /dev/nvme0n1p1 /mnt/boot
+nano /mnt/etc/nixos/hardware-configuration-melk-pc.nix
+
+Change the root block from ext4 to btrfs with the new UUID, and delete the games mount entirely.
+
+Root filesystem, replace this:
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/057edf4b-829d-4f84-a45f-95754fec5ba9";
+      fsType = "ext4";
+    };
+
+with this (use the UUID from blkid):
+
+  fileSystems."/" =
+    { device = "/dev/disk/by-uuid/<NEW-BTRFS-UUID>";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" ];
+    };
+
+Delete this whole block (games moves into the pool later):
+
+  fileSystems."/home/melk-pc/games" =
+    { device = "/dev/disk/by-uuid/7df12312-4b2c-4aa8-b3be-4af5e854a456";
+      fsType = "ext4";
+      options = [ "nofail" ];
+    };
+
+Phase 3 — rebuild initrd and bootloader for btrfs
+
+# chroot into the installed system
+nixos-enter --root /mnt
+
+# regenerate initrd (now with btrfs) and the boot entries, do not switch
+nixos-rebuild boot --flake /etc/nixos#melk-pc
+
+exit
+reboot   # remove the USB
+
+If nixos-rebuild needs to fetch btrfs-progs for the initrd, the live env needs network. Wire ethernet or nmcli first if it errors.
+
+Phase 4 — first boot on btrfs, reclaim the old image
+
+After booting into the converted system:
+
+# confirm root is btrfs
+findmnt /
+
+# once you trust it, drop the saved ext4 copy to free ~846G of shadow space
+sudo btrfs subvolume delete /ext2_saved
+
+# tidy the freshly converted (fragmented) data, add compression
+sudo btrfs filesystem defragment -r -czstd /
+
+Phase 5 — grow into the other drives
+
+Add the two empty SSDs and the NVMe free space first, so there's room for games.
+
+# carve the ~989G of free nvme space into p2
+sudo sgdisk -n 2:0:0 -t 2:8300 /dev/nvme0n1
+sudo partprobe /dev/nvme0n1
+
+# add the empty drives (this wipes them, they are empty/free anyway)
+sudo btrfs device add -f /dev/sdb1 /dev/sdc1 /dev/nvme0n1p2 /
+
+Now relocate games off sdd into the pool:
+
+sudo mkdir -p /home/melk-pc/games
+sudo mount /dev/sdd1 /mnt
+sudo rsync -aHAX --info=progress2 /mnt/ /home/melk-pc/games/
+sudo chown -R melk-pc:users /home/melk-pc/games
+
+# verify the copy looks right, then release sdd
+sudo umount /mnt
+
+Fold in the now empty sdd and spread everything across all drives:
+
+sudo btrfs device add -f /dev/sdd1 /
+# metadata to raid1 for safety, data stays single across all drives
+sudo btrfs balance start -mconvert=raid1 -dconvert=single /
+
+Confirm the final ~4 TB pool:
+
+sudo btrfs filesystem usage /
+
+Phase 6 — finalize initrd and commit
+
+The root is now multi-device, so rebuild once more so the boot config reflects the final pool, then commit.
+
+sudo nixos-rebuild boot --flake /etc/nixos#melk-pc
+git -C /etc/nixos add -A
+git -C /etc/nixos commit -m "switch melk-pc root to single btrfs pool across all drives"
+git -C /etc/nixos push
+
+Two things to watch for:
+- Don't delete /ext2_saved until you've booted successfully and spot-checked your files. That subvolume is your rollback.
+- Don't wipe/add sdd until the rsync of games is verified. That copy is the only one at that moment.
