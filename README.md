@@ -93,9 +93,6 @@ snapshots are cow so a minute with no changes costs next to nothing. the
 knobs are TIMELINE_LIMIT_HOURLY / DAILY / WEEKLY / MONTHLY. home snapshots
 need /home/.snapshots to exist (btrfs subvolume create /home/.snapshots).
 
-these snapshots share the pool, so they are undo protection, not disaster
-recovery. for a broken system config just boot an older generation instead.
-
 restoring from a snapshot
 =========================
 
