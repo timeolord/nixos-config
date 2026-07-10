@@ -162,7 +162,7 @@
   # the password hash lives encrypted in the repo and is decrypted before
   # user creation, so the login password is fully declarative
   sops = {
-    age.keyFile = "/home/${userName}/.config/sops/age/keys.txt";
+    age.keyFile = "/var/lib/sops-nix/key.txt";
     secrets.user-password = {
       format = "binary";
       sopsFile = ./secrets/user-password;
@@ -275,6 +275,14 @@
     automatic = true;
     dates = "weekly";
   };
+
+  # brtfs auto scrub to ensure file integrity
+  services.btrfs.autoScrub = {
+    enable = true;
+    interval = "weekly";
+    fileSystems = [ "/" ];
+  };
+
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;
