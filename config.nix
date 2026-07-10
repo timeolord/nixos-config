@@ -18,6 +18,16 @@
 
   networking.hostName = userName; # Define your hostname.
 
+  # keep this config repo writable for the user without sudo. the default acl
+  # (d:) makes new files inherit the permission so it does not drift, and
+  # running it on activation reasserts it on every rebuild and boot. this
+  # replaces having to run fix-permissions.sh by hand.
+  system.activationScripts.nixosRepoAcl.text = ''
+    if [ -d /etc/nixos ]; then
+      ${pkgs.acl}/bin/setfacl -R -m d:u:${userName}:rwx -m u:${userName}:rwx /etc/nixos
+    fi
+  '';
+
   # Configure network proxy if necessary
   # networking.proxy.default = "http://user:password@proxy:port/";
   # networking.proxy.noProxy = "127.0.0.1,localhost,internal.domain";
