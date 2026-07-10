@@ -11,20 +11,15 @@
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/057edf4b-829d-4f84-a45f-95754fec5ba9";
-      fsType = "ext4";
+    { device = "/dev/disk/by-uuid/850071b5-beef-4929-8fa4-3b88433f9316";
+      fsType = "btrfs";
+      options = [ "compress=zstd" "noatime" ];
     };
 
   fileSystems."/boot" =
     { device = "/dev/disk/by-uuid/8ACB-14EF";
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
-    };
-
-  fileSystems."/home/melk-pc/games" =
-    { device = "/dev/disk/by-uuid/7df12312-4b2c-4aa8-b3be-4af5e854a456";
-      fsType = "ext4";
-      options = [ "nofail" ];
     };
 
   swapDevices = [ ];

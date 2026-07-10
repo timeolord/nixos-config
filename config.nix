@@ -13,8 +13,8 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  # cap generations on the tiny 100mb esp so it never fills up
-  boot.loader.systemd-boot.configurationLimit = 5;
+
+  boot.loader.systemd-boot.configurationLimit = 10;
 
   networking.hostName = userName; # Define your hostname.
 
@@ -221,7 +221,7 @@
 
   nixpkgs.config.allowUnfree = true;
   environment.systemPackages = with pkgs; [
-    gzip
+    busybox
     unrar
     git
 
