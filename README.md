@@ -3,16 +3,29 @@ secrets setup on a new machine
 
 the sops secrets in secrets/ are encrypted with an age key. the key itself
 is stored in this repo at secrets/age-key.txt.age, wrapped with a passphrase,
-so the repo is self contained. to restore it on a new machine:
+so the repo is self contained. it has to land in two places, both decrypted
+from the same wrapped key.
+
+system secrets (the login password in config.nix and the ssh key in
+programs/ssh) are decrypted during early boot, before /home is mounted, so the
+key lives on the root subvolume:
+
+    sudo mkdir -p /var/lib/sops-nix
+    age -d secrets/age-key.txt.age | sudo tee /var/lib/sops-nix/key.txt > /dev/null
+    sudo chmod 400 /var/lib/sops-nix/key.txt
+
+home manager secrets (activitywatch, steam) are decrypted as the user, so the
+key also goes in the home config dir:
 
     mkdir -p ~/.config/sops/age
     age -d secrets/age-key.txt.age > ~/.config/sops/age/keys.txt
 
 type the passphrase when prompted. after that every encrypted secret in the
-repo can be decrypted on this machine, and rebuilds will place them where
-they belong.
+repo can be decrypted on this machine, and rebuilds will place them where they
+belong.
 
-never commit ~/.config/sops/age/keys.txt (the plaintext key) to the repo.
+never commit either plaintext key (/var/lib/sops-nix/key.txt or
+~/.config/sops/age/keys.txt) to the repo.
 
 editing secrets
 ===============
