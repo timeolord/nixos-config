@@ -15,7 +15,7 @@
         margin-left = 0;
         margin-right = 0;
 
-        modules-left = [ "hyprland/workspaces" ];
+        modules-left = [ "ext/workspaces" ];
         modules-center = [
           "cpu"
           "custom/nvidia"
@@ -40,7 +40,7 @@
           format-zh = "中文";
         };
 
-        "hyprland/workspaces" = {
+        "ext/workspaces" = {
           active-only = false;
           all-outputs = true;
           on-scroll-up = "hyprctl dispatch hl.dsp.focus({ workspace = \"-1\" })";
