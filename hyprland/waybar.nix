@@ -43,11 +43,11 @@
         "ext/workspaces" = {
           active-only = false;
           all-outputs = true;
-          on-scroll-up = "hyprctl dispatch hl.dsp.focus({ workspace = \"-1\" })";
-          on-scroll-down = "hyprctl dispatch hl.dsp.focus({ workspace = \"+1\" })";
+          on-scroll-up = "hyprctl \"dispatch hl.dsp.focus({ workspace = \"-1\" })\"";
+          on-scroll-down = "hyprctl \"dispatch hl.dsp.focus({ workspace = \"+1\" })\"";
           format = "{icon}";
           on-click = "activate";
-          sort-by-number = true;
+          sort-by-id = true;
           format-icons = {
             "1" = "壹";
             "2" = "贰";
