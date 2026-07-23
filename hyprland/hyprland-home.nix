@@ -1,7 +1,7 @@
 { config, pkgs, userName, ... }:
 let
-  hyprland_base_config = builtins.readFile ./hyprland.conf;
-  additional_config = builtins.readFile (./${userName}.conf);
+  hyprland_base_config = builtins.readFile ./hyprland.lua;
+  additional_config = builtins.readFile (./${userName}.lua);
   hyprland_config = hyprland_base_config + additional_config;
 in
 {
@@ -18,7 +18,7 @@ in
     package = null;
     portalPackage = null;
     systemd.variables = [ "--all" ];
-    configType = "hyprlang";
+    configType = "lua";
     extraConfig = hyprland_config;
   };
 

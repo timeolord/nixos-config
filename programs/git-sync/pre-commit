@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# github rejects big pushes, so drop any staged file over 50mb and exclude it from future syncs
+size_limit=$((50 * 1024 * 1024))
+
+while IFS= read -r -d '' file; do
+    size=$(git cat-file -s ":$file" 2>/dev/null || echo 0)
+    if (( size > size_limit )); then
+        git restore --staged -- "$file"
+        exclude_file="$(git rev-parse --git-dir)/info/exclude"
+        grep -qxF "/$file" "$exclude_file" 2>/dev/null || echo "/$file" >> "$exclude_file"
+        echo "pre commit: skipped $file, $((size / 1024 / 1024))mb is over the 50mb limit" >&2
+    fi
+done < <(git diff --cached --name-only --diff-filter=AM -z)
+
+# abort the commit if the big files were the only changes
+git diff --cached --quiet && exit 1 || exit 0
