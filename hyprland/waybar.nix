@@ -44,7 +44,7 @@
           active-only = false;
           all-outputs = true;
           on-scroll-up = "hyprctl \"dispatch hl.dsp.focus({ workspace = \"-1\" })\"";
-          on-scroll-down = "hyprctl \"dispatch hl.dsp.focus({ workspace = \"+1\" })\"";
+          on-scroll-down = "hyprctl \"dispatch hl.dsp.focus({ workspace = \"\\+1\" })\"";
           format = "{icon}";
           on-click = "activate";
           sort-by-id = true;
