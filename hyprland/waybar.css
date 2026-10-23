@@ -56,7 +56,7 @@ window#waybar {
 /*   border: solid 0px #f4d9e1; */
 /* } */
 
-#clock, #clock.date, #battery, #pulseaudio, #network, #language {
+#clock, #clock.date, #battery, #pulseaudio, #network, #custom-language {
 	  background: transparent;
 	  padding: 5px 5px 5px 5px;
 	  margin: 5px 5px 5px 5px;
@@ -109,7 +109,7 @@ window#waybar {
     /*border-left: solid 1px #282738;*/
 }
 
-#language {
+#custom-language {
     color: #ff3f7f;
 }
 

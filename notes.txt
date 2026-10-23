@@ -5,7 +5,7 @@ config.nix and flake.lock already had local edits before this review. config.nix
 
 user preferences
 
-use nix flakes for dependencies and pair development environments with .envrc containing "use flake". prefer fish, rust, zig, haskell, concise functions, functional patterns, and snake_case function names. zig defaults belong in constructors. write new comments in informal lowercase without dashes. avoid emojis, em dashes, and unnecessary bold text. existing code does not consistently follow these preferences.
+use nix flakes for dependencies and pair development environments in separate projects with .envrc containing "use flake". do not add a development shell, devShell output, or .envrc to this nixos configuration repository. editing and rebuilding the system configuration must not depend on direnv or a development shell; manage its dependencies through the existing system flake and modules. prefer fish, rust, zig, haskell, concise functions, functional patterns, and snake_case function names. zig defaults belong in constructors. write new comments in informal lowercase without dashes. avoid emojis, em dashes, and unnecessary bold text. existing code does not consistently follow these preferences.
 programs/claude.nix installs claude and codex and generates the user's instruction files from the same preference text. there is no repository AGENTS.md on disk at review time.
 
 entry points and module graph

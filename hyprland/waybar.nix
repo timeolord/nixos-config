@@ -25,20 +25,13 @@
         ];
         modules-right = [
           "tray"
-          "hyprland/language"
+          "custom/language"
           "pulseaudio"
           "battery"
           "clock#date"
           "clock"
           "custom/power"
         ];
-
-        "hyprland/language" = {
-          format = "{}";
-          format-en = "英文";
-          format-fr = "法文";
-          format-zh = "中文";
-        };
 
         "ext/workspaces" = {
           active-only = false;

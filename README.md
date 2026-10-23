@@ -85,8 +85,9 @@ currently uses the nixpkgs hyprland package. flake.lock records the pins.
 
 flake.nix also pins peewee to 3.18.3 for activitywatch's aw-core dependency,
 which still requires version 3. other packages keep the nixpkgs version.
-the same overlay fixes the aw-qt wrapper argument list and compiles
-audacity's extensions qml module separately to avoid a type name collision
+the same overlay fixes mozc's widget class name for qt, the aw-qt wrapper
+argument list, and compiles audacity's extensions qml module separately
+to avoid a type name collision
 with generated qt code.
 
 building and rebuilding
@@ -112,6 +113,22 @@ module:
 the root flake has no development shell. flake-templates/ holds haskell
 and python project flakes used by the fish flakeinit function, which also
 creates .envrc with use flake and git pull.
+
+language input
+==============
+
+fcitx handles english, french, chinese pinyin, japanese mozc, and turkish.
+french uses us international qwerty with dead keys for accents, so typing
+' followed by e gives é. turkish uses the turkish q layout. pinyin and
+mozc use the us layout for phonetic input.
+
+super space cycles forward and super shift space cycles backward. the
+waybar language indicator shows the active input method in chinese and
+updates every second. left click or scroll up cycles forward, and right
+click or scroll down cycles backward. the selection is shared across apps.
+fcitx's clipboard shortcut is cleared so emacs can receive control semicolon.
+
+rebuild and log out and back in to load the new addons and settings.
 
 settings and data sync
 ======================

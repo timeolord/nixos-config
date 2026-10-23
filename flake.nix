@@ -47,6 +47,14 @@
         emacs-overlay.overlays.default
         godsays-flake.overlays.${system}.default
         (final: prev: {
+          mozc = prev.mozc.overrideAttrs (old: {
+            # qt expects the widget namespace without a leading scope
+            postPatch = (old.postPatch or "") + ''
+              substituteInPlace src/gui/dictionary_tool/dictionary_tool.ui \
+                --replace-fail '::mozc::gui::DictionaryContentTableWidget' \
+                  'mozc::gui::DictionaryContentTableWidget'
+            '';
+          });
           aw-qt = prev.aw-qt.overridePythonAttrs (_: {
             # the wrapper needs separate arguments instead of one string
             makeWrapperArgs = [ "--suffix" "PATH" ":" (final.lib.makeBinPath [ final.xdg-utils ]) ];
