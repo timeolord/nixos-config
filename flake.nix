@@ -46,6 +46,36 @@
       overlays = [
         emacs-overlay.overlays.default
         godsays-flake.overlays.${system}.default
+        (final: prev: {
+          aw-qt = prev.aw-qt.overridePythonAttrs (_: {
+            # the wrapper needs separate arguments instead of one string
+            makeWrapperArgs = [ "--suffix" "PATH" ":" (final.lib.makeBinPath [ final.xdg-utils ]) ];
+          });
+          audacity = prev.audacity.overrideAttrs (old: {
+            # keep muse types out of the generated qt qml sources
+            postPatch = (old.postPatch or "") + ''
+              substituteInPlace muse/framework/extensions/qml/Muse/Extensions/CMakeLists.txt \
+                --replace-fail 'muse_create_qml_module(muse_extensions_qml ALIAS' \
+                  'muse_create_qml_module(muse_extensions_qml NO_UNITY ALIAS'
+            '';
+          });
+          pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
+            (python_final: python_prev: {
+              # activitywatch still needs peewee 3
+              aw-core = python_prev.aw-core.override {
+                peewee = python_prev.peewee.overridePythonAttrs (_: {
+                  version = "3.18.3";
+                  src = final.fetchFromGitHub {
+                    owner = "coleifer";
+                    repo = "peewee";
+                    tag = "3.18.3";
+                    hash = "sha256-gMoU6YQMlEfL6onRAA/8v/08Je2jeLoZ3zw+2n1fmw4=";
+                  };
+                });
+              };
+            })
+          ];
+        })
       ];
       userNames = [
         "melktogo"

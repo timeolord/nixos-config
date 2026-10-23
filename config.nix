@@ -249,11 +249,12 @@
     nixfmt
     nil
     aspell
-    aspellDicts.fr
-    aspellDicts.en
-    aspellDicts.en-science
-    aspellDicts.en-computers
-    aspellDicts.tr
+    # TODO FIX deprecated
+    # aspellDicts.fr
+    # aspellDicts.en
+    # aspellDicts.en-science
+    # aspellDicts.en-computers
+    # aspellDicts.tr
 
     # trashy
     ntfs3g

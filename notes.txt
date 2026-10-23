@@ -1,0 +1,101 @@
+repository reference
+
+reviewed on 2026/10/22 from the working tree, including all source files, the lockfile, encrypted secret containers, application data, and wallpaper. git internals and decrypted secrets were not read. this is a source review, not a successful build or runtime verification.
+config.nix and flake.lock already had local edits before this review. config.nix comments out five aspell dictionaries with a deprecation todo. preserve existing work and check git status again before editing.
+
+user preferences
+
+use nix flakes for dependencies and pair development environments with .envrc containing "use flake". prefer fish, rust, zig, haskell, concise functions, functional patterns, and snake_case function names. zig defaults belong in constructors. write new comments in informal lowercase without dashes. avoid emojis, em dashes, and unnecessary bold text. existing code does not consistently follow these preferences.
+programs/claude.nix installs claude and codex and generates the user's instruction files from the same preference text. there is no repository AGENTS.md on disk at review time.
+
+entry points and module graph
+
+flake.nix generates x86_64-linux systems for melktogo, melk-pc, melk-lab, and melkmobile. userName is both the hostname and normal account name, with home at /home/<host>.
+each system combines config.nix, hyprland/hyprland.nix, <host>.nix, hardware-configuration-<host>.nix, home manager, and system sops. inputs and userName are passed to both module layers.
+home.nix imports every active application module. hyprland/hyprland.nix separately adds hyprland-home.nix to the same home manager user.
+home manager shares system packages and overlays and uses the backup extension "backup". system.stateVersion is 25.05 and home.stateVersion is 25.11; these are compatibility settings, not package versions.
+packages.x86_64-linux.<host>-iso uses nixos-generators with install-iso and omits the hardware module while keeping shared and host configuration.
+inputs include nixos-unstable, home-manager, emacs-overlay, godsays-haskell, nixos-generators, sops-nix, hyprland, and hyprland-plugins. emacs and godsays overlays are applied globally.
+flake.nix extends python package sets to give aw-core peewee 3.18.3, since the current nixpkgs peewee 4.4.0 violates its dependency constraint. other peewee consumers are unchanged. the corrected aw-core builds on python 3.14 with 156 tests passing and 2 skipped.
+the same overlay splits aw-qt's makeWrapperArgs into separate tokens for the binary wrapper and adds NO_UNITY to audacity's muse_extensions_qml target to avoid a muse and qt Type name collision. the user is handling full rebuilds; do not assume a completed system build from the initial source review.
+the root nixpkgs input resolves to nixpkgs_2 in flake.lock; hyprland has a separate nixpkgs node. do not assume the first nixpkgs lock node is the system pin.
+hyprland inputs are declared but no explicit upstream hyprland package or plugin is selected by the modules. the system module supplies hyprland; home manager sets package and portalPackage to null.
+there is no root devShell, .envrc, formatter output, check output, test suite, or ci configuration. this documentation task adds no dependencies.
+
+shared system and home
+
+config.nix owns systemd boot with ten generations, networking, firewall, locale, users, graphics, printing, audio, bluetooth, steam, firefox policy, fonts, garbage collection, and store optimisation.
+networkmanager includes openconnect and a mcgill vpn profile. firewall explicitly opens tcp and udp 25565 and 4000; steam also opens its configured ports. openssh server is commented out.
+pipewire supplies alsa and pulse audio; bluetooth and cups are enabled. bazecor-rules provides dygma usb and hid access. graphics includes 32 bit support.
+locale is en_CA.UTF-8 with french available and timezone America/New_York. nix enables flakes and nix-command, the nix community cache, and unfree packages.
+the user belongs to wheel, networkmanager, and dialout. users.mutableUsers is false and the login password comes from sops; passwd changes will be replaced on activation.
+an activation script reapplies recursive user and default acls to /etc/nixos. aspell and strawberry services rely on being able to write here.
+system git sets main as default, emacsclient as editor, /etc/nixos as safe, and branch.main.sync plus syncNewFiles for git-sync.
+home.nix owns lowercase xdg directories, catppuccin mocha blue gtk and kvantum styling, dark gsettings, desktop packages, direnv with nix-direnv, and bash support. xdg directory creation is disabled.
+fonts pin noto for text and UDEV Gothic NF for monospace; all nerd font derivations are also installed. emacs explicitly sets its font again for daemon frames.
+packages cover communication, games, media, texliveFull, recording, github tools, secrets, and development utilities. per application dependencies generally live beside that application's module.
+
+host differences and storage
+
+melk-pc imports nvidia and enables snapper for root and home: minutely snapshots, cleanup every 10m, minimum age 3600s, 24 hourly, 7 daily, 4 weekly, no monthly or yearly retention.
+melk-pc uses amd microcode and kvm-amd. its btrfs mounts are @ at /, @home at /home, @nix at /nix, @log at /var/log, and @snapshots at /.snapshots, all with zstd and noatime. no swap is declared.
+melkmobile imports nvidia, ignores lid events on battery, external power, and dock, and uses amd microcode, kvm-amd, ext4 root, and no swap.
+melk-lab imports nvidia and uses intel microcode, ext4 root, and no swap. its hardware file has crlf line endings.
+melktogo has an empty host module and uses intel microcode, kvm-intel, ext4 root, and a swap partition. all hosts have vfat efi boot partitions.
+nvidia.nix selects the stable driver with open kernel modules, modesetting, and nvidia settings; both power management options are disabled.
+shared btrfs auto scrub targets / weekly even though only melk-pc declares btrfs root. verify host behavior before changing that assumption.
+README.md documents secret bootstrap and btrfs recovery. explicit subvol=@ mounts mean changing the btrfs default subvolume with snapper rollback does not select a restored root. home snapshots are nested and require separate handling during recovery. follow the detailed readme rather than improvising destructive commands.
+
+desktop configuration
+
+hyprland/hyprland.nix enables ly with colormix, hyprland with xwayland, blueman, fcitx5 with chinese and gtk addons, and electron wayland support; xserver is disabled.
+hyprland-home.nix concatenates hyprland.lua and <host>.lua into a lua configuration. it imports kitty, waybar, dunst, hyprpaper, and fuzzel, installs desktop utilities, configures a fetched sonic cursor, and supplies english, french, and pinyin input methods.
+hyprland.lua uses master layout with the master on the right at 65 percent, purple borders, rounded corners, animations, and no blur. it contains shared window rules, bindings, and session startup.
+super q opens kitty, e opens an emacsclient frame, r opens fuzzel, c closes a window, v toggles floating, f toggles fullscreen, and w swaps with master. super j/l/i/k changes focus; shift moves windows and ctrl resizes. number keys select workspaces, shift moves windows, and a/s/d capture output/window/region to the clipboard.
+startup launches input, notification, wallpaper, audio, policy, bluetooth, bar, and network services; firefox opens on workspace 1 and discord plus signal on workspace 6. some services are also enabled through home manager, so inspect ownership when debugging startup.
+melk-pc.lua and melkmobile.lua set nvidia environment variables and three monitors: a central 3440x1440@165 display with 1080p@60 side displays. connector names differ. melktogo.lua selects the preferred internal display; melk-lab.lua is empty.
+waybar.nix and waybar.css define workspaces, cpu, gpu, memory, disk, network, tray, language, audio, battery, clocks, and power controls. workspaces use ext/workspaces and lua dispatch commands. nvidia-smi runs unconditionally, including on melktogo.
+kitty runs fish with a translucent background. fuzzel is the launcher, dunst handles notifications, and syspower supplies power actions. syspower.css contains a trailing "rb" after a rule, a possible css typo.
+hyprpaper links wallpapers to ~/.wallpapers and selects ivan_the_terrible.jpg, the repository's only image.
+
+application modules and mutable data
+
+programs/emacs.nix builds unstable pgtk emacs from emacs.el use-package declarations and starts a graphical user daemon; python3 supports treemacs. use emacsclient -c for frames.
+emacs.el configures doom-one, treemacs, magit, vertico/orderless/marginalia/consult, corfu, eglot with booster, direnv, vterm with fish, pdf tools, org-roam at ~/notes, activity-watch-mode, and language modes for nix, rust, zig, haskell, python, fish, and wgsl. backups and autosaves go under ~/emacs. the python eglot hook contains "python-mode." and merits checking if automatic startup fails.
+programs/activitywatch.nix enables awatcher for wayland and a pinned python steam watcher. activitywatch is tied to the graphical session; watcher restart settings address compositor and secret availability. aw-sync waits for ~/activity-data/.git and runs an export daemon there.
+programs/mpv.nix packages pinned activitywatch logger and sender components plus primed listening, toggled with n. patches make logs writable under the xdg data directory and relax an upstream python version restriction. the sender runs as another activitywatch watcher.
+programs/anki.nix wraps anki with python 3.13 spacy and the pinned french fr_core_news_lg 3.8.0 wheel on PYTHONPATH.
+programs/git-sync.nix syncs notes, language-learning, activity-data, and website under the user's home to timeolord github repositories. it installs programs/git-sync/pre-commit into each repo, so clone them before activation as its comment requires.
+the pre-commit hook unstages added or modified files over 50 mib, appends them to .git/info/exclude, and aborts empty commits. it is installed for those four data repos, not explicitly for /etc/nixos.
+programs/aspell/aspell.nix unions the committed en.pws with ~/.aspell.en.pws on activation, then a systemd path unit merges local additions back into the repository. en.pws contains a personal scientific and computing vocabulary. removals are not propagated by this union strategy.
+programs/strawberry/strawberry.nix copies its adjacent strawberry.conf to the user's config on activation, keeping it writable with mode 600; a path unit copies local edits back into this repo. the repository copy wins on rebuild, and whole files are copied without merging.
+programs/strawberry/strawberry.conf is the active file with playback, window, playlist, and equalizer state. programs/strawberry.conf is a separate unreferenced settings file and contains a plaintext lastfm session_key; do not reproduce the value in notes or reports. its validity was not checked.
+
+secrets and bootstrap
+
+.sops.yaml assigns one age recipient to secrets/.*. user-password, id_rsa, and aw-watcher-steam.toml are sops binary payloads stored as encrypted json containers. age-key.txt.age is the age identity wrapped with a passphrase.
+system sops uses /var/lib/sops-nix/key.txt to decrypt user-password before creating users. keep this identity on the root filesystem because /home may not yet be mounted.
+home manager sops uses ~/.config/sops/age/keys.txt, configured in activitywatch.nix. it decrypts the steam watcher configuration and ~/.ssh/id_rsa with mode 0400. programs/ssh/id_rsa.pub is installed as a public file.
+README.md now reflects that programs/ssh/ssh.nix is imported through home.nix and uses home manager sops. it also documents the host layout, build commands, and settings sync behavior.
+restore the same identity to both key paths using the readme procedure on a new machine. never commit the plaintext identity or decrypted credentials. encrypted payload contents were not decrypted during this review.
+
+shell and helper scripts
+
+programs/fish/fish.nix combines shell setup, prompt.fish, and functions.fish; adds /etc/nixos, ~/.local/bin, and ~/.cargo/bin to PATH; sets emacsclient as editor; integrates any-nix-shell; and refreshes vendor completions when XDG_DATA_DIRS changes.
+fish_greeting recursively deletes ~/Downloads and ~/null before printing fastfetch and godsays. avoid starting an interactive configured fish merely to inspect configuration.
+functions.fish contains github helpers, git add/commit/push, project scaffolding, archive extraction, filename normalisation, recursive renaming, and mp4 to gif conversion. the second cd definition supersedes the first. extraction helpers can remove or move their source archives.
+flakeinit supports only haskell and python, copies flake-templates/<language>.nix, writes .envrc with use flake and git pull, initialises git, permits direnv, and formats the flake. the templates are not exported as flake templates. haskell supplies a package, overlay, and ghc/cabal shell; python supplies basedpyright, ruff, and jedi language server.
+programs/python/startup.py customises the python prompt with the current directory.
+rebuild.sh pulls first, switches /etc/nixos#$USER, then stages everything, commits, and pushes on success; on failure it retries switch with --show-trace. it is not a passive validation command.
+nix-clean.sh deletes all old root and user generations then optimises the store. fix-permissions.sh is the older manual acl helper, superseded by activation. dunst-reload.sh restarts dunst and sends sample notifications. latex-watch.sh runs latexmk continuously. gparted.sh grants root x access and starts gparted; its nix-shell interpreter declaration looks inconsistent with the other scripts.
+the shell scripts use existing bash nix-shell shebangs. new shell work should follow the user's fish preference unless interoperability requires otherwise.
+.gitignore ignores ~$ and result. .#PLACEHOLDER.txt is a tracked dangling emacs lock symlink, not a source document.
+
+working and validation guidance
+
+edit shared system behavior in config.nix, shared home behavior in home.nix, a specific application in programs/, host hardware in its matching file, and desktop behavior in hyprland/. update this reference when those relationships change.
+review git status before and after work because application path units can modify tracked files in the background. do not replace unrelated local changes.
+for future configuration changes, evaluate an explicit host first: nix eval --no-write-lock-file .#nixosConfigurations.melkmobile.config.system.build.toplevel.drvPath
+to build without activating: nix build --no-link --no-write-lock-file .#nixosConfigurations.melkmobile.config.system.build.toplevel
+replace melkmobile with the intended host and check all four for shared changes. iso outputs can be built as .#melkmobile-iso. these commands were documented, not executed during this review.
+new source files referenced by a git flake must be included in its git source set for evaluation. keep lockfile changes intentional. a build does not verify desktop behavior, secret activation, or host hardware at runtime.

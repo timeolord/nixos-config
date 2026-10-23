@@ -6,16 +6,17 @@ is stored in this repo at secrets/age-key.txt.age, wrapped with a passphrase,
 so the repo is self contained. it has to land in two places, both decrypted
 from the same wrapped key.
 
-system secrets (the login password in config.nix and the ssh key in
-programs/ssh) are decrypted during early boot, before /home is mounted, so the
-key lives on the root subvolume:
+the system secret (the login password in config.nix) is decrypted before
+user creation, before /home is mounted, so the key lives on the root
+subvolume:
 
     sudo mkdir -p /var/lib/sops-nix
     age -d secrets/age-key.txt.age | sudo tee /var/lib/sops-nix/key.txt > /dev/null
     sudo chmod 400 /var/lib/sops-nix/key.txt
 
-home manager secrets (activitywatch, steam) are decrypted as the user, so the
-key also goes in the home config dir:
+home manager secrets (the ssh private key and the steam activitywatch
+configuration) are decrypted as the user, so the key also goes in the home
+config dir:
 
     mkdir -p ~/.config/sops/age
     age -d secrets/age-key.txt.age > ~/.config/sops/age/keys.txt
@@ -53,9 +54,91 @@ ssh keys
 ========
 
 the ssh keypair is declarative: the public key sits in programs/ssh/ and the
-private key is encrypted at secrets/id_rsa, placed at ~/.ssh/id_rsa on
-rebuild. on a new machine clone this repo over https first (it is public),
-restore the age key as above, then rebuild to get the ssh key back.
+private key is encrypted at secrets/id_rsa. home manager places it at
+~/.ssh/id_rsa with mode 0400, using ~/.config/sops/age/keys.txt to decrypt it.
+on a new machine clone this repo over https first (it is public), restore
+the age key as above, then rebuild to get the ssh key back.
+
+configuration layout
+====================
+
+flake.nix builds four x86_64-linux systems. the hostname and username are
+the same on each machine:
+
+    melk-pc      amd, nvidia, btrfs root and home, snapper
+    melkmobile  amd, nvidia, ext4 root, lid switches ignored
+    melk-lab    intel, nvidia, ext4 root
+    melktogo    intel, ext4 root, swap partition
+
+config.nix holds shared system settings and home.nix holds shared home
+manager settings. each host adds <host>.nix and its matching
+hardware-configuration-<host>.nix. application modules live in programs/.
+
+hyprland/hyprland.nix sets up ly, hyprland, and input methods. home manager
+combines hyprland/hyprland.lua with hyprland/<host>.lua for the desktop
+configuration. the same directory holds kitty, waybar, dunst, fuzzel,
+hyprpaper, and the power menu settings.
+
+packages come from nixos-unstable with emacs and godsays overlays. the
+hyprland and plugin inputs are present in the flake, but the system module
+currently uses the nixpkgs hyprland package. flake.lock records the pins.
+
+flake.nix also pins peewee to 3.18.3 for activitywatch's aw-core dependency,
+which still requires version 3. other packages keep the nixpkgs version.
+the same overlay fixes the aw-qt wrapper argument list and compiles
+audacity's extensions qml module separately to avoid a type name collision
+with generated qt code.
+
+building and rebuilding
+=======================
+
+build a system without activating it, replacing melkmobile with the host:
+
+    nix build --no-link --no-write-lock-file .#nixosConfigurations.melkmobile.config.system.build.toplevel
+
+switch to it when ready:
+
+    sudo nixos-rebuild switch --flake /etc/nixos#melkmobile
+
+rebuild.sh, also available as rb in fish, does more: it pulls the repo,
+switches the configuration for $USER, then stages all changes, commits,
+and pushes on success. if the switch fails it retries with --show-trace.
+
+each host also has an installer image output, built without its hardware
+module:
+
+    nix build .#melkmobile-iso
+
+the root flake has no development shell. flake-templates/ holds haskell
+and python project flakes used by the fish flakeinit function, which also
+creates .envrc with use flake and git pull.
+
+settings and data sync
+======================
+
+home manager runs git-sync for ~/notes, ~/language-learning,
+~/activity-data, and ~/website. clone these repos before the first
+activation: their pre commit hooks are installed inside .git/hooks.
+the hook unstages files over 50 mib and adds them to .git/info/exclude so
+they do not block future syncs.
+
+activitywatch starts with the graphical session. awatcher tracks wayland
+activity, the steam watcher uses its encrypted configuration, and mpv has
+a logger and sender. aw-sync waits for ~/activity-data/.git before
+exporting into that repo. emacs also reports through activity-watch-mode.
+
+the aspell personal dictionary is merged with programs/aspell/en.pws on
+activation. a user service watches local changes and merges new words
+back into this repo, keeping words from both copies.
+
+strawberry uses programs/strawberry/strawberry.conf. activation copies it
+to the user's config as a writable file, and a user service copies local
+changes back into the repo. the repo copy wins on rebuild. the separate
+programs/strawberry.conf is not used by the module.
+
+these services can change tracked files while the desktop is running.
+config.nix reapplies user and default acls on /etc/nixos during activation
+so they can write here without sudo.
 
 btrfs subvolumes (melk-pc)
 ==========================
@@ -87,7 +170,10 @@ timeline snapshot is taken every minute and cleanup thins it down:
     everything from the last hour is kept (min age 3600)
     then hourly for a day
     then 7 daily (a week)
-    then weekly
+    then 4 weekly
+
+the timeline timer is persistent and cleanup runs every 10 minutes.
+monthly and yearly retention are disabled.
 
 snapshots are cow so a minute with no changes costs next to nothing. the
 knobs are TIMELINE_LIMIT_HOURLY / DAILY / WEEKLY / MONTHLY. home snapshots
