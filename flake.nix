@@ -8,6 +8,19 @@
       inputs.hyprland.follows = "hyprland";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    rust-overlay = {
+      url = "github:oxalica/rust-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    zig-overlay = {
+      url = "github:mitchellh/zig-overlay";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    haskell-nix.url = "github:input-output-hk/haskell.nix";
+    codex = {
+      url = "github:sadjow/codex-cli-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     home-manager = {
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -43,6 +56,11 @@
     }:
     let
       system = "x86_64-linux";
+      rust_pkgs = import nixpkgs {
+        inherit system;
+        overlays = [ inputs.rust-overlay.overlays.default ];
+      };
+      haskell_pkgs = inputs.haskell-nix.legacyPackages.${system}.haskell-nix;
       overlays = [
         emacs-overlay.overlays.default
         godsays-flake.overlays.${system}.default
@@ -143,7 +161,14 @@
       );
     in
     {
-      packages.x86_64-linux = isos;
+      packages.x86_64-linux = isos // {
+        rust-nightly = rust_pkgs.rust-bin.selectLatestNightlyWith (
+          toolchain: toolchain.default.override { extensions = [ "rust-src" ]; }
+        );
+        zig-nightly = inputs.zig-overlay.packages.${system}.master;
+        ghc-development = haskell_pkgs.compiler.${haskell_pkgs.resolve-compiler-name "ghc915"};
+        codex-latest = inputs.codex.packages.${system}.default;
+      };
       nixosConfigurations = configurations;
     };
 }

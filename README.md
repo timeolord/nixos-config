@@ -101,8 +101,13 @@ switch to it when ready:
 
     sudo nixos-rebuild switch --flake /etc/nixos#melkmobile
 
-rebuild.sh, also available as rb in fish, does more: it pulls the repo,
-switches the configuration for $USER, then stages all changes, commits,
+rebuild.sh, also available as rb in fish, first checks that both age keys
+can decrypt their configured secrets. if either key is missing or invalid,
+it asks to decrypt secrets/age-key.txt.age with your passphrase and restores
+the affected key with mode 0400. declining or failing decryption stops the
+rebuild. it checks again after pulling in case the secrets changed.
+
+it pulls the repo, switches the configuration for $USER, then stages all changes, commits,
 and pushes on success. if the switch fails it retries with --show-trace.
 
 each host also has an installer image output, built without its hardware
@@ -113,6 +118,43 @@ module:
 the root flake has no development shell. flake-templates/ holds haskell
 and python project flakes used by the fish flakeinit function, which also
 creates .envrc with use flake and git pull.
+
+upstream development builds
+===========================
+
+the system flake includes these upstream inputs for access to development
+builds. each stays pinned until its input is updated in flake.lock.
+
+| input | source | package output |
+| --- | --- | --- |
+| rust-overlay | https://github.com/oxalica/rust-overlay | rust-nightly |
+| zig-overlay | https://github.com/mitchellh/zig-overlay | zig-nightly |
+| haskell-nix | https://github.com/input-output-hk/haskell.nix | ghc-development |
+| codex | https://github.com/sadjow/codex-cli-nix | codex-latest |
+
+rust selects the latest nightly with the default components and rust-src
+available. zig uses the upstream master binary. haskell selects the ghc915
+development compiler from haskell.nix's own package set, currently the pinned
+9.15.20260204 snapshot. the codex input checks
+hourly for released binaries; codex-latest provides the release at the pinned
+revision, rather than a nightly build.
+
+haskell.nix may fetch sources and build planning tools during evaluation.
+
+use them directly from this repository:
+
+    nix shell .#rust-nightly
+    nix shell .#zig-nightly
+    nix shell .#ghc-development
+    nix run .#codex-latest
+
+update just these inputs with:
+
+    nix flake update rust-overlay zig-overlay haskell-nix codex
+
+modules can also use the inputs argument to select other versions. haskell.nix
+keeps its own nixpkgs pin and overlay separate from the system package set.
+these outputs do not install development builds into the normal user profile.
 
 language input
 ==============
