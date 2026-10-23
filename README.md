@@ -93,6 +93,14 @@ with generated qt code.
 building and rebuilding
 =======================
 
+run nix flake update to update all inputs, including godsays, to their latest
+upstream revisions. to update only godsays:
+
+    nix flake update godsays-flake
+
+rebuild afterward to install the updated packages. rb uses the repository's
+lockfile and does not update inputs itself.
+
 build a system without activating it, replacing melkmobile with the host:
 
     nix build --no-link --no-write-lock-file .#nixosConfigurations.melkmobile.config.system.build.toplevel
