@@ -1,13 +1,18 @@
 { lib, pkgs, ... }:
+let
+  emacs_packages = pkgs.emacsWithPackagesFromUsePackage {
+    package = pkgs.emacs-unstable-pgtk;
+    config = ./emacs.el;
+    defaultInitFile = false;
+    alwaysEnsure = true;
+  };
+in
 {
   programs.emacs = {
     enable = true;
-    package = pkgs.emacsWithPackagesFromUsePackage {
-      package = pkgs.emacs-unstable-pgtk;
-      config = ./emacs.el;
-      defaultInitFile = false;
-      alwaysEnsure = true;
-    };
+    # keep one wrapper so theme dependencies reach the compiler
+    package = pkgs.emacs-unstable-pgtk;
+    extraPackages = _: builtins.filter (package: package != null) emacs_packages.explicitRequires;
     extraConfig = lib.mkBefore (builtins.readFile ./emacs.el);
   };
 

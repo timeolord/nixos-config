@@ -168,7 +168,7 @@ style profiles
 ==============
 
 Stylix manages the shared palette, fonts, cursor, opacity, and wallpaper.
-styles/selected.nix contains the default profile name, currently "current".
+styles/selected.nix contains the default profile name, currently "vespers".
 a host can override it with style.name = "current"; in its host module.
 profile selection takes effect through a normal system rebuild.
 
@@ -176,6 +176,27 @@ styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,
 Kitty colors and transparency, and Doom One in Emacs. the application
 exceptions live in this profile, so they do not carry into another profile.
+
+styles/vespers.nix is the Victorian inspired alternative. it combines walnut
+browns, antique gold, ivory and marble whites, EB Garamond text, Cinzel
+headings, and IosevkaTerm for code. it changes the floating Waybar frame,
+window spacing and borders, animations, launcher, notifications, terminal,
+Emacs, GTK, Qt, shell colors and prompt, and power menu. the VESPERAE label
+has the tooltip Ad maiorem Dei gloriam. the system language stays unchanged.
+
+Waybar shows workspaces I through X and uses Latin names for input methods:
+ANGLICA, GALLICA, SINICA, IAPONICA, and TURCICA. the same input methods and
+switching shortcuts are retained. use style.name = "vespers"; in a host
+module to select it independently, or edit styles/selected.nix for all hosts.
+set the selection to "current" and rebuild to restore the previous style.
+
+vespers uses the original 4000 × 2563 scan of Friedrich's The Abbey in the
+Oakwood. an alternative 3518 × 4801 Granet scan of The Choir in the Capuchin
+Church on the Piazza Barberini, Rome is also included. change stylix.image
+in styles/vespers.nix to ../wallpapers/choir_of_the_capuchin_church.jpg to use
+it; its portrait composition suits a portrait monitor better than a wide
+screen. wallpapers/README.md records the sources and attribution. neither
+painting was generated, recolored, or upscaled.
 
 styles/default.nix registers profiles and enables selected Stylix targets.
 Hyprland uses a custom palette adapter for its Lua configuration. Waybar,

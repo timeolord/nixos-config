@@ -1,3 +1,7 @@
+(declare-function consult-register-window "consult-register" (buffer &optional show-empty pred))
+(declare-function consult-xref "consult-xref" (fetcher &optional alist))
+(declare-function treemacs-project-follow-mode "treemacs-project-follow-mode" (&optional arg))
+
 (defun split-and-follow-horizontally ()
   (interactive)
   (split-window-below)

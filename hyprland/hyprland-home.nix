@@ -33,7 +33,7 @@ in
   };
 
   home.file.".config/sys64/power/config.conf".source = ./syspower.conf;
-  home.file.".config/sys64/power/style.css".source = ./syspower.css;
+  home.file.".config/sys64/power/style.css".source = lib.mkDefault ./syspower.css;
 
   home.packages = with pkgs; [
     hyprpolkitagent

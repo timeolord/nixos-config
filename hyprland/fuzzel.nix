@@ -8,7 +8,7 @@ in
     enable = true;
     settings = {
       main = {
-        dpi_aware = "yes";
+        dpi-aware = "yes";
         terminal = "${pkgs.kitty}/bin/kitty";
         layer = "overlay";
         auto-select = "yes";
