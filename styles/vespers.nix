@@ -161,9 +161,6 @@
       programs.waybar = {
         style = lib.mkForce (builtins.replaceStrings [ "@cross_asset@" ] [ "${cross_icon}" ] (render_style (builtins.readFile ./vespers/waybar.css)));
         settings.mainBar = {
-          margin-top = lib.mkForce 8;
-          margin-left = lib.mkForce 12;
-          margin-right = lib.mkForce 12;
           height = 48;
           spacing = 0;
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];

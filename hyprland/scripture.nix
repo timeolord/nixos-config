@@ -18,9 +18,9 @@ in
     layer = "top";
     height = 36;
     margin-top = 0;
-    margin-bottom = 8;
-    margin-left = 12;
-    margin-right = 12;
+    margin-bottom = 0;
+    margin-left = 0;
+    margin-right = 0;
     modules-center = [ "custom/godsays" ];
     "custom/godsays" = {
       exec = "${scripture}/bin/waybar-scripture";
