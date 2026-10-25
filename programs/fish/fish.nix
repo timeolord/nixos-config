@@ -6,11 +6,12 @@
   ...
 }:
 {
-  home.packages = [ pkgs.any-nix-shell pkgs.fastfetch ];
+  home.packages = [ pkgs.any-nix-shell ];
   programs.fastfetch = {
+    enable = true;
     settings = {
-      modules = [
-      ];
+      logo.position = "auto";
+      display.disableLinewrap = false;
     };
   };
   programs.fish = {
