@@ -44,16 +44,16 @@ tooltip {
     padding: 0 6px;
     margin: 0 2px;
     min-width: 18px;
-    border: 1px solid #@base02@;
-    background: #@base01@;
+    border: 1px solid transparent;
+    background: transparent;
 }
 #workspaces button.active {
     color: #@base00@;
     background: #@base0A@;
     border-color: #@base0A@;
 }
-#workspaces button.urgent { color: #@base08@; border-color: #@base08@; }
-#workspaces button:hover { color: #@base0A@; background: #@base02@; box-shadow: none; }
+#workspaces button.urgent { color: #@base08@; }
+#workspaces button:not(.active):hover { color: #@base0A@; }
 
 #clock { color: #@base06@; padding: 0 16px; }
 #clock.date { color: #@base0D@; padding-right: 0; }
