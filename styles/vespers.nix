@@ -4,6 +4,7 @@
     stylix = {
       image = ../wallpapers/abbey_in_the_oakwood.jpg;
       polarity = "dark";
+      cursor = { package = pkgs.hackneyed; name = "Hackneyed"; size = 24; };
       base16Scheme = {
         scheme = "Vespers";
         author = "timeolord";
