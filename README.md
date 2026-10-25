@@ -184,6 +184,12 @@ window spacing and borders, animations, launcher, notifications, terminal,
 Emacs, GTK, Qt, shell colors and prompt, and power menu. the VESPERAE label
 has the tooltip Ad maiorem Dei gloriam. the system language stays unchanged.
 
+Ly also follows Vespers, with a static walnut background, ivory text, gold
+frame, VESPERAE title, and AD MAIOREM DEI GLORIAM motto. Linux virtual
+consoles use the matching palette and a larger 24 pixel Terminus font.
+Waybar writes full Latin month names, such as 25 Octobris 2026, using the
+local system timezone. the clock remains in 24 hour format.
+
 the interface takes cues from NES.css and System.css: flat opaque panels,
 square geometry, double gold frames, a small pixel cross, compact controls,
 and inverted gold selections. Terminus is rendered without antialiasing;

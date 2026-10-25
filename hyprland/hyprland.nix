@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   inputs,
   userName,
@@ -32,7 +33,7 @@
   services.displayManager.ly = {
     enable = true;
     settings = {
-      animation = "colormix";
+      animation = lib.mkDefault "colormix";
       session_log = "null";
     };
   };

@@ -56,7 +56,7 @@ tooltip {
 #workspaces button:not(.active):hover { color: #@base0A@; }
 
 #clock { color: #@base06@; padding: 0 16px; }
-#clock.date { color: #@base0D@; padding-right: 0; }
+#custom-date { color: #@base0D@; padding-left: 16px; }
 
 #cpu, #memory, #network, #pulseaudio, #battery, #custom-language, #tray, #custom-power {
     padding: 0 8px;

@@ -4,6 +4,7 @@
     stylix = {
       image = ../wallpapers/abbey_in_the_oakwood.jpg;
       polarity = "dark";
+      targets.console.enable = true;
       cursor = { package = pkgs.hackneyed; name = "Hackneyed"; size = 24; };
       base16Scheme = {
         scheme = "Vespers";
@@ -34,12 +35,48 @@
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
     };
 
+    console.font = "${pkgs.terminus_font}/share/consolefonts/ter-v24n.psf.gz";
+    services.displayManager.ly.settings = {
+      animation = "none";
+      auth_fails = 0;
+      full_color = false;
+      bg = "0x00000001";
+      fg = "0x00000008";
+      border_fg = "0x01000004";
+      error_bg = "0x00000001";
+      error_fg = "0x01000002";
+      box_title = "VESPERAE";
+      initial_info_text = "AD MAIOREM DEI GLORIAM";
+      hide_borders = false;
+      blank_box = true;
+      margin_box_h = 4;
+      margin_box_v = 2;
+      input_len = 36;
+      edge_margin = 2;
+      text_in_center = true;
+      bigclock = "none";
+      clock = "%H:%M";
+    };
+
     home-manager.users.${userName} = { config, ... }:
     let
       colors = config.lib.stylix.colors;
       force_values = lib.mapAttrs (_: lib.mkForce);
       render_style = import ./render.nix { inherit config lib; };
       cross_icon = pkgs.writeText "vespers-cross.svg" (render_style (builtins.readFile ./vespers/cross.svg));
+      date_status = pkgs.writeTextFile {
+        name = "vespers-date";
+        destination = "/bin/vespers-date";
+        executable = true;
+        checkPhase = "${pkgs.fish}/bin/fish --no-config --no-execute $out/bin/vespers-date";
+        text = ''
+          #!${pkgs.fish}/bin/fish --no-config
+          set month_names Ianuarii Februarii Martii Aprilis Maii Iunii Iulii Augusti Septembris Octobris Novembris Decembris
+          set date_parts (${pkgs.coreutils}/bin/date '+%-d %-m %Y' | string split ' ')
+          set month_index $date_parts[2]
+          printf '%s %s %s\n' $date_parts[1] $month_names[$month_index] $date_parts[3]
+        '';
+      };
       flat_qt = pkgs.runCommand "vespers-flat-kvantum" { nativeBuildInputs = [ pkgs.libxslt ]; } ''
         theme_dir=$out/share/Kvantum/Base16Kvantum
         mkdir -p "$theme_dir"
@@ -97,7 +134,7 @@
           height = 48;
           spacing = 0;
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];
-          modules-center = lib.mkForce [ "clock#date" "clock" ];
+          modules-center = lib.mkForce [ "custom/date" "clock" ];
           modules-right = lib.mkForce [ "cpu" "memory" "network" "pulseaudio" "custom/language" "battery" "tray" "custom/power" ];
           "custom/sigil" = { format = "VESPERAE"; tooltip-format = "Ad maiorem Dei gloriam"; };
           "ext/workspaces".format-icons = lib.mkForce {
@@ -106,7 +143,11 @@
             urgent = "!";
           };
           clock = { format = lib.mkForce "{:%H:%M}"; };
-          "clock#date".format = lib.mkForce "{:%d · %m · %Y}";
+          "custom/date" = {
+            exec = "${date_status}/bin/vespers-date";
+            interval = 60;
+            tooltip = false;
+          };
           cpu.format = lib.mkForce "CALC {usage}%";
           memory.format = lib.mkForce "MEM {}%";
           network = force_values {
