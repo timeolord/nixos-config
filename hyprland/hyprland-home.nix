@@ -1,6 +1,7 @@
-{ config, pkgs, userName, ... }:
+{ config, lib, pkgs, userName, ... }:
 let
-  hyprland_base_config = builtins.readFile ./hyprland.lua;
+  render_style = import ../styles/render.nix { inherit config lib; };
+  hyprland_base_config = render_style (builtins.readFile ./hyprland.lua);
   additional_config = builtins.readFile (./${userName}.lua);
   hyprland_config = hyprland_base_config + additional_config;
 in
@@ -22,39 +23,6 @@ in
     configType = "lua";
     extraConfig = hyprland_config;
   };
-
-  # home.pointerCursor = {
-  #   name = "Sonic";
-  #   size = 24;
-  #   # package = null;
-  #   gtk.enable = true;
-  #   x11.enable = true;
-  #   # hyprcursor.enable = true;
-  # };
-
-    home.pointerCursor =
-    let
-      getFrom = url: hash: name: {
-          gtk.enable = true;
-          x11.enable = true;
-          hyprcursor.enable = true;
-          name = name;
-          size = 24;
-          enable = true;
-          package =
-            pkgs.runCommand "moveUp" {} ''
-              mkdir -p $out/share/icons
-              ln -s ${pkgs.fetchzip {
-                url = url;
-                hash = hash;
-              }} $out/share/icons/${name}
-          '';
-        };
-    in
-      getFrom
-        "https://github.com/K1NGSSTH/Sonic-cursor/releases/download/sonic-cursor/Sonic-cursor.tar"
-        "sha256-i7iOZT4mh7MtKeFN5/2Msm4ekTocdt9BIdXJfABv3aU="
-        "Sonic-cursor";
 
   home.sessionVariables = {
     # GTK_IM_MODULE = "fcitx";

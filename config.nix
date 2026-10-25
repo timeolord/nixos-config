@@ -277,15 +277,6 @@
   # into the profile, share/themes is linked by default but this one is not
   environment.pathsToLink = [ "/share/Kvantum" ];
 
-  # with hundreds of nerd fonts installed the generic aliases resolve to
-  # whatever wins font sorting, so pin them explicitly
-  fonts.fontconfig.defaultFonts = {
-    sansSerif = [ "Noto Sans" ];
-    serif = [ "Noto Serif" ];
-    monospace = [ "UDEV Gothic NF" ];
-    emoji = [ "Noto Color Emoji" ];
-  };
-
   nix.gc = {
     automatic = true;
     dates = "weekly";

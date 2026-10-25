@@ -1,13 +1,14 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   programs.emacs = {
     enable = true;
     package = pkgs.emacsWithPackagesFromUsePackage {
       package = pkgs.emacs-unstable-pgtk;
       config = ./emacs.el;
-      defaultInitFile = true;
+      defaultInitFile = false;
       alwaysEnsure = true;
     };
+    extraConfig = lib.mkBefore (builtins.readFile ./emacs.el);
   };
 
   # treemacs needs python3 for its extended and deferred git modes, without

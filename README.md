@@ -164,6 +164,61 @@ modules can also use the inputs argument to select other versions. haskell.nix
 keeps its own nixpkgs pin and overlay separate from the system package set.
 these outputs do not install development builds into the normal user profile.
 
+style profiles
+==============
+
+Stylix manages the shared palette, fonts, cursor, opacity, and wallpaper.
+styles/selected.nix contains the default profile name, currently "current".
+a host can override it with style.name = "current"; in its host module.
+profile selection takes effect through a normal system rebuild.
+
+styles/current.nix preserves the existing purple and pink desktop, Ivan the
+Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,
+Kitty colors and transparency, and Doom One in Emacs. the application
+exceptions live in this profile, so they do not carry into another profile.
+
+styles/default.nix registers profiles and enables selected Stylix targets.
+Hyprland uses a custom palette adapter for its Lua configuration. Waybar,
+Fuzzel, and Dunst also consume the Stylix palette while keeping their layouts
+and existing application specific transparency. automatic theming of other
+programs is disabled; enable additional targets explicitly when wanted.
+new profiles get generated GTK, Qt, Kitty, and Emacs themes and a Bibata
+cursor unless they override those settings.
+
+for example, add styles/mocha.nix:
+
+    { config, lib, pkgs, ... }:
+    {
+      config = lib.mkIf (config.style.name == "mocha") {
+        stylix = {
+          image = ../wallpapers/ivan_the_terrible.jpg;
+          base16Scheme = "${pkgs.base16-schemes}/share/themes/catppuccin-mocha.yaml";
+          polarity = "dark";
+          opacity.terminal = 0.9;
+        };
+      };
+    }
+
+add mocha = ./mocha.nix; to the profiles attribute set in styles/default.nix,
+then change styles/selected.nix to contain just "mocha". each profile must
+conditionally apply its settings as above and provide an image and palette.
+keep application exceptions inside the corresponding conditional profile.
+
+include new files in the git source set and rebuild, using your hostname:
+
+    git add styles
+    sudo nixos-rebuild switch --flake .#melkmobile
+
+change the selection back to "current" and rebuild to restore this style.
+log out and back in after switching so running applications and the Emacs
+daemon load the new configuration. this is declarative switching through
+rebuilds, rather than an immediate runtime theme toggle.
+
+Stylix follows the system nixpkgs input. existing input revisions were kept
+when adding it. future updates should update Stylix, nixpkgs, and Home
+Manager together for compatibility, as described in the upstream docs:
+https://nix-community.github.io/stylix/installation.html
+
 language input
 ==============
 

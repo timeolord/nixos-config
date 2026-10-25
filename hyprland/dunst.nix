@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  colors = config.lib.stylix.colors.withHashtag;
+in
 {
   services.dunst = {
     enable = true;
@@ -60,18 +63,18 @@
         fullscreen = "show";
       };
       urgency_low = {
-        background = "#45069380";
-        foreground = "#f4d9e1ff";
+        background = "${colors.base01}80";
+        foreground = "${colors.base05}ff";
         timeout = 10;
       };
       urgency_normal = {
-        background = "#8c00ff80";
-        foreground = "#f4d9e1ff";
+        background = "${colors.base02}80";
+        foreground = "${colors.base05}ff";
         timeout = 10;
       };
       urgency_critical = {
-        background = "#ff3f7f80";
-        foreground = "#f4d9e1ff";
+        background = "${colors.base08}80";
+        foreground = "${colors.base05}ff";
         timeout = 60;
       };
     };

@@ -7,11 +7,6 @@
     settings = {
       ipc = "on";
       splash = false;
-      wallpaper = {
-        monitor = " ";
-        path = "~/.wallpapers/ivan_the_terrible.jpg";
-        fit_mode = "cover";
-      };
     };
   };
 }

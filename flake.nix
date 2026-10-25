@@ -8,6 +8,10 @@
       inputs.hyprland.follows = "hyprland";
     };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
+    stylix = {
+      url = "github:nix-community/stylix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     rust-overlay = {
       url = "github:oxalica/rust-overlay";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -122,6 +126,8 @@
           modules = [
             { nixpkgs = { inherit overlays; }; }
             ./config.nix
+            inputs.stylix.nixosModules.stylix
+            ./styles
             ./hyprland/hyprland.nix
             user-module
             home-manager.nixosModules.home-manager

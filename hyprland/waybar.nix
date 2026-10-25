@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
+let
+  render_style = import ../styles/render.nix { inherit config lib; };
+  colors = config.lib.stylix.colors;
+  names = map (index: "base0${lib.toHexString index}") (lib.range 0 15);
+in
 {
   home.packages = [
     pkgs.waybar
@@ -146,6 +151,7 @@
         };
       };
     };
-    style = builtins.readFile ./waybar.css;
+    style = lib.concatMapStrings (name: "@define-color ${name} #${colors.${name}};\n") names
+      + render_style (builtins.readFile ./waybar.css);
   };
 }

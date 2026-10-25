@@ -1,4 +1,7 @@
 { config, pkgs, ... }:
+let
+  colors = config.lib.stylix.colors;
+in
 {
   home.packages = [ pkgs.fuzzel ];
   programs.fuzzel = {
@@ -11,17 +14,17 @@
         auto-select = "yes";
       };
       colors = {
-        background = "282828dd";
-        text = "f4d9e1ff";
-        prompt = "f4d9e1ff";
-        placeholder = "838ba7ff";
-        input = "f4d9e1ff";
-        match = "ffc40080";
-        selection = "8c00ff90";
-        selection-text = "ff3f7fff";
-        selection-match = "ffce00ff";
-        counter = "8c00ffff";
-        border = "450693ff";
+        background = "${colors.base00}dd";
+        text = "${colors.base05}ff";
+        prompt = "${colors.base05}ff";
+        placeholder = "${colors.base03}ff";
+        input = "${colors.base05}ff";
+        match = "${colors.base0A}80";
+        selection = "${colors.base02}90";
+        selection-text = "${colors.base08}ff";
+        selection-match = "${colors.base0C}ff";
+        counter = "${colors.base02}ff";
+        border = "${colors.base01}ff";
       };
     };
   };

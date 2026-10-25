@@ -50,9 +50,6 @@
   (add-to-list 'default-frame-alist '(fullscreen . maximized))
   (add-to-list 'default-frame-alist '(undecorated . t))
 
-  (set-frame-parameter nil 'alpha-background 95) ; For current frame
-  (add-to-list 'default-frame-alist '(alpha-background . 95)) ; For all new frames
-
   (require 'use-package-ensure)
   (setq use-package-always-ensure t)
 
@@ -68,11 +65,6 @@
   (setq-default indent-tabs-mode nil
                 tab-width 2
                 c-basic-offset 2)
-  ;; setting the default face is the only approach that survives the daemon,
-  ;; both set-frame-font and default-frame-alist get overridden by the broken
-  ;; system font that pgtk picks up on client frame creation
-  (set-face-attribute 'default nil :family "UDEV Gothic NF" :height 130)
-
   ;; Org-mode Settings
   (setq org-support-shift-select t)
   (setq fill-column 160)
@@ -193,9 +185,7 @@
   (doom-modeline-mode 1))
 
 (use-package doom-themes
-  :ensure t
-  :config
-  (load-theme 'doom-one))
+  :ensure t)
 
 (use-package vertico
   :ensure t
