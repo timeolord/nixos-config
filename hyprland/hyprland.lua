@@ -152,6 +152,8 @@ hl.bind("XF86AudioPrev", hl.dsp.exec_cmd("playerctl previous"), { locked = true 
 --- windows and workspaces ---
 ------------------------------
 
+hl.workspace_rule({ workspace = "w[tv1]", gaps_out = 0, gaps_in = 0 })
+
 -- ignore maximize requests from apps
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 
