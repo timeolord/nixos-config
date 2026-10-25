@@ -9,9 +9,9 @@
       base16Scheme = {
         scheme = "Vespers";
         author = "timeolord";
-        base00 = "36261e";
-        base01 = "443124";
-        base02 = "58402f";
+        base00 = "30221b";
+        base01 = "3e2c21";
+        base02 = "513b2c";
         base03 = "a08a70";
         base04 = "b6a38b";
         base05 = "e8dfce";
