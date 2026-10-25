@@ -1,20 +1,19 @@
-#syspower { background: rgba(17, 12, 9, 0.90); }
-#syspower .primary_window { color: #@base05@; font-family: "EB Garamond"; font-size: 22px; }
+#syspower * { border-radius: 0; box-shadow: none; text-shadow: none; transition: none; animation: none; }
+#syspower { background: #@base00@; }
+#syspower .primary_window { color: #@base05@; font-family: "Terminus (TTF)"; font-size: 16px; }
 #syspower .label_status { color: #@base0A@; font-family: "Cinzel"; }
-#syspower .box_buttons { padding: 30px; }
+#syspower .box_buttons { padding: 20px; }
 #syspower button {
     color: #@base05@;
-    background: linear-gradient(180deg, #493627, #@base00@);
-    border: 1px solid #@base0D@;
-    border-radius: 3px;
-    padding: 24px;
-    margin: 12px;
-    box-shadow: inset 0 1px #80623c, 0 8px 20px rgba(0, 0, 0, 0.5);
+    background: #@base01@;
+    border: 3px double #@base0D@;
+    padding: 20px;
+    margin: 8px;
 }
 #syspower button:hover, #syspower button:focus {
-    color: #@base07@;
-    background: #@base02@;
-    border-color: #@base0A@;
+    color: #@base00@;
+    background: #@base0A@;
+    border-color: #@base07@;
 }
 #syspower .button_shutdown:hover { border-color: #@base08@; }
 #syspower .progressbar_status trough { background: #@base02@; }

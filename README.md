@@ -178,11 +178,26 @@ Kitty colors and transparency, and Doom One in Emacs. the application
 exceptions live in this profile, so they do not carry into another profile.
 
 styles/vespers.nix is the Victorian inspired alternative. it combines walnut
-browns, antique gold, ivory and marble whites, EB Garamond text, Cinzel
-headings, and IosevkaTerm for code. it changes the floating Waybar frame,
+browns, antique gold, ivory and marble whites, Terminus pixel text, Cinzel
+headings, and EB Garamond for prose. it changes the floating Waybar frame,
 window spacing and borders, animations, launcher, notifications, terminal,
 Emacs, GTK, Qt, shell colors and prompt, and power menu. the VESPERAE label
 has the tooltip Ad maiorem Dei gloriam. the system language stays unchanged.
+
+the interface takes cues from NES.css and System.css: flat opaque panels,
+square geometry, double gold frames, a small pixel cross, compact controls,
+and inverted gold selections. Terminus is rendered without antialiasing;
+Cinzel and Garamond retain their normal rendering. compositor shadows,
+blur, border gradients, and animations are disabled. GTK controls and the
+power menu have square edges without gradients or shadows. the Qt theme
+uses a build time SVG transform to flatten gradient stops, remove rounded
+rectangle corners and filters, and request crisp edges, with Kvantum popup
+shadows, blurring, and opacity reduction disabled. painting scans are kept
+unchanged. these references inspired the design; no web CSS library is
+installed as a dependency:
+
+https://nostalgic-css.github.io/NES.css/
+https://sakofchit.github.io/system.css/
 
 Waybar shows workspaces I through X and uses Latin names for input methods:
 ANGLICA, GALLICA, SINICA, IAPONICA, and TURCICA. the same input methods and

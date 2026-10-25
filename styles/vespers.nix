@@ -1,4 +1,4 @@
-{ config, lib, pkgs, userName, ... }:
+{ config, lib, pkgs, inputs, userName, ... }:
 {
   config = lib.mkIf (config.style.name == "vespers") {
     stylix = {
@@ -26,11 +26,11 @@
       };
       fonts = {
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
-        sansSerif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
-        monospace = { package = pkgs.nerd-fonts.iosevka-term; name = "IosevkaTerm Nerd Font"; };
-        sizes = { applications = 13; desktop = 11; popups = 13; terminal = 13; };
+        sansSerif = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
+        monospace = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
+        sizes = { applications = 12; desktop = 12; popups = 12; terminal = 12; };
       };
-      opacity = { applications = 1.0; desktop = 0.98; popups = 1.0; terminal = 0.97; };
+      opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
     };
 
     home-manager.users.${userName} = { config, ... }:
@@ -38,9 +38,41 @@
       colors = config.lib.stylix.colors;
       force_values = lib.mapAttrs (_: lib.mkForce);
       render_style = import ./render.nix { inherit config lib; };
+      cross_icon = pkgs.writeText "vespers-cross.svg" (render_style (builtins.readFile ./vespers/cross.svg));
+      flat_qt = pkgs.runCommand "vespers-flat-kvantum" { nativeBuildInputs = [ pkgs.libxslt ]; } ''
+        theme_dir=$out/share/Kvantum/Base16Kvantum
+        mkdir -p "$theme_dir"
+        xsltproc ${./vespers/flat_qt.xsl} ${colors {
+          template = builtins.readFile "${inputs.stylix}/modules/qt/kvantum.svg.mustache";
+          extension = ".svg";
+        }} > "$theme_dir/Base16Kvantum.svg"
+        cp ${colors {
+          template = builtins.readFile "${inputs.stylix}/modules/qt/kvconfig.mustache";
+          extension = ".kvconfig";
+        }} "$theme_dir/Base16Kvantum.kvconfig"
+        substituteInPlace "$theme_dir/Base16Kvantum.kvconfig" \
+          --replace-fail 'menu_shadow_depth=7' 'menu_shadow_depth=0' \
+          --replace-fail 'popup_blurring=true' 'popup_blurring=false' \
+          --replace-fail 'reduce_window_opacity=10' 'reduce_window_opacity=0' \
+          --replace-fail 'shadowless_popup=false' 'shadowless_popup=true' \
+          --replace-fail 'transient_scrollbar=true' 'transient_scrollbar=false' \
+          --replace-fail 'blur_konsole=true' 'blur_konsole=false' \
+          --replace-fail 'blur_translucent=true' 'blur_translucent=false'
+      '';
     in
     {
       home.packages = [ pkgs.cinzel ];
+      xdg.configFile."fontconfig/conf.d/99-vespers-pixel.conf".text = ''
+        <?xml version="1.0"?>
+        <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
+        <fontconfig>
+          <match target="font">
+            <test name="family" compare="eq"><string>Terminus (TTF)</string></test>
+            <edit name="antialias" mode="assign"><bool>false</bool></edit>
+          </match>
+        </fontconfig>
+      '';
+      qt.kvantum.themes = lib.mkForce [ flat_qt ];
       desktop = {
         language_labels = {
           keyboard-us = "ANGLICA";
@@ -56,12 +88,12 @@
       wayland.windowManager.hyprland.extraConfig = lib.mkAfter (render_style (builtins.readFile ./vespers/hyprland.lua));
 
       programs.waybar = {
-        style = lib.mkForce (render_style (builtins.readFile ./vespers/waybar.css));
+        style = lib.mkForce (builtins.replaceStrings [ "@cross_asset@" ] [ "${cross_icon}" ] (render_style (builtins.readFile ./vespers/waybar.css)));
         settings.mainBar = {
-          margin-top = lib.mkForce 12;
-          margin-left = lib.mkForce 18;
-          margin-right = lib.mkForce 18;
-          height = 42;
+          margin-top = lib.mkForce 8;
+          margin-left = lib.mkForce 12;
+          margin-right = lib.mkForce 12;
+          height = 40;
           spacing = 0;
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];
           modules-center = lib.mkForce [ "clock#date" "clock" ];
@@ -96,15 +128,15 @@
 
       programs.fuzzel.settings = {
         main = {
-          font = "EB Garamond:size=16";
+          font = "Terminus (TTF):pixelsize=16:antialias=false";
           prompt = "Quaere: ";
           width = 48;
           lines = 10;
-          horizontal-pad = 28;
-          vertical-pad = 22;
-          inner-pad = 12;
+          horizontal-pad = 20;
+          vertical-pad = 16;
+          inner-pad = 8;
         };
-        border = { width = 2; radius = 3; };
+        border = { width = 3; radius = 0; };
         colors = force_values {
           background = "${colors.base00}ff";
           text = "${colors.base05}ff";
@@ -112,9 +144,9 @@
           placeholder = "${colors.base04}ff";
           input = "${colors.base06}ff";
           match = "${colors.base0A}ff";
-          selection = "${colors.base02}ff";
-          selection-text = "${colors.base07}ff";
-          selection-match = "${colors.base0A}ff";
+          selection = "${colors.base0A}ff";
+          selection-text = "${colors.base00}ff";
+          selection-match = "${colors.base00}ff";
           counter = "${colors.base04}ff";
           border = "${colors.base0D}ff";
         };
@@ -122,16 +154,16 @@
 
       services.dunst.settings = {
         global = force_values {
-          font = "EB Garamond 14";
+          font = "Terminus (TTF) 12";
           width = 380;
           offset = "(24, 76)";
-          padding = 20;
-          horizontal_padding = 24;
-          frame_width = 2;
+          padding = 16;
+          horizontal_padding = 16;
+          frame_width = 3;
           frame_color = "#${colors.base0D}";
           separator_height = 1;
           separator_color = "#${colors.base02}";
-          corner_radius = 3;
+          corner_radius = 0;
           format = "<b>%s</b>\n%b";
         };
         urgency_low = force_values { background = "#${colors.base00}ff"; foreground = "#${colors.base04}ff"; };
@@ -140,10 +172,10 @@
       };
 
       programs.kitty.settings = {
-        window_padding_width = 20;
-        cursor_shape = "beam";
+        window_padding_width = 12;
+        cursor_shape = "block";
         cursor_blink_interval = 0;
-        inactive_text_alpha = "0.85";
+        inactive_text_alpha = "1.0";
         tab_bar_style = "separator";
         tab_separator = "  │  ";
         active_tab_font_style = "bold";
@@ -152,9 +184,17 @@
       programs.fish.interactiveShellInit = lib.mkAfter (render_style (builtins.readFile ./vespers/prompt.fish));
       stylix.targets.fish.enable = true;
       stylix.targets.gtk.extraCss = ''
-        window decoration { border: 1px solid #${colors.base0D}; }
-        button { border-radius: 3px; }
-        selection { background-color: #${colors.base02}; color: #${colors.base07}; }
+        * { border-radius: 0; box-shadow: none; text-shadow: none; transition: none; animation: none; }
+        window decoration { border: 2px solid #${colors.base0D}; }
+        button, entry, spinbutton, combobox, menu, popover, tooltip, headerbar, notebook > header, trough, progress, slider {
+          background-image: none;
+        }
+        button { background-color: #${colors.base01}; border: 2px solid #${colors.base03}; }
+        button:hover { border-color: #${colors.base0D}; }
+        button:active, button:checked { background-color: #${colors.base0A}; color: #${colors.base00}; border-color: #${colors.base0A}; }
+        entry { border: 2px solid #${colors.base03}; }
+        entry:focus { border-color: #${colors.base0D}; }
+        selection { background-color: #${colors.base0A}; color: #${colors.base00}; }
       '';
       home.file.".config/sys64/power/style.css".source = pkgs.writeText "vespers-power.css" (render_style (builtins.readFile ./vespers/power.css));
     };
