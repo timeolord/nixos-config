@@ -9,10 +9,10 @@
       base16Scheme = {
         scheme = "Vespers";
         author = "timeolord";
-        base00 = "211a16";
-        base01 = "2e241d";
-        base02 = "453529";
-        base03 = "8b7560";
+        base00 = "4b3225";
+        base01 = "593e2b";
+        base02 = "6b4b35";
+        base03 = "a08a70";
         base04 = "b6a38b";
         base05 = "e8dfce";
         base06 = "f2ebdd";
@@ -110,7 +110,40 @@
           </match>
         </fontconfig>
       '';
+      xdg.configFile."gtk-4.0/gtk.css".source = lib.mkForce (pkgs.concatText "vespers-gtk4.css" [
+        config.xdg.configFile."gtk-3.0/gtk.css".source
+        (pkgs.writeText "vespers-libadwaita.css" ''
+          :root {
+            --accent-color: #${colors.base0A};
+            --accent-bg-color: #${colors.base0D};
+            --accent-fg-color: #${colors.base00};
+            --window-bg-color: #${colors.base00};
+            --window-fg-color: #${colors.base05};
+            --view-bg-color: #${colors.base00};
+            --view-fg-color: #${colors.base05};
+            --headerbar-bg-color: #${colors.base01};
+            --headerbar-fg-color: #${colors.base05};
+            --headerbar-backdrop-color: #${colors.base00};
+            --sidebar-bg-color: #${colors.base01};
+            --sidebar-fg-color: #${colors.base05};
+            --sidebar-backdrop-color: #${colors.base00};
+            --card-bg-color: #${colors.base01};
+            --card-fg-color: #${colors.base05};
+            --dialog-bg-color: #${colors.base01};
+            --dialog-fg-color: #${colors.base05};
+            --popover-bg-color: #${colors.base01};
+            --popover-fg-color: #${colors.base05};
+          }
+        '')
+      ]);
       qt.kvantum.themes = lib.mkForce [ flat_qt ];
+      stylix.icons = {
+        enable = true;
+        package = pkgs.gruvbox-plus-icons.override { folder-color = "gold"; };
+        dark = "Gruvbox-Plus-Dark";
+        light = "Gruvbox-Plus-Light";
+      };
+      dconf.settings."org/gnome/desktop/interface".accent-color = "yellow";
       desktop = {
         language_labels = {
           keyboard-us = "ANGLICA";
@@ -222,7 +255,7 @@
         tab_separator = "  │  ";
         active_tab_font_style = "bold";
       };
-      programs.emacs.extraConfig = lib.mkAfter (builtins.readFile ./vespers/emacs.el);
+      programs.emacs.extraConfig = lib.mkAfter (render_style (builtins.readFile ./vespers/emacs.el));
       programs.fish.interactiveShellInit = lib.mkAfter (render_style (builtins.readFile ./vespers/prompt.fish));
       stylix.targets.fish.enable = true;
       stylix.targets.gtk.extraCss = ''
@@ -231,9 +264,10 @@
         button, entry, spinbutton, combobox, menu, popover, tooltip, headerbar, notebook > header, trough, progress, slider {
           background-image: none;
         }
-        button { background-color: #${colors.base01}; border: 2px solid #${colors.base03}; }
-        button:hover { border-color: #${colors.base0D}; }
-        button:active, button:checked { background-color: #${colors.base0A}; color: #${colors.base00}; border-color: #${colors.base0A}; }
+        button { background-color: #${colors.base01}; border: 2px solid transparent; }
+        button.image-button, button.flat, windowcontrols button { background-color: transparent; }
+        button:hover { background-color: #${colors.base02}; border-color: transparent; }
+        button:active, button:checked { background-color: #${colors.base0A}; color: #${colors.base00}; border-color: transparent; }
         entry { border: 2px solid #${colors.base03}; }
         entry:focus { border-color: #${colors.base0D}; }
         selection { background-color: #${colors.base0A}; color: #${colors.base00}; }

@@ -17,6 +17,9 @@ window#waybar {
     border: 3px double #@base0D@;
 }
 
+window#waybar.scripture { border-top: none; }
+#custom-godsays { color: #@base05@; padding: 4px 16px; }
+
 tooltip {
     color: #@base05@;
     background: #@base00@;

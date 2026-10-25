@@ -5,6 +5,7 @@ let
   names = map (index: "base0${lib.toHexString index}") (lib.range 0 15);
 in
 {
+  imports = [ ./scripture.nix ];
   home.packages = [
     pkgs.waybar
     pkgs.playerctl
