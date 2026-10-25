@@ -10,7 +10,7 @@
   programs.fastfetch = {
     enable = true;
     settings = {
-      logo.position = "auto";
+      logo.position = "top";
       display.disableLinewrap = false;
       modules = [
         "title" "separator" "os" "host" "kernel" "uptime" "packages" "shell"
