@@ -28,7 +28,7 @@
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
         sansSerif = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
         monospace = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
-        sizes = { applications = 12; desktop = 12; popups = 12; terminal = 12; };
+        sizes = { applications = 15; desktop = 15; popups = 15; terminal = 15; };
       };
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
     };
@@ -93,7 +93,7 @@
           margin-top = lib.mkForce 8;
           margin-left = lib.mkForce 12;
           margin-right = lib.mkForce 12;
-          height = 40;
+          height = 48;
           spacing = 0;
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];
           modules-center = lib.mkForce [ "clock#date" "clock" ];
@@ -121,14 +121,14 @@
             format-charging = "VIS +{capacity}%";
             format-plugged = "VIS {capacity}%";
           };
-          tray = { icon-size = lib.mkForce 16; spacing = lib.mkForce 8; };
+          tray = { icon-size = lib.mkForce 20; spacing = lib.mkForce 8; };
           "custom/power" = { format = lib.mkForce "EXIRE"; tooltip-format = "Finis sessionis"; };
         };
       };
 
       programs.fuzzel.settings = {
         main = {
-          font = "Terminus (TTF):pixelsize=16:antialias=false";
+          font = "Terminus (TTF):pixelsize=${toString (config.stylix.fonts.sizes.popups * 4 / 3)}:antialias=false";
           prompt = "Quaere: ";
           width = 48;
           lines = 10;
@@ -154,9 +154,9 @@
 
       services.dunst.settings = {
         global = force_values {
-          font = "Terminus (TTF) 12";
-          width = 380;
-          offset = "(24, 76)";
+          font = "Terminus (TTF) ${toString config.stylix.fonts.sizes.popups}";
+          width = 460;
+          offset = "(24, 84)";
           padding = 16;
           horizontal_padding = 16;
           frame_width = 3;

@@ -9,5 +9,5 @@
 (set-face-attribute 'mode-line-inactive nil :background "#2e241d" :foreground "#b6a38b" :box nil)
 (set-face-attribute 'vertical-border nil :foreground "#453529")
 (setq-default line-spacing 0)
-(setq doom-modeline-height 24)
+(setq doom-modeline-height 30)
 (setq org-ellipsis " ▾")

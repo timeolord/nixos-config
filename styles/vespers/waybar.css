@@ -2,7 +2,7 @@
     border: none;
     border-radius: 0;
     font-family: "Terminus (TTF)", "Noto Sans CJK SC";
-    font-size: 16px;
+    font-size: @desktop_size@px;
     font-weight: normal;
     min-height: 0;
     box-shadow: none;
@@ -26,7 +26,7 @@ tooltip {
 #custom-sigil {
     color: #@base0A@;
     font-family: "Cinzel";
-    font-size: 12px;
+    font-size: 16px;
     letter-spacing: 2px;
     padding: 0 16px;
     padding-left: 36px;
@@ -55,14 +55,14 @@ tooltip {
 #workspaces button.urgent { color: #@base08@; border-color: #@base08@; }
 #workspaces button:hover { color: #@base0A@; background: #@base02@; box-shadow: none; }
 
-#clock { color: #@base06@; font-size: 16px; padding: 0 16px; }
-#clock.date { color: #@base0D@; font-size: 16px; padding-right: 0; }
+#clock { color: #@base06@; padding: 0 16px; }
+#clock.date { color: #@base0D@; padding-right: 0; }
 
 #cpu, #memory, #network, #pulseaudio, #battery, #custom-language, #tray, #custom-power {
     padding: 0 8px;
     margin: 8px 0;
 }
-#cpu, #memory { color: #@base04@; font-size: 16px; }
+#cpu, #memory { color: #@base04@; }
 #custom-language { color: #@base0A@; border-left: 1px solid #@base02@; }
 #network.disconnected, #pulseaudio.muted { color: #@base03@; }
 #battery.charging { color: #@base0B@; }
