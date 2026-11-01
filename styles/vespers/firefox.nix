@@ -4,7 +4,7 @@ let
   stylesheet = pkgs.writeText "vespers-firefox.css" (render_style (builtins.readFile ./firefox.css));
 in
 {
-  config = lib.mkIf (lib.elem config.style.name [ "vespers" "vespers-16" ]) {
+  config = lib.mkIf (config.style.name == "vespers") {
     programs.firefox = {
       package = pkgs.firefox.override {
         extraAutoConfig = ''pref("general.config.sandbox_enabled", false);'';

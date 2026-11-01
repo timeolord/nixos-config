@@ -168,24 +168,23 @@ style profiles
 ==============
 
 Stylix manages the shared palette, fonts, cursor, opacity, and wallpaper.
-styles/selected.nix contains the default profile name, currently "vespers-16".
+styles/selected.nix contains the default profile name, currently "vespers".
 a host can override it with style.name = "current"; in its host module.
 profile selection takes effect through a normal system rebuild.
 
-styles/vespers-16.nix is a reversible interface palette trial layered over
-Vespers. it keeps the walnut backgrounds, adds stronger gold and colour
-accents, and removes GTK shade overlays. application artwork and website
-content keep their own colours; this is a theme palette rather than a
-promise that every rendered pixel uses one of sixteen colours. set
-styles/selected.nix back to "vespers" and rebuild to undo the trial.
+Vespers uses the approved sixteen colour palette, with walnut backgrounds,
+strong gold and colour accents, and flat GTK shading. the former vespers-16
+trial is now part of Vespers. artwork and website content keep their own
+colours unless the optional whole screen filter is enabled.
 
-both Vespers profiles include an optional whole screen sixteen colour
+Vespers includes an optional whole screen sixteen colour
 filter, initially off. press Super+Shift+F12 to toggle it, or run
 vespers_filter on, vespers_filter off, or vespers_filter status. the filter
-uses the selected profile's sixteen colours and affects paintings, photos,
+uses the Vespers palette and affects paintings, photos,
 videos, and websites while enabled. files are untouched. a configuration
 reload or new session turns it off. it leaves other active screen shaders
-alone. the generated shader is at ~/.config/hypr/vespers-16.frag.
+alone. the helper uses Lua IPC and checks the applied setting before
+reporting success. the generated shader is at ~/.config/hypr/vespers-16.frag.
 
 styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,

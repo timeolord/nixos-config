@@ -1,6 +1,6 @@
 { config, lib, pkgs, userName, ... }:
 {
-  config = lib.mkIf (lib.elem config.style.name [ "vespers" "vespers-16" ]) {
+  config = lib.mkIf (config.style.name == "vespers") {
     home-manager.users.${userName} = { config, ... }:
     let
       colors = config.lib.stylix.colors;

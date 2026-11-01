@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, userName, ... }:
 {
   imports = [ ./vespers/firefox.nix ./vespers/filter.nix ];
-  config = lib.mkIf (lib.elem config.style.name [ "vespers" "vespers-16" ]) {
+  config = lib.mkIf (config.style.name == "vespers") {
     stylix = {
       image = ../wallpapers/abbey_in_the_oakwood.jpg;
       polarity = "dark";
@@ -13,19 +13,19 @@
         base00 = "30221b";
         base01 = "3e2c21";
         base02 = "513b2c";
-        base03 = "a08a70";
-        base04 = "b6a38b";
+        base03 = "927553";
+        base04 = "bca278";
         base05 = "e8dfce";
         base06 = "f2ebdd";
         base07 = "faf6ec";
-        base08 = "c47b73";
-        base09 = "cb9868";
-        base0A = "d8bb78";
-        base0B = "a8ad86";
-        base0C = "98ada0";
-        base0D = "c9a45c";
-        base0E = "b59aaf";
-        base0F = "a98167";
+        base08 = "bd5445";
+        base09 = "ce8c42";
+        base0A = "e2bd58";
+        base0B = "91a35b";
+        base0C = "72ada1";
+        base0D = "bf9638";
+        base0E = "a17cb0";
+        base0F = "99613c";
       };
       fonts = {
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
@@ -274,6 +274,15 @@
         entry { border: 3px double #${colors.base03}; }
         entry:focus { border-color: #${colors.base0D}; }
         selection { background-color: #${colors.base0A}; color: #${colors.base00}; }
+        @define-color headerbar_border_color #${colors.base02};
+        @define-color headerbar_shade_color transparent;
+        @define-color headerbar_darker_shade_color transparent;
+        @define-color sidebar_shade_color transparent;
+        @define-color secondary_sidebar_shade_color transparent;
+        @define-color card_shade_color transparent;
+        @define-color popover_shade_color transparent;
+        @define-color shade_color transparent;
+        *:disabled { opacity: 1; color: #${colors.base03}; }
       '';
       home.file.".config/sys64/power/style.css".source = pkgs.writeText "vespers-power.css" (render_style (builtins.readFile ./vespers/power.css));
     };
