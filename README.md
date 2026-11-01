@@ -194,8 +194,10 @@ flashing during toggles. idle frame skipping stays enabled; active screen
 updates can cost more GPU work than partial redraws. repeated on or off
 commands leave an already matching shader alone. the generated shaders are
 at ~/.config/hypr/vespers-16.frag and ~/.config/hypr/vespers-16-dither.frag.
-dithering uses a fixed 4 by 4 Bayer pattern to distribute two nearby palette
-colours across pixels. intermediate tones appear smoother at a distance,
+dithering uses a fixed 4 by 4 Bayer pattern with 2 by 2 pixel cells and
+stronger mixing of two nearby palette colours. this makes the pattern
+chunkier and spreads it further into colour transitions. intermediate tones
+appear blended at a distance,
 while every output pixel still uses a palette colour. exact theme colours
 remain solid. the pattern is anchored to screen pixels and has no time or
 random input; moving content can still move through the fixed pattern.

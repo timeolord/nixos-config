@@ -5,6 +5,8 @@ layout(location = 0) out vec4 fragColor;
 uniform sampler2D tex;
 const vec3 palette[16] = vec3[16](@palette@);
 const bool ordered_dither = @dither@;
+const float dither_pixel_size = 2.0;
+const float dither_strength = 2.0;
 const vec3 color_weights = vec3(0.299, 0.587, 0.114);
 const int bayer[16] = int[16](
      0,  8,  2, 10,
@@ -39,7 +41,9 @@ void main() {
         vec3 segment = second_color - first_color;
         float blend_ratio = clamp(dot((source - first_color) * color_weights, segment)
             / max(dot(segment * color_weights, segment), 0.000001), 0.0, 1.0);
-        ivec2 pixel = ivec2(gl_FragCoord.xy) % 4;
+        float centered_ratio = blend_ratio * 2.0 - 1.0;
+        blend_ratio = 0.5 + 0.5 * sign(centered_ratio) * pow(abs(centered_ratio), dither_strength);
+        ivec2 pixel = ivec2(floor(gl_FragCoord.xy / dither_pixel_size)) % 4;
         float threshold = (float(bayer[pixel.y * 4 + pixel.x]) + 0.5) / 16.0;
         selected = blend_ratio > threshold ? second_color : first_color;
     }
