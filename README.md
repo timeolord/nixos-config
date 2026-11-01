@@ -174,8 +174,8 @@ profile selection takes effect through a normal system rebuild.
 
 Vespers uses the approved sixteen colour palette, with walnut backgrounds,
 strong gold and colour accents, and flat GTK shading. the former vespers-16
-trial is now part of Vespers. artwork and website content keep their own
-colours unless the optional whole screen filter is enabled.
+trial is now part of Vespers. artwork retains its own colours unless the whole screen filter is enabled.
+website colours also follow the automatic dark mode setup described below.
 
 Vespers starts with the stronger dithered whole screen sixteen colour
 filter enabled. press Super+Shift+F12 to toggle it, or run
@@ -201,6 +201,28 @@ appear blended at a distance,
 while every output pixel still uses a palette colour. exact theme colours
 remain solid. the pattern is anchored to screen pixels and has no time or
 random input; moving content can still move through the fixed pattern.
+
+Discord keeps the standard client with Vencord supplied by Nixpkgs. its
+Stylix theme follows the selected palette and fonts. Vespers adds VGA text,
+flat walnut panels, gold accents and selections, square controls, and no
+button borders, gradients, shadows, or transitions. restart Discord fully
+after rebuilding; existing login data and Discord settings remain in place.
+
+programs/discord.nix wraps the discord command so it enables
+stylix.theme.css before launch, preserving other Vencord settings and themes.
+the settings stay writable. the current profile disables the managed theme;
+future profiles inherit the Stylix Vencord target. the local theme is at
+~/.config/Vencord/themes/stylix.theme.css and appears in Vencord's Themes
+settings. malformed Vencord settings stop launch without being overwritten.
+
+Firefox requests native dark website themes by default and installs the
+signed Dark Reader extension for sites that stay bright. this applies across
+style profiles. Dark Reader starts enabled on ordinary websites and detects
+existing dark themes; use its toolbar menu for per site exceptions or to
+disable it. browser protected pages retain their normal extension restrictions.
+the XPI version and hash are pinned in config.nix and supplied from the Nix
+store. the extension can be disabled normally. rebuild and restart Firefox
+to install it in existing profiles; no profile migration is needed.
 
 Firefox vertical tabs show bare icons when idle, a walnut hover highlight,
 and a gold marked selected tab. its native sidebar and launcher controls

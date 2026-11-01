@@ -1,0 +1,79 @@
+:root, .theme-light, .theme-dark, .theme-darker, .theme-midnight, .visual-refresh {
+  --font: "@monospace_font@", monospace !important;
+  --font-primary: "@monospace_font@", monospace !important;
+  --font-display: "@monospace_font@", monospace !important;
+  --font-headline: "@monospace_font@", monospace !important;
+  --font-code: "@monospace_font@", monospace !important;
+  --custom-font-size: @desktop_size@px !important;
+  --background-primary: #@base00@ !important;
+  --background-secondary: #@base01@ !important;
+  --background-secondary-alt: #@base01@ !important;
+  --background-tertiary: #@base00@ !important;
+  --background-floating: #@base01@ !important;
+  --background-base-lowest: #@base00@ !important;
+  --background-base-lower: #@base00@ !important;
+  --background-base-low: #@base01@ !important;
+  --background-surface-high: #@base01@ !important;
+  --background-surface-higher: #@base02@ !important;
+  --background-surface-highest: #@base02@ !important;
+  --chat-background-default: #@base00@ !important;
+  --channeltextarea-background: #@base01@ !important;
+  --input-background: #@base01@ !important;
+  --background-modifier-hover: #@base02@ !important;
+  --background-modifier-selected: #@base02@ !important;
+  --background-modifier-active: #@base02@ !important;
+  --background-message-hover: #@base01@ !important;
+  --background-mentioned: #@base01@ !important;
+  --background-mentioned-hover: #@base02@ !important;
+  --brand-500: #@base0D@ !important;
+  --blurple-50: #@base0D@ !important;
+  --bg-brand: #@base0D@ !important;
+  --text-brand: #@base0A@ !important;
+  --text-link: #@base0A@ !important;
+  --header-primary: #@base06@ !important;
+  --header-secondary: #@base04@ !important;
+  --text-normal: #@base05@ !important;
+  --text-primary: #@base05@ !important;
+  --text-secondary: #@base04@ !important;
+  --text-muted: #@base03@ !important;
+  --interactive-normal: #@base04@ !important;
+  --interactive-hover: #@base06@ !important;
+  --interactive-active: #@base0A@ !important;
+  --channels-default: #@base04@ !important;
+  --channel-icon: #@base04@ !important;
+  --button-filled-brand-background: #@base0D@ !important;
+  --button-filled-brand-background-hover: #@base0A@ !important;
+  --button-filled-brand-text: #@base00@ !important;
+  --button-filled-brand-text-hover: #@base00@ !important;
+  --button-secondary-background: #@base02@ !important;
+  --button-secondary-background-hover: #@base03@ !important;
+  --mention-background: #@base02@ !important;
+  --mention-foreground: #@base0A@ !important;
+  --focus-primary: #@base0D@ !important;
+  --border-faint: #@base02@ !important;
+  --border-subtle: #@base02@ !important;
+  --border-strong: #@base03@ !important;
+  --scrollbar-auto-thumb: #@base03@ !important;
+  --scrollbar-thin-thumb: #@base03@ !important;
+}
+
+body { font-family: var(--font-primary) !important; font-size: @desktop_size@px !important; }
+button, input, textarea, select { font-family: var(--font-primary) !important; }
+*, *::before, *::after {
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  text-shadow: none !important;
+  transition: none !important;
+  animation: none !important;
+}
+button, [role="button"], input, textarea { background-image: none !important; }
+button, [role="button"] { border-color: transparent !important; }
+[role="button"][aria-pressed="true"], [role="option"][aria-selected="true"] {
+  background-color: #@base02@ !important;
+  color: #@base0A@ !important;
+}
+input:focus-visible, textarea:focus-visible, [contenteditable="true"]:focus-visible {
+  outline: 2px solid #@base0D@ !important;
+  outline-offset: -2px;
+}
+::selection { background: #@base0A@ !important; color: #@base00@ !important; }

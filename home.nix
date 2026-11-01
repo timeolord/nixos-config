@@ -10,6 +10,7 @@
     inputs.sops-nix.homeManagerModules.sops
     ./programs/fish/fish.nix
     ./programs/claude.nix
+    ./programs/discord.nix
     ./programs/anki.nix
     ./programs/activitywatch.nix
     ./programs/mpv.nix
@@ -40,7 +41,6 @@
   home.packages = with pkgs; [
     # bitwarden-desktop electron version is current eol
     # youtube-music is deprecated and is ai slop now...
-    discord
     signal-desktop
     bazecor
     # obsidian, switched to org-roam

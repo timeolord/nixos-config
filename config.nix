@@ -235,6 +235,15 @@
       OfferToSaveLogins = false;
       OfferToSaveLoginsDefault = false;
       PictureInPicture = false;
+      Preferences."browser.theme.content-theme" = { Value = 0; Status = "default"; };
+      ExtensionSettings."addon@darkreader.org" = {
+        installation_mode = "normal_installed";
+        install_url = "file://${pkgs.fetchurl {
+          name = "darkreader-4.9.134.xpi";
+          url = "https://addons.mozilla.org/firefox/downloads/file/5175215/darkreader-4.9.134.xpi";
+          hash = "sha256-cAYzOVqi9jmhvtQlPicwnrZ280bVmbCuK3oEUyMuCuw=";
+        }}";
+      };
     };
   };
 

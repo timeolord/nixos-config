@@ -138,6 +138,7 @@
         '')
       ]);
       qt.kvantum.themes = lib.mkForce [ flat_qt ];
+      stylix.targets.vencord.extraCss = render_style (builtins.readFile ./vespers/discord.css);
       stylix.icons = {
         enable = true;
         package = pkgs.gruvbox-plus-icons.override { folder-color = "gold"; };

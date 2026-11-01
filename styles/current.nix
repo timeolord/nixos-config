@@ -45,6 +45,7 @@
         qt.enable = false;
         kitty.enable = false;
         emacs.enable = false;
+        vencord.enable = false;
       };
       programs.kitty.settings.background_opacity = config.stylix.opacity.terminal;
       programs.waybar.style = lib.mkAfter ''
