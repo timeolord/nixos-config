@@ -26,7 +26,10 @@
       home.packages = [ filter_toggle ];
       xdg.configFile."hypr/vespers-16.frag".source = shader;
       wayland.windowManager.hyprland.extraConfig = lib.mkAfter ''
-        hl.config({ decoration = { screen_shader = "[[EMPTY]]" } })
+        hl.config({
+          decoration = { screen_shader = "[[EMPTY]]" },
+          debug = { damage_tracking = 1 },
+        })
         hl.bind("SUPER + SHIFT + F12", hl.dsp.exec_cmd("${filter_toggle}/bin/vespers_filter toggle"))
       '';
     };

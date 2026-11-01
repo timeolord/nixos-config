@@ -184,7 +184,11 @@ uses the Vespers palette and affects paintings, photos,
 videos, and websites while enabled. files are untouched. a configuration
 reload or new session turns it off. it leaves other active screen shaders
 alone. the helper uses Lua IPC and checks the applied setting before
-reporting success. the generated shader is at ~/.config/hypr/vespers-16.frag.
+reporting success. Vespers redraws the whole monitor when something
+changes and applies shader refreshes immediately to reduce stale frame
+flashing during toggles. idle frame skipping stays enabled; active screen
+updates can cost more GPU work than partial redraws. repeated on or off
+commands leave an already matching shader alone. the generated shader is at ~/.config/hypr/vespers-16.frag.
 
 styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,
