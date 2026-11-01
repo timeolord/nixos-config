@@ -30,8 +30,8 @@ tooltip {
     color: #@base0A@;
     font-family: "@monospace_font@";
     font-size: @desktop_size@px;
-    padding: 0 16px;
-    padding-left: 36px;
+    padding: 0 8px;
+    padding-left: 28px;
     background-image: url("@cross_asset@");
     background-repeat: no-repeat;
     background-position: 12px center;
@@ -39,10 +39,10 @@ tooltip {
     margin: 0;
 }
 
-#workspaces { margin: 4px 8px; }
+#workspaces { margin: 4px; }
 #workspaces button {
     color: #@base04@;
-    padding: 0 6px;
+    padding: 0 2px;
     margin: 0 2px;
     min-width: 18px;
     border: 1px solid transparent;
@@ -56,12 +56,12 @@ tooltip {
 #workspaces button.urgent { color: #@base08@; }
 #workspaces button:not(.active):hover { color: #@base0A@; }
 
-#clock { color: #@base06@; padding: 0 16px; }
-#custom-date { color: #@base0D@; padding-left: 16px; }
+#clock { color: #@base06@; padding: 0 8px; }
+#custom-date { color: #@base0D@; padding-left: 8px; }
 
 #cpu, #memory, #network, #pulseaudio, #battery, #custom-language, #tray, #custom-power {
-    padding: 0 8px;
-    margin: 8px 0;
+    padding: 0 4px;
+    margin: 4px 0;
 }
 #cpu, #memory { color: #@base04@; }
 #custom-language { color: #@base0A@; border-left: 1px solid #@base02@; }
@@ -69,5 +69,5 @@ tooltip {
 #battery.charging { color: #@base0B@; }
 #battery.warning:not(.charging) { color: #@base0A@; }
 #battery.critical:not(.charging) { color: #@base08@; }
-#custom-power { color: #@base0D@; border-left: 1px solid #@base02@; padding: 0 18px; }
+#custom-power { color: #@base0D@; border-left: 1px solid #@base02@; padding: 0 8px; }
 #custom-power:hover { color: #@base00@; background: #@base0A@; }

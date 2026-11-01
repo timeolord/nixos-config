@@ -46,7 +46,9 @@ in
           on-scroll-down = "hyprctl \"dispatch hl.dsp.focus({ workspace = \\\"+1\\\" })\"";
           format = "{icon}";
           on-click = "activate";
-          sort-by-id = true;
+          sort-by-id = false;
+          sort-by-name = true;
+          sort-by-coordinates = false;
           format-icons = {
             "1" = "壹";
             "2" = "贰";

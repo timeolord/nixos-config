@@ -95,6 +95,7 @@
     background-color: #@base00@ !important;
     color: #@base05@ !important;
     font-family: "@monospace_font@" !important;
+    font-size: @desktop_size@px !important;
   }
   *, *::before, *::after { border-radius: 0 !important; box-shadow: none !important; transition: none !important; animation: none !important; }
   .top-site-outer .tile, .search-wrapper .search-handoff-button, .card, .section-list { background-color: #@base01@ !important; color: #@base05@ !important; }

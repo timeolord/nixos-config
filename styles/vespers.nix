@@ -31,7 +31,7 @@
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
         sansSerif = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
         monospace = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
-        sizes = { applications = 15; desktop = 15; popups = 15; terminal = 15; };
+        sizes = { applications = 24; desktop = 24; popups = 24; terminal = 24; };
       };
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
     };
@@ -161,13 +161,15 @@
 
       programs.waybar = {
         style = lib.mkForce (builtins.replaceStrings [ "@cross_asset@" ] [ "${cross_icon}" ] (render_style (builtins.readFile ./vespers/waybar.css)));
+        settings.scriptureBar.height = lib.mkForce 44;
         settings.mainBar = {
           height = 48;
+          fixed-center = false;
           spacing = 0;
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];
           modules-center = lib.mkForce [ "custom/date" "clock" ];
           modules-right = lib.mkForce [ "cpu" "memory" "network" "pulseaudio" "custom/language" "battery" "tray" "custom/power" ];
-          "custom/sigil" = { format = "╔═ VESPERAE ═╗\n╚════════════╝"; tooltip-format = "Ad maiorem Dei gloriam"; };
+          "custom/sigil" = { format = "╡ VESPERAE ╞"; tooltip-format = "Ad maiorem Dei gloriam"; };
           "ext/workspaces".format-icons = lib.mkForce {
             "1" = "I"; "2" = "II"; "3" = "III"; "4" = "IV"; "5" = "V";
             "6" = "VI"; "7" = "VII"; "8" = "VIII"; "9" = "IX"; "10" = "X";
@@ -228,8 +230,8 @@
       services.dunst.settings = {
         global = force_values {
           font = "${config.stylix.fonts.monospace.name} ${toString config.stylix.fonts.sizes.popups}";
-          width = 460;
-          offset = "(24, 84)";
+          width = 560;
+          offset = "(24, 108)";
           padding = 16;
           horizontal_padding = 16;
           frame_width = 4;
