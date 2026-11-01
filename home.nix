@@ -50,12 +50,16 @@
     # zotero
     # for gog games
     heroic
-    sgt-puzzles # for Theo
+    # sgt-puzzles # for Theo
     godsays
+    # art stuff
     gimp-with-plugins
+    inkscape
+    # zip stuff
     unzip
     p7zip
     tree
+    # latex
     texliveFull
     audacity
     appimage-run
