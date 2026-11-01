@@ -1,7 +1,7 @@
 { config, lib, pkgs, inputs, userName, ... }:
 {
-  imports = [ ./vespers/firefox.nix ];
-  config = lib.mkIf (config.style.name == "vespers") {
+  imports = [ ./vespers/firefox.nix ./vespers/filter.nix ];
+  config = lib.mkIf (lib.elem config.style.name [ "vespers" "vespers-16" ]) {
     stylix = {
       image = ../wallpapers/abbey_in_the_oakwood.jpg;
       polarity = "dark";
@@ -31,7 +31,7 @@
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
         sansSerif = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
         monospace = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
-        sizes = { applications = 24; desktop = 24; popups = 24; terminal = 24; };
+        sizes = { applications = 21; desktop = 21; popups = 21; terminal = 21; };
       };
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
     };
@@ -196,7 +196,7 @@
             format-charging = "VIS +{capacity}%";
             format-plugged = "VIS {capacity}%";
           };
-          tray = { icon-size = lib.mkForce 20; spacing = lib.mkForce 8; };
+          tray = { icon-size = lib.mkForce 20; spacing = lib.mkForce 12; };
           "custom/power" = { format = lib.mkForce "EXIRE"; tooltip-format = "Finis sessionis"; };
         };
       };

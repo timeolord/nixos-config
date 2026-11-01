@@ -168,9 +168,24 @@ style profiles
 ==============
 
 Stylix manages the shared palette, fonts, cursor, opacity, and wallpaper.
-styles/selected.nix contains the default profile name, currently "vespers".
+styles/selected.nix contains the default profile name, currently "vespers-16".
 a host can override it with style.name = "current"; in its host module.
 profile selection takes effect through a normal system rebuild.
+
+styles/vespers-16.nix is a reversible interface palette trial layered over
+Vespers. it keeps the walnut backgrounds, adds stronger gold and colour
+accents, and removes GTK shade overlays. application artwork and website
+content keep their own colours; this is a theme palette rather than a
+promise that every rendered pixel uses one of sixteen colours. set
+styles/selected.nix back to "vespers" and rebuild to undo the trial.
+
+both Vespers profiles include an optional whole screen sixteen colour
+filter, initially off. press Super+Shift+F12 to toggle it, or run
+vespers_filter on, vespers_filter off, or vespers_filter status. the filter
+uses the selected profile's sixteen colours and affects paintings, photos,
+videos, and websites while enabled. files are untouched. a configuration
+reload or new session turns it off. it leaves other active screen shaders
+alone. the generated shader is at ~/.config/hypr/vespers-16.frag.
 
 styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,
@@ -178,8 +193,8 @@ Kitty colors and transparency, and Doom One in Emacs. the application
 exceptions live in this profile, so they do not carry into another profile.
 
 styles/vespers.nix is the Victorian inspired alternative. it combines walnut
-browns, antique gold, ivory and marble whites, Terminus pixel text, Cinzel
-headings, and EB Garamond for prose. it changes the floating Waybar frame,
+browns, antique gold, ivory and marble whites, PxPlus IBM VGA pixel text, Cinzel
+headings, and EB Garamond for prose. it changes the edge to edge Waybar frame,
 window spacing and borders, animations, launcher, notifications, terminal,
 Emacs, GTK, Qt, shell colors and prompt, and power menu. the VESPERAE label
 has the tooltip Ad maiorem Dei gloriam. the system language stays unchanged.
@@ -192,7 +207,7 @@ local system timezone. the clock remains in 24 hour format.
 
 the interface takes cues from NES.css and System.css: flat opaque panels,
 square geometry, double gold frames, a small pixel cross, compact controls,
-and inverted gold selections. Terminus is rendered without antialiasing;
+and inverted gold selections. the VGA font renders without antialiasing;
 Cinzel and Garamond retain their normal rendering. compositor shadows,
 blur, border gradients, and animations are disabled. GTK controls and the
 power menu have square edges without gradients or shadows. the Qt theme

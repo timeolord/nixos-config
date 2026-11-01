@@ -1,6 +1,6 @@
 { config, lib, pkgs, userName, ... }:
 let
-  profiles = { current = ./current.nix; vespers = ./vespers.nix; };
+  profiles = { current = ./current.nix; vespers = ./vespers.nix; vespers-16 = ./vespers-16.nix; };
 in
 {
   imports = builtins.attrValues profiles;

@@ -60,14 +60,14 @@ tooltip {
 #custom-date { color: #@base0D@; padding-left: 8px; }
 
 #cpu, #memory, #network, #pulseaudio, #battery, #custom-language, #tray, #custom-power {
-    padding: 0 4px;
+    padding: 0 10px;
     margin: 4px 0;
 }
 #cpu, #memory { color: #@base04@; }
-#custom-language { color: #@base0A@; border-left: 1px solid #@base02@; }
+#custom-language { color: #@base0A@; }
 #network.disconnected, #pulseaudio.muted { color: #@base03@; }
 #battery.charging { color: #@base0B@; }
 #battery.warning:not(.charging) { color: #@base0A@; }
 #battery.critical:not(.charging) { color: #@base08@; }
-#custom-power { color: #@base0D@; border-left: 1px solid #@base02@; padding: 0 8px; }
+#custom-power { color: #@base0D@; }
 #custom-power:hover { color: #@base00@; background: #@base0A@; }
