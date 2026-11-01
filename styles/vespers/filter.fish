@@ -1,13 +1,13 @@
 set action toggle
 if test (count $argv) -gt 1
-    echo 'usage: vespers_filter [on|off|toggle|status]' >&2
+    echo 'usage: vespers_filter [on|dither|off|toggle|status]' >&2
     exit 2
 end
 if test (count $argv) -eq 1
     set action $argv[1]
 end
-if not contains -- $action on off toggle status
-    echo 'usage: vespers_filter [on|off|toggle|status]' >&2
+if not contains -- $action on dither off toggle status
+    echo 'usage: vespers_filter [on|dither|off|toggle|status]' >&2
     exit 2
 end
 function get_shader
@@ -19,11 +19,15 @@ end
 set current (get_shader)
 or exit 1
 set enabled off
-if test "$current" = '@shader@'
+if contains -- "$current" '@shader@' '@dither_shader@'
     set enabled on
 end
 if test $action = status
-    echo $enabled
+    if test "$current" = '@dither_shader@'
+        echo 'on (dithered)'
+    else
+        echo $enabled
+    end
     exit 0
 end
 if test $action = toggle
@@ -33,13 +37,15 @@ if test $action = toggle
         set action on
     end
 end
-if not contains -- "$current" '@shader@' '[[EMPTY]]' ''
+if not contains -- "$current" '@shader@' '@dither_shader@' '[[EMPTY]]' ''
     echo 'another screen shader is active; leaving it in place' >&2
     exit 1
 end
 set target ''
 if test $action = on
     set target '@shader@'
+else if test $action = dither
+    set target '@dither_shader@'
 end
 if test "$current" = '[[EMPTY]]'
     set current ''

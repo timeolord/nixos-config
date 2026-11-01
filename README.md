@@ -179,7 +179,11 @@ colours unless the optional whole screen filter is enabled.
 
 Vespers includes an optional whole screen sixteen colour
 filter, initially off. press Super+Shift+F12 to toggle it, or run
-vespers_filter on, vespers_filter off, or vespers_filter status. the filter
+vespers_filter on, vespers_filter off, or vespers_filter status. use
+vespers_filter dither for an optional ordered dithering mode; on restores
+the original flat quantization. status identifies the dithered mode, and
+the shortcut turns either active mode off or enables the flat mode from off.
+the filter
 uses the Vespers palette and affects paintings, photos,
 videos, and websites while enabled. files are untouched. a configuration
 reload or new session turns it off. it leaves other active screen shaders
@@ -188,7 +192,13 @@ reporting success. Vespers redraws the whole monitor when something
 changes and applies shader refreshes immediately to reduce stale frame
 flashing during toggles. idle frame skipping stays enabled; active screen
 updates can cost more GPU work than partial redraws. repeated on or off
-commands leave an already matching shader alone. the generated shader is at ~/.config/hypr/vespers-16.frag.
+commands leave an already matching shader alone. the generated shaders are
+at ~/.config/hypr/vespers-16.frag and ~/.config/hypr/vespers-16-dither.frag.
+dithering uses a fixed 4 by 4 Bayer pattern to distribute two nearby palette
+colours across pixels. intermediate tones appear smoother at a distance,
+while every output pixel still uses a palette colour. exact theme colours
+remain solid. the pattern is anchored to screen pixels and has no time or
+random input; moving content can still move through the fixed pattern.
 
 styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,
