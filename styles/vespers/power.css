@@ -1,7 +1,7 @@
 #syspower * { border-radius: 0; box-shadow: none; text-shadow: none; transition: none; animation: none; }
 #syspower { background: #@base00@; }
-#syspower .primary_window { color: #@base05@; font-family: "Terminus (TTF)"; font-size: @desktop_size@px; }
-#syspower .label_status { color: #@base0A@; font-family: "Cinzel"; }
+#syspower .primary_window { color: #@base05@; font-family: "@monospace_font@"; font-size: @desktop_size@px; }
+#syspower .label_status { color: #@base0A@; font-family: "@monospace_font@"; }
 #syspower .box_buttons { padding: 20px; }
 #syspower button {
     color: #@base05@;

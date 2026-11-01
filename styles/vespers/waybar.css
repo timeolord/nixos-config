@@ -1,7 +1,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Terminus (TTF)", "Noto Sans CJK SC";
+    font-family: "@monospace_font@", "Noto Sans CJK SC";
     font-size: @desktop_size@px;
     font-weight: normal;
     min-height: 0;
@@ -28,17 +28,15 @@ tooltip {
 
 #custom-sigil {
     color: #@base0A@;
-    font-family: "Cinzel";
-    font-size: 16px;
-    letter-spacing: 2px;
+    font-family: "@monospace_font@";
+    font-size: @desktop_size@px;
     padding: 0 16px;
     padding-left: 36px;
     background-image: url("@cross_asset@");
     background-repeat: no-repeat;
     background-position: 12px center;
     background-size: 12px 16px;
-    margin: 6px 0;
-    border-right: 1px solid #@base0D@;
+    margin: 0;
 }
 
 #workspaces { margin: 4px 8px; }

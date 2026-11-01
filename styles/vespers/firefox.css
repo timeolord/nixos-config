@@ -1,0 +1,103 @@
+@-moz-document url("chrome://browser/content/browser.xhtml") {
+  :root {
+    color-scheme: dark !important;
+    --lwt-accent-color: #@base00@ !important;
+    --lwt-text-color: #@base05@ !important;
+    --toolbar-bgcolor: #@base01@ !important;
+    --toolbar-color: #@base05@ !important;
+    --toolbar-field-background-color: #@base00@ !important;
+    --toolbar-field-color: #@base05@ !important;
+    --toolbar-field-border-color: transparent !important;
+    --toolbar-field-focus-background-color: #@base00@ !important;
+    --toolbar-field-focus-color: #@base06@ !important;
+    --toolbar-field-focus-border-color: #@base0D@ !important;
+    --toolbar-field-highlight-background-color: #@base0A@ !important;
+    --toolbar-field-highlight-color: #@base00@ !important;
+    --toolbarbutton-hover-background: #@base02@ !important;
+    --toolbarbutton-active-background: #@base02@ !important;
+    --tab-selected-bgcolor: #@base02@ !important;
+    --tab-selected-textcolor: #@base07@ !important;
+    --tab-loading-fill: #@base0D@ !important;
+    --arrowpanel-background: #@base01@ !important;
+    --arrowpanel-color: #@base05@ !important;
+    --arrowpanel-border-color: #@base0D@ !important;
+    --panel-background: #@base01@ !important;
+    --panel-color: #@base05@ !important;
+    --panel-border-color: #@base0D@ !important;
+    --sidebar-background-color: #@base00@ !important;
+    --sidebar-text-color: #@base05@ !important;
+    --sidebar-border-color: #@base02@ !important;
+    --link-color: #@base0A@ !important;
+    --link-color-hover: #@base06@ !important;
+    --color-accent-primary: #@base0D@ !important;
+    --color-accent-primary-hover: #@base0A@ !important;
+    --color-accent-primary-active: #@base0A@ !important;
+    --button-background-color: #@base02@ !important;
+    --button-background-color-hover: #@base02@ !important;
+    --button-text-color: #@base05@ !important;
+    --border-radius-small: 0 !important;
+    --border-radius-medium: 0 !important;
+    --border-radius-large: 0 !important;
+    font-family: "@monospace_font@" !important;
+    font-size: @desktop_size@px !important;
+  }
+
+  *, *::before, *::after {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+    transition: none !important;
+    animation: none !important;
+  }
+
+  #navigator-toolbox { background: #@base00@ !important; border-bottom: 3px double #@base0D@ !important; }
+  #TabsToolbar { background: #@base00@ !important; color: #@base05@ !important; }
+  #nav-bar, #PersonalToolbar { background: #@base01@ !important; color: #@base05@ !important; }
+  .tab-background[selected] { background: #@base02@ !important; border-top: 2px solid #@base0D@ !important; }
+  .tab-label { color: #@base05@ !important; }
+  #urlbar-background, #searchbar { background: #@base00@ !important; }
+  #urlbar[focused] > #urlbar-background { outline: 1px solid #@base0D@ !important; }
+  #urlbar-input, #searchbar input { color: #@base05@ !important; }
+  .urlbarView { background: #@base01@ !important; color: #@base05@ !important; }
+  .urlbarView-row[selected] .urlbarView-row-inner { background: #@base02@ !important; }
+  .urlbarView-url { color: #@base0A@ !important; }
+  #sidebar-main, #sidebar-box, #sidebar-header { background: #@base00@ !important; color: #@base05@ !important; }
+  menu, menuitem, menupopup, panel { font-family: "@monospace_font@" !important; font-size: @desktop_size@px !important; }
+  menupopup { --panel-background: #@base01@ !important; --panel-color: #@base05@ !important; }
+  menuitem[_moz-menuactive="true"], menu[_moz-menuactive="true"] { background: #@base02@ !important; color: #@base0A@ !important; }
+  ::selection { background: #@base0A@ !important; color: #@base00@ !important; }
+}
+
+@-moz-document url("about:home"), url("about:newtab"), url-prefix("about:preferences"), url-prefix("about:addons"), url-prefix("about:downloads"), url-prefix("about:reader"), url-prefix("chrome://browser/content/places/") {
+  :root, body {
+    color-scheme: dark !important;
+    --newtab-background-color: #@base00@ !important;
+    --newtab-background-color-secondary: #@base01@ !important;
+    --newtab-text-primary-color: #@base05@ !important;
+    --newtab-text-secondary-color: #@base04@ !important;
+    --newtab-element-hover-color: #@base02@ !important;
+    --newtab-element-active-color: #@base02@ !important;
+    --newtab-primary-action-background: #@base0D@ !important;
+    --in-content-page-background: #@base00@ !important;
+    --in-content-page-color: #@base05@ !important;
+    --background-color-canvas: #@base00@ !important;
+    --background-color-box: #@base01@ !important;
+    --background-color-card: #@base01@ !important;
+    --background-color-field: #@base01@ !important;
+    --text-color: #@base05@ !important;
+    --text-color-deemphasized: #@base04@ !important;
+    --link-color: #@base0A@ !important;
+    --link-color-visited: #@base0E@ !important;
+    --color-accent-primary: #@base0D@ !important;
+    --color-accent-primary-hover: #@base0A@ !important;
+    --button-background-color: #@base02@ !important;
+    --button-text-color: #@base05@ !important;
+    background-color: #@base00@ !important;
+    color: #@base05@ !important;
+    font-family: "@monospace_font@" !important;
+  }
+  *, *::before, *::after { border-radius: 0 !important; box-shadow: none !important; transition: none !important; animation: none !important; }
+  .top-site-outer .tile, .search-wrapper .search-handoff-button, .card, .section-list { background-color: #@base01@ !important; color: #@base05@ !important; }
+  .search-wrapper .logo-and-wordmark .wordmark { filter: sepia(1) saturate(0.4) !important; }
+  ::selection { background: #@base0A@ !important; color: #@base00@ !important; }
+}

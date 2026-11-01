@@ -1,5 +1,6 @@
 { config, lib, pkgs, inputs, userName, ... }:
 {
+  imports = [ ./vespers/firefox.nix ];
   config = lib.mkIf (config.style.name == "vespers") {
     stylix = {
       image = ../wallpapers/abbey_in_the_oakwood.jpg;
@@ -28,8 +29,8 @@
       };
       fonts = {
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
-        sansSerif = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
-        monospace = { package = pkgs.terminus_font_ttf; name = "Terminus (TTF)"; };
+        sansSerif = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
+        monospace = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
         sizes = { applications = 15; desktop = 15; popups = 15; terminal = 15; };
       };
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
@@ -105,7 +106,7 @@
         <!DOCTYPE fontconfig SYSTEM "urn:fontconfig:fonts.dtd">
         <fontconfig>
           <match target="font">
-            <test name="family" compare="eq"><string>Terminus (TTF)</string></test>
+            <test name="family" compare="eq"><string>${config.stylix.fonts.monospace.name}</string></test>
             <edit name="antialias" mode="assign"><bool>false</bool></edit>
           </match>
         </fontconfig>
@@ -166,7 +167,7 @@
           modules-left = lib.mkForce [ "custom/sigil" "ext/workspaces" ];
           modules-center = lib.mkForce [ "custom/date" "clock" ];
           modules-right = lib.mkForce [ "cpu" "memory" "network" "pulseaudio" "custom/language" "battery" "tray" "custom/power" ];
-          "custom/sigil" = { format = "VESPERAE"; tooltip-format = "Ad maiorem Dei gloriam"; };
+          "custom/sigil" = { format = "╔═ VESPERAE ═╗\n╚════════════╝"; tooltip-format = "Ad maiorem Dei gloriam"; };
           "ext/workspaces".format-icons = lib.mkForce {
             "1" = "I"; "2" = "II"; "3" = "III"; "4" = "IV"; "5" = "V";
             "6" = "VI"; "7" = "VII"; "8" = "VIII"; "9" = "IX"; "10" = "X";
@@ -200,15 +201,15 @@
 
       programs.fuzzel.settings = {
         main = {
-          font = "Terminus (TTF):pixelsize=${toString (config.stylix.fonts.sizes.popups * 4 / 3)}:antialias=false";
-          prompt = "Quaere: ";
+          font = "${config.stylix.fonts.monospace.name}:pixelsize=${toString (config.stylix.fonts.sizes.popups * 4 / 3)}:antialias=false";
+          prompt = "╟─ QUAERE ► ";
           width = 48;
           lines = 10;
           horizontal-pad = 20;
           vertical-pad = 16;
           inner-pad = 8;
         };
-        border = { width = 3; radius = 0; };
+        border = { width = 4; radius = 0; };
         colors = force_values {
           background = "${colors.base00}ff";
           text = "${colors.base05}ff";
@@ -226,12 +227,12 @@
 
       services.dunst.settings = {
         global = force_values {
-          font = "Terminus (TTF) ${toString config.stylix.fonts.sizes.popups}";
+          font = "${config.stylix.fonts.monospace.name} ${toString config.stylix.fonts.sizes.popups}";
           width = 460;
           offset = "(24, 84)";
           padding = 16;
           horizontal_padding = 16;
-          frame_width = 3;
+          frame_width = 4;
           frame_color = "#${colors.base0D}";
           separator_height = 1;
           separator_color = "#${colors.base02}";
@@ -244,20 +245,23 @@
       };
 
       programs.kitty.settings = {
-        window_padding_width = 12;
+        window_padding_width = 8;
         cursor_shape = "block";
         cursor_blink_interval = 0;
         inactive_text_alpha = "1.0";
         tab_bar_style = "separator";
-        tab_separator = "  │  ";
-        active_tab_font_style = "bold";
+        tab_separator = "\"\"";
+        tab_title_template = "╡ {index}: {title} ╞";
+        active_tab_font_style = "normal";
+        box_drawing_scale = "1, 1, 2, 2";
       };
       programs.emacs.extraConfig = lib.mkAfter (render_style (builtins.readFile ./vespers/emacs.el));
       programs.fish.interactiveShellInit = lib.mkAfter (render_style (builtins.readFile ./vespers/prompt.fish));
       stylix.targets.fish.enable = true;
       stylix.targets.gtk.extraCss = ''
         * { border-radius: 0; box-shadow: none; text-shadow: none; transition: none; animation: none; }
-        window decoration { border: 2px solid #${colors.base0D}; }
+        window decoration { border: 3px double #${colors.base0D}; }
+        popover > contents { border: 3px double #${colors.base0D}; }
         button, entry, spinbutton, combobox, menu, popover, tooltip, headerbar, notebook > header, trough, progress, slider {
           background-image: none;
         }
@@ -265,7 +269,7 @@
         button.image-button, button.flat, windowcontrols button { background-color: transparent; }
         button:hover { background-color: #${colors.base02}; border-color: transparent; }
         button:active, button:checked { background-color: #${colors.base0A}; color: #${colors.base00}; border-color: transparent; }
-        entry { border: 2px solid #${colors.base03}; }
+        entry { border: 3px double #${colors.base03}; }
         entry:focus { border-color: #${colors.base0D}; }
         selection { background-color: #${colors.base0A}; color: #${colors.base00}; }
       '';
