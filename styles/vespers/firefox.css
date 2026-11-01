@@ -3,6 +3,13 @@
     color-scheme: dark !important;
     --lwt-accent-color: #@base00@ !important;
     --lwt-text-color: #@base05@ !important;
+    --toolbox-background-color: #@base00@ !important;
+    --toolbox-background-color-inactive: #@base00@ !important;
+    --toolbox-background-gradient: none !important;
+    --toolbox-text-color: #@base05@ !important;
+    --toolbox-text-color-inactive: #@base05@ !important;
+    --toolbar-background-color: #@base01@ !important;
+    --toolbar-text-color: #@base05@ !important;
     --toolbar-bgcolor: #@base01@ !important;
     --toolbar-color: #@base05@ !important;
     --toolbar-field-background-color: #@base00@ !important;
@@ -15,6 +22,14 @@
     --toolbar-field-highlight-color: #@base00@ !important;
     --toolbarbutton-hover-background: #@base02@ !important;
     --toolbarbutton-active-background: #@base02@ !important;
+    --toolbarbutton-background-color-hover: #@base01@ !important;
+    --toolbarbutton-background-color-active: #@base02@ !important;
+    --tab-background-color: transparent !important;
+    --tab-background-color-hover: #@base01@ !important;
+    --tab-background-color-selected: #@base02@ !important;
+    --tab-text-color: #@base05@ !important;
+    --tab-text-color-hover: #@base05@ !important;
+    --tab-text-color-selected: #@base07@ !important;
     --tab-selected-bgcolor: #@base02@ !important;
     --tab-selected-textcolor: #@base07@ !important;
     --tab-loading-fill: #@base0D@ !important;
@@ -35,6 +50,9 @@
     --button-background-color: #@base02@ !important;
     --button-background-color-hover: #@base02@ !important;
     --button-text-color: #@base05@ !important;
+    --button-background-color-ghost: transparent !important;
+    --button-background-color-ghost-hover: #@base01@ !important;
+    --button-background-color-ghost-active: #@base02@ !important;
     --border-radius-small: 0 !important;
     --border-radius-medium: 0 !important;
     --border-radius-large: 0 !important;
@@ -53,7 +71,10 @@
   #navigator-toolbox { background: #@base00@ !important; border-bottom: 3px double #@base0D@ !important; }
   #TabsToolbar { background: #@base00@ !important; color: #@base05@ !important; }
   #nav-bar, #PersonalToolbar { background: #@base01@ !important; color: #@base05@ !important; }
-  .tab-background[selected] { background: #@base02@ !important; border-top: 2px solid #@base0D@ !important; }
+  .tab-background:not([selected], [multiselected]) { background: transparent !important; }
+  .tabbrowser-tab:hover .tab-background:not([selected], [multiselected]) { background: #@base01@ !important; }
+  .tab-background:is([selected], [multiselected]) { background: #@base02@ !important; border-top: 2px solid #@base0D@ !important; }
+  .tab-content, .tab-icon-stack, .tab-icon-image { background-color: transparent !important; }
   .tab-label { color: #@base05@ !important; }
   #urlbar-background, #searchbar { background: #@base00@ !important; }
   #urlbar[focused] > #urlbar-background { outline: 1px solid #@base0D@ !important; }
@@ -61,7 +82,7 @@
   .urlbarView { background: #@base01@ !important; color: #@base05@ !important; }
   .urlbarView-row[selected] .urlbarView-row-inner { background: #@base02@ !important; }
   .urlbarView-url { color: #@base0A@ !important; }
-  #sidebar-main, #sidebar-box, #sidebar-header { background: #@base00@ !important; color: #@base05@ !important; }
+  sidebar-main, #sidebar-container, #sidebar-box, #sidebar-header { background: #@base00@ !important; color: #@base05@ !important; }
   menu, menuitem, menupopup, panel { font-family: "@monospace_font@" !important; font-size: @desktop_size@px !important; }
   menupopup { --panel-background: #@base01@ !important; --panel-color: #@base05@ !important; }
   menuitem[_moz-menuactive="true"], menu[_moz-menuactive="true"] { background: #@base02@ !important; color: #@base0A@ !important; }

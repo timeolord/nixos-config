@@ -177,16 +177,16 @@ strong gold and colour accents, and flat GTK shading. the former vespers-16
 trial is now part of Vespers. artwork and website content keep their own
 colours unless the optional whole screen filter is enabled.
 
-Vespers includes an optional whole screen sixteen colour
-filter, initially off. press Super+Shift+F12 to toggle it, or run
+Vespers starts with the stronger dithered whole screen sixteen colour
+filter enabled. press Super+Shift+F12 to toggle it, or run
 vespers_filter on, vespers_filter off, or vespers_filter status. use
 vespers_filter dither for an optional ordered dithering mode; on restores
 the original flat quantization. status identifies the dithered mode, and
-the shortcut turns either active mode off or enables the flat mode from off.
+the shortcut turns either active mode off or enables the dithered mode from off.
 the filter
 uses the Vespers palette and affects paintings, photos,
 videos, and websites while enabled. files are untouched. a configuration
-reload or new session turns it off. it leaves other active screen shaders
+reload or new session enables the dithered mode again. it leaves other active screen shaders
 alone. the helper uses Lua IPC and checks the applied setting before
 reporting success. Vespers redraws the whole monitor when something
 changes and applies shader refreshes immediately to reduce stale frame
@@ -201,6 +201,10 @@ appear blended at a distance,
 while every output pixel still uses a palette colour. exact theme colours
 remain solid. the pattern is anchored to screen pixels and has no time or
 random input; moving content can still move through the fixed pattern.
+
+Firefox vertical tabs show bare icons when idle, a walnut hover highlight,
+and a gold marked selected tab. its native sidebar and launcher controls
+use the Vespers palette, including current Firefox colour tokens.
 
 styles/current.nix preserves the existing purple and pink desktop, Ivan the
 Terrible wallpaper, Sonic cursor, Catppuccin Mocha Blue GTK and Kvantum,

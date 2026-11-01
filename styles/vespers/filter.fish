@@ -34,7 +34,7 @@ if test $action = toggle
     if test $enabled = on
         set action off
     else
-        set action on
+        set action dither
     end
 end
 if not contains -- "$current" '@shader@' '@dither_shader@' '[[EMPTY]]' ''

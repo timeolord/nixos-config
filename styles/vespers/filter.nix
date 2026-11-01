@@ -30,7 +30,7 @@
       xdg.configFile."hypr/vespers-16-dither.frag".source = dither_shader;
       wayland.windowManager.hyprland.extraConfig = lib.mkAfter ''
         hl.config({
-          decoration = { screen_shader = "[[EMPTY]]" },
+          decoration = { screen_shader = "${dither_shader}" },
           debug = { damage_tracking = 1 },
         })
         hl.bind("SUPER + SHIFT + F12", hl.dsp.exec_cmd("${filter_toggle}/bin/vespers_filter toggle"))
