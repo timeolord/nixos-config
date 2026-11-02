@@ -4,6 +4,7 @@ from pathlib import Path
 
 from fontTools.fontBuilder import FontBuilder
 from fontTools.pens.ttGlyphPen import TTGlyphPen
+from fontTools.ttLib.removeOverlaps import removeOverlaps
 
 
 def read_glyph(block):
@@ -45,15 +46,16 @@ def build_font(source, destination):
     font.setupHorizontalHeader(ascent=768, descent=-256)
     font.setupNameTable({
         "familyName": "Unicode VGA", "styleName": "Regular",
-        "uniqueFontIdentifier": "Unicode VGA pixel outlines 1.0",
+        "uniqueFontIdentifier": "Unicode VGA pixel outlines 1.1",
         "fullName": "Unicode VGA Regular", "psName": "UnicodeVGA-Regular",
-        "version": "Version 1.0",
+        "version": "Version 1.1",
         "copyright": "Copyright (c) 2000 Dmitry Bolkhovityanov",
         "licenseDescription": "Freely distributable and modifiable under the X license; derived from UNI-VGA.",
     })
     font.setupOS2(sTypoAscender=768, sTypoDescender=-256, sTypoLineGap=0, usWinAscent=768, usWinDescent=256)
     font.setupPost(isFixedPitch=1)
     font.setupMaxp()
+    removeOverlaps(font.font)
     font.font["head"].created = font.font["head"].modified = 2082844800
     font.save(destination)
 

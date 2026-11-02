@@ -1,6 +1,6 @@
 { lib, pkgs }:
 pkgs.runCommand "unicode-vga-scalable" {
-  nativeBuildInputs = [ (pkgs.python3.withPackages (ps: [ ps.fonttools ])) ];
+  nativeBuildInputs = [ (pkgs.python3.withPackages (ps: [ ps.fonttools ps.skia-pathops ])) ];
   meta = { description = "Unicode VGA with scalable pixel outlines"; license = lib.licenses.mit; };
 } ''
   mkdir -p "$out/share/fonts/truetype"
