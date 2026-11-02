@@ -234,7 +234,7 @@ Kitty colors and transparency, and Doom One in Emacs. the application
 exceptions live in this profile, so they do not carry into another profile.
 
 styles/vespers.nix is the Victorian inspired alternative. it combines walnut
-browns, antique gold, ivory and marble whites, PxPlus IBM VGA pixel text, Cinzel
+browns, antique gold, ivory and marble whites, Unicode VGA pixel text, Cinzel
 headings, and EB Garamond for prose. it changes the edge to edge Waybar frame,
 window spacing and borders, animations, launcher, notifications, terminal,
 Emacs, GTK, Qt, shell colors and prompt, and power menu. the VESPERAE label

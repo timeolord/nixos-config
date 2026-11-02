@@ -1,4 +1,7 @@
 { config, lib, pkgs, inputs, userName, ... }:
+let
+  unicode_vga = import ./vespers/unicode-vga.nix { inherit lib pkgs; };
+in
 {
   imports = [ ./vespers/firefox.nix ./vespers/filter.nix ];
   config = lib.mkIf (config.style.name == "vespers") {
@@ -29,8 +32,8 @@
       };
       fonts = {
         serif = { package = pkgs.eb-garamond; name = "EB Garamond"; };
-        sansSerif = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
-        monospace = { package = pkgs.ultimate-oldschool-pc-font-pack; name = "PxPlus IBM VGA 8x16"; };
+        sansSerif = { package = unicode_vga; name = "Unicode VGA"; };
+        monospace = { package = unicode_vga; name = "Unicode VGA"; };
         sizes = { applications = 21; desktop = 21; popups = 21; terminal = 21; };
       };
       opacity = { applications = 1.0; desktop = 1.0; popups = 1.0; terminal = 1.0; };
