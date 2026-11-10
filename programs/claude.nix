@@ -1,5 +1,6 @@
 {
   config,
+  lib,
   pkgs,
   userName,
   ...
@@ -20,6 +21,25 @@ in
   #     }
   #   }'';
   home.file.".codex/AGENTS.md".text = prompt;
+  home.activation.codex_defaults = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    run ${pkgs.python3.withPackages (ps: [ ps.tomlkit ])}/bin/python3 - <<'PY'
+    import os
+    from pathlib import Path
+    import tomlkit
+
+    path = Path("${config.home.homeDirectory}/.codex/config.toml")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    original = path.read_text() if path.exists() else ""
+    settings = tomlkit.parse(original)
+    settings.update(sandbox_mode="workspace-write", approval_policy="on-request", approvals_reviewer="auto_review")
+    updated = tomlkit.dumps(settings)
+    if updated != original:
+        temporary = path.with_suffix(".toml.tmp")
+        temporary.touch(mode=0o600, exist_ok=False)
+        temporary.write_text(updated)
+        os.replace(temporary, path)
+    PY
+  '';
 
   #   home.file.".claude/settings.json".text = ''
   # {

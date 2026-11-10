@@ -3,7 +3,7 @@ let
   desktop_command = "/run/current-system/sw/bin/start-hyprland --path /run/wrappers/bin/Hyprland";
 in
 {
-  imports = lib.optional (builtins.pathExists ./access.nix) ./access.nix;
+  imports = [ ./lab-share.nix ] ++ lib.optional (builtins.pathExists ./access.nix) ./access.nix;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;

@@ -391,11 +391,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793583715,
-        "narHash": "sha256-T55ol3tYWTLgYUi60KTqR1pOrj+r0RZ1503O93Wds9s=",
+        "lastModified": 1794347758,
+        "narHash": "sha256-Ilqtlhx+qMl8PPdKsz72gn+iLhUAUkHC6Y+HetHHneQ=",
         "owner": "timeolord",
         "repo": "godsays-haskell",
-        "rev": "c56e31a14c7479b2cc6bffaef8cbcb8c80195ac2",
+        "rev": "6d5aa8fa9a3b99f947f7d40c53baf0b962916713",
         "type": "github"
       },
       "original": {
