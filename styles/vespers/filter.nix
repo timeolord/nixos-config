@@ -1,5 +1,13 @@
 { config, lib, pkgs, userName, ... }:
+let
+  filter_default = config.style.vespers.filter.enable;
+in
 {
+  options.style.vespers.filter.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = config.hardware.graphics.enable && !config.services.qemuGuest.enable && !config.boot.isContainer;
+    description = "Enable the Vespers screen filter by default; QEMU guests and systems without graphics default to off. Override for GPU passthrough if desired.";
+  };
   config = lib.mkIf (config.style.name == "vespers") {
     home-manager.users.${userName} = { config, ... }:
     let
@@ -30,8 +38,8 @@
       xdg.configFile."hypr/vespers-16-dither.frag".source = dither_shader;
       wayland.windowManager.hyprland.extraConfig = lib.mkAfter ''
         hl.config({
-          decoration = { screen_shader = "${dither_shader}" },
-          debug = { damage_tracking = 1 },
+          decoration = { screen_shader = "${if filter_default then dither_shader else ""}" },
+          debug = { damage_tracking = ${if filter_default then "1" else "2"} },
         })
         hl.bind("SUPER + SHIFT + F12", hl.dsp.exec_cmd("${filter_toggle}/bin/vespers_filter toggle"))
       '';

@@ -175,6 +175,11 @@
         ghc-development = haskell_pkgs.compiler.${haskell_pkgs.resolve-compiler-name "ghc915"};
         codex-latest = inputs.codex.packages.${system}.default;
       };
-      nixosConfigurations = configurations;
+      nixosConfigurations = configurations // {
+        melk-vm = nixpkgs.lib.nixosSystem (generateSystem {
+          userName = "melk-vm";
+          include-hardware = true;
+        });
+      };
     };
 }

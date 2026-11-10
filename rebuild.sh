@@ -17,7 +17,9 @@ function ensure_keys
     set -l system_ready 0
     set -l home_ready 0
 
-    if sudo test -s "$system_key"; and sudo "$age_keygen_bin" -y "$system_key" >/dev/null 2>&1
+    if test "$USER" = melk-vm
+        set system_ready 1
+    else if sudo test -s "$system_key"; and sudo "$age_keygen_bin" -y "$system_key" >/dev/null 2>&1
         if sudo env -u SOPS_AGE_KEY -u SOPS_AGE_KEY_CMD XDG_CONFIG_HOME=/dev/null SOPS_AGE_KEY_FILE="$system_key" \
                 "$sops_bin" decrypt --input-type binary --output-type binary secrets/user-password >/dev/null 2>&1
             set system_ready 1
@@ -75,12 +77,16 @@ function main
     ensure_keys; or return 1
     git pull; or return 1
     ensure_keys; or return 1
-    if sudo nixos-rebuild switch --flake "/etc/nixos#$USER"
+    set -l rebuild_args --flake "/etc/nixos#$USER"
+    if test "$USER" = melk-vm
+        set rebuild_args --flake "path:/etc/nixos#$USER" --no-write-lock-file
+    end
+    if sudo nixos-rebuild switch $rebuild_args
         git add -A; or return 1
         git commit -m "updated configs"; or return 1
         git push
     else
-        sudo nixos-rebuild switch --flake "/etc/nixos#$USER" --show-trace
+        sudo nixos-rebuild switch $rebuild_args --show-trace
         set -l rebuild_status $status
         git status
         return $rebuild_status

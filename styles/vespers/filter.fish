@@ -54,7 +54,11 @@ if test "$current" = "$target"
     printf 'vespers filter: %s\n' $action
     exit 0
 end
-set response (@hyprctl@ eval "hl.config({ decoration = { screen_shader = \"$target\" }, debug = { damage_tracking = 1 } }); hl.exec_scheduled_prop_refresh_immediately()")
+set damage_tracking 1
+if test $action = off
+    set damage_tracking 2
+end
+set response (@hyprctl@ eval "hl.config({ decoration = { screen_shader = \"$target\" }, debug = { damage_tracking = $damage_tracking } }); hl.exec_scheduled_prop_refresh_immediately()")
 or exit 1
 if test (string trim -- "$response") != ok
     printf 'could not change the screen shader: %s\n' "$response" >&2

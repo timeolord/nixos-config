@@ -192,7 +192,7 @@
   users.users.${userName} = {
     isNormalUser = true;
     description = "Melody";
-    hashedPasswordFile = config.sops.secrets.user-password.path;
+    hashedPasswordFile = lib.mkDefault config.sops.secrets.user-password.path;
     extraGroups = [
       "networkmanager"
       "wheel"

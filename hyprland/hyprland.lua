@@ -180,15 +180,19 @@ hl.on("hyprland.start", function()
   -- required for desktop functionality
   hl.exec_cmd("fcitx5 -d -r")
   hl.exec_cmd("dunst")
-  hl.exec_cmd("hyprpaper")
+  if not vm_light_session then
+    hl.exec_cmd("hyprpaper")
+    hl.exec_cmd("blueman-applet")
+  end
   hl.exec_cmd("systemctl --user restart pipewire")
   hl.exec_cmd("systemctl --user start hyprpolkitagent")
-  hl.exec_cmd("blueman-applet")
   hl.exec_cmd("waybar")
   hl.exec_cmd("nm-applet")
 
   -- personal apps
-  hl.exec_cmd("firefox", { workspace = "1 silent" })
-  hl.exec_cmd("discord --enable-features=UseOzonePlatform --ozone-platform=wayland", { workspace = "6 silent" })
-  hl.exec_cmd("signal-desktop", { workspace = "6 silent" })
+  if not vm_light_session then
+    hl.exec_cmd("firefox", { workspace = "1 silent" })
+    hl.exec_cmd("discord --enable-features=UseOzonePlatform --ozone-platform=wayland", { workspace = "6 silent" })
+    hl.exec_cmd("signal-desktop", { workspace = "6 silent" })
+  end
 end)

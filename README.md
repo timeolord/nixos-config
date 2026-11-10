@@ -62,13 +62,20 @@ the age key as above, then rebuild to get the ssh key back.
 configuration layout
 ====================
 
-flake.nix builds four x86_64-linux systems. the hostname and username are
+flake.nix builds four physical x86_64-linux systems. the hostname and username are
 the same on each machine:
 
     melk-pc      amd, nvidia, btrfs root and home, snapper
     melkmobile  amd, nvidia, ext4 root, lid switches ignored
     melk-lab    intel, nvidia, ext4 root
     melktogo    intel, ext4 root, swap partition
+
+nixosConfigurations.melk-vm adds the windows hosted qemu machine with the same
+hyprland, home manager, application, and selected style modules. it uses virtual
+hardware, passwordless local login, and a dedicated host ssh key instead of the
+physical machines' secrets. see [virtual-machine/README.md](virtual-machine/README.md)
+for setup differences and the portable windows launcher location. the physical
+host iso outputs remain unchanged.
 
 config.nix holds shared system settings and home.nix holds shared home
 manager settings. each host adds <host>.nix and its matching
@@ -178,7 +185,11 @@ trial is now part of Vespers. artwork retains its own colours unless the whole s
 website colours also follow the automatic dark mode setup described below.
 
 Vespers starts with the stronger dithered whole screen sixteen colour
-filter enabled. press Super+Shift+F12 to toggle it, or run
+filter enabled on graphics enabled physical hosts. QEMU guests, including
+melk-vm, and systems without graphics default to off. override
+style.vespers.filter.enable in a host module if needed, including for GPU
+passthrough. this is a configuration policy, not runtime GPU detection.
+press Super+Shift+F12 to toggle it, or run
 vespers_filter on, vespers_filter off, or vespers_filter status. use
 vespers_filter dither for an optional ordered dithering mode; on restores
 the original flat quantization. status identifies the dithered mode, and
@@ -186,12 +197,13 @@ the shortcut turns either active mode off or enables the dithered mode from off.
 the filter
 uses the Vespers palette and affects paintings, photos,
 videos, and websites while enabled. files are untouched. a configuration
-reload or new session enables the dithered mode again. it leaves other active screen shaders
+reload or new session restores the host default. it leaves other active screen shaders
 alone. the helper uses Lua IPC and checks the applied setting before
-reporting success. Vespers redraws the whole monitor when something
+reporting success. while filtering, Vespers redraws the whole monitor when something
 changes and applies shader refreshes immediately to reduce stale frame
 flashing during toggles. idle frame skipping stays enabled; active screen
-updates can cost more GPU work than partial redraws. repeated on or off
+updates can cost more GPU work than partial redraws. disabling the filter
+restores partial redraws. repeated on or off
 commands leave an already matching shader alone. the generated shaders are
 at ~/.config/hypr/vespers-16.frag and ~/.config/hypr/vespers-16-dither.frag.
 dithering uses a fixed 4 by 4 Bayer pattern with 2 by 2 pixel cells and
