@@ -3,7 +3,7 @@ let
   desktop_command = "/run/current-system/sw/bin/start-hyprland --path /run/wrappers/bin/Hyprland";
 in
 {
-  imports = [ ./lab-share.nix ] ++ lib.optional (builtins.pathExists ./access.nix) ./access.nix;
+  imports = [ ./package-overrides.nix ./windows-share.nix ./lab-share.nix ] ++ lib.optional (builtins.pathExists ./access.nix) ./access.nix;
 
   boot.loader.systemd-boot.enable = lib.mkForce false;
   boot.loader.efi.canTouchEfiVariables = lib.mkForce false;
@@ -53,9 +53,6 @@ in
   system.activationScripts.nixosRepoAcl.deps = [ "users" ];
 
   home-manager.users.${userName} = { config, ... }: {
-    options.home.packages = lib.mkOption {
-      apply = packages: builtins.filter (package: lib.getName package != "audacity") packages;
-    };
     config = {
       # double the original sixteen pixel grid instead of smoothing it at twenty eight
       programs.kitty.font.size = lib.mkForce 24;
