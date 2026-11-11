@@ -92,8 +92,8 @@ currently uses the nixpkgs hyprland package. flake.lock records the pins.
 
 flake.nix also pins peewee to 3.18.3 for activitywatch's aw-core dependency,
 which still requires version 3. other packages keep the nixpkgs version.
-the same overlay fixes mozc's widget class name for qt, the aw-qt wrapper
-argument list, and compiles audacity's extensions qml module separately
+the same overlay fixes the aw-qt wrapper argument list and compiles
+audacity's extensions qml module separately
 to avoid a type name collision
 with generated qt code.
 
@@ -124,6 +124,17 @@ rebuild. it checks again after pulling in case the secrets changed.
 
 it pulls the repo, switches the configuration for $USER, then stages all changes, commits,
 and pushes on success. if the switch fails it retries with --show-trace.
+
+the large build planner runs on the first rebuild and when the lockfile,
+recognizable package references or package lists, cache settings, or size limit
+change. otherwise it skips the dry run using a per user and host cache. this
+quick source scan cannot detect every indirect package change, such as enabling
+a service that installs a package. store or binary cache availability may also
+change independently. force a fresh check when needed:
+
+    REBUILD_FORCE_PLAN=1 rebuild-system
+
+the updated planner takes effect in rebuild-system after the next activation.
 
 each host also has an installer image output, built without its hardware
 module:

@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 
 import json
+import hashlib
 import os
 import re
 import sqlite3
@@ -10,6 +11,82 @@ import tempfile
 
 
 CACHE_PATH = '/etc/nixos/rebuild-size-cache.json'
+STATE_VERSION = 1
+
+
+def package_fingerprint(flake, limit):
+    root, host = flake.rsplit('#', 1)
+    root = root.removeprefix('path:')
+    tokens = re.compile(r'"(?:\\.|[^"\\])*"|\'\'(?:(?!\'\').)*\'\'|/\*.*?\*/|\#[^\n]*|[a-zA-Z_][\w\'-]*|[^\s]', re.S)
+    relevant = []
+    for directory, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs if not d.startswith('.') and d != '__pycache__')
+        for name in sorted(files):
+            if not name.endswith('.nix'):
+                continue
+            path = os.path.join(directory, name)
+            with open(path, encoding='utf-8') as source:
+                parts = [t for t in tokens.findall(source.read()) if not t.startswith(('#', '/*'))]
+            found = []
+            for i, part in enumerate(parts):
+                if part == 'pkgs' and i + 2 < len(parts) and parts[i + 1] == '.':
+                    end = i + 3
+                    while end + 1 < len(parts) and parts[end] == '.':
+                        end += 2
+                    found.append(parts[i:end])
+                if part in ('package', 'packages', 'systemPackages', 'extraPackages', 'addons', 'buildInputs', 'nativeBuildInputs', 'dependencies') and i + 1 < len(parts) and parts[i + 1] == '=':
+                    end = i + 2
+                    depth = 0
+                    with_scope = False
+                    while end < len(parts):
+                        if parts[end] == 'with' and depth == 0:
+                            with_scope = True
+                        if parts[end] in ('[', '(', '{'):
+                            depth += 1
+                        elif parts[end] in (']', ')', '}'):
+                            depth -= 1
+                        elif parts[end] == ';' and depth == 0:
+                            if not with_scope:
+                                break
+                            with_scope = False
+                        end += 1
+                    found.append(parts[i:end + 1])
+            if found:
+                relevant.append([os.path.relpath(path, root), found])
+    with open(os.path.join(root, 'flake.lock'), encoding='utf-8') as lock:
+        inputs = json.load(lock)
+    data = [STATE_VERSION, host, inputs, relevant, limit, os.environ.get('REBUILD_SUBSTITUTERS'), os.environ.get('REBUILD_TRUSTED_KEYS')]
+    return hashlib.sha256(json.dumps(data, sort_keys=True).encode()).hexdigest()
+
+
+def state_path(flake):
+    base = os.environ.get('XDG_CACHE_HOME') or os.path.expanduser('~/.cache')
+    host = flake.rsplit('#', 1)[-1]
+    return os.path.join(base, 'rebuild-system', hashlib.sha256(host.encode()).hexdigest() + '.json')
+
+
+def checked_fingerprint(path):
+    try:
+        with open(path, encoding='utf-8') as state:
+            return json.load(state).get('fingerprint')
+    except (OSError, ValueError, AttributeError):
+        return None
+
+
+def save_fingerprint(path, fingerprint):
+    os.makedirs(os.path.dirname(path), exist_ok=True)
+    with tempfile.NamedTemporaryFile(mode='w', encoding='utf-8', dir=os.path.dirname(path), delete=False) as state:
+        try:
+            json.dump({'fingerprint': fingerprint}, state)
+            temp_path = state.name
+        except BaseException:
+            os.unlink(state.name)
+            raise
+    try:
+        os.replace(temp_path, path)
+    finally:
+        if os.path.exists(temp_path):
+            os.unlink(temp_path)
 
 
 def package_name(path):
@@ -72,6 +149,17 @@ def main():
         print('REBUILD_SIZE_LIMIT_MIB must be a positive integer', file=sys.stderr)
         return 1
 
+    if sys.argv[1] != '--refresh-cache':
+        try:
+            fingerprint = package_fingerprint(sys.argv[1], limit)
+            state = state_path(sys.argv[1])
+            if os.environ.get('REBUILD_FORCE_PLAN') != '1' and checked_fingerprint(state) == fingerprint:
+                print('package inputs unchanged since the last planner check; skipping')
+                return 0
+        except (OSError, ValueError, TypeError) as error:
+            print(f'could not check package inputs, running planner: {error}', file=sys.stderr)
+            fingerprint = None
+
     try:
         history = size_history()
     except (OSError, sqlite3.Error, ValueError) as error:
@@ -105,6 +193,11 @@ def main():
                 derivations.append(message)
     if not derivations:
         print('no local builds are planned')
+        if fingerprint:
+            try:
+                save_fingerprint(state, fingerprint)
+            except OSError as error:
+                print(f'could not save planner state: {error}', file=sys.stderr)
         return 0
 
     blocked = False
@@ -126,6 +219,11 @@ def main():
     if blocked:
         print(f'rebuild stopped: known output size reached {limit // 1024**2} MiB', file=sys.stderr)
         return 1
+    if fingerprint:
+        try:
+            save_fingerprint(state, fingerprint)
+        except OSError as error:
+            print(f'could not save planner state: {error}', file=sys.stderr)
     return 0
 
 

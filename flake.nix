@@ -68,13 +68,15 @@
         emacs-overlay.overlays.default
         godsays-flake.overlays.${system}.default
         (final: prev: {
-          mozc = prev.mozc.overrideAttrs (old: {
-            # qt expects the widget namespace without a leading scope
-            postPatch = (old.postPatch or "") + ''
-              substituteInPlace src/gui/dictionary_tool/dictionary_tool.ui \
-                --replace-fail '::mozc::gui::DictionaryContentTableWidget' \
-                  'mozc::gui::DictionaryContentTableWidget'
-            '';
+          anki = prev.anki.overrideAttrs (old: {
+            nativeBuildInputs = old.nativeBuildInputs ++ [ final.pkg-config ];
+            buildInputs = old.buildInputs ++ [ final.zstd ];
+            env = old.env // {
+              UV_FIND_LINKS = final.symlinkJoin {
+                name = "anki-build-wheels";
+                paths = [ old.env.UV_FIND_LINKS final.python3Packages.tomlkit.dist ];
+              };
+            };
           });
           aw-qt = prev.aw-qt.overridePythonAttrs (_: {
             # the wrapper needs separate arguments instead of one string
