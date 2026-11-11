@@ -81,6 +81,24 @@ function main
     if test "$USER" = melk-vm
         set rebuild_args --flake "path:/etc/nixos#$USER" --no-write-lock-file
     end
+    set -l flake_root (string replace -r '#.*$' '' -- "$rebuild_args[2]")
+    if not set -q REBUILD_SUBSTITUTERS
+        set -gx REBUILD_SUBSTITUTERS (nix eval --raw --no-write-lock-file --apply 'builtins.concatStringsSep " "' "$flake_root#nixosConfigurations.$USER.config.nix.settings.substituters"); or return 1
+    end
+    if not set -q REBUILD_TRUSTED_KEYS
+        set -gx REBUILD_TRUSTED_KEYS (nix eval --raw --no-write-lock-file --apply 'builtins.concatStringsSep " "' "$flake_root#nixosConfigurations.$USER.config.nix.settings.trusted-public-keys"); or return 1
+    end
+    set -l preflight /etc/nixos/rebuild-preflight.py
+    if set -q REBUILD_PREFLIGHT
+        set preflight "$REBUILD_PREFLIGHT"
+    end
+    python3 "$preflight" "$flake_root#nixosConfigurations.$USER"; or return 1
+    if set -q REBUILD_SUBSTITUTERS; and test -n "$REBUILD_SUBSTITUTERS"
+        set -a rebuild_args --option extra-substituters "$REBUILD_SUBSTITUTERS"
+    end
+    if set -q REBUILD_TRUSTED_KEYS; and test -n "$REBUILD_TRUSTED_KEYS"
+        set -a rebuild_args --option extra-trusted-public-keys "$REBUILD_TRUSTED_KEYS"
+    end
     if sudo nixos-rebuild switch $rebuild_args
         git add -A; or return 1
         git commit -m "updated configs"; or return 1

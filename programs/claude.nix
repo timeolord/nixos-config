@@ -1,5 +1,6 @@
 {
   config,
+  inputs,
   lib,
   pkgs,
   userName,
@@ -51,6 +52,6 @@ in
 
   home.packages = with pkgs; [
     claude-code
-    codex
+    inputs.codex.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 }

@@ -23,7 +23,6 @@
     haskell-nix.url = "github:input-output-hk/haskell.nix";
     codex = {
       url = "github:sadjow/codex-cli-nix";
-      inputs.nixpkgs.follows = "nixpkgs";
     };
     home-manager = {
       url = "github:nix-community/home-manager";
@@ -126,6 +125,7 @@
           modules = [
             { nixpkgs = { inherit overlays; }; }
             ./config.nix
+            ./rebuild-tools.nix
             inputs.stylix.nixosModules.stylix
             ./styles
             ./hyprland/hyprland.nix

@@ -23,7 +23,7 @@
   programs.fish = {
     enable = true;
     shellAbbrs = {
-      rb = "rebuild.sh";
+      rb = "rebuild-system";
       nclean = "nix-clean.sh";
       fperm = "fix-permissions.sh";
       gs = "git status";
