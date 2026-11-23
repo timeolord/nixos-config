@@ -200,7 +200,7 @@ def main():
                 print(f'could not save planner state: {error}', file=sys.stderr)
         return 0
 
-    blocked = False
+    has_large_builds = False
     unversioned = 0
     for drv in derivations:
         name = package_name(drv)
@@ -213,11 +213,20 @@ def main():
             print(f'[info] {label}: no previous package size available')
         elif previous >= limit:
             print(f'[large] {label}: largest known output was {previous / 1024**2:.1f} MiB')
-            blocked = True
+            has_large_builds = True
     if unversioned:
         print(f'[info] {unversioned} unversioned or generated build steps have no size estimate')
-    if blocked:
-        print(f'rebuild stopped: known output size reached {limit // 1024**2} MiB', file=sys.stderr)
+    if has_large_builds:
+        try:
+            answer = input(f'continue with local builds at or above {limit // 1024**2} MiB? [y/N] ')
+        except EOFError:
+            answer = ''
+        except KeyboardInterrupt:
+            print('\nrebuild stopped', file=sys.stderr)
+            return 130
+        if answer.strip().lower() in ('y', 'yes'):
+            return 0
+        print('rebuild stopped', file=sys.stderr)
         return 1
     if fingerprint:
         try:

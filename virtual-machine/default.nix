@@ -1,6 +1,6 @@
 { config, lib, pkgs, userName, utils, ... }:
 let
-  desktop_command = "/run/current-system/sw/bin/start-hyprland --path /run/wrappers/bin/Hyprland";
+  desktop_command = "/run/current-system/sw/bin/start-hyprland --path /run/current-system/sw/bin/Hyprland";
 in
 {
   imports = [ ./package-overrides.nix ./windows-share.nix ./lab-share.nix ] ++ lib.optional (builtins.pathExists ./access.nix) ./access.nix;
