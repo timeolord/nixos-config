@@ -82,14 +82,6 @@
             # the wrapper needs separate arguments instead of one string
             makeWrapperArgs = [ "--suffix" "PATH" ":" (final.lib.makeBinPath [ final.xdg-utils ]) ];
           });
-          audacity = prev.audacity.overrideAttrs (old: {
-            # keep muse types out of the generated qt qml sources
-            postPatch = (old.postPatch or "") + ''
-              substituteInPlace muse/framework/extensions/qml/Muse/Extensions/CMakeLists.txt \
-                --replace-fail 'muse_create_qml_module(muse_extensions_qml ALIAS' \
-                  'muse_create_qml_module(muse_extensions_qml NO_UNITY ALIAS'
-            '';
-          });
           pythonPackagesExtensions = prev.pythonPackagesExtensions ++ [
             (python_final: python_prev: {
               # activitywatch still needs peewee 3
