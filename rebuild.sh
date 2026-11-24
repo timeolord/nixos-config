@@ -66,6 +66,24 @@ function cleanup_keys --on-event fish_exit
     end
 end
 
+function wait_for_network
+    echo "waiting up to 60 seconds for github networking and dns..."
+    timeout 60s python3 -c '
+import socket
+import time
+
+while True:
+    try:
+        with socket.create_connection(("github.com", 22), timeout=3):
+            break
+    except OSError:
+        time.sleep(2)
+'; or begin
+        echo "github is unreachable. your commit is saved locally; run git push once networking recovers." >&2
+        return 1
+    end
+end
+
 function main
     cd /etc/nixos; or return 1
     for dependency in age age-keygen sops
@@ -102,6 +120,7 @@ function main
     if sudo nixos-rebuild switch $rebuild_args
         git add -A; or return 1
         git commit -m "updated configs"; or return 1
+        wait_for_network; or return 1
         git push
     else
         sudo nixos-rebuild switch $rebuild_args --show-trace

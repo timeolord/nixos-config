@@ -35,7 +35,6 @@ in
         qt.enable = lib.mkDefault true;
         kitty.enable = lib.mkDefault true;
         emacs.enable = lib.mkDefault true;
-        vencord.enable = lib.mkDefault true;
         hyprpaper.enable = true;
       };
       home.pointerCursor = {

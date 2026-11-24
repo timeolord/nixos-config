@@ -225,18 +225,10 @@ while every output pixel still uses a palette colour. exact theme colours
 remain solid. the pattern is anchored to screen pixels and has no time or
 random input; moving content can still move through the fixed pattern.
 
-Discord keeps the standard client with Vencord supplied by Nixpkgs. its
-Stylix theme follows the selected palette and fonts. Vespers adds VGA text,
-flat walnut panels, gold accents and selections, square controls, and no
-button borders, gradients, shadows, or transitions. restart Discord fully
-after rebuilding; existing login data and Discord settings remain in place.
-
-programs/discord.nix wraps the discord command so it enables
-stylix.theme.css before launch, preserving other Vencord settings and themes.
-the settings stay writable. the current profile disables the managed theme;
-future profiles inherit the Stylix Vencord target. the local theme is at
-~/.config/Vencord/themes/stylix.theme.css and appears in Vencord's Themes
-settings. malformed Vencord settings stop launch without being overwritten.
+Discord uses the standard Nixpkgs client through programs/discord.nix.
+Vencord and its managed theme are no longer included. rebuild and fully
+quit and reopen Discord to apply the change. existing login data, Discord
+settings, and old Vencord user files remain in place.
 
 Firefox requests native dark website themes by default and installs the
 signed Dark Reader extension for sites that stay bright. this applies across
