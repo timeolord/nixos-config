@@ -37,6 +37,7 @@
       session_log = "null";
     };
   };
+  programs.hyprlock.enable = userName != "melk-vm";
   programs.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;

@@ -247,3 +247,5 @@ melkmobile login recovery on 2026/11/24: ly accepted the password and opened a s
 the full repaired melkmobile system built successfully without activation. activation requires sudo from the local tty, and graphical login still needs a runtime check.
 
 hyprland release test on 2026/11/24: the shared input now explicitly pins v0.57.2 at 11cbc6c with its upstream dependency lock and matching portal. melkmobile built successfully using the hyprland binary cache. config verification accepted the active lua file. the new generation was built without activation, so graphical login on this release still needs a runtime check.
+
+desktop locking on 2026/11/24: ly handles sign in on physical hosts. hyprlock handles unlocking an active hyprland session with pam and a password field using the selected style palette. super alt l requests a lock through logind. hypridle also requests a lock before suspend, waits for the compositor to acknowledge it within the logind delay window, and requests display power on after resume. no idle timeout is added. melk-vm skips the locker because it uses a passwordless account.
