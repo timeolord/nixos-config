@@ -34,6 +34,8 @@ there is no root devShell, .envrc, formatter output, check output, test suite, o
 
 shared system and home
 
+melkmobile ethernet diagnosis on 2026/11/24: pci device 0000:04:00.0 has id 1f0a:6801, a motorcomm yt6801 controller. linux 6.18.62 detected the pci device but had no bound driver, no ethernet interface, and no installed yt6801 module. networkmanager only exposed wifi and loopback. melkmobile.nix now includes config.boot.kernelPackages.yt6801 in boot.extraModulePackages and yt6801 in boot.kernelModules. the driver fetched successfully from cache.nixos.org, and modinfo confirms its pci alias matches this controller. it targets the configured kernel 6.18.64 while the running kernel is 6.18.62, so rebuild and reboot to load the matching kernel and driver. runtime cable and dhcp connectivity remain unverified. other hosts are unchanged.
+
 config.nix owns systemd boot with ten generations, networking, firewall, locale, users, graphics, printing, audio, bluetooth, steam, firefox policy, fonts, garbage collection, and store optimisation.
 networkmanager includes openconnect and a mcgill vpn profile. firewall explicitly opens tcp and udp 25565 and 4000; steam also opens its configured ports. openssh server is commented out.
 pipewire supplies alsa and pulse audio; bluetooth and cups are enabled. bazecor-rules provides dygma usb and hid access. graphics includes 32 bit support.
