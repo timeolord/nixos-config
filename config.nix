@@ -204,6 +204,9 @@
     ];
   };
 
+  # For Julia and other binaries that expect a normal FHS
+  programs.nix-ld.enable = true;
+
   programs.git = {
     enable = true;
     config = {
