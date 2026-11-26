@@ -128,6 +128,27 @@ hl.bind(mainMod .. " + ALT + K", hl.dsp.focus({ workspace = "e-1" }))
 hl.bind(mainMod .. " + mouse_down", hl.dsp.focus({ workspace = "e+1" }))
 hl.bind(mainMod .. " + mouse_up", hl.dsp.focus({ workspace = "e-1" }))
 
+-- toggle wheel clicks for both scroll directions
+local wheel_click_enabled = false
+local scroll_event_delay = hl.get_config("binds.scroll_event_delay")
+local wheel_click_binds = {}
+local click_down = hl.dsp.send_key_state({ mods = "", key = "mouse:272", state = "down" })
+local click_up = hl.dsp.send_key_state({ mods = "", key = "mouse:272", state = "up" })
+for _, direction in ipairs({ "mouse_up", "mouse_down" }) do
+  local bind = hl.bind(direction, function()
+    hl.dispatch(click_down)
+    hl.dispatch(click_up)
+  end)
+  bind:set_enabled(false)
+  table.insert(wheel_click_binds, bind)
+end
+hl.bind(mainMod .. " + ALT + M", function()
+  wheel_click_enabled = not wheel_click_enabled
+  for _, bind in ipairs(wheel_click_binds) do bind:set_enabled(wheel_click_enabled) end
+  hl.config({ binds = { scroll_event_delay = wheel_click_enabled and 0 or scroll_event_delay } })
+  hl.notification.create({ text = "Wheel left click: " .. (wheel_click_enabled and "on" or "off"), duration = 2000 })
+end)
+
 -- move and resize with the mouse
 hl.bind(mainMod .. " + mouse:272", hl.dsp.window.drag(), { mouse = true })
 hl.bind(mainMod .. " + mouse:273", hl.dsp.window.resize(), { mouse = true })
